@@ -7,7 +7,7 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 	    <property name="configLocation" value="classpath:sql-map-config-spring.xml" />
-		<property name="mapperLocations" value="classpath:/mapper/*.xml" />
+		<property name="mapperLocations" value="classpath*:com/one/style/**/*-mapper.xml" />
 	</bean>
 	
 	<!-- SqlSessionTemplate -->
@@ -16,6 +16,6 @@
 	</bean> 
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-	  <property name="basePackage" value="com.dbal.**.mapper" />
+	  <property name="basePackage" value="com.one.style.**.mapper" />
 	</bean>
 </beans>

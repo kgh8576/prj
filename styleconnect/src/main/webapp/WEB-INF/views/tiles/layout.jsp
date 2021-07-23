@@ -5,45 +5,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="author" content="Nile-Theme">
+    <meta name="robots" content="index follow">
+    <meta name="googlebot" content="index follow">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="directory, doctor, doctor directory, Health directory, listing, map, medical, medical directory, professional directory, reservation, reviews">
+    <meta name="description" content="Health Care & Medical Services Directory">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800%7CPoppins:300i,300,400,700,400i,500%7CDancing+Script:700%7CDancing+Script:700" rel="stylesheet">
+    <!-- animate -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate.css" />
+    <!-- owl Carousel assets -->
+    <link href="${pageContext.request.contextPath}/resources/assets/css/owl.carousel.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/assets/css/owl.theme.css" rel="stylesheet">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css">
+    <!-- hover anmation -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/hover-min.css">
+    <!-- flag icon -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/flag-icon.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.css">
+    <!-- colors -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/colors/main.css">
+    <!-- elegant icon -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/elegant_icon.css">
 
-<style>
-div.container {
-	width: 100%;
-	border: 1px solid gray;
-}
-
-header, footer {
-	padding: 1em;
-	color: white;
-	background-color: black;
-	clear: left;
-	text-align: center;
-}
-
-nav {
-	float: left;
-	max-width: 160px;
-	margin: 0;
-	padding: 1em;
-}
-
-nav ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-nav ul a {
-	text-decoration: none;
-}
-
-article {
-	margin-left: 170px;
-	border-left: 1px solid gray;
-	padding: 1em;
-	overflow: hidden;
-	min-height: 400px;
-}
-</style>
+    <!-- jquery library  -->
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/jquery-3.2.1.min.js"></script>
+    <!-- fontawesome  -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 
 <body>
@@ -55,12 +47,20 @@ article {
 			<tiles:insertAttribute name="header" />
 		</nav>
 		<article>
-			<tiles:insertAttribute name="content"/>
+			<tiles:insertAttribute name="body"/>
 		</article>
 		<footer>
 			copyright
 		</footer>
 		
 	</div>
+	<script  src="${pageContext.request.contextPath}/resources/assets/js/sticky-sidebar.js"></script>
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/YouTubePopUp.jquery.js"></script>
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/owl.carousel.min.js"></script>
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/imagesloaded.min.js"></script>
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/wow.min.js"></script>
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/custom.js"></script>
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/popper.min.js"></script>
+    <script  src="${pageContext.request.contextPath}/resources/assets/js/bootstrap.min.js"></script>
 </body>
 </html>

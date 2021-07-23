@@ -8,12 +8,12 @@ Configuration 2.1//EN"
 
 	<definition name="userTemplate"	template="/WEB-INF/views/tiles/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-		<put-attribute name="content" value="/WEB-INF/views/tiles/content.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tiles/body.jsp" />
 	</definition>
 
 	<!-- 사용자 -->
 	<definition name="*/*" extends="userTemplate">
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
 	
 </tiles-definitions>
