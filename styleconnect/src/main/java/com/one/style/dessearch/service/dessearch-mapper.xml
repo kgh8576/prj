@@ -3,14 +3,36 @@
 <mapper namespace="com.one.style.descourse.service.descourse-mapper">
 	
 	<!-- 전체디자이너 리스트 -->
-	<select id="selectDessearchList" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT * FROM DESIGNER D  FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
+	<select id="dessearchSelectList" resultType="com.one.style.dessearch.vo.DessearchVO">
+	SELECT * FROM DESIGNER D FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
 	</select>
-	
+
 	<!-- 컷디자이너 리스트 -->
 	<select id="cutList" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT * FROM DESIGNER D  FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
+	SELECT * FROM DESIGNER D FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
 	WHERE CUT_YN='Y'
 	</select>
 	
+	<!-- 펌디자이너 리스트 -->
+	<select id="permList" resultType="com.one.style.dessearch.vo.DessearchVO">
+	SELECT * FROM DESIGNER D FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
+	WHERE PERM_YN='Y'
+	</select>
+	
+	<!-- 염색디자이너 리스트 -->
+	<select id="dyeList" resultType="com.one.style.dessearch.vo.DessearchVO">
+	SELECT * FROM DESIGNER D FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
+	WHERE DYE_YN='Y'
+	</select>
+	
+	<!-- 메이크업디자이너 리스트 -->
+	<select id="makeupList" resultType="com.one.style.dessearch.vo.DessearchVO">
+	SELECT * FROM DESIGNER D FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
+	WHERE MAKEUP_YN='Y'
+	</select>
+	
+	<!-- 디자이너 한건 -->
+	<select id="dessearchSelect" parameterType="String" resultType="com.one.style.dessearch.vo.DessearchVO">
+	select * from designer where id = #{id}
+	</select>
 </mapper>

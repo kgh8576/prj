@@ -25,6 +25,7 @@ public class DessearchVO {
 	private String major;
 	private int imgGroupNo;
 	private String comments;
+	//review
 	private int conNo;
 	private Clob contents;
 	private int rate;
