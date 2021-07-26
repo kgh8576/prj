@@ -11,177 +11,64 @@
     <title>Foogra - Discover & Book the best restaurants at the best price</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/reservationreso/img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/reservationreso/img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="${pageContext.request.contextPath}/resources/reservationreso/img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="${pageContext.request.contextPath}/resources/reservationreso/img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="${pageContext.request.contextPath}/resources/reservationreso/img/apple-touch-icon-144x144-precomposed.png">
 
      <!-- GOOGLE WEB FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- BASE CSS -->
-    <link href="css/bootstrap_customized.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/reservationreso/css/bootstrap_customized.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/reservationreso/css/style.css" rel="stylesheet">
 
     <!-- SPECIFIC CSS -->
-    <link href="css/detail-page.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/reservationreso/css/detail-page.css" rel="stylesheet">
 
     <!-- YOUR CUSTOM CSS -->
-    <link href="css/custom.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/reservationreso/css/custom.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	function finddate() {
+		var week = new Array('sun','mon','tue','wed','thu','fri','sat');
+		var currentday =$("td[class*='ui-datepicker-current-day']");
+		var day = currentday.text();
+		var month = currentday.attr("data-month");
+		var year = currentday.attr("data-year");
+		var date = new Date(year, month, day);
+		var weekLabel = week[date.getDay()];
+		console.log(weekLabel);
+		return weekLabel;
+	}
+	function findTime() {
+		var desData = {
+				id : "des05",
+				week : finddate()
+		}
+		$.ajax({
+			url:"workTime.do",
+			type:"post",
+			data:desData,
+			success: function(data) {
+				for ( var time of data) {
+					console.log(time);
+				}
+			},
+			error : function(err) {
+				console.log(err);
+			}
+		})
+	}
+</script>
 
 </head>
 
 <body>
-				
-	<header class="header_in clearfix">
-		<div class="container">
-		<div id="logo">
-			<a href="index.html">
-				<img src="img/logo_sticky.svg" width="140" height="35" alt="">
-			</a>
-		</div>
-		<ul id="top_menu">
-			<li><a href="#sign-in-dialog" id="sign-in" class="login">Sign In</a></li>
-			<li><a href="wishlist.html" class="wishlist_bt_top" title="Your wishlist">Your wishlist</a></li>
-		</ul>
-		<!-- /top_menu -->
-		<a href="#0" class="open_close">
-			<i class="icon_menu"></i><span>Menu</span>
-		</a>
-		<nav class="main-menu">
-			<div id="header_menu">
-				<a href="#0" class="open_close">
-					<i class="icon_close"></i><span>Menu</span>
-				</a>
-				<a href="index.html"><img src="img/logo.svg" width="140" height="35" alt=""></a>
-			</div>
-			<ul>
-				<li class="submenu">
-					<a href="#0" class="show-submenu">Home</a>
-					<ul>
-						<li><a href="index.html">Default</a></li>			
-						<li class="third-level"><a href="#0">Sliders - Parallax <strong>New!</strong></a>
-							<ul>
-								<li><a href="index-8.html">Revolution Slider 1</a></li>
-								<li><a href="index-9.html">Revolution Slider 2</a></li>
-								<li><a href="index-3.html">Owl Carousel</a></li>
-								<li><a href="index-10.html">Parallax Youtube</a></li>
-								<li><a href="index-11.html">Parallax Vimeo</a></li>
-								<li><a href="index-12.html">Parallax Mp4 Video</a></li>
-								<li><a href="index-13.html">Parallax Video Fullscreen</a></li>
-								<li><a href="index-14.html">Parallax Image</a></li>
-							</ul>
-						</li>
-						<li><a href="index-15.html">Text Rotator</a></li>
-						<li><a href="index-5.html">Address Autocomplete</a></li>
-						<li><a href="index-6.html">Search Version 2</a></li>
-						<li><a href="index-7.html">Delivery/Takeaway version</a></li>
-						<li><a href="modal-advertise.html">Modal Advertise</a></li>
-						<li><a href="modal-newsletter.html">Modal Newsletter</a></li>
-						<li><a href="index-2.html">Video Bg Fallback Mobile</a></li>
-						<li><a href="index-4.html">GDPR Cookie Bar EU Law</a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="#0" class="show-submenu">Listing</a>
-					<ul>
-						<li class="third-level"><a href="#0">List pages</a>
-							<ul>
-								<li><a href="grid-listing-filterscol.html">List default</a></li>
-								<li><a href="grid-listing-filterscol-map.html">List with map</a></li>
-								<li><a href="listing-map.html">List side map</a></li>
-								<li><a href="grid-listing-filterscol-full-width.html">List full width</a></li>
-								<li><a href="grid-listing-filterscol-full-masonry.html">List Masonry Filter</a></li>
-								<li><a href="grid-listing-filterscol-delivery.html">List Delivery/Takeaway</a></li>
-							</ul>
-						</li>
-						<li class="third-level"><a href="#0">Detail pages</a>
-							<ul>
-								<li><a href="detail-restaurant.html">Detail page 1</a></li>
-								<li><a href="detail-restaurant-2.html">Detail page 2</a></li>
-								<li><a href="detail-restaurant-3.html">Mobile Fixed Booking</a></li>
-								<li><a href="detail-restaurant-delivery.html">Delivery/Takeaway</a></li>
-								<li><a href="detail-restaurant-4.html">Detail Menu Thumbs</a></li>
-								<li><a href="detail-restaurant-5.html">Detail Contact Form</a></li>
-							</ul>
-						</li>
-						<li class="third-level"><a href="#0">OpenStreetMap</a>
-							<ul>
-								<li><a href="grid-listing-filterscol-map-openstreetmap.html">List with map</a></li>
-								<li><a href="listing-map-openstreetmap.html">List side map</a></li>
-								<li><a href="grid-listing-filterscol-full-width-openstreetmap.html">List full width</a></li>
-								<li><a href="grid-listing-filterscol-full-masonry-openstreetmap.html">List Masonry Filter</a></li>
-							</ul>
-						</li>
-						<li><a href="submit-restaurant.html">Submit Restaurant</a></li>
-						<li><a href="submit-rider.html">Submit Rider</a></li>
-						<li><a href="wishlist.html">Wishlist</a></li>
-						<li><a href="booking.html">Booking</a></li>
-						<li><a href="confirm.html">Confirm Booking</a></li>
-						<li><a href="confirm-delivery.html">Confirm Order</a></li>
-						<li><a href="booking-delivery-2.html">Order Delivery/Takeaway</a></li>
-						<li><a href="booking-delivery.html">Order Delivery/Takeaway 2</a></li>
-						<li><a href="admin_section/index.html" target="_blank">Admin Section</a></li>
-					</ul>
-				</li>
-				<li class="submenu">
-					<a href="#0" class="show-submenu">Other Pages</a>
-					<ul>
-						<li><a href="404.html">404 Error</a></li>
-						<li><a href="help.html">Help and Faq</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="leave-review.html">Leave a review</a></li>
-						<li><a href="user-logged-1.html">User Logged 1</a></li>
-						<li><a href="user-logged-2.html">User Logged 2</a></li>
-						<li><a href="contacts.html">Contacts</a></li>
-						<li><a href="coming_soon/index.html">Coming Soon</a></li>
-						<li><a href="account.html">Sign Up</a></li>
-						<li><a href="icon-pack-1.html">Icon Pack 1</a></li>
-						<li><a href="icon-pack-2.html">Icon Pack 2</a></li>
-					</ul>
-				</li>
-				<li><a href="submit-restaurant.html">Submit</a></li>
-				<li><a href="#0">Buy this template</a></li>
-			</ul>
-		</nav>
-	</div>
-	</header>
-	<!-- /header -->
-	
+	<br><br><br><br>
 	<main>
-
-		<div class="hero_in detail_page background-image" data-background="url(img/restaurant_detail_hero.jpg)">
-			<div class="wrapper opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
-				
-				<div class="container">
-					<div class="main_info">
-						<div class="row">
-							<div class="col-xl-4 col-lg-5 col-md-6">
-								<div class="head"><div class="score"><span>Superb<em>350 Reviews</em></span><strong>8.9</strong></div></div>
-								<h1>Pizzeria da Alfredo</h1>
-								ITALIAN - 27 Old Gloucester St, 4530 - <a href="https://www.google.com/maps/dir//Assistance+%E2%80%93+H%C3%B4pitaux+De+Paris,+3+Avenue+Victoria,+75004+Paris,+Francia/@48.8606548,2.3348734,14z/data=!4m15!1m6!3m5!1s0x47e66e1de36f4147:0xb6615b4092e0351f!2sAssistance+Publique+-+H%C3%B4pitaux+de+Paris+(AP-HP)+-+Si%C3%A8ge!8m2!3d48.8568376!4d2.3504305!4m7!1m0!1m5!1m1!1s0x47e67031f8c20147:0xa6a9af76b1e2d899!2m2!1d2.3504327!2d48.8568361" target="blank">Get directions</a>
-							</div>
-							<div class="col-xl-8 col-lg-7 col-md-6">
-								<div class="buttons clearfix">
-									<span class="magnific-gallery">
-										<a href="img/detail_1.jpg" class="btn_hero" title="Photo title" data-effect="mfp-zoom-in"><i class="icon_image"></i>View photos</a>
-										<a href="img/detail_2.jpg" title="Photo title" data-effect="mfp-zoom-in"></a>
-										<a href="img/detail_3.jpg" title="Photo title" data-effect="mfp-zoom-in"></a>
-									</span>
-									<a href="#0" class="btn_hero wishlist"><i class="icon_heart"></i>Wishlist</a>
-								</div>
-							</div>
-						</div>
-						<!-- /row -->
-					</div>
-					<!-- /main_info -->
-				</div>
-			</div>
-		</div>
-		<!--/hero_in-->
-		
 		<div class="container margin_detail">
 		    <div class="row">
 		        <div class="col-lg-8">
@@ -211,13 +98,6 @@
 		                            	<p>An malorum ornatus nostrum vel, graece iracundia laboramus cu ius. No pro mazim blandit instructior, sumo voluptaria has et, vide persecuti abhorreant ne est.</p>
 		                            	<div class="add_bottom_25"></div>
 		                                <h2>Pictures from our users</h2>
-		                                <div class="pictures magnific-gallery clearfix">
-		                                    <figure><a href="img/detail_gallery/detail_1.jpg" title="Photo title" data-effect="mfp-zoom-in"><img src="img/thumb_detail_placeholder.jpg" data-src="img/thumb_detail_1.jpg" class="lazy" alt=""></a></figure>
-		                                    <figure><a href="img/detail_gallery/detail_2.jpg" title="Photo title" data-effect="mfp-zoom-in"><img src="img/thumb_detail_placeholder.jpg" data-src="img/thumb_detail_2.jpg" class="lazy" alt=""></a></figure>
-		                                    <figure><a href="img/detail_gallery/detail_3.jpg" title="Photo title" data-effect="mfp-zoom-in"><img src="img/thumb_detail_placeholder.jpg" data-src="img/thumb_detail_3.jpg" class="lazy" alt=""></a></figure>
-		                                    <figure><a href="img/detail_gallery/detail_4.jpg" title="Photo title" data-effect="mfp-zoom-in"><img src="img/thumb_detail_placeholder.jpg" data-src="img/thumb_detail_4.jpg" class="lazy" alt=""></a></figure>
-		                                    <figure><a href="img/detail_gallery/detail_5.jpg" title="Photo title" data-effect="mfp-zoom-in"><span class="d-flex align-items-center justify-content-center">+10</span><img src="img/thumb_detail_placeholder.jpg" data-src="img/thumb_detail_5.jpg" class="lazy" alt=""></a></figure>
-		                                </div>
 		                                <!-- /pictures -->
 		                                <h2>Da Alfredo Menu</h2>
 		                                <h3>Starters</h3>
@@ -435,7 +315,6 @@
 		                                    <div class="review_card">
 		                                        <div class="row">
 		                                            <div class="col-md-2 user_info">
-		                                                <figure><img src="img/avatar4.jpg" alt=""></figure>
 		                                                <h5>Lukas</h5>
 		                                            </div>
 		                                            <div class="col-md-10 review_content">
@@ -458,7 +337,6 @@
 		                                    <div class="review_card">
 		                                        <div class="row">
 		                                            <div class="col-md-2 user_info">
-		                                                <figure><img src="img/avatar6.jpg" alt=""></figure>
 		                                                <h5>Lukas</h5>
 		                                            </div>
 		                                            <div class="col-md-10 review_content">
@@ -481,7 +359,6 @@
 		                                    <div class="review_card">
 		                                        <div class="row">
 		                                            <div class="col-md-2 user_info">
-		                                                <figure><img src="img/avatar1.jpg" alt=""></figure>
 		                                                <h5>Marika</h5>
 		                                            </div>
 		                                            <div class="col-md-10 review_content">
@@ -501,7 +378,6 @@
 		                                        <!-- /row -->
 		                                        <div class="row reply">
 		                                            <div class="col-md-2 user_info">
-		                                                <figure><img src="img/avatar.jpg" alt=""></figure>
 		                                            </div>
 		                                            <div class="col-md-10">
 		                                                <div class="review_content">
@@ -537,56 +413,36 @@
 		                <div class="main">
 		                    <input type="text" id="datepicker_field">
 		                    <div id="DatePicker"></div>
-		                    <div class="dropdown time">
-		                        <a href="#" data-toggle="dropdown">Hour <span id="selected_time"></span></a>
-		                        <div class="dropdown-menu">
-		                            <div class="dropdown-menu-content">
-		                                <h4>Lunch</h4>
-		                                <div class="radio_select add_bottom_15">
-		                                    <ul>
-		                                        <li>
-		                                            <input type="radio" id="time_1" name="time" value="12.00am">
-		                                            <label for="time_1">12.00<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="time_2" name="time" value="08.30pm">
-		                                            <label for="time_2">12.30<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="time_3" name="time" value="09.00pm">
-		                                            <label for="time_3">1.00<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="time_4" name="time" value="09.30pm">
-		                                            <label for="time_4">1.30<em>-40%</em></label>
-		                                        </li>
-		                                    </ul>
-		                                </div>
-		                                <!-- /time_select -->
-		                                <h4>Dinner</h4>
-		                                <div class="radio_select">
-		                                    <ul>
-		                                        <li>
-		                                            <input type="radio" id="time_5" name="time" value="08.00pm">
-		                                            <label for="time_1">20.00<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="time_6" name="time" value="08.30pm">
-		                                            <label for="time_2">20.30<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="time_7" name="time" value="09.00pm">
-		                                            <label for="time_3">21.00<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="time_8" name="time" value="09.30pm">
-		                                            <label for="time_4">21.30<em>-40%</em></label>
-		                                        </li>
-		                                    </ul>
-		                                </div>
-		                                <!-- /time_select -->
-		                            </div>
-		                        </div>
+		                    <div>
+			                    <div class="dropdown time">
+			                        <a href="#" data-toggle="dropdown" onclick="findTime()">Hour <span id="selected_time"></span></a>
+			                        <div class="dropdown-menu">
+			                            <div class="dropdown-menu-content">
+			                                <h4>예약가능시간</h4>
+			                                <div class="radio_select add_bottom_15">
+			                                    <ul>
+			                                        <li>
+			                                            <input type="radio" id="time_1" name="time" value="12.00am">
+			                                            <label for="time_1">12.00</label>
+			                                        </li>
+			                                        <li>
+			                                            <input type="radio" id="time_2" name="time" value="08.30pm">
+			                                            <label for="time_2">12.30</label>
+			                                        </li>
+			                                        <li>
+			                                            <input type="radio" id="time_3" name="time" value="09.00pm">
+			                                            <label for="time_3">1.00</label>
+			                                        </li>
+			                                        <li>
+			                                            <input type="radio" id="time_4" name="time" value="09.30pm">
+			                                            <label for="time_4">1.30</label>
+			                                        </li>
+			                                    </ul>
+			                                </div>
+			                                <!-- /time_select -->
+			                            </div>
+			                        </div>
+			                    </div>
 		                    </div>
 		                    <!-- /dropdown -->
 		                    <div class="dropdown people">
@@ -619,7 +475,7 @@
 		                        </div>
 		                    </div>
 		                    <!-- /dropdown -->
-		                    <a href="booking.html" class="btn_1 full-width mb_5">Reserve Now</a>
+		                    <a href="#" class="btn_1 full-width mb_5" onclick="finddate()">Reserve Now</a>
 		                   <div class="text-center"><small>No money charged on this steps</small></div>
 		                </div>
 		            </div>
@@ -691,10 +547,6 @@
 						<div class="follow_us">
 							<h5>Follow Us</h5>
 							<ul>
-								<li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="img/twitter_icon.svg" alt="" class="lazy"></a></li>
-								<li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="img/facebook_icon.svg" alt="" class="lazy"></a></li>
-								<li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="img/instagram_icon.svg" alt="" class="lazy"></a></li>
-								<li><a href="#0"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="img/youtube_icon.svg" alt="" class="lazy"></a></li>
 							</ul>
 						</div>
 					</div>
@@ -723,7 +575,6 @@
 								</select>
 							</div>
 						</li>
-						<li><img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="img/cards_all.svg" alt="" width="198" height="30" class="lazy"></li>
 					</ul>
 				</div>
 				<div class="col-lg-6">
@@ -791,15 +642,15 @@
 	<!-- /Sign In Modal -->
 	
 	<!-- COMMON SCRIPTS -->
-    <script src="js/common_scripts.min.js"></script>
-    <script src="js/common_func.js"></script>
-    <script src="assets/validate.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/reservationreso/js/common_scripts.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/reservationreso/js/common_func.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/reservationreso/assets/validate.js"></script>
 
     <!-- SPECIFIC SCRIPTS -->
-    <script src="js/sticky_sidebar.min.js"></script>
-    <script src="js/specific_detail.js"></script>
-	<script src="js/datepicker.min.js"></script>
-	<script src="js/datepicker_func_1.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/reservationreso/js/sticky_sidebar.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/reservationreso/js/specific_detail.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/reservationreso/js/datepicker.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/reservationreso/js/datepicker_func_1.js"></script>
 
 </body>
 </html>

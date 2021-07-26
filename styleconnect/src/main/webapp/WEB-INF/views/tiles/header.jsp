@@ -19,7 +19,6 @@ pageEncoding="UTF-8" %>
  
                 <div class="row">
                     <div class="col-lg-2 col-md-12">
-                        <a id="logo" href="index.html" class="d-inline-block margin-tb-15px"><img src="assets/img/logo-1.png" alt=""></a>
                         <a class="mobile-toggle padding-13px background-main-color" href="#"><i class="fas fa-bars"></i></a>
                     </div>
                     <div class="col-lg-7 col-md-12 position-inherit">
