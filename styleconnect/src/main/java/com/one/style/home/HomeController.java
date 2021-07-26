@@ -31,10 +31,6 @@ public class HomeController {
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		List<MemberVO> list =  memberDao.memList();
-		for (MemberVO vo : list) {
-			System.out.println(vo.getId());
-		}
 		return "main/home";
 	}
 
