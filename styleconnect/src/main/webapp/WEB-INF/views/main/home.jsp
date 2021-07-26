@@ -1,12 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Tabib HTML5 Health Directory Template</title>
-    
-
+    <style>
+    </style>
+    <script>
+    	function topHairDesChange(keyword){
+    		console.log(keyword);
+        	$.ajax({
+        		type:'post',
+        		url:'ajaxTopHairDesChange.do',
+        		data:{ keyword:keyword },
+        		success:function(result){
+        			console.log(result);
+        		},
+        		error:function(err){
+        			console.log(err);
+        		}
+        	}); 		
+    	}
+    </script>
 </head>
 
 <body>
@@ -17,33 +34,23 @@ pageEncoding="UTF-8" %>
                 <h1 class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Style Connect</h1>
                 <h4 class="font-weight-300 text-main-color text-up-small">나에게 맞는 디자이너를 찾아보세요!</h4>
             </div>
+            
             <div class="row justify-content-center margin-tb-60px">
                 <div class="col-lg-8">
                     <div class="listing-search">
                         <form class="row no-gutters">
                             <div class="col-md-3">
                                 <div class="keywords">
-                                    <input class="listing-form first" type="text" placeholder="Keywords..." value="">
+                                    <input class="listing-form first" type="text" placeholder="검색할 키워드를 입력하세요" value="">
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="regions">
-                                    <input class="listing-form" type="text" placeholder="All Regions" value="">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="categories dropdown">
-                                    <a class="listing-form d-block text-nowrap" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Categories</a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <button class="dropdown-item text-up-small" type="button">Doctors</button>
-                                        <button class="dropdown-item text-up-small" type="button">Clinics</button>
-                                        <button class="dropdown-item text-up-small" type="button">Pharmacies</button>
-                                        <button class="dropdown-item text-up-small" type="button">Labs</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <a class="listing-bottom background-second-color box-shadow" href="#">Search Now</a>
+                                <a class="listing-bottom background-second-color box-shadow" href="#">Search Now</a> <br>
+								<div>
+									<a href="#" class="text-primary">#호일펌</a>
+									<a href="#" class="text-primary">#구자혁</a>
+									<a href="#" class="text-primary">#병지컷</a>
+								</div>
                             </div>
                         </form>
                     </div>
@@ -160,18 +167,40 @@ pageEncoding="UTF-8" %>
                 <div class="col-lg-10">
                     <div class="row">
                         <div class="col-md-4 wow fadeInUp">
-                            <h1 class="text-second-color font-weight-300 text-sm-center text-lg-right margin-tb-15px">Famous Doctors</h1>
+                            <h1 class="text-second-color font-weight-300 text-sm-center text-lg-right margin-tb-15px">헤어 디자이너 TOP3</h1>
+							<button type="button" class="btn btn-info" onclick="topHairDesChange('cut')">컷</button>
+                            <button type="button" class="btn btn-info" onclick="topHairDesChange('perm')">펌</button>
+                            <button type="button" class="btn btn-info" onclick="topHairDesChange('dye')">염색</button>
                         </div>
-                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                            <p class="text-grey-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                            <p class="text-grey-2"></p>
                         </div>
                         <div class="col-md-2 wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="#" class="text-main-color margin-tb-15px d-inline-block"><span class="d-block float-left margin-right-10px margin-top-5px">Show All</span> <i class="far fa-arrow-alt-circle-right text-large margin-top-7px"></i></a>
+                            <a href="#" class="text-main-color margin-tb-15px d-inline-block"><span class="d-block float-left margin-right-10px margin-top-5px">모두 보기</span> <i class="far fa-arrow-alt-circle-right text-large margin-top-7px"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- // Title -->
+            
+           <div class="row justify-content-center margin-bottom-45px">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-md-4 wow fadeInUp">
+                            <h1 class="text-second-color font-weight-300 text-sm-center text-lg-right margin-tb-8px">메이크업 디자이너 TOP3</h1>
+                            <button type="button" class="btn btn-info">cate1</button>
+                            <button type="button" class="btn btn-info">cate2</button>
+                            <button type="button" class="btn btn-info">cate3</button>
+                        </div>
+                        <div class="col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                            <p class="text-grey-2"></p>
+                        </div>
+                        <div class="col-md-2 wow fadeInUp" data-wow-delay="0.4s">
+                            <a href="#" class="text-main-color margin-tb-15px d-inline-block"><span class="d-block float-left margin-right-10px margin-top-5px">모두 보기</span> <i class="far fa-arrow-alt-circle-right text-large margin-top-7px"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
 
@@ -183,7 +212,7 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="padding-30px">
                             <span class="text-grey-2">Internal</span>
-                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">Dr. Shahrzat Moh</a></h5>
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">이름 자리</a></h5>
                             <div class="rating clearfix">
                                 <ul class="float-left">
                                     <li class="active"></li>
@@ -192,22 +221,23 @@ pageEncoding="UTF-8" %>
                                     <li class="active"></li>
                                     <li></li>
                                 </ul>
-                                <small class="float-right text-grey-2">(17 reviews)</small>
+                                <small class="float-right text-grey-2">리뷰수, 레이팅 자리</small>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- // Doctor -->
-
-                <!-- Doctor -->
+                
+                
+                                <!-- Doctor -->
                 <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
                         <div class="thum">
                             <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
                         </div>
                         <div class="padding-30px">
                             <span class="text-grey-2">Internal</span>
-                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">Dr. Adwa Ali</a></h5>
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">이름 자리</a></h5>
                             <div class="rating clearfix">
                                 <ul class="float-left">
                                     <li class="active"></li>
@@ -216,22 +246,23 @@ pageEncoding="UTF-8" %>
                                     <li class="active"></li>
                                     <li></li>
                                 </ul>
-                                <small class="float-right text-grey-2">(17 reviews)</small>
+                                <small class="float-right text-grey-2">리뷰수, 레이팅 자리</small>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- // Doctor -->
-
-                <!-- Doctor -->
+                
+                
+                                <!-- Doctor -->
                 <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
                         <div class="thum">
                             <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
                         </div>
                         <div class="padding-30px">
                             <span class="text-grey-2">Internal</span>
-                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">Dr. Salma Elkheir</a></h5>
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">이름 자리</a></h5>
                             <div class="rating clearfix">
                                 <ul class="float-left">
                                     <li class="active"></li>
@@ -240,36 +271,15 @@ pageEncoding="UTF-8" %>
                                     <li class="active"></li>
                                     <li></li>
                                 </ul>
-                                <small class="float-right text-grey-2">(17 reviews)</small>
+                                <small class="float-right text-grey-2">리뷰수, 레이팅 자리</small>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- // Doctor -->
-
-                <!-- Doctor -->
-                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="thum">
-                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
-                        </div>
-                        <div class="padding-30px">
-                            <span class="text-grey-2">Internal</span>
-                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">Dr. Salim Qasim</a></h5>
-                            <div class="rating clearfix">
-                                <ul class="float-left">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
-                                </ul>
-                                <small class="float-right text-grey-2">(17 reviews)</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- // Doctor -->
+                
+                
+                
 
             </div>
         </div>
@@ -298,9 +308,7 @@ pageEncoding="UTF-8" %>
             <!-- // Title -->
 
 
-            <div class="row">
-
-                <!-- clinic -->
+			<!-- <div class="row">
                 <div class="col-lg-4 col-md-6 sm-mb-45px">
                     <div class="background-white full-width thum-hover box-shadow hvr-float wow fadeInUp" data-wow-delay="0.2s">
                         <div class="item-thumbnail thum background-white">
@@ -328,71 +336,8 @@ pageEncoding="UTF-8" %>
                         </div>
                     </div>
                 </div>
-                <!-- // clinic -->
 
-
-                <!-- clinic -->
-                <div class="col-lg-4 col-md-6 sm-mb-45px">
-                    <div class="background-white full-width thum-hover box-shadow hvr-float wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="item-thumbnail thum background-white">
-                            <a href="#"><img src="http://placehold.it/450x245" alt=""></a>
-                        </div>
-                        <div class="padding-30px">
-                            <h5 class="margin-bottom-20px"><a class="text-dark" href="#">Alrayan Eye Clinic</a></h5>
-                            <div class="rating clearfix">
-                                <span class="float-left text-grey-2"><i class="far fa-map"></i>  California</span>
-                                <ul class="float-right">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="padding-lr-30px padding-tb-15px background-light-grey">
-                            <div class="row no-gutters">
-                                <div class="col-4"><a href="#" class="text-lime"><i class="far fa-bookmark"></i> Open Now!</a></div>
-                                <div class="col-4 text-center"><a href="#" class="text-red"><i class="far fa-heart"></i> Save</a></div>
-                                <div class="col-4 text-right"><a href="#" class="text-blue"><i class="far fa-hospital"></i> Hospital</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- // clinic -->
-
-
-                <!-- clinic -->
-                <div class="col-lg-4 col-md-6 sm-mb-45px">
-                    <div class="background-white full-width thum-hover box-shadow hvr-float wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="item-thumbnail thum background-white">
-                            <a href="#"><img src="http://placehold.it/450x245" alt=""></a>
-                        </div>
-                        <div class="padding-30px">
-                            <h5 class="margin-bottom-20px"><a class="text-dark" href="#">Alrayan Eye Clinic</a></h5>
-                            <div class="rating clearfix">
-                                <span class="float-left text-grey-2"><i class="far fa-map"></i>  California</span>
-                                <ul class="float-right">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="padding-lr-30px padding-tb-15px background-light-grey">
-                            <div class="row no-gutters">
-                                <div class="col-4"><a href="#" class="text-lime"><i class="far fa-bookmark"></i> Open Now!</a></div>
-                                <div class="col-4 text-center"><a href="#" class="text-red"><i class="far fa-heart"></i> Save</a></div>
-                                <div class="col-4 text-right"><a href="#" class="text-blue"><i class="far fa-hospital"></i> Hospital</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- // clinic -->
-
-            </div>
+            </div> -->
 
         </div>
     </section>

@@ -39,9 +39,9 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<header>
-			<h2>Spring project(ver 1.0)</h2>
+			<h2><a href="main.do">Style Connect</a></h2>
 		</header>
 		<nav>
 			<tiles:insertAttribute name="header" />
