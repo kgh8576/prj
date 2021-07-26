@@ -6,4 +6,15 @@
 		select * from member
 	</select>
 
+	<select id="loginCheck" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
+		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<select id="login" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
+		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<select id="insertCheck" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
+		SELECT ID FROM MEMBER WHERE ID = #{id}
+	</select>
 </mapper>

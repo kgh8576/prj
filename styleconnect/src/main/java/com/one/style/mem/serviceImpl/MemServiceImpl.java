@@ -21,4 +21,61 @@ public class MemServiceImpl implements MemService {
 		return memMapper.memList();
 	}
 
+// 맴버 로그인체크
+	@Override
+	public boolean loginCheck(MemberVO vo) {
+		boolean N = false;
+		MemberVO mvo = memMapper.loginCheck(vo);
+		
+		if(mvo != null) {
+			N = true;
+		} else {
+			N = false;
+		}
+			
+		return N;
+	}
+
+// 맴버로그인 값 받아오기
+	@Override
+	public MemberVO login(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return memMapper.login(vo);
+	}
+	//회원가입 아이디 중복확인
+	public boolean insertcheck(MemberVO vo)  {
+		boolean N = false;
+		MemberVO mvo = memMapper.insertCheck(vo);
+		System.out.println("mvo 결과 "  + mvo);
+		
+		if(mvo != null) {
+			N = true;
+		} else {
+			N = false;
+		}
+		System.out.println("불린타입 "+N);
+		return N;
+	}
+
+// 회원가입
+	@Override
+	public MemberVO memberInsert(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+// 회원수정
+	@Override
+	public MemberVO memberUpdate(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//회원탈퇴
+	@Override
+	public MemberVO memberDelete(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
