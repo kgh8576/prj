@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.style.home.mapper.HomeServiceMap">
+
+	<!-- 평점 순 top3 디자이너 가져오기 -->
+	<select id="ajaxTopHairDes" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
+		
+		select *
+		from designer d, review r
+		where d.id = r.id
+		<if test='keyword == "cut"'>
+			and d.cut_yn = 'Y'
+		</if>
+		<if test='keyword == "perm"'>
+			and d.perm_yn = 'Y'
+		</if>
+		<if test='keyword == "dye"'>
+			and d.dye_yn = 'Y'
+		</if>
+		
+	</select> 
+
+</mapper>

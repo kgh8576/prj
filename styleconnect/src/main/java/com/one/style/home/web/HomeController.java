@@ -1,4 +1,4 @@
-package com.one.style.home;
+package com.one.style.home.web;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,4 +61,7 @@ public class HomeController {
 		list.add(map);
 		return list;
 	}
+	
+	
+	
 }
