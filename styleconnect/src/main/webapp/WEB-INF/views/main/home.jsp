@@ -14,8 +14,8 @@ pageEncoding="UTF-8" %>
     <section class="banner padding-tb-200px sm-ptb-80px background-overlay" style="background-image: url('http://placehold.it/1600x830');">
         <div class="container z-index-2 position-relative">
             <div class="title text-center">
-                <h1 class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Health Directory</h1>
-                <h4 class="font-weight-300 text-main-color text-up-small">A better Doctors , Clinics &amp; Labs . We'll help you find it</h4>
+                <h1 class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Style Connect</h1>
+                <h4 class="font-weight-300 text-main-color text-up-small">나에게 맞는 디자이너를 찾아보세요!</h4>
             </div>
             <div class="row justify-content-center margin-tb-60px">
                 <div class="col-lg-8">
