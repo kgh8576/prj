@@ -16,9 +16,11 @@
 				if (pswd2.val() != pswd.val()) {
 					chkNotice.html('비밀번호 일치하지 않음<br><br>').attr('color',
 							'#f82a2aa3');
+					$('#passwordCheck').val('unChecked');
 				} else {
 					chkNotice.html('비밀번호 일치함<br><br>').attr('color',
 							'#199894b3');
+					$('#passwordCheck').val('Checked');
 				}
 			}
 		});
@@ -35,9 +37,11 @@
 				if (data == 1) {
 					$('#chkNotice2').html('이미 가입중이거나, 회원 탈퇴한 회원입니다.').attr('color',
 					'#f82a2aa3');
+					$('#idCheck').val('unChecked');
 				} else {
 					$('#chkNotice2').html('사용가능한 아이디 입니다.').attr('color',
 					'#f82a2aa3');
+					$('#idCheck').val('Checked');
 				}
 			},
 			error : function(err) {
@@ -46,7 +50,50 @@
 			}
 		})
 	};
+	function formCheck() {
+		if (frm.id.value == "") {
+			alert("아이디를 입력하세요.");
+			frm.id.focus();
+			return false;
+		}
+		if (frm.pw.value == "") {
+			alert("비밀번호를 입력하세요.");
+			frm.pw.focus();
+			return false;
+		}
+		if (frm.pw2.value == "") {
+			alert("비밀번호를 재입력하세요.");
+			frm.pw2.focus();
+			return false;
+		}
+		if (frm.name.value == "") {
+			alert("이름를 입력하세요.");
+			frm.name.focus();
+			return false;
+		}
+		if(frm.hp.value =="") {
+			alert("핸드폰 번호를 입력해주세요.");
+			frm.hp.focus();
+			return false;
+		}
+		if(frm.gender.value=="") {
+			alert("성별 확인 해주세요.");
+			frm.gender.focus();
+		}
+		if (frm.idCheck.value == 'unChecked') {
+			alert("탈퇴한 아이디이거나, 이미 사용중인 아이디입니다.");
+			frm.id.val("");
+			frm.id.focus();
+			return false;
+		}
 
+		if (frm.passwordCheck.value == 'unChecked') {
+			alert("비밀번호를 다시 한번 똑같이 입력해주세요.");
+			frm.pw2.focus();
+			return false;
+		}
+		frm.submit();
+	}
 			
 	
 	
@@ -58,7 +105,7 @@
 
 		<div class="form-output">
 
-			<form>
+			<form id="frm" action="memberInsert.do" method="post">
 				<div class="form-group label-floating">
 					<label class="control-label">이름</label> <input class="form-control"
 						placeholder="이름을 입력해주세요." type="text" name="name" id="name">
@@ -66,6 +113,7 @@
 				<div class="form-group label-floating">
 					<label class="control-label">ID</label> <input class="form-control" oninput = "checkId()"
 						placeholder="사용 하실 아이디를 입력해주세요." type="text" name="id" id="id">
+						<input type="hidden" id="idCheck" name="idCheck" value="unChecked">
 						
 				</div>
 				<div style="text-align: left">
@@ -80,6 +128,7 @@
 					<label class="control-label">Password Check</label> <input
 						class="form-control" placeholder="비밀번호 확인" type="password"
 						id="pw2" name="pw2">
+						<input type="hidden" id="passwordCheck" name="passwordCheck" value="unChecked">
 				</div>
 				<div style="text-align: left">
 					<font id="chkNotice" size="2"></font>
@@ -93,8 +142,8 @@
 				<div class="form-group label-floating is-select">
 					<label class="control-label">성별</label> <select
 						class="selectpicker form-control" id="gender" name="gender">
-						<option value="MA">Male</option>
-						<option value="FE">Female</option>
+						<option value="MALE">Male</option>
+						<option value="FEMALE">Female</option>
 					</select>
 				</div>
 				<div class="form-group label-floating">
@@ -110,8 +159,7 @@
 					</div>
 				</div>
 
-				<a href="01-home.html" class="btn btn-md btn-primary full-width">Complete
-					sign up !</a>
+				<button type="button" onclick="formCheck()" class="btn btn-md btn-primary full-width">가입하기</button>>
 
 				<div class="or"></div>
 
