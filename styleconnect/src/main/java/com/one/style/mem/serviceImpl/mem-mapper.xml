@@ -17,4 +17,8 @@
 	<select id="insertCheck" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
 		SELECT ID FROM MEMBER WHERE ID = #{id}
 	</select>
+	
+	<insert id="memberInsert" parameterType="com.one.style.mem.vo.MemberVO">
+		INSERT INTO MEMBER VALUES(#{id},#{pw},#{name},#{hp},#{gender},to_date(#{birth},'YYYY/MM/DD'),0,sysdate)
+	</insert>
 </mapper>

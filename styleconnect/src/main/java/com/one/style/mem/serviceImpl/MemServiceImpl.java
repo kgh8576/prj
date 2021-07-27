@@ -59,9 +59,8 @@ public class MemServiceImpl implements MemService {
 
 // 회원가입
 	@Override
-	public MemberVO memberInsert(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public void memberInsert(MemberVO vo) {
+		memMapper.memberInsert(vo);
 	}
 
 // 회원수정
