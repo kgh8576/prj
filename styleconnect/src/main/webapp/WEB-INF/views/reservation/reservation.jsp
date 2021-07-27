@@ -40,27 +40,39 @@
 		var year = currentday.attr("data-year");
 		var date = new Date(year, month, day);
 		var weekLabel = week[date.getDay()];
-		console.log(weekLabel);
-		return weekLabel;
+		return {
+			date: date,
+	        week: weekLabel
+	    };
 	}
 	function findTime() {
+		var findDate = new finddate();
+		var courno = ${courNo};
 		var desData = {
-				id : "des05",
-				week : finddate()
+				courNo : courno,
+				week : findDate.week,
+				searchDate : findDate.date
 		}
 		$.ajax({
 			url:"workTime.do",
 			type:"post",
 			data:desData,
 			success: function(data) {
-				for ( var time of data) {
-					console.log(time);
+				$(".can_reservation_time").html("");
+				var i = 1;
+				for (var time of data) {
+					$(".can_reservation_time").append("<li><input type='radio' id='time_"+i+"' onclick='selectTime(\""+time+"\")' name='time' value='"+time+"'><label for='time_"+i+"'>"+time+"</label></li>");
+					i = i+1;
 				}
 			},
 			error : function(err) {
 				console.log(err);
 			}
 		})
+	}
+	function selectTime(time) {
+		console.log(time)
+		$("#selected_time").text(time);
 	}
 </script>
 
@@ -406,8 +418,7 @@
 		        <div class="col-lg-4" id="sidebar_fixed">
 		            <div class="box_booking">
 		                <div class="head">
-		                    <h3>Book your table</h3>
-		                    <div class="offer">Up to -40% off</div>
+		                    <h3>예약할 날짜를 선택해주세요</h3>
 		                </div>
 		                <!-- /head -->
 		                <div class="main">
@@ -420,9 +431,9 @@
 			                            <div class="dropdown-menu-content">
 			                                <h4>예약가능시간</h4>
 			                                <div class="radio_select add_bottom_15">
-			                                    <ul>
+			                                    <ul class="can_reservation_time">
 			                                        <li>
-			                                            <input type="radio" id="time_1" name="time" value="12.00am">
+			                                            <input type="radio" id="time_1" name="time" value="10:00">
 			                                            <label for="time_1">12.00</label>
 			                                        </li>
 			                                        <li>
@@ -475,7 +486,7 @@
 		                        </div>
 		                    </div>
 		                    <!-- /dropdown -->
-		                    <a href="#" class="btn_1 full-width mb_5" onclick="finddate()">Reserve Now</a>
+		                    <a href="#" class="btn_1 full-width mb_5">Reserve Now</a>
 		                   <div class="text-center"><small>No money charged on this steps</small></div>
 		                </div>
 		            </div>

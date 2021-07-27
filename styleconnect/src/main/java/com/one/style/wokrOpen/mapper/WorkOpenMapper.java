@@ -4,6 +4,8 @@ import com.one.style.wokrOpen.vo.WorkOpenVO;
 
 public interface WorkOpenMapper {
 
-	public String gerWorkOpenTime(WorkOpenVO vo);
+	public String getWorkOpenTime(WorkOpenVO vo);
+	public String getReservationTime(WorkOpenVO vo);
+	public String getWorkCloseTime(WorkOpenVO vo);
 	
 }

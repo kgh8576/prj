@@ -7,5 +7,5 @@ import com.one.style.wokrOpen.vo.WorkOpenVO;
 public interface WorkOpenService {
 
 	
-	public String getWorkOpenTime(WorkOpenVO vo);
+	public String[] getRealWorkOpenTime(WorkOpenVO vo);
 }

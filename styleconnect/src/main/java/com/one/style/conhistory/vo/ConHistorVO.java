@@ -12,8 +12,9 @@ public class ConHistorVO {
 	private String state;
 	private int price;
 	private Date reservateDate;
-	private String id;
+	private String memId;
 	private String memComment;
 	private int courNo;
 	private String desComment;
+	private String desId;
 }

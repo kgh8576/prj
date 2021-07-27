@@ -1,5 +1,7 @@
 package com.one.style.wokrOpen.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -13,7 +15,9 @@ public class WorkOpenVO {
 	private String sat;
 	private String sun;
 	private String week;
-	
+	private String reserDate;
+	private int courNo;
+	private String searchDate;
 	
 	
 	

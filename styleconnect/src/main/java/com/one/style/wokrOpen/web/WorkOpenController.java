@@ -20,13 +20,7 @@ public class WorkOpenController {
 	@RequestMapping("workTime.do")
 	@ResponseBody
 	public String[] workTime(WorkOpenVO vo , Model model) {
-		String workTime = workOpenDao.getWorkOpenTime(vo);
-		
-		String[] workTimes = workTime.split(",");
-		for (String times : workTimes) {
-			System.out.println(times);
-		}
-		return workTimes;
+		return workOpenDao.getRealWorkOpenTime(vo);
 	}
 	
 	

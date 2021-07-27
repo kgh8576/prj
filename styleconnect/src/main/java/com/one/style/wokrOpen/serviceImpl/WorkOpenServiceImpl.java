@@ -1,5 +1,9 @@
 package com.one.style.wokrOpen.serviceImpl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,8 +19,14 @@ public class WorkOpenServiceImpl implements WorkOpenService{
 	WorkOpenMapper workOpenMapper;
 
 	@Override
-	public String getWorkOpenTime(WorkOpenVO vo) {
-		return workOpenMapper.gerWorkOpenTime(vo);
+	public String[] getRealWorkOpenTime(WorkOpenVO vo) {
+		String[] openTimes =workOpenMapper.getWorkOpenTime(vo).split(",");
+		System.out.println(vo.getSearchDate());
+		
+//		workOpenMapper.getReservationTime(vo);
+//		workOpenMapper.getWorkCloseTime(vo);
+		String [] realWrokTime = null;
+		return realWrokTime;
 	}
 	
 	
