@@ -15,5 +15,4 @@ public interface DessearchService {
 	List<DessearchVO> dyeList();
 	List<DessearchVO> makeupList();
 	
-	
 }

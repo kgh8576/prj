@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <head>
@@ -47,7 +48,6 @@
 
 
 </head>
-
 <body>
 	<div id="page-title" class="padding-tb-30px gradient-white">
 		<div class="container">
@@ -59,47 +59,43 @@
 			<h1 class="font-weight-300">Designer List</h1>
 		</div>
 	</div>
-
-
 	<div class="margin-tb-30px">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
-
 					<div class="row">
-
 						<!-- Doctor -->
 						<c:forEach items="${designer}" var="vo">
 							<div class="col-lg-4 col-md-6 hvr-bob margin-bottom-45px">
-							<div class="background-white box-shadow">
-								<div class="thum">
-									<a href="desListSelect.do?id=${vo.id}"><img src="http://placehold.it/400x400" alt=""></a>
-								</div>
-							<div class="padding-30px">
-									<span class="text-grey-2">${vo.major } 전문</span>
-									<h5 class="margin-tb-15px">
-										<a class="text-dark" href="desListSelect.do">${vo.name } 디자이너</a>
-									</h5>
-									<div class="rating clearfix">
-										<ul class="float-left">
-											<li class="active"></li>
-											<li class="active"></li>
-											<li class="active"></li>
-											<li class="active"></li>
-											<li></li>
-										</ul>
+								<div class="background-white box-shadow">
+									<div class="thum">
+										<a href="desListSelect.do?id=${vo.id}"><img
+											src="images/Desert.jpg" alt=""></a>
 									</div>
+									<div class="padding-30px">
+										<span class="text-grey-2"># ${vo.major }</span>
+										<h5 class="margin-tb-15px">
+											<a class="text-dark" href="desListSelect.do?id=${vo.id }">${vo.name }
+												디자이너</a>
+										</h5>
+										<div class="rating clearfix">
+											<ul class="float-left">
+												<li class="active"></li>
+												<li class="active"></li>
+												<li></li>
+											</ul>
+											리뷰 평점
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+						<!-- // Doctor -->
 					</div>
 				</div>
 			</div>
-			</c:forEach>
-			<!-- // Doctor -->
 		</div>
 	</div>
-	</div>
-	</div>
-	</div>
-
 	<ul class="pagination pagination-md ">
 		<li class="page-item disabled"><a class="page-link rounded-0"
 			href="#" tabindex="-1">Previous</a></li>

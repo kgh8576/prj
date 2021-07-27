@@ -30,6 +30,7 @@ public class DessearchController {
 	@RequestMapping("desListSelect.do")
 	public String desListSelect(Model model, @RequestParam("id")String id) {
 		model.addAttribute("designer",dao.dessearchSelect(id));
+		
 	return("dessearch/desListSelect");
 	}
 	//펌전문디자이너 목록
