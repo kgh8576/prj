@@ -39,9 +39,14 @@
 		var month = currentday.attr("data-month");
 		var year = currentday.attr("data-year");
 		var date = new Date(year, month, day);
+		console.log(date.getFullYear());
+		console.log(date.getMonth());
+		console.log(date.getDate());
+		var currentDay = [date.getFullYear(),date.getMonth()+1,date.getDate()].join('/');
+		console.log(currentDay)
 		var weekLabel = week[date.getDay()];
 		return {
-			date: date,
+			date: currentDay,
 	        week: weekLabel
 	    };
 	}

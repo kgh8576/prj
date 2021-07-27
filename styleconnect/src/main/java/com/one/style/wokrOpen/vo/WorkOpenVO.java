@@ -18,7 +18,8 @@ public class WorkOpenVO {
 	private String reserDate;
 	private int courNo;
 	private String searchDate;
-	
+	private String closeTime;
+	private String time;
 	
 	
 	
