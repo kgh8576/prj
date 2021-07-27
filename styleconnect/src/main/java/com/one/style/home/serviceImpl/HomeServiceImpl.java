@@ -18,6 +18,12 @@ public class HomeServiceImpl implements HomeService{
 	public List<HomeVO> ajaxTopHairDes(String keyword) {
 		return map.ajaxTopHairDes(keyword);
 	}
+
+	@Override
+	public List<HomeVO> ajaxTopHairDesCount(String keyword) {
+		return map.ajaxTopHairDesCount(keyword);
+	}
+
 	
 
 

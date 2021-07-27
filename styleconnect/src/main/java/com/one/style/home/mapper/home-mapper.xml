@@ -4,20 +4,55 @@
 
 	<!-- 평점 순 top3 디자이너 가져오기 -->
 	<select id="ajaxTopHairDes" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
+
+		select * from (
+		  select r.name, r.id, avg(r.rate) as rate, file_path
+		  from review r,
+		    (
+		    select name, id, img_group_no, file_path
+		    from designer d, files f
+		    where d.img_group_no = f.des_group_no(+)
+		    <if test="keyword == 'perm'">
+		    	and d.perm_yn = 'Y'
+		    </if>
+		    <if test="keyword == 'dye'">
+		    	and d.dye_yn = 'Y'
+		    </if>
+		    <if test="keyword == 'cut'">
+		    	and d.cut_yn = 'Y'
+		    </if>
+		    ) sq
+		  where r.id = sq.id
+		  group by r.name, r.id, sq.file_path
+		  order by 3 desc
+		) where rownum between 1 and 3
 		
-		select *
-		from designer d, review r
-		where d.id = r.id
-		<if test='keyword == "cut"'>
-			and d.cut_yn = 'Y'
-		</if>
-		<if test='keyword == "perm"'>
-			and d.perm_yn = 'Y'
-		</if>
-		<if test='keyword == "dye"'>
-			and d.dye_yn = 'Y'
-		</if>
-		
-	</select> 
+	</select>
+	
+	<select id="ajaxTopHairDesCount" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
+		select * from (
+		  select r.name, r.id, count(*) as count, file_path
+		  from review r,
+		    (
+		    select name, id, img_group_no, file_path
+		    from designer d, files f
+		    where d.img_group_no = f.des_group_no(+)
+		    <if test="keyword == 'perm'">
+		    	and d.perm_yn = 'Y'
+		    </if>
+		    <if test="keyword == 'dye'">
+		    	and d.dye_yn = 'Y'
+		    </if>
+		    <if test="keyword == 'cut'">
+		    	and d.cut_yn = 'Y'
+		    </if>
+		    ) sq
+		  where r.id = sq.id
+		  group by r.name, r.id, sq.file_path
+		  order by 3 desc
+		) where rownum between 1 and 3
+	</select>
+
+	
 
 </mapper>

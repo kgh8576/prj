@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.style.review.mapper.ReviewServiceMap">
+	<select id="reviewPersonalTotal" parameterType="string" resultType="com.one.style.review.vo.ReviewVO">
+		select count(*) as count from review where name = #{name}
+	</select>
+	<select id="reviewRating" parameterType="string" resultType="int">
+		select round(avg(rate)) as rate from review where name = #{name}
+	</select>
+	
+	<select id="reviewPaging" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+		select * from
+		  (select review.*, rownum as rn
+		  from review
+		  where name = #{name}
+		  order by wdate desc)
+		where rn between #{firstCnt} and #{lastCnt}
+		order by rn
+	</select>
+	
+</mapper>

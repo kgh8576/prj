@@ -10,18 +10,41 @@ pageEncoding="UTF-8" %>
     </style>
     <script>
     	function topHairDesChange(keyword){
-    		console.log(keyword);
+    		// 헤어디자이너 top3 이름, 평점, 이미지 경로 가져오는 ajax
         	$.ajax({
-        		type:'post',
         		url:'ajaxTopHairDesChange.do',
         		data:{ keyword:keyword },
         		success:function(result){
         			console.log(result);
+        			for(var i = 0; i < result.length; i++){
+        				$('#targetHairName'+(i+1)).text(result[i].name);
+        				$('#targetHairStar'+(i+1)).html(''); // 별 칸 다 지우고 ajax로 평점만큼 별 채워넣기
+        				for(var j = 0; j < result[i].rate; j++){
+        					console.log(result[i].rate);
+        					$('#targetHairStar'+(i+1)).append('<li class="active"></li>');	
+        				}
+        				//$('#targetHairImage'+(i+1)).html(''); // 이미지 칸 지우고 ajax로 경로 채워넣기
+        				//$('#targetHairImage'+(i+1)).append('<a href="reviewList.do?name="'+result[i].name+'><img src="'+result[i].filePath+'" alt=""></a>');
+        				$('#targetHairImage'+(i+1)).append('<a href="reviewList.do?name="'+result[i].name+'</a>');
+        			}
         		},
         		error:function(err){
         			console.log(err);
         		}
-        	}); 		
+        	});
+        	// 총 리뷰 수 가져오는 ajax
+        	$.ajax({
+        		url:'ajaxTopHairDesCount.do',
+        		data:{ keyword:keyword },
+        		success:function(ratingResult){
+        			for(var i = 0; i < ratingResult.length; i++){
+        				$('#targetHairRating'+(i+1)).text('총 리뷰 수 '+ratingResult[i].count+'건');
+        			}
+        		},
+        		error:function(err){
+        			console.log(err);
+        		}
+        	});
     	}
     </script>
 </head>
@@ -50,6 +73,7 @@ pageEncoding="UTF-8" %>
 									<a href="#" class="text-primary">#호일펌</a>
 									<a href="#" class="text-primary">#구자혁</a>
 									<a href="#" class="text-primary">#병지컷</a>
+									<a href="reviewList.do?name=소국진">테스트테스트</a>
 								</div>
                             </div>
                         </form>
@@ -181,6 +205,78 @@ pageEncoding="UTF-8" %>
                     </div>
                 </div>
             </div>
+            
+             <div class="row">
+
+                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="thum" id="targetHairImage1">
+                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
+                        </div>
+                        <div class="padding-30px">
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName1">이름 자리</a></h5>
+                            <div class="rating clearfix">
+                                <ul class="float-left" id="targetHairStar1">
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li></li>
+                                </ul>
+                                <small class="float-right text-grey-2" id="targetHairRating1">레이팅</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="thum" id="targetHairImage2">
+                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
+                        </div>
+                        <div class="padding-30px">
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName2">이름 자리</a></h5>
+                            <div class="rating clearfix">
+                                <ul class="float-left" id="targetHairStar2">
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li></li>
+                                </ul>
+                                <small class="float-right text-grey-2" id="targetHairRating2">리뷰수, 레이팅 자리</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="thum" id="targetHairImage3">
+                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
+                        </div>
+                        <div class="padding-30px">
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName3">이름 자리</a></h5>
+                            <div class="rating clearfix">
+                                <ul class="float-left" id="targetHairStar3">
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li class="active"></li>
+                                    <li></li>
+                                    
+                                </ul>
+                                <small class="float-right text-grey-2" id="targetHairRating3">리뷰수, 레이팅 자리</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+
+            </div>
+            
             <!-- // Title -->
             
            <div class="row justify-content-center margin-bottom-45px">
@@ -202,86 +298,7 @@ pageEncoding="UTF-8" %>
                 </div>
             </div>
 
-            <div class="row">
-
-                <!-- Doctor -->
-                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="thum">
-                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
-                        </div>
-                        <div class="padding-30px">
-                            <span class="text-grey-2">Internal</span>
-                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">이름 자리</a></h5>
-                            <div class="rating clearfix">
-                                <ul class="float-left">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
-                                </ul>
-                                <small class="float-right text-grey-2">리뷰수, 레이팅 자리</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- // Doctor -->
-                
-                
-                                <!-- Doctor -->
-                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="thum">
-                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
-                        </div>
-                        <div class="padding-30px">
-                            <span class="text-grey-2">Internal</span>
-                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">이름 자리</a></h5>
-                            <div class="rating clearfix">
-                                <ul class="float-left">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
-                                </ul>
-                                <small class="float-right text-grey-2">리뷰수, 레이팅 자리</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- // Doctor -->
-                
-                
-                                <!-- Doctor -->
-                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="thum">
-                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
-                        </div>
-                        <div class="padding-30px">
-                            <span class="text-grey-2">Internal</span>
-                            <h5 class="margin-tb-15px"><a class="text-dark" href="#">이름 자리</a></h5>
-                            <div class="rating clearfix">
-                                <ul class="float-left">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
-                                </ul>
-                                <small class="float-right text-grey-2">리뷰수, 레이팅 자리</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- // Doctor -->
-                
-                
-                
-
-            </div>
+           
         </div>
     </section>
 
