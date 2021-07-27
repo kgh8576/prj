@@ -8,11 +8,12 @@ public interface DessearchService {
 	//전체디자이너 리스트
 	List<DessearchVO> dessearchSelectList();
 	//디자이너 한명
-	DessearchVO dessearchSelect(String id);
+	DessearchVO dessearchSelect(DessearchVO vo);
 	//컷,펌,염색,메이크업 리스트
 	List<DessearchVO> cutList();
 	List<DessearchVO> permList();
 	List<DessearchVO> dyeList();
 	List<DessearchVO> makeupList();
 	
+	List<DessearchVO> review(DessearchVO vo);
 }

@@ -76,7 +76,7 @@
 										<span class="text-grey-2"># ${vo.major }</span>
 										<h5 class="margin-tb-15px">
 											<a class="text-dark" href="desListSelect.do?id=${vo.id }">${vo.name }
-												디자이너</a>
+												디자이너 ${review.rate }</a>
 										</h5>
 										<div class="rating clearfix">
 											<ul class="float-left">
@@ -84,7 +84,7 @@
 												<li class="active"></li>
 												<li></li>
 											</ul>
-											리뷰 평점
+											리뷰 평점 
 										</div>
 									</div>
 								</div>
