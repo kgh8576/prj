@@ -7,5 +7,5 @@ import com.one.style.home.vo.HomeVO;
 public interface HomeServiceMap {
 
 	public List<HomeVO> ajaxTopHairDes(String keyword);
-	
+	public List<HomeVO> ajaxTopHairDesCount(String keyword);
 }

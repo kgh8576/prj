@@ -16,5 +16,7 @@ public class HomeVO {
 	private String dyeYn;
 	private String major;
 	private int rate;
+	private int count;
+	private String filePath;
 	
 }
