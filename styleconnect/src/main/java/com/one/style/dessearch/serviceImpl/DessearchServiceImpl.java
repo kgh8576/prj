@@ -15,40 +15,41 @@ public class DessearchServiceImpl implements DessearchService {
 	SqlSession sqlSession;
 
 	@Override
-	public List<DessearchVO> selectDessearchList() {
+	public List<DessearchVO> dessearchSelectList() {
 		// 전체디자이너 리스트
-		return sqlSession.selectList("selectDessearchList");
+		return sqlSession.selectList("dessearchSelectList");
 	}
 
 	@Override
-	public DessearchVO selectDessearch(DessearchVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public DessearchVO dessearchSelect(String id) {
+		// 디자이너 한명 조회
+		return sqlSession.selectOne("dessearchSelect",id);
 	}
 
 	@Override
 	public List<DessearchVO> cutList() {
-		// TODO Auto-generated method stub
+		// 컷전문
 		return sqlSession.selectList("cutList");
 	}
 
 	@Override
 	public List<DessearchVO> permList() {
-		// TODO Auto-generated method stub
-		return null;
+		// 펌전문
+		return sqlSession.selectList("permList");
 	}
 
 	@Override
 	public List<DessearchVO> dyeList() {
-		// TODO Auto-generated method stub
-		return null;
+		// 염색전문
+		return sqlSession.selectList("dyeList");
 	}
 
 	@Override
 	public List<DessearchVO> makeupList() {
-		// TODO Auto-generated method stub
-		return null;
+		// 메이크업전문
+		return sqlSession.selectList("makeupList");
 	}
+
 
 	
 

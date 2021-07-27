@@ -25,7 +25,7 @@ pageEncoding="UTF-8" %>
                     <div class="col-lg-7 col-md-12 position-inherit">
                         <ul id="menu-main" class="nav-menu float-lg-right link-padding-tb-20px">
                         	<li><a href="#">상담하기</a></li>
-                        	<li><a href="#">디자이너 찾기</a></li>
+                        	<li><a href="category.do">디자이너 찾기</a></li>
                         	<li><a href="#">설문조사</a></li>           	
                         	<!-- 
                             <li class="has-dropdown"><a href="#">Listings</a>
