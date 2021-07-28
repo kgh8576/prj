@@ -34,7 +34,7 @@
       where des_id in (
                        select id
                        from DESIGNER d
-                       where cut_yn = 'Y'
+                       where perm_yn = 'Y'
                        )
       group by des_id) r
       on d.id = r.des_id
@@ -51,7 +51,7 @@
       where des_id in (
                        select id
                        from DESIGNER d
-                       where cut_yn = 'Y'
+                       where dye_yn = 'Y'
                        )
       group by des_id) r
       on d.id = r.des_id
@@ -68,7 +68,7 @@
       where des_id in (
                        select id
                        from DESIGNER d
-                       where cut_yn = 'Y'
+                       where makeup_yn = 'Y'
                        )
       group by des_id) r
       on d.id = r.des_id

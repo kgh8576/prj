@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <body>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
@@ -27,19 +28,10 @@
                                     <div class="rating clearfix">
                                         <span class="float-left text-grey-2"><i class="far fa-map"></i>  California</span>
                                         <ul class="float-right">
-                                            <li class="active"></li>
-                                            <li class="active"></li>
-                                            <li class="active"></li>
-                                            <li class="active"></li>
-                                            <li></li>
+                                          <c:forEach begin="1" end="${designer.rate }">
+												<li class="active"></li>
+										</c:forEach>  평점 ${designer.rate }
                                         </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="row no-gutters">
-                                        <div class="col-4"><a href="#" class="text-lime"><i class="far fa-bookmark"></i> Open Now!</a></div>
-                                        <div class="col-4 text-center"><a href="#" class="text-red"><i class="far fa-heart"></i> Save</a></div>
-                                        <div class="col-4 text-right"><a href="#" class="text-blue"><i class="far fa-hospital"></i> Hospital</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +55,12 @@
                           <!-- Post tags -->
                         <hr>
                         <div class="post-tags">
-                            <a href="#" rel="tag">${designer.major }</a>
+                            <div>
+										<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
+											<c:forEach var="major" items="${majors}">
+											    <a href="#"> <span class="text-grey-2"># ${major} </span> </a>
+											</c:forEach>
+									</div>
                             <!-- // Post tags -->
                         </div>
                         </div>
@@ -94,12 +91,24 @@
                         <hr>
                         <div class="padding-bottom-30px">
                         ${designer.name }<br/>
-                        ${designer.rate }
-                           # ${designer.major }
-                             <!-- Post tags -->
-                        <div class="post-tags">
-                            <a href="#" rel="tag"> # ${designer.major }</a>
-                            <!-- // Post tags -->
+                        <!-- 별점 -->
+                         <div class="rating clearfix">
+                                        <ul class="float-right">
+                                          <c:forEach begin="1" end="${designer.rate }">
+												<li class="active"></li>
+										</c:forEach>  평점 ${designer.rate }
+                                        </ul>
+                         </div>
+                             <!-- 디자이너 major 태그 -->
+                         <div class="post-tags">
+                            <div>
+										<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
+											<c:forEach var="major" items="${majors}">
+											    <a href="#"> <span class="text-grey-2"># ${major} </span> </a>
+											</c:forEach>
+									</div>
+                            <!-- //디자이너 major 태그 -->
+                        </div>
                         </div>
                         </div>
                     </div>

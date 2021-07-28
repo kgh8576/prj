@@ -13,10 +13,8 @@ public class DessearchVO {
 	private String location;
 	private String gender;
 	private Date birth;
-	private int point;
 	private String state;
 	private String career;
-	private Date regDay;
 	private String majorGender;
 	private String makeupYN;
 	private String cutYN;
@@ -26,6 +24,7 @@ public class DessearchVO {
 	private int imgGroupNo;
 	private String comments;
 	private int cerGroupNo;
+	private String[] majors;
 	//review
 	private int conNo;
 	private String contents;

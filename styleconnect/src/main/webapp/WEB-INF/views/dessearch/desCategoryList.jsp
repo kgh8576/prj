@@ -54,7 +54,7 @@
 				<li><a href="#">Pages</a></li>
 				<li class="active">Doctors List</li>
 			</ol>
-			<h1 class="font-weight-300">Designerddd List</h1>
+			<h1 class="font-weight-300">Designer List</h1>
 		</div>
 	</div>
 
