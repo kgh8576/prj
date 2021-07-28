@@ -31,50 +31,54 @@
     <!-- YOUR CUSTOM CSS -->
     <link href="${pageContext.request.contextPath}/resources/reservationreso/css/custom.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script type="text/javascript">
-	function finddate() {
-		var week = new Array('sun','mon','tue','wed','thu','fri','sat');
-		var currentday =$("td[class*='ui-datepicker-current-day']");
-		var day = currentday.text();
-		var month = currentday.attr("data-month");
-		var year = currentday.attr("data-year");
-		var date = new Date(year, month, day);
-		console.log(date.getFullYear());
-		console.log(date.getMonth());
-		console.log(date.getDate());
-		var currentDay = [date.getFullYear(),date.getMonth()+1,date.getDate()].join('/');
-		console.log(currentDay)
-		var weekLabel = week[date.getDay()];
-		return {
-			date: currentDay,
-	        week: weekLabel
-	    };
-	}
-	function findTime() {
-		var findDate = new finddate();
-		var courno = ${courNo};
-		var desData = {
-				courNo : courno,
-				week : findDate.week,
-				searchDate : findDate.date
-		}
-		$.ajax({
-			url:"workTime.do",
-			type:"post",
-			data:desData,
-			success: function(data) {
-				$(".can_reservation_time").html("");
-				var i = 1;
-				for (var time of data) {
-					$(".can_reservation_time").append("<li><input type='radio' id='time_"+i+"' onclick='selectTime(\""+time+"\")' name='time' value='"+time+"'><label for='time_"+i+"'>"+time+"</label></li>");
-					i = i+1;
-				}
-			},
-			error : function(err) {
-				console.log(err);
-			}
-		})
-	}
+	
+	//function finddate() {
+		//var week = new Array('sun','mon','tue','wed','thu','fri','sat');
+		//var currentday =$("td[class*='ui-datepicker-current-day']");
+		//var day = currentday.text();
+		//var month = currentday.attr("data-month");
+		//var year = currentday.attr("data-year");
+		//var date = new Date(year, month, day);
+		//console.log(date.getFullYear());
+		//console.log(date.getMonth());
+		//console.log(date.getDate());
+		//var currentDay = [date.getFullYear(),date.getMonth()+1,date.getDate()].join('/');
+		//console.log(currentDay)
+		//var weekLabel = week[date.getDay()];
+		//return {
+			//date: currentDay,
+	        //week: weekLabel
+	    //};
+	//}
+	//function findTime() {
+		//var currentday =$("td[class*='ui-datepicker-current-day']");
+		//var findDate = new finddate();
+		//var courno = $("#courNo").val();
+		//console.log(courno)
+		//var desData = {
+		//		courNo : courno,
+		//		week : findDate.week,
+		//		searchDate : findDate.date
+		//}
+		//$.ajax({
+		//	url:"workTime.do",
+		//	type:"post",
+		//	data:desData,
+		//	success: function(data) {
+		//		$(".can_reservation_time").html("");
+		//		var i = 1;
+		//		for (var time of data) {
+		//			$(".can_reservation_time").append("<li><input type='radio' id='time_"+i+"' onclick='selectTime(\""+time+"\")' name='time' value='"+time+"'><label for='time_"+i+"'>"+time+"</label></li>");
+		//			i = i+1;
+		//		}
+		//	},
+		//	error : function(err) {
+		//		console.log(err);
+		//	}
+		//})
+	//}
 	function selectTime(time) {
 		console.log(time)
 		$("#selected_time").text(time);
@@ -431,28 +435,13 @@
 		                    <div id="DatePicker"></div>
 		                    <div>
 			                    <div class="dropdown time">
-			                        <a href="#" data-toggle="dropdown" onclick="findTime()">Hour <span id="selected_time"></span></a>
+			                        <a href="#" data-toggle="dropdown">Hour <span id="selected_time"></span></a>
 			                        <div class="dropdown-menu">
 			                            <div class="dropdown-menu-content">
 			                                <h4>예약가능시간</h4>
 			                                <div class="radio_select add_bottom_15">
 			                                    <ul class="can_reservation_time">
-			                                        <li>
-			                                            <input type="radio" id="time_1" name="time" value="10:00">
-			                                            <label for="time_1">12.00</label>
-			                                        </li>
-			                                        <li>
-			                                            <input type="radio" id="time_2" name="time" value="08.30pm">
-			                                            <label for="time_2">12.30</label>
-			                                        </li>
-			                                        <li>
-			                                            <input type="radio" id="time_3" name="time" value="09.00pm">
-			                                            <label for="time_3">1.00</label>
-			                                        </li>
-			                                        <li>
-			                                            <input type="radio" id="time_4" name="time" value="09.30pm">
-			                                            <label for="time_4">1.30</label>
-			                                        </li>
+													원하는 날짜를 선택하면 예약 가능한 시간이 표시됩니다.
 			                                    </ul>
 			                                </div>
 			                                <!-- /time_select -->
@@ -461,36 +450,7 @@
 			                    </div>
 		                    </div>
 		                    <!-- /dropdown -->
-		                    <div class="dropdown people">
-		                        <a href="#" data-toggle="dropdown">People <span id="selected_people"></span></a>
-		                        <div class="dropdown-menu">
-		                            <div class="dropdown-menu-content">
-		                                <h4>How many people?</h4>
-		                                <div class="radio_select">
-		                                    <ul>
-		                                        <li>
-		                                            <input type="radio" id="people_1" name="people" value="1">
-		                                            <label for="people_1">1<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="people_2" name="people" value="2">
-		                                            <label for="people_2">2<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="people_3" name="people" value="3">
-		                                            <label for="people_3">3<em>-40%</em></label>
-		                                        </li>
-		                                        <li>
-		                                            <input type="radio" id="people_4" name="people" value="4">
-		                                            <label for="people_4">4<em>-40%</em></label>
-		                                        </li>
-		                                    </ul>
-		                                </div>
-		                                <!-- /people_select -->
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <!-- /dropdown -->
+		                    <input type="hidden" id="courNo" name="courNo" value="${courNo}">
 		                    <a href="#" class="btn_1 full-width mb_5">Reserve Now</a>
 		                   <div class="text-center"><small>No money charged on this steps</small></div>
 		                </div>
