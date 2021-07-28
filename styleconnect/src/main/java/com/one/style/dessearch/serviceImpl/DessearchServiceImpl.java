@@ -21,9 +21,9 @@ public class DessearchServiceImpl implements DessearchService {
 	}
 
 	@Override
-	public DessearchVO dessearchSelect(String id) {
+	public DessearchVO dessearchSelect(DessearchVO vo) {
 		// 디자이너 한명 조회
-		return sqlSession.selectOne("dessearchSelect",id);
+		return sqlSession.selectOne("dessearchSelect", vo.getId());
 	}
 
 	@Override
@@ -48,6 +48,12 @@ public class DessearchServiceImpl implements DessearchService {
 	public List<DessearchVO> makeupList() {
 		// 메이크업전문
 		return sqlSession.selectList("makeupList");
+	}
+
+	@Override
+	public List<DessearchVO> review(DessearchVO vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("review",vo);
 	}
 
 
