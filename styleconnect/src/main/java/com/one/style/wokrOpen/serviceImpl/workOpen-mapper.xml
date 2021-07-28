@@ -11,13 +11,13 @@
 					where cour_no = #{courNo} 
 					)
 	</select>
-	<select id="getReservationTime" parameterType="com.one.style.wokrOpen.vo.WorkOpenVO">
+	<select id="getReservationTime" parameterType="com.one.style.wokrOpen.vo.WorkOpenVO" resultType="string">
 		select time
 		from consulting_history
 		where day = #{searchDate}
 		and cour_no = #{courNo}
 	</select>
-	<select id="getWorkCloseTime" parameterType="com.one.style.wokrOpen.vo.WorkOpenVO">
+	<select id="getWorkCloseTime" parameterType="com.one.style.wokrOpen.vo.WorkOpenVO" resultType="string">
 		select close_time
 		from work_close
 		where close_day = #{searchDate}
