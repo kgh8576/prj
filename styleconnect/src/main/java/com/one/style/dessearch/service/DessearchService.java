@@ -14,6 +14,4 @@ public interface DessearchService {
 	List<DessearchVO> permList();
 	List<DessearchVO> dyeList();
 	List<DessearchVO> makeupList();
-	
-	List<DessearchVO> review(DessearchVO vo);
 }

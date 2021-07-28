@@ -1,45 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.one.style.descourse.service.descourse-mapper">
+<mapper namespace="com.one.style.descourse.mapper.DessearchMapper">
 	
 	<!-- 전체디자이너 리스트 -->
 	<select id="dessearchSelectList" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT * FROM DESIGNER D FULL OUTER JOIN REVIEW R ON(D.ID =R.ID)
+	
 	</select>
 
 	<!-- 컷디자이너 리스트 -->
 	<select id="cutList" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT DISTINCT * FROM DESIGNER 
-	WHERE CUT_YN='Y'
+	select d.id, d.name, d.major, nvl2(r.rate,r.rate,0)as rate
+	from DESIGNER d
+	left join (
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+      from review
+      where des_id in (
+                       select id
+                       from DESIGNER d
+                       where cut_yn = 'Y'
+                       )
+      group by des_id) r
+      on d.id = r.des_id
+	where cut_yn ='Y'
 	</select>
 	
 	<!-- 펌디자이너 리스트 -->
 	<select id="permList" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT * FROM DESIGNER 
-	WHERE PERM_YN='Y'
+	select d.id, d.name, d.major, nvl2(r.rate,r.rate,0)as rate
+	from DESIGNER d
+	left join (
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+      from review
+      where des_id in (
+                       select id
+                       from DESIGNER d
+                       where cut_yn = 'Y'
+                       )
+      group by des_id) r
+      on d.id = r.des_id
+	where perm_yn ='Y'
 	</select>
 	
 	<!-- 염색디자이너 리스트 -->
 	<select id="dyeList" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT * FROM DESIGNER 
-	WHERE DYE_YN='Y'
+	select d.id, d.name, d.major, nvl2(r.rate,r.rate,0)as rate
+	from DESIGNER d
+	left join (
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+      from review
+      where des_id in (
+                       select id
+                       from DESIGNER d
+                       where cut_yn = 'Y'
+                       )
+      group by des_id) r
+      on d.id = r.des_id
+	where dye_yn ='Y'
 	</select>
 	
 	<!-- 메이크업디자이너 리스트 -->
 	<select id="makeupList" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT * FROM DESIGNER 
-	WHERE MAKEUP_YN='Y'
+	select d.id, d.name, d.major, nvl2(r.rate,r.rate,0)as rate
+	from DESIGNER d
+	left join (
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+      from review
+      where des_id in (
+                       select id
+                       from DESIGNER d
+                       where cut_yn = 'Y'
+                       )
+      group by des_id) r
+      on d.id = r.des_id
+	where makeup_yn ='Y'
 	</select>
 	
 	<!-- 디자이너 한건 -->
 	<select id="dessearchSelect" parameterType="String" resultType="com.one.style.dessearch.vo.DessearchVO">
-	SELECT * FROM DESIGNER D LEFT OUTER JOIN REVIEW R ON(D.ID = R.ID) 
-	WHERE D.ID = #{ID}
+	select d.id, d.name, d.major,d.career, d.major_gender, d.img_group_no, nvl2(r.rate,r.rate,0)as rate
+	from DESIGNER d
+	left join (
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+      from review
+      where des_id in (
+                       select id
+                       from DESIGNER d
+                       )
+      group by des_id) r
+      on d.id = r.des_id
+	where id= #{id}
 	</select>
-	
-	<!-- 별점 평균 -->
-	<select id="rateAvg">
-	SELECT ROUND(AVG(RATE),1) FROM REVIEW WHERE NAME= #{NAME}
-	</select>
-	
+
 </mapper>

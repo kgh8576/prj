@@ -17,13 +17,13 @@ public class DessearchController {
 	//디자이너 카테고리
 	@RequestMapping("category.do")
 	public String categoryList(Model model) {
-		model.addAttribute("designer",dao.dessearchSelectList());
 	return("dessearch/desCategoryList");
 	}
 	//전체디자이너 목록
 	@RequestMapping("cutList.do")
-	public String cutList(Model model) {
+	public String cutList(Model model, DessearchVO vo ) {
 		model.addAttribute("designer",dao.cutList());
+		
 	return("dessearch/desList");
 	}
 	//디자이너상세페이지

@@ -2,12 +2,14 @@ package com.one.style.dessearch.serviceImpl;
 
 import java.util.List;
 
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.one.style.dessearch.service.DessearchService;
 import com.one.style.dessearch.vo.DessearchVO;
+
 @Repository
 public class DessearchServiceImpl implements DessearchService {
 
@@ -49,14 +51,4 @@ public class DessearchServiceImpl implements DessearchService {
 		// 메이크업전문
 		return sqlSession.selectList("makeupList");
 	}
-
-	@Override
-	public List<DessearchVO> review(DessearchVO vo) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("review",vo);
-	}
-
-
-	
-
 }

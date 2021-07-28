@@ -25,9 +25,10 @@ public class DessearchVO {
 	private String major;
 	private int imgGroupNo;
 	private String comments;
+	private int cerGroupNo;
 	//review
 	private int conNo;
-	private Clob contents;
+	private String contents;
 	private int rate;
 	private Date wDate;
 	private String title;
