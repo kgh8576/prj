@@ -1,5 +1,9 @@
 package com.one.style.conhistory.mapper;
 
-public interface ConhistoryMapper {
+import java.util.List;
 
+import com.one.style.conhistory.vo.ConHistorVO;
+
+public interface ConhistoryMapper {
+	public List<ConHistorVO> conHistoryList(ConHistorVO vo);
 }

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.one.style.conhistory.mapper.conhistoryMapper">
+
+	<select id="conHistoryList" parameterType="com.one.style.conhistory.vo.ConHistorVO" resultType="com.one.style.conhistory.vo.ConHistorVO">
+		select * from consulting_history
+		<!-- if구문으로 전체 리스트 보기, 내 상담 리스트 보기 구분-->
+	</select>
+
 </mapper>
