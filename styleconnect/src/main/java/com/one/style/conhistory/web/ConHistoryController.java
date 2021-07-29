@@ -16,9 +16,10 @@ import com.one.style.wokrOpen.service.WorkOpenService;
 
 @Controller
 public class ConHistoryController {
-
+	
+	
 	@Autowired
-	ConhistoryService conHistoryService;
+	ConhistoryService conHistoryDao;
 	
 	@RequestMapping("reservation.do")
 	public String reservation(Model model , HttpServletRequest req , HttpServletResponse resp) {
@@ -32,8 +33,11 @@ public class ConHistoryController {
 	@RequestMapping("consulting.do")
 	public String consulting(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		ConHistorVO vo = new ConHistorVO();
-		//세션에서 아이디 가져와서 vo에 넣음
-		//model.addAttribute("conHistoryList", conHistoryService.conhistoryList());
+		HttpSession session = req.getSession();
+		
+		vo.setMemId((String)session.getAttribute("id"));  
+		model.addAttribute("conHistoryList", conHistoryDao.conhistoryList(vo));
+		
 		return "consulting/consulting";
 	}
 
