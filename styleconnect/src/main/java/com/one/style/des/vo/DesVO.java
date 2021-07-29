@@ -27,5 +27,9 @@ public class DesVO {
 	private String major;
 	private int imggroupno;
 	private String comments;
+	private String title;
+	private String detail;
+	private int price;
+	private int courNo;
 	
 }
