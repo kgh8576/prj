@@ -20,6 +20,9 @@ public class AjaxReviewController {
 	
 	@RequestMapping("reviewUpdate.do")
 	public String reviewUpdate(ReviewVO vo) {
+		reviewDao.reviewUpdate(vo);
 		return null;
 	}
+	
+	
 }

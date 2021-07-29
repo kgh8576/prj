@@ -69,6 +69,11 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<ReviewVO> canRegReviewList(String sessionId) {
 		return map.canRegReviewList(sessionId);
 	}
+
+	@Override
+	public void reviewUpdate(ReviewVO vo) {
+		map.reviewUpdate(vo);
+	}
 	
 	
 

@@ -13,5 +13,6 @@ public interface ReviewServiceMap {
 	public ReviewVO canReviewModCheck(ReviewVO vo);
 	public ReviewVO canReviewRegCheck(ReviewVO vo);
 	public List<ReviewVO> canRegReviewList(String sessionId);
+	public void reviewUpdate(ReviewVO vo);
 	
 }
