@@ -10,4 +10,8 @@ public interface ReviewService {
 	public List<ReviewVO> reviewPaging(ReviewVO vo);
 	public ReviewVO getReviewWriter(ReviewVO vo);
 	public void reviewDelete(ReviewVO vo);
+	public boolean canReviewModCheck(ReviewVO vo);
+	public boolean canReviewRegCheck(ReviewVO vo);
+	public List<ReviewVO> canRegReviewList(String sessionId);
+	public void reviewUpdate(ReviewVO vo);
 }

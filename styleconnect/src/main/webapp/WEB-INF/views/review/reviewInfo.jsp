@@ -26,6 +26,11 @@
 	function modify(){
 		$('#modifyFrm').submit();
 	}
+	// 돌아가기 버튼
+	function back(desId){
+		location.href='reviewList.do?desId='+desId;
+	}
+	
 </script>
 </head>
 <body>
@@ -40,6 +45,7 @@
 				
 				<form action="reviewModify.do" id="modifyFrm" method="post">
 					<input type="hidden" name="conNo" value="${reviewInfo.conNo }">
+					<input type="hidden" name="memId" value="${reviewInfo.memId }">
 				</form>
 				
 			</c:if>
@@ -63,8 +69,11 @@
 			<hr>
 			${reviewInfo.contents}
 		</div>
-		
+		<div align="center">
+			<br><button class="btn btn-info" onclick="back('${reviewInfo.desId}')">돌아가기</button>
+		</div>
 	</div>
+		
 	<div class="col-md-3"></div>
 </div>
 </body>

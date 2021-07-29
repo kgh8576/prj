@@ -50,4 +50,19 @@ select * from
 		delete from review where con_no = #{conNo}
 	</delete>
 	
+	<select id="canReviewModCheck" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+	select * from consulting_history
+	where state = 'ccode005'
+	and mem_id = #{memId}
+	and sysdate - day between 0 and 7
+	and con_no = #{conNo}
+	</select>
+	
+	<select id="canReviewRegCheck" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+	select * from review where con_no = #{conNo}
+	</select>
+	
+	<update id="reviewUpdate" parameterType="com.one.style.review.vo.ReviewVO">
+	update review set contents = #{contents}, title = #{title}, rate = #{rate} where con_no = #{conNo}; 
+	</update>
 </mapper>
