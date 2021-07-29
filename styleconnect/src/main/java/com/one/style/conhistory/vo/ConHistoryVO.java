@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class ConHistorVO {
+public class ConHistoryVO {
 	private int conNo;
 	private Date day;
 	private String time;

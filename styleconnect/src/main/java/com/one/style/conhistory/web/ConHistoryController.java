@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.style.conhistory.service.ConhistoryService;
-import com.one.style.conhistory.vo.ConHistorVO;
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.wokrOpen.service.WorkOpenService;
 
 @Controller
@@ -24,15 +24,15 @@ public class ConHistoryController {
 	@RequestMapping("reservation.do")
 	public String reservation(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		String courNo =  req.getParameter("courNo");
-		
-		HttpSession session = req.getSession();
-		session.setAttribute("courNo", courNo);
+		ConHistoryVO vo = new ConHistoryVO();
+		vo.setCourNo(Integer.parseInt(courNo));
+		model.addAttribute("course", conHistoryDao.desCourseDetail(vo));
 		return "reservation/reservation";
 	}
 	
 	@RequestMapping("consulting.do")
 	public String consulting(Model model , HttpServletRequest req , HttpServletResponse resp) {
-		ConHistorVO vo = new ConHistorVO();
+		ConHistoryVO vo = new ConHistoryVO();
 		HttpSession session = req.getSession();
 		
 		vo.setMemId((String)session.getAttribute("id"));  

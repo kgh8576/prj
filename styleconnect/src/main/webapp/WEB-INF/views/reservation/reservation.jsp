@@ -58,8 +58,9 @@
 		                        </div>
 		                        <div id="collapse-A" class="collapse" role="tabpanel" aria-labelledby="heading-A">
 		                            <div class="card-body info_content">
-		                            	<p>Mei at intellegat reprehendunt, te facilisis definiebas dissentiunt usu. Choro delicata voluptatum cu vix. Sea error splendide at. Te sed facilisi persequeris definitiones, ad per scriptorem instructior, vim latine adipiscing no. Cu tacimates salutandi his, mel te dicant quodsi aperiri. Unum timeam his eu.</p>
-		                            	<p>An malorum ornatus nostrum vel, graece iracundia laboramus cu ius. No pro mazim blandit instructior, sumo voluptaria has et, vide persecuti abhorreant ne est.</p>
+		                            	<h2></h2>
+		                            	<h2 align="left">상담 상세 정보</h2>
+		                            	<p>${course.detail}</p>
 		                            	<div class="add_bottom_25"></div>
 		                                <h2>디자이너가 했던 사진들</h2>
 		                                <div class="pictures magnific-gallery clearfix">
@@ -71,6 +72,10 @@
 		                                </div>
 		                            </div>
 		                        </div>
+		                        <div class="form-group">
+                                    <label>디자이너 선생님에게 전할 말을 남겨 주세요 </label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Ex)저는 심한 곱슬이에요 / 파마를 하려고 해요!"></textarea>
+                                </div>
 		                    </div>
 		                    <!-- /tab -->
 							<!-- 디자이너 정보 탭 -->
@@ -85,14 +90,14 @@
 		                        <div id="collapse-B" class="collapse" role="tabpanel" aria-labelledby="heading-B">
 		                            <div id="page-title" class="padding-tb-30px gradient-white">
 								        <div class="container">
-								            <h1 class="font-weight-300">디자이너 이름 디자이너</h1>
+								            <h1 class="font-weight-300">${course.name}  이름 디자이너</h1>
 								        </div>
 								        <!-- 프로필(경력) -->
 					                    <div class="margin-bottom-30px box-shadow">
 					                        <div class="padding-30px background-white">
 					                            <h3><i class="far fa-hospital margin-right-10px text-main-color"></i> 경력 </h3>
 					                            <hr>
-					                            <p class="text-grey-2">${designer.career }</p>
+					                            <p class="text-grey-2">${course.career }</p>
 					                        </div>
 					                    </div>
 					                    <div class="margin-bottom-30px box-shadow">
@@ -103,7 +108,7 @@
 					                        <hr>
 					                        <div class="post-tags">
 					                            <div>
-													<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
+													<c:set var="majors" value="${fn:split(course.major,',')}"></c:set>
 														<c:forEach var="major" items="${majors}">
 														<a href="#"> <span class="text-grey-2"># ${major} </span> </a>
 													</c:forEach>
@@ -148,7 +153,7 @@
 			                    </div>
 		                    </div>
 		                    <!-- /dropdown -->
-		                    <input type="hidden" id="courNo" name="courNo" value="${courNo}">
+		                    <input type="hidden" id="courNo" name="courNo" value="${course.courNo}">
 		                    <a href="#" class="btn_1 full-width mb_5">예약하기</a>
 		                </div>
 		            </div>

@@ -2,8 +2,10 @@ package com.one.style.conhistory.service;
 
 import java.util.List;
 
-import com.one.style.conhistory.vo.ConHistorVO;
+import com.one.style.conhistory.vo.ConHistoryVO;
+import com.one.style.des.vo.DesVO;
 
 public interface ConhistoryService {
-	public List<ConHistorVO> conhistoryList(ConHistorVO vo);
+	public List<ConHistoryVO> conhistoryList(ConHistoryVO vo);
+	public DesVO desCourseDetail(ConHistoryVO vo);
 }

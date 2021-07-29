@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.one.style.conhistory.mapper.ConhistoryMapper">
 
-	<select id="conHistoryList" parameterType="com.one.style.conhistory.vo.ConHistorVO" resultType="com.one.style.conhistory.vo.ConHistorVO">
+	<select id="conHistoryList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
 		select * 
 			from consulting_history
 			where mem_id=#{memId}
 	</select>
 	
-	<select id="desCourseDetail" parameterType="com.one.style.conhistory.vo.ConHistorVO" resultType="com.one.style.conhistory.vo.ConHistorVO">
-		select d.id , d.name , d.career , major , dc.title , dc.detail, price
+	<select id="desCourseDetail" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.des.vo.DesVO">
+		select cour_no, d.id , d.name , d.career , major , dc.title , dc.detail, price
 		from designer d
 		join des_course dc
 		on d.id = dc.id

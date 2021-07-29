@@ -4079,8 +4079,8 @@ a.btn_1.gray:hover,
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  border-bottom: 2px solid #589442;
-  color: #589442;
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
   background-color: transparent;
 }
 
