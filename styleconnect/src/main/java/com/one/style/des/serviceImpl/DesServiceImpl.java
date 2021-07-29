@@ -20,7 +20,7 @@ public class DesServiceImpl implements DesService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+//디자이너 로그인
 	@Override
 	public boolean loginCheck(DesVO vo) {
 		boolean N = false;
