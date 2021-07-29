@@ -6,5 +6,13 @@
 		select * from consulting_history
 		<!-- if구문으로 전체 리스트 보기, 내 상담 리스트 보기 구분-->
 	</select>
-
+	
+	<select id="desCourseDetail" parameterType="com.one.style.conhistory.vo.ConHistorVO" resultType="com.one.style.conhistory.vo.ConHistorVO">
+		select d.id , d.name , d.career , major , dc.title , dc.detail, price
+		from designer d
+		join des_course dc
+		on d.id = dc.id
+		where cour_no = 5
+	</select>
+	
 </mapper>

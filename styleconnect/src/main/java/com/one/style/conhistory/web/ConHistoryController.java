@@ -22,8 +22,10 @@ public class ConHistoryController {
 	
 	@RequestMapping("reservation.do")
 	public String reservation(Model model , HttpServletRequest req , HttpServletResponse resp) {
+		String courNo =  req.getParameter("courNo");
+		
 		HttpSession session = req.getSession();
-		session.setAttribute("courNo", "5");
+		session.setAttribute("courNo", courNo);
 		return "reservation/reservation";
 	}
 	

@@ -1717,7 +1717,7 @@ hr {
 
 /*General links color*/
 a {
-  color: #589442;
+  color: #007bff;;
   text-decoration: none;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -3779,7 +3779,7 @@ ul#top_menu li a.login:before {
 a.btn_1,
 .btn_1 {
   border: none;
-  background: #589442;
+  background: #007bff;
   outline: none;
   cursor: pointer;
   display: inline-block;
@@ -4092,10 +4092,12 @@ a.btn_1.gray:hover,
     visibility: visible !important;
   }
 }
+/*
 footer {
   background-color: #121921;
   padding: 60px 0 35px 0;
 }
+*/
 @media (max-width: 767px) {
   footer {
     padding: 0 0 15px 0;
