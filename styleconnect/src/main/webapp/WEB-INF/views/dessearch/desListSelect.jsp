@@ -6,7 +6,7 @@
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
             <ol class="breadcrumb opacity-5">
-                <li><a href="#">Home</a></li>
+                <li><a href="main.do">Home</a></li>
                 <li><a href="#">Clinics</a></li>
                 <li class="active">${designer.name} 디자이너</li>
             </ol>
@@ -90,13 +90,12 @@
                         <h3 class="padding-lr-30px padding-top-20px"><i class="far fa-clock margin-right-10px"></i> ${designer.name}디자이너</h3>
                         <hr>
                         <div class="padding-bottom-30px">
-                        ${designer.name }<br/>
                         <!-- 별점 -->
                          <div class="rating clearfix">
-                                        <ul class="float-right">
+                                        <ul class="float-left">
                                           <c:forEach begin="1" end="${designer.rate }">
 												<li class="active"></li>
-										</c:forEach>  평점 ${designer.rate }
+										</c:forEach>  
                                         </ul>
                          </div>
                              <!-- 디자이너 major 태그 -->
@@ -108,6 +107,8 @@
 											</c:forEach>
 									</div>
                             <!-- //디자이너 major 태그 -->
+                            <!-- 상담목록가기 버튼 -->
+                             <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
                         </div>
                         </div>
                         </div>
@@ -121,8 +122,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+</body>
 
 
 </html>

@@ -5,7 +5,7 @@ import java.util.List;
 import com.one.style.dessearch.vo.DessearchVO;
 
 public interface DessearchService {
-	//전체디자이너 리스트
+	//전체디자이너 리스트  
 	List<DessearchVO> dessearchSelectList();
 	//디자이너 한명
 	DessearchVO dessearchSelect(DessearchVO vo);
@@ -14,4 +14,9 @@ public interface DessearchService {
 	List<DessearchVO> permList();
 	List<DessearchVO> dyeList();
 	List<DessearchVO> makeupList();
+	//상담목록
+	List<DessearchVO> courseList(DessearchVO vo);
+	
+	//검색
+	List<DessearchVO> searchList(DessearchVO vo);
 }

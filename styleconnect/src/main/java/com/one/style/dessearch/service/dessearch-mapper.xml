@@ -90,5 +90,43 @@
       on d.id = r.des_id
 	where id= #{id}
 	</select>
-
+	
+	<!-- 디자이너 상담 목록 리스트 -->
+	<select id="courseList" parameterType="String" resultType="com.one.style.dessearch.vo.DessearchVO">
+	select d.id, d.name, d.major, nvl2(r.rate,r.rate,0)as rate, c.detail,c.price, c.title
+	from DESIGNER d
+	left join (
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+      from review
+      where des_id in (
+                       select id
+                       from DESIGNER d
+                       )
+      group by des_id) r
+      on d.id = r.des_id
+  	join(select id,price,detail,title from des_course c) c
+ 	on c.id = d.id
+  	where d.id= #{id}    
+	</select>
+	
+	<!-- 검색 -->
+	<select id="searchList" parameterType="String" resultType="com.one.style.dessearch.vo.DessearchVO">
+	 select d.id , d.name , d.major , nvl2(r.rate,r.rate,0)as rate from designer d
+ 	left join
+          (
+           select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+           from review
+           where des_id in (
+                            select id
+                            from DESIGNER d
+                            )
+           group by des_id)r
+ 	on d.id = r.des_id
+ 	where id in (
+              select id from des_course 
+              where title like'%'||#{search}||'%' or detail like'%'||#{search}||'%'
+              )
+ 	or major like'%'||#{search}||'%'
+	</select>
+	
 </mapper>
