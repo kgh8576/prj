@@ -44,7 +44,7 @@ pageEncoding="UTF-8" %>
                         <hr class="margin-bottom-0px d-block d-sm-none">
                        	<c:if test="${empty id }">
 							<a href="loginpage.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그인</a>
-                       		<a href="memberinsertpage.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>회원가입</a>
+                       		<a href="Insertchoice.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>회원가입</a>
                        	</c:if>
                     	<c:if test="${not empty id }">
 							<a href="#">마이페이지</a>

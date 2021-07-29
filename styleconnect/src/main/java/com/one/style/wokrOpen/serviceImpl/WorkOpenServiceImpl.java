@@ -26,17 +26,29 @@ public class WorkOpenServiceImpl implements WorkOpenService{
 	@Override
 	public String[] getRealWorkOpenTime(WorkOpenVO vo) {
 		String[] openTimes = workOpenMapper.getWorkOpenTime(vo).split(",");
-		String[] reserTimes = workOpenMapper.getReservationTime(vo).split(",");
-		String[] closeTimes = workOpenMapper.getWorkCloseTime(vo).split(",");
+		
+		
 		Collection<String> openTimeColl = new ArrayList(Arrays.asList(openTimes));
-		Collection<String> reserTimeColl = new ArrayList(Arrays.asList(reserTimes));
-		Collection<String> closeTimeColl = new ArrayList(Arrays.asList(closeTimes));
+		Collection<String> reserTimeColl = null;
+		Collection<String> closeTimeColl = null;
 		
 		List<String> openTimeList = new ArrayList<String>(openTimeColl);
-		System.out.println(openTimeList.toString()+"==============");
-		openTimeList.removeAll(reserTimeColl);
-		openTimeList.removeAll(closeTimeColl);
-		System.out.println(openTimeList.toString());
+		String reserTime = workOpenMapper.getReservationTime(vo);
+		String[]  reserTimes = null;
+		if (reserTime != null) {
+			reserTimes = reserTime.split(",");
+			reserTimeColl = new ArrayList(Arrays.asList(reserTimes));
+			openTimeList.removeAll(reserTimeColl);
+		}
+		
+		String closeTime = workOpenMapper.getWorkCloseTime(vo);
+		String[]  closeTimes = null;
+		if (closeTime != null) {
+			closeTimes = closeTime.split(",");
+			closeTimeColl = new ArrayList(Arrays.asList(closeTimes));
+			openTimeList.removeAll(closeTimeColl);
+		}
+		
 		String[] realWrokTime = openTimeList.toArray(new String[openTimeList.size()]);
 		return realWrokTime;
 	}

@@ -2,20 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.style.review.mapper.ReviewServiceMap">
 	<select id="reviewPersonalTotal" parameterType="string" resultType="com.one.style.review.vo.ReviewVO">
-		select count(*) as count from review where name = #{name}
+		select count(*) as count from review where des_id = #{desId}
 	</select>
 	<select id="reviewRating" parameterType="string" resultType="int">
-		select round(avg(rate)) as rate from review where name = #{name}
+		select round(avg(rate)) as rate from review where des_id = #{desId}
 	</select>
 	
 	<select id="reviewPaging" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
-		select * from
-		  (select review.*, rownum as rn
-		  from review
-		  where name = #{name}
-		  order by wdate desc)
-		where rn between #{firstCnt} and #{lastCnt}
-		order by rn
+	
+select * from
+(select outSq.*, rownum rn from
+  (select inSq.con_no, dc.cour_no, dc.price, dc.title, inSq.title as review_title, inSq.contents, inSq.rate, inSq.mem_id, inSq.des_id, to_char(wdate, 'YYYY-MM-DD') as stringwDate
+  from DES_COURSE dc,
+    (select ch.con_no, ch.price, ch.cour_no, r.contents, r.title, r.rate, r.mem_id, r.des_id, wdate
+    from consulting_history ch, review r
+    where ch.con_no = r.con_no
+    and des_id = #{desId}) inSq
+  where inSq.cour_no = dc.cour_no
+  <if test='pullValue == "byDate"'>
+  order by wdate desc) outSq
+  </if>
+  <if test='pullValue == "byRatingDesc"'>
+  order by rate desc) outSq
+  </if>
+  <if test='pullValue == "byRatingAsc"'>
+  order by rate asc) outSq
+  </if>  
+)
+where rn between #{firstCnt} and #{lastCnt}
 	</select>
+	
+	<select id="getReviewWriter" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+select * from
+(select outSq.* from
+  (select inSq.con_no, dc.cour_no, dc.price, dc.title, inSq.title as review_title, inSq.contents, inSq.rate, inSq.mem_id, inSq.des_id, to_char(wdate, 'YYYY-MM-DD') as stringwDate
+  from DES_COURSE dc,
+    (select ch.con_no, ch.price, ch.cour_no, r.contents, r.title, r.rate, r.mem_id, r.des_id, wdate
+    from consulting_history ch, review r
+    where ch.con_no = r.con_no
+    and r.con_no = #{conNo}) inSq
+  where inSq.cour_no = dc.cour_no
+  order by wdate desc) outSq  
+)	
+	</select>
+	
+	<delete id="reviewDelete" parameterType="com.one.style.review.vo.ReviewVO">
+		delete from review where con_no = #{conNo}
+	</delete>
 	
 </mapper>
