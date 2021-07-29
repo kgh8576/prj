@@ -29,5 +29,18 @@ public class ReviewServiceImpl implements ReviewService{
 		return map.reviewPaging(vo);
 	}
 
+	@Override
+	public ReviewVO getReviewWriter(ReviewVO vo) {
+		return map.getReviewWriter(vo);
+	}
+
+	@Override
+	public void reviewDelete(ReviewVO vo) {
+		map.reviewDelete(vo);
+		
+	}
+	
+	
+
 	
 }

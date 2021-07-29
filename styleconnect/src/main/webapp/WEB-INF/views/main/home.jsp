@@ -50,7 +50,6 @@ pageEncoding="UTF-8" %>
 </head>
 
 <body>
-	
     <section class="banner padding-tb-200px sm-ptb-80px background-overlay" style="background-image: url('http://placehold.it/1600x830');">
         <div class="container z-index-2 position-relative">
             <div class="title text-center">
@@ -73,7 +72,7 @@ pageEncoding="UTF-8" %>
 									<a href="#" class="text-primary">#호일펌</a>
 									<a href="#" class="text-primary">#구자혁</a>
 									<a href="#" class="text-primary">#병지컷</a>
-									<a href="reviewList.do?name=소국진">테스트테스트</a>
+									<a href="reviewList.do?desId=des04">테스트테스트</a>
 								</div>
                             </div>
                         </form>

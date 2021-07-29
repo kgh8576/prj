@@ -99,4 +99,9 @@ public class MemController {
 		
 		return "redirect:main.do";
 	}
+	//회원가입 페이지이동
+	@RequestMapping("/Insertchoice.do")
+	public String insertchoice() {
+		return "member/insertchoicepage";
+	}
 }
