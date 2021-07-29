@@ -16,9 +16,7 @@ public class ConhistoryServiceImple implements ConhistoryService {
 	
 	@Override
 	public List<ConHistorVO> conhistoryList(ConHistorVO vo) {
-		
 		List<ConHistorVO> conHistoryList = conHistoryMapper.conHistoryList(vo);
-		
 		return conHistoryList;
 	}
 
