@@ -23,14 +23,22 @@ public class DesServiceImpl implements DesService {
 
 	@Override
 	public boolean loginCheck(DesVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean N = false;
+		DesVO dvo = desMapper.dloginCheck(vo);
+		
+		if(dvo != null) {
+			N = true;
+		}else {
+			N = false;
+		}
+		
+		return N;
 	}
 
 	@Override
 	public DesVO login(DesVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return desMapper.dlogin(vo);
 	}
 
 	@Override
