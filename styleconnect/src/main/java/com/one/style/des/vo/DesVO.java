@@ -26,6 +26,6 @@ public class DesVO {
 	private String dyeyn;
 	private String major;
 	private int imggroupno;
-	private int comments;
+	private String comments;
 	
 }

@@ -42,21 +42,21 @@
 	$(function() {
 		$('#loginCheck').click(
 				function() {
-					if ($('#id').val() == "") {
+					if ($('#mid').val() == "") {
 						alert('아이디를 입력하세요.');
-						$('#id').focus();
+						$('#mid').focus();
 						return;
 					}
-					if ($('#pw').val() == "") {
+					if ($('#mpw').val() == "") {
 						alert('비밀번호를 입력하세요.');
-						$('#pw').focus();
+						$('#mpw').focus();
 						return;
 					}
 					$.ajax({
 						url : 'loginCheck.do',
 						data : {
-							id : $('#id').val(),
-							pw : $('#pw').val(),
+							id : $('#mid').val(),
+							pw : $('#mpw').val(),
 						},
 						type : 'post',
 						success : function(data) {
@@ -81,21 +81,21 @@
 	$(function() {
 		$('#desloginCheck').click(
 				function() {
-					if ($('#id').val() == "") {
+					if ($('#did').val() == "") {
 						alert('아이디를 입력하세요.');
-						$('#id').focus();
+						$('#did').focus();
 						return;
 					}
-					if ($('#pw').val() == "") {
+					if ($('#dpw').val() == "") {
 						alert('비밀번호를 입력하세요.');
-						$('#pw').focus();
+						$('#dpw').focus();
 						return;
 					}
 					$.ajax({
 						url : 'desloginCheck.do',
 						data : {
-							id : $('#id').val(),
-							pw : $('#pw').val(),
+							id : $('#did').val(),
+							pw : $('#dpw').val(),
 						},
 						type : 'post',
 						success : function(data) {
@@ -147,14 +147,14 @@
 		<div class="form-output">
 			<form>
 				<div class="form-group label-floating">
-					<label class="control-label">Your MEMBER ID</label> <input id="id"
+					<label class="control-label">Your MEMBER ID</label> <input id="mid"
 						name="id" class="form-control" placeholder="아이디를 입력해주세요!"
 						type="text">
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">Your Password</label> <input
 						class="form-control" placeholder="비밀번호를 입력해주세요." type="password"
-						id="pw" name="pw">
+						id="mpw" name="pw">
 				</div>
 
 				<div class="remember">
@@ -206,14 +206,14 @@
 		<div class="form-output">
 			<form>
 				<div class="form-group label-floating">
-					<label class="control-label">Your ID</label> <input id="id"
+					<label class="control-label">Your ID</label> <input id="did"
 						name="id" class="form-control" placeholder="아이디를 입력해주세요!"
 						type="text">
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">Your Password</label> <input
 						class="form-control" placeholder="비밀번호를 입력해주세요." type="password"
-						id="pw" name="pw">
+						id="dpw" name="pw">
 				</div>
 
 				<div class="remember">
