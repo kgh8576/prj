@@ -57,7 +57,22 @@
 			<h1 class="font-weight-300">Designer List</h1>
 		</div>
 	</div>
-
+<!-- 검색창 -->
+<form id="frm" action="searchList.do" method="post">
+ <div class="margin-bottom-30px">
+                        <div class="padding-30px background-white border-radius-10">
+                            <h4><i class="fas fa-search margin-right-10px text-main-color"></i> Search</h4>
+                            <hr>
+                            <div class="input-group mb-3">
+                                <input type="text" name="search" placeholder="키워드를 입력하세요" class="form-control border-radius-0">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary text-white background-main-color border-radius-0" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</form>
+<!-- 검색창 끝 -->
 	<!-- 디자이너 카테고리 박스 -->
 	<div class="margin-tb-30px">
 		<div class="container">
@@ -66,11 +81,11 @@
 					<div class="row">
 						<div class="featured-categorey">
 							<div class="row">
+							<!-- 박스 -->
 								<div class="col-6 margin-bottom-30px wow fadeInUp">
 									<a href="cutList.do"
 										class="d-block border-radius-15 hvr-float hvr-sh2">
-										<div
-											class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
+										<div class = "background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
 											<div class="icon margin-bottom-15px opacity-7">
 												<img src="assets/img/icon/categorie-1.png" alt="">
 											</div>
@@ -78,6 +93,7 @@
 										</div>
 									</a>
 								</div>
+								
 
 								<div class="col-6 margin-bottom-30px wow fadeInUp">
 									<a href="permList.do"

@@ -51,4 +51,16 @@ public class DessearchServiceImpl implements DessearchService {
 		// 메이크업전문
 		return sqlSession.selectList("makeupList");
 	}
+
+	@Override
+	public List<DessearchVO> courseList(DessearchVO vo) {
+		// 상담목록 리스트
+		return sqlSession.selectList("courseList" , vo.getId());
+	}
+
+	@Override
+	public List<DessearchVO> searchList(DessearchVO vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("searchList",vo);
+	}
 }

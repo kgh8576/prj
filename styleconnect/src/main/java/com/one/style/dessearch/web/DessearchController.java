@@ -1,5 +1,8 @@
 package com.one.style.dessearch.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,19 +22,38 @@ public class DessearchController {
 	return("dessearch/desCategoryList");
 	}
 	
-	//전체디자이너 목록
-	@RequestMapping("cutList.do")
-	public String cutList(Model model) {		
-	model.addAttribute("designer",dao.cutList());
-	return("dessearch/desList");
+	//상담 목록
+	@RequestMapping("courseList.do")
+	public String courseList(Model model,DessearchVO vo) {
+		model.addAttribute("course",dao.courseList(vo));
+		return ("dessearch/desCourseList");
 	}
-	
 	//디자이너상세페이지
 	@RequestMapping("desListSelect.do")
 	public String desListSelect(Model model,DessearchVO vo) {
 		model.addAttribute("designer",dao.dessearchSelect(vo));
 	return("dessearch/desListSelect");
 	}
+	
+	//검색결과
+	@RequestMapping("searchList.do")
+	public String searchList(Model model, DessearchVO vo, HttpServletRequest request) {
+		System.out.println("=====서치 키워드: "+vo.getSearch());
+		
+		
+		model.addAttribute("search",dao.searchList(vo));
+		
+	return("dessearch/searchResult");
+	}
+	
+	
+	//컷 디자이너 목록
+	@RequestMapping("cutList.do")
+	public String cutList(Model model) {		
+	model.addAttribute("designer",dao.cutList());
+	return("dessearch/desList");
+	}
+	
 	//펌전문디자이너 목록
 	@RequestMapping("permList.do")
 	public String permList(Model model) {

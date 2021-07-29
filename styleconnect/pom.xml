@@ -170,6 +170,12 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/ojdbc8 -->
+		<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
 
 		<!-- log jdbc -->
 		<dependency>
@@ -216,12 +222,12 @@
 			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
-		    <groupId>org.seleniumhq.selenium</groupId>
-		    <artifactId>selenium-java</artifactId>
-		    <version>3.141.59</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -242,6 +248,7 @@
 		</dependency>
 				
 		
+
 
 	</dependencies>
 	<build>

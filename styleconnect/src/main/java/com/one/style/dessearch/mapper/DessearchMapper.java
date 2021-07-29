@@ -12,4 +12,8 @@ public interface DessearchMapper {
 		List<DessearchVO> permList();
 		List<DessearchVO> dyeList();
 		List<DessearchVO> makeupList();
+		
+		List<DessearchVO> courseList();
+		
+		List<DessearchVO> searchList(DessearchVO vo);
 }
