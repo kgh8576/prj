@@ -3,12 +3,14 @@ package com.one.style.review.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 public class ReviewVO {
-	private String conNo;
+	private int conNo;
 	private String contents;
 	private int rate;
 	private Date wDate;
@@ -28,5 +30,6 @@ public class ReviewVO {
 	private int price;
 	private String reviewTitle;
 	private String stringwDate;
+	private String id;
 	
 }

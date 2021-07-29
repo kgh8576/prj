@@ -17,4 +17,9 @@ public class AjaxReviewController {
 		reviewDao.reviewDelete(vo);
 		return null;
 	}
+	
+	@RequestMapping("reviewUpdate.do")
+	public String reviewUpdate(ReviewVO vo) {
+		return null;
+	}
 }

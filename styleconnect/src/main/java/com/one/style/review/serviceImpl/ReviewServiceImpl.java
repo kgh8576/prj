@@ -39,6 +39,36 @@ public class ReviewServiceImpl implements ReviewService{
 		map.reviewDelete(vo);
 		
 	}
+
+	@Override
+	public boolean canReviewModCheck(ReviewVO vo) {
+		boolean b = false;
+		try {
+			if (map.canReviewModCheck(vo).getConNo() == vo.getConNo()) {
+				b = true;
+			}
+		} catch(NullPointerException n){} finally {}
+		b = true;
+		return b;
+	}
+
+	@Override
+	public boolean canReviewRegCheck(ReviewVO vo) {
+		boolean b = false;
+		try {
+			if (map.canReviewModCheck(vo).getConNo() == vo.getConNo()) {
+				if(map.canReviewRegCheck(vo).getConNo() != vo.getConNo()) {
+					b = true;
+				}
+			}
+		} catch(NullPointerException n){} finally {}
+		return b;
+	}
+
+	@Override
+	public List<ReviewVO> canRegReviewList(String sessionId) {
+		return map.canRegReviewList(sessionId);
+	}
 	
 	
 
