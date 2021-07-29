@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>>
 <!DOCTYPE html>
 <head>
 <title>디자이너 카테고리</title>
@@ -73,24 +74,27 @@
 											src="images/Desert.jpg" alt=""></a>
 									</div>
 									<div class="padding-30px">
-										<span class="text-grey-2"># ${vo.major }</span>
+									<div>
+										<c:set var="majors" value="${fn:split(vo.major,',')}"></c:set>
+											<c:forEach var="major" items="${majors}">
+											    <a href="#"> <span class="text-grey-2"># ${major} </span> </a>
+											</c:forEach>
+									</div>
 										<h5 class="margin-tb-15px">
 											<a class="text-dark" href="desListSelect.do?id=${vo.id }">${vo.name }
 												디자이너</a>
 										</h5>
 										<div class="rating clearfix">
 											<ul class="float-left">
+										<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
-												<li class="active"></li>
-												<li></li>
+										</c:forEach>  평점 ${vo.rate }
 											</ul>
-											  평점 ${vo.rate }
 										</div>
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-						<!-- // Doctor -->
 					</div>
 				</div>
 			</div>
