@@ -13,7 +13,7 @@
 		from designer d
 		join des_course dc
 		on d.id = dc.id
-		where cour_no = 5
+		where cour_no = #{courNo}
 	</select>
 	
 </mapper>
