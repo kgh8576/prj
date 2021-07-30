@@ -58,7 +58,7 @@
                             <div>
 										<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
 											<c:forEach var="major" items="${majors}">
-											    <a href="#"> <span class="text-grey-2"># ${major} </span> </a>
+											    <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
 											</c:forEach>
 									</div>
                             <!-- // Post tags -->
@@ -83,7 +83,44 @@
                         </div>
                     </div>
                         </div>
+                 
+                    
+                    <!-- 리뷰 -->
+                    <div class="margin-bottom-30px box-shadow">
+                        <div class="padding-30px background-white">
+                            <h3><i class="far fa-star margin-right-10px text-main-color"></i> 리뷰 </h3>
+                            <hr>
+							<c:forEach items="${review}" var="review">
+                            <ul class="commentlist padding-0px margin-0px list-unstyled text-grey-3">
+                                <li class="border-bottom-1 border-grey-1 margin-bottom-20px">
+                                    <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
+                                    <div class="margin-left-85px">
+                                        <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 글쓴이 : ${review.MName} </a>
+                                       <%--  <span class="text-extra-small">상담명 :  <a href="#" class="text-main-color">${review.title }</a></span> --%>
+                                        <!-- 별점 -->
+                                         <div class="rating clearfix">
+                                        	<ul class="float-left">
+                                        	<c:forEach begin="1" end="${designer.rate }">
+												<li class="active"></li>
+											</c:forEach> 
+										 	평점 ${designer.rate }
+                                        	</ul>
+                                    	</div>
+                                        <!-- 별점 끝-->
+                                        <p class="margin-top-15px text-grey-2">${review.title } </p>
+                               		</div>
+                              	</li>
+                          </ul>
+							</c:forEach>
+                                <div align="right">
+                                <a href="reviewList.do?desId=des04" >>리뷰 더 보기 </a>
+                                    </div>
+                        </div>
                     </div>
+                    <!-- 리뷰 끝 -->
+                    
+                       </div>
+                       
                 <!-- 사이드바 div -->
                 <div class="col-lg-4">
                     <div class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
@@ -93,9 +130,14 @@
                         <!-- 별점 -->
                          <div class="rating clearfix">
                                         <ul class="float-left">
-                                          <c:forEach begin="1" end="${designer.rate }">
+                                          <c:if test="${vo.rate != 0 }">
+										<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
-										</c:forEach>  
+										</c:forEach>  평점 ${vo.rate }
+										</c:if>
+										<c:if test="${vo.rate == 0 }">
+											등록된 후기가 없습니다.
+										</c:if>
                                         </ul>
                          </div>
                              <!-- 디자이너 major 태그 -->
@@ -103,7 +145,7 @@
                             <div>
 										<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
 											<c:forEach var="major" items="${majors}">
-											    <a href="#"> <span class="text-grey-2"># ${major} </span> </a>
+											    <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
 											</c:forEach>
 									</div>
                             <!-- //디자이너 major 태그 -->

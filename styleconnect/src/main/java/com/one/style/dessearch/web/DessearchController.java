@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.one.style.dessearch.service.DessearchService;
 import com.one.style.dessearch.vo.DessearchVO;
+import com.one.style.review.web.Paging;
 
 @Controller    
 public class DessearchController {
@@ -32,6 +33,8 @@ public class DessearchController {
 	@RequestMapping("desListSelect.do")
 	public String desListSelect(Model model,DessearchVO vo) {
 		model.addAttribute("designer",dao.dessearchSelect(vo));
+		model.addAttribute("review",dao.dessearchSelectReview(vo));
+		System.out.println(vo.getMName());
 	return("dessearch/desListSelect");
 	}
 	
@@ -40,23 +43,38 @@ public class DessearchController {
 	public String searchList(Model model, DessearchVO vo, HttpServletRequest request) {
 		System.out.println("=====서치 키워드: "+vo.getSearch());
 		
-		
+		HttpSession session = request.getSession();
 		model.addAttribute("search",dao.searchList(vo));
-		
+		session.setAttribute("searchkeyword", vo.getSearch());
 	return("dessearch/searchResult");
 	}
 	
 	
 	//컷 디자이너 목록
 	@RequestMapping("cutList.do")
-	public String cutList(Model model) {		
+	public String cutList(Model model, DessearchVO vo) {		
 	model.addAttribute("designer",dao.cutList());
+	
 	return("dessearch/desList");
 	}
 	
 	//펌전문디자이너 목록
 	@RequestMapping("permList.do")
-	public String permList(Model model) {
+	public String permList(Model model, DessearchVO vo, HttpServletRequest request) {
+		String page = request.getParameter("page");
+		if(page == null) page = "1";
+		int getNum = Integer.parseInt(page);
+		vo.setFirstCnt(1+(getNum -1)* 10);
+		vo.setLastCnt(getNum * 10);
+		vo.setTotalCnt(dao.permCnt());
+		
+		Paging paging = new Paging();
+		paging.setPageNo(getNum);
+		paging.setPageSize(6);
+		paging.setTotalCount(vo.getTotalCnt());
+		
+		model.addAttribute("paging",paging);
+		
 		model.addAttribute("designer",dao.permList());
 	return("dessearch/desList");
 	}

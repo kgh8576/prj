@@ -60,7 +60,19 @@ public class DessearchServiceImpl implements DessearchService {
 
 	@Override
 	public List<DessearchVO> searchList(DessearchVO vo) {
-		// TODO Auto-generated method stub
+		// 검색
 		return sqlSession.selectList("searchList",vo);
+	}
+
+	@Override
+	public List<DessearchVO> dessearchSelectReview(DessearchVO vo) {
+		// 리뷰
+		return sqlSession.selectList("dessearchSelectReview", vo);
+	}
+
+	@Override
+	public int permCnt() {
+		// 페이징
+		return sqlSession.selectOne("permCnt");
 	}
 }

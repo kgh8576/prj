@@ -1,54 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<head>
-<title>디자이너 카테고리</title>
-<meta name="author" content="Nile-Theme">
-<meta name="robots" content="index follow">
-<meta name="googlebot" content="index follow">
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="keywords"
-	content="directory, doctor, doctor directory, Health directory, listing, map, medical, medical directory, professional directory, reservation, reviews">
-<meta name="description"
-	content="Health Care & Medical Services Directory">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- google fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800%7CPoppins:300i,300,400,700,400i,500%7CDancing+Script:700%7CDancing+Script:700"
-	rel="stylesheet">
-<!-- animate -->
-<link rel="stylesheet" href="assets/css/animate.css" />
-<!-- owl Carousel assets -->
-<link href="assets/css/owl.carousel.css" rel="stylesheet">
-<link href="assets/css/owl.theme.css" rel="stylesheet">
-<!-- bootstrap -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<!-- hover anmation -->
-<link rel="stylesheet" href="assets/css/hover-min.css">
-<!-- flag icon -->
-<link rel="stylesheet" href="assets/css/flag-icon.min.css">
-<!-- main style -->
-<link rel="stylesheet" href="assets/css/style.css">
-<!-- colors -->
-<link rel="stylesheet" href="assets/css/colors/main.css">
-<!-- elegant icon -->
-<link rel="stylesheet" href="assets/css/elegant_icon.css">
 
-<!-- jquery library  -->
-<script src="assets/js/jquery-3.2.1.min.js"></script>
-
-<!-- Maps library  -->
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="assets/js/jquery.gomap-1.3.3.min.js"></script>
-
-<!-- fontawesome  -->
-<script defer
-	src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-
-</head>
 <body>
 	<div id="page-title" class="padding-tb-30px gradient-white">
 		<div class="container">
@@ -60,6 +15,7 @@
 			<h1 class="font-weight-300">Designer List</h1>
 		</div>
 	</div>
+	
 	<div class="margin-tb-30px">
 		<div class="container">
 			<div class="row">
@@ -77,7 +33,7 @@
 									<div>
 										<c:set var="majors" value="${fn:split(vo.major,',')}"></c:set>
 											<c:forEach var="major" items="${majors}">
-											    <a href="#"> <span class="text-grey-2"># ${major} </span> </a>
+											    <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
 											</c:forEach>
 									</div>
 										<h5 class="margin-tb-15px">
@@ -86,9 +42,14 @@
 										</h5>
 										<div class="rating clearfix">
 											<ul class="float-left">
+										<c:if test="${vo.rate != 0 }">
 										<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
 										</c:forEach>  평점 ${vo.rate }
+										</c:if>
+										<c:if test="${vo.rate == 0 }">
+											등록된 후기가 없습니다.
+										</c:if>
 											</ul>
 										</div>
 									</div>
@@ -108,7 +69,8 @@
 		<li class="page-item"><a class="page-link" href="#">3</a></li>
 		<li class="page-item"><a class="page-link rounded-0" href="#">Next</a></li>
 	</ul>
-
+	<!-- 페이징처리 -->
+								
 	<script src="assets/js/sticky-sidebar.js"></script>
 	<script src="assets/js/YouTubePopUp.jquery.js"></script>
 	<script src="assets/js/owl.carousel.min.js"></script>

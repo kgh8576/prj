@@ -56,18 +56,25 @@ pageEncoding="UTF-8" %>
                 <h1 class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Style Connect</h1>
                 <h4 class="font-weight-300 text-main-color text-up-small">나에게 맞는 디자이너를 찾아보세요!</h4>
             </div>
-            
+            <!-- 검색창 -->
             <div class="row justify-content-center margin-tb-60px">
                 <div class="col-lg-8">
                     <div class="listing-search">
-                        <form class="row no-gutters">
-                            <div class="col-md-3">
-                                <div class="keywords">
-                                    <input class="listing-form first" type="text" placeholder="검색할 키워드를 입력하세요" value="">
+                        <form id="frm" action="searchList.do" method="post">
+ 							<div class="margin-bottom-30px">
+                        	<div class="padding-30px background-white border-radius-10">
+                            <h4><i class="fas fa-search margin-right-10px text-main-color"></i> Search</h4>
+                            <hr>
+                            <div class="input-group mb-3">
+                                <input type="text" name="search" placeholder="${searchkeyword}" class="form-control border-radius-0">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary text-white background-main-color border-radius-0" type="submit">Search</button>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <a class="listing-bottom background-second-color box-shadow" href="#">Search Now</a> <br>
+                        	</div>
+                    			</div>
+						</form>
+                           
 								<div>
 									<a href="#" class="text-primary">#호일펌</a>
 									<a href="#" class="text-primary">#구자혁</a>
@@ -79,6 +86,7 @@ pageEncoding="UTF-8" %>
                     </div>
                 </div>
             </div>
+            <!-- 검색창 끝 -->
             <div class="row justify-content-center">
                 <div class="col-lg-7">
                     <div class="row">

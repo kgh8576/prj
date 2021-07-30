@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-lg-8">
 
-<!-- 상담목록 -->
+			<!-- 상담목록 -->
 				<c:forEach items="${course }" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">
                         <div class="row no-gutters">
@@ -38,16 +38,19 @@
                                     <a class="d-block h4  text-capitalize margin-bottom-8px" href="#">${vo.title} </a>
                                     <div class="meta">
                                         <span class="margin-right-20px text-extra-small"><a href="#" class="text-main-color"> ${vo.name }</a>디자이너</span>
-                                        <span class="margin-right-20px text-extra-small">Date :  <a href="#" class="text-main-color">July 15, 2016</a></span>
-                                        <span class="text-extra-small">Categorie :  <a href="#" class="text-main-color">Arts</a></span>
+                        			상담번호:${vo.courNo }
                         			 <hr>
-                                        <span> ${vo.detail } </span>
+                                        <span> ${vo.detail }  </span>
+                                        <div align="right">
+                                        <a href="reservation.do?courNo=${vo.courNo }" >>예약하러가기</a>
+                                    	</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                 <!-- 상담목록 끝 -->
 				</c:forEach>
                     <div class="row"></div>
                     <ul class="pagination pagination-md ">

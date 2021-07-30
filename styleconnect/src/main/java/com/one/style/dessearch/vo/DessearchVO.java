@@ -9,9 +9,6 @@ public class DessearchVO {
 	private String id;
 	private String pw;
 	private String name;
-	private String location;
-	private String gender;
-	private String state;
 	private String career;
 	private String majorGender;
 	private String makeupYN;
@@ -27,13 +24,18 @@ public class DessearchVO {
 	private String contents;
 	private int rate;
 	private Date wDate;
-//	private String title;
+	private String title;
 	//course
 	private int courNo;
-	private String title;
+	private String Ctitle;
 	private String detail;
 	private String price;
-	
+	//검색
 	private String search;
-	
+	//member
+	private String mName;
+	//페이징
+	private int firstCnt;
+	private int lastCnt;
+	private int totalCnt;
 }
