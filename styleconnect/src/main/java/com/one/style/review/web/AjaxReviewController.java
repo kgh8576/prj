@@ -24,5 +24,10 @@ public class AjaxReviewController {
 		return null;
 	}
 	
+	@RequestMapping("reviewInsert.do")
+	public String reviewInsert(ReviewVO vo) {
+		reviewDao.reviewInsert(vo);
+		return null;
+	}
 	
 }

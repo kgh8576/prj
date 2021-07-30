@@ -76,10 +76,24 @@ elip{
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
 	<br><br><br>
-		<div align="center">
-			<p style="font-size: 20px;"><Strong>[name] 디자이너의 총 리뷰 건수는 ${total } 입니다</Strong></p>
-			<br>
-			<div class="rating clearfix" style="display: inline-block;">
+	
+	<div id="page-title" class="padding-tb-30px gradient-white">
+        <div class="container">
+            <ol class="breadcrumb opacity-5">
+                <li><a href="main.do">Home<svg class="svg-inline--fa fa-angle-right fa-w-8" data-fa-pseudo-element=":after" aria-hidden="true" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas" data-fa-pseudo-element=":after"></i> --></a></li>
+                <li><a href="#">디자이너 상세정보<svg class="svg-inline--fa fa-angle-right fa-w-8" data-fa-pseudo-element=":after" aria-hidden="true" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas" data-fa-pseudo-element=":after"></i> --></a></li>
+                <li class="active">상담 목록</li>
+            </ol>
+            <h1 class="font-weight-300">${desName } 디자이너 후기</h1>
+        </div>
+    </div>
+	
+	
+		<div class="margin-bottom-30px padding-30px box-shadow" align="center">
+	        <div class="padding-30px background-white">
+	            남겨주신 리뷰 수 <Strong>${total }</Strong> 회 <br>
+	        </div>
+   				<div class="rating clearfix" style="display: inline-block;">
 				<ul class="float-left">
 					<c:forEach begin="1" end="${rate }">
 						<li class="active"></li>
@@ -89,7 +103,7 @@ elip{
 					</c:forEach>
 				</ul>
 			</div>
-		</div>
+	    </div>
 		<div align="right">
 			<input type="hidden" value="${desId}" id="hiddenId">
 			<select name='pullValue' id="pullValue" onchange="changeList()">
@@ -100,7 +114,7 @@ elip{
 		</div>
 		<div>
 			<c:forEach items="${reviewListPaging }" var="vo">
-				<div style="margin:10px; border-bottom:1px solid black;" onclick="goInfo('${vo.conNo}')">
+				<div class="margin-bottom-30px padding-20px box-shadow" onclick="goInfo('${vo.conNo}')">
 					<form action="reviewInfo.do" method="POST" id="${vo.conNo }_form">
   						<input type="hidden" name="conNo" value="${vo.conNo}">
 					</form>
@@ -135,6 +149,7 @@ elip{
 			    <jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
 			</jsp:include>
 		</div>
+		
 	</div>
 	<div class="col-md-3"></div>
 </div>

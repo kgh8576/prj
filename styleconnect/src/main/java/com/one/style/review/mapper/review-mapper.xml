@@ -2,21 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.style.review.mapper.ReviewServiceMap">
 	<select id="reviewPersonalTotal" parameterType="string" resultType="com.one.style.review.vo.ReviewVO">
-		select count(*) as count from review where des_id = #{desId}
+		select count(*) as count from review where des_id = #{desId} and state = 'Y'
 	</select>
 	<select id="reviewRating" parameterType="string" resultType="int">
-		select round(avg(rate)) as rate from review where des_id = #{desId}
+		select round(avg(rate)) as rate from review where des_id = #{desId} and state = 'Y'
 	</select>
 	
 	<select id="reviewPaging" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
-	
-select * from
+select lastSq.*, d.name
+from designer d,
 (select outSq.*, rownum rn from
   (select inSq.con_no, dc.cour_no, dc.price, dc.title, inSq.title as review_title, inSq.contents, inSq.rate, inSq.mem_id, inSq.des_id, to_char(wdate, 'YYYY-MM-DD') as stringwDate
   from DES_COURSE dc,
     (select ch.con_no, ch.price, ch.cour_no, r.contents, r.title, r.rate, r.mem_id, r.des_id, wdate
     from consulting_history ch, review r
     where ch.con_no = r.con_no
+    and r.state = 'Y'
     and des_id = #{desId}) inSq
   where inSq.cour_no = dc.cour_no
   <if test='pullValue == "byDate"'>
@@ -27,9 +28,10 @@ select * from
   </if>
   <if test='pullValue == "byRatingAsc"'>
   order by rate asc) outSq
-  </if>  
-)
-where rn between #{firstCnt} and #{lastCnt}
+  </if>
+) lastSq
+where d.id = lastSq.des_id
+and rn between #{firstCnt} and #{lastCnt}
 	</select>
 	
 	<select id="getReviewWriter" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
@@ -43,26 +45,65 @@ select * from
     and r.con_no = #{conNo}) inSq
   where inSq.cour_no = dc.cour_no
   order by wdate desc) outSq  
-)	
+)
 	</select>
 	
-	<delete id="reviewDelete" parameterType="com.one.style.review.vo.ReviewVO">
-		delete from review where con_no = #{conNo}
-	</delete>
-	
-	<select id="canReviewModCheck" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
-	select * from consulting_history
-	where state = 'ccode005'
-	and mem_id = #{memId}
-	and sysdate - day between 0 and 7
-	and con_no = #{conNo}
+	<select id="canReviewRegCheckDate" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+		select ch.con_no, ch.day, r.wdate, r.*
+		from consulting_history ch, review r
+		where r.con_no(+) = ch.con_no
+		and ch.state = 'ccode005'
+		and ch.con_no = #{conNo}
+		and sysdate - day <![CDATA[ <= 3 ]]> 
+	</select>
+
+	<select id="canReviewRegCheckExist" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+		select ch.day, r.*
+		from consulting_history ch, review r
+		where r.con_no = ch.con_no
+		and r.con_no = #{conNo}
 	</select>
 	
-	<select id="canReviewRegCheck" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
-	select * from review where con_no = #{conNo}
-	</select>
 	
 	<update id="reviewUpdate" parameterType="com.one.style.review.vo.ReviewVO">
-	update review set contents = #{contents}, title = #{title}, rate = #{rate} where con_no = #{conNo}; 
+		update review set contents = #{contents}, title = #{title}, rate = #{rate} where con_no = #{conNo}
 	</update>
+	
+	<insert id="reviewInsert" parameterType="com.one.style.review.vo.ReviewVO">
+		insert into review (con_no, contents, rate, wdate, title, mem_id, des_id, state) values (#{conNo}, #{contents}, #{rate}, sysdate, #{title}, #{memId}, #{desId}, 'Y')
+	</insert>
+	
+	<update id="reviewDelete" parameterType="com.one.style.review.vo.ReviewVO">
+		update review set state = 'N' where con_no = #{conNo}
+	</update>
+	
+	<select id="getHistoryForModify" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+	select *
+	from designer d,
+	
+	  (select inSq.con_no, dc.cour_no, dc.price, dc.title, inSq.title as review_title, inSq.contents, inSq.rate, inSq.mem_id, inSq.des_id, to_char(wdate, 'YYYY-MM-DD') as stringwDate
+	  from DES_COURSE dc,
+	    (select ch.con_no, ch.price, ch.cour_no, r.contents, r.title, r.rate, r.mem_id, r.des_id, wdate
+	    from consulting_history ch, review r
+	    where ch.con_no = r.con_no
+	    and r.con_no = #{conNo}) inSq
+	  where inSq.cour_no = dc.cour_no
+	  ) outSq
+	where outSq.des_id = d.id
+	</select>
+	
+	<select id="getHistoryForInsert" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+		select inSq.*, ch.con_no
+		from consulting_history ch,
+		  (select d.id, d.name, title, detail, price, cour_no
+		  from designer d, des_course dc
+		  where d.id = dc.id) inSq
+		where ch.cour_no = inSq.cour_no
+		and con_no = #{conNo}
+	</select>
+	
+	<update id="reviewPoint" parameterType="String">
+		update member set point = point+500 where id = #{id}
+	</update>
+	
 </mapper>

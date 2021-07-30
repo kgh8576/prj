@@ -42,12 +42,10 @@
 			<c:if test="${id eq reviewInfo.memId }">
 				<button class="btn btn-info" onclick="deletes('${reviewInfo.conNo}', '${reviewInfo.desId }')">삭제</button>
 				<button class="btn btn-info" onclick="modify()">수정</button>
-				
 				<form action="reviewModify.do" id="modifyFrm" method="post">
 					<input type="hidden" name="conNo" value="${reviewInfo.conNo }">
 					<input type="hidden" name="memId" value="${reviewInfo.memId }">
 				</form>
-				
 			</c:if>
 			<br>
 		</div>
