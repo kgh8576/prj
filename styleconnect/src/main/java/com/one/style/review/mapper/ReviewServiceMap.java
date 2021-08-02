@@ -10,9 +10,12 @@ public interface ReviewServiceMap {
 	public List<ReviewVO> reviewPaging(ReviewVO vo);
 	public ReviewVO getReviewWriter(ReviewVO vo);
 	public void reviewDelete(ReviewVO vo);
-	public ReviewVO canReviewModCheck(ReviewVO vo);
-	public ReviewVO canReviewRegCheck(ReviewVO vo);
-	public List<ReviewVO> canRegReviewList(String sessionId);
+	ReviewVO canReviewRegCheckDate(ReviewVO vo);
+	ReviewVO canReviewRegCheckExist(ReviewVO vo);
 	public void reviewUpdate(ReviewVO vo);
+	ReviewVO getHistoryForModify(ReviewVO vo);
+	ReviewVO getHistoryForInsert(ReviewVO vo);
+	void reviewInsert(ReviewVO vo);
+	void reviewPoint(String id);
 	
 }

@@ -18,6 +18,7 @@ public class ReviewVO {
 	private String desId;
 	private String memId;
 	private int count;
+	private String state;
 	
 	//페이징 관련
 	private int firstCnt;
@@ -31,5 +32,5 @@ public class ReviewVO {
 	private String reviewTitle;
 	private String stringwDate;
 	private String id;
-	
+	private String name;
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.style.reply.mapper.ReplyServiceMap">
+
+	<insert id="insertReply" parameterType="com.one.style.reply.vo.ReplyVO">
+		insert into reply values(#{contents}, sysdate, #{conNo})
+	</insert>
+
+	<select id="getReply" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.reply.vo.ReplyVO">
+		select * from reply where con_no = #{conNo}
+	</select>
+	
+	<select id="canReplyCheck" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.des.vo.DesVO">
+		select * from designer where des_id = #{desId}
+	</select>
+	
+</mapper>

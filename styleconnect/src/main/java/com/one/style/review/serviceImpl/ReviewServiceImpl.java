@@ -41,41 +41,51 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public boolean canReviewModCheck(ReviewVO vo) {
-		boolean b = false;
-		try {
-			if (map.canReviewModCheck(vo).getConNo() == vo.getConNo()) {
-				b = true;
-			}
-		} catch(NullPointerException n){} finally {}
-		b = true;
-		return b;
-	}
-
-	@Override
-	public boolean canReviewRegCheck(ReviewVO vo) {
-		boolean b = false;
-		try {
-			if (map.canReviewModCheck(vo).getConNo() == vo.getConNo()) {
-				if(map.canReviewRegCheck(vo).getConNo() != vo.getConNo()) {
-					b = true;
-				}
-			}
-		} catch(NullPointerException n){} finally {}
-		return b;
-	}
-
-	@Override
-	public List<ReviewVO> canRegReviewList(String sessionId) {
-		return map.canRegReviewList(sessionId);
-	}
-
-	@Override
 	public void reviewUpdate(ReviewVO vo) {
 		map.reviewUpdate(vo);
 	}
-	
-	
 
+	@Override
+	public ReviewVO getHistoryForModify(ReviewVO vo) {
+		return map.getHistoryForModify(vo);
+	}
+
+	@Override
+	public ReviewVO getHistoryForInsert(ReviewVO vo) {
+		return map.getHistoryForInsert(vo);
+	}
+
+	@Override
+	public void reviewInsert(ReviewVO vo) {
+		map.reviewInsert(vo);
+		
+	}
+
+	@Override
+	public void reviewPoint(String id) {
+		map.reviewPoint(id);
+	}
+
+	@Override
+	public boolean canReviewRegCheckDate(ReviewVO vo) {
+		boolean b = false;
+		if(map.canReviewRegCheckDate(vo) != null) {
+			b = true;
+			return b;
+		}
+		return b;
+	}
+
+	@Override
+	public boolean canReviewRegCheckExist(ReviewVO vo) {
+		boolean b = false;
+		if(map.canReviewRegCheckExist(vo) == null) {
+			b = true;
+			return b;
+		}
+		return b;
+	}
+	
+	
 	
 }

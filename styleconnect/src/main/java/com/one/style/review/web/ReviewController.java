@@ -1,5 +1,7 @@
 package com.one.style.review.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.one.style.reply.service.ReplyService;
 import com.one.style.review.service.ReviewService;
 import com.one.style.review.vo.ReviewVO;
 
@@ -15,6 +18,7 @@ import com.one.style.review.vo.ReviewVO;
 public class ReviewController {
 	
 	@Autowired ReviewService reviewDao;
+	@Autowired ReplyService replyDao;
 	
 	@RequestMapping("reviewList.do")
 	public String reviewPage(Model model, @RequestParam(value="desId") String desId,
@@ -38,33 +42,40 @@ public class ReviewController {
 	    paging.setPageNo(page);
 	    paging.setPageSize(4);
 	    paging.setTotalCount(tvo.getCount());
-	    model.addAttribute("reviewListPaging", reviewDao.reviewPaging(pvo));
+	    
+	    List<ReviewVO> reviewListPaging = reviewDao.reviewPaging(pvo);
+	    model.addAttribute("reviewListPaging", reviewListPaging);
 	    model.addAttribute("paging", paging);
+	    model.addAttribute("desName", reviewListPaging.get(0).getName());
 	    
 		return "review/reviewList";
 	}
-	
+	// 리뷰 상세보기
 	@RequestMapping("reviewInfo.do")
 	public String reviewInfo(ReviewVO vo, Model model){
 		model.addAttribute("reviewInfo", reviewDao.getReviewWriter(vo));
+		if(replyDao.getReply(vo) != null) { // 답장 있으면 답장도 같이 가져오기
+			model.addAttribute("replyInfo", replyDao.getReply(vo));	
+		}
 		return "review/reviewInfo";
 	}
-	
-	@RequestMapping("reviewModify.do")
+	// 리뷰 수정 페이지
+	@RequestMapping("reviewModify.do") // 리뷰 수정. 수정은 제한 X 
 	public String reviewModify(ReviewVO vo, Model model) {
-		if (reviewDao.canReviewModCheck(vo)) {
-			model.addAttribute("conNo", vo.getConNo());
-			return "review/reviewModify";	
-		}
-		return "main/home";
+		model.addAttribute("conNo", vo.getConNo());
+		model.addAttribute("reviewInfo", reviewDao.getHistoryForModify(vo));
+		return "review/reviewModify";	
 	}
-	
 
-	
-	@RequestMapping("reviewRegister.do")
+	// 리뷰 작성 페이지
+	@RequestMapping("reviewRegister.do") // 리뷰 작성
 	public String reviewRegister(ReviewVO vo, Model model) {
-		if (reviewDao.canReviewRegCheck(vo)) {
+		vo.setMemId("1");
+		vo.setConNo(2107270012); // 더미 
+		if (reviewDao.canReviewRegCheckDate(vo) && reviewDao.canReviewRegCheckExist(vo) ) {  // 컨설팅 일자 이후 3일 이내이면서, 리뷰가 존재하지 않는 경우 등록 가능
 			model.addAttribute("conNo", vo.getConNo());
+			model.addAttribute("consultInfo", reviewDao.getHistoryForInsert(vo));
+			reviewDao.reviewPoint(vo.getMemId()); // 포인트 적립
 			return "review/reviewRegister";	
 		}
 		return "main/home";
