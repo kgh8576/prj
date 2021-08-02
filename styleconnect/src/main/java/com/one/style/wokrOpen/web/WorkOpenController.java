@@ -19,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.one.style.files.web.FilesController;
 import com.one.style.wokrOpen.service.WorkOpenService;
 import com.one.style.wokrOpen.vo.WorkOpenVO;
 
 @Controller
 public class WorkOpenController {
-	private static final String ROOT_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\";
+	
 	@Autowired
 	WorkOpenService workOpenDao;
 
@@ -36,30 +37,13 @@ public class WorkOpenController {
 
 	@RequestMapping("fileUploadTest.do")
 	public String uploadView(Model model) {
-		try {
-			ResourceUtils.getURL("classpath:resources\\img\\0134a297-de83-4fa0-88c9-6330a7004f3f.png");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return "test/FileTest";
 	}
 
 	@RequestMapping("/uploadTest.do")
-	public String upload(@RequestParam("file") MultipartFile file ,HttpServletRequest req) {
-		System.out.println("파일 이름 : " + file.getOriginalFilename());
-		System.out.println("파일 크기 : " + file.getSize());
-		String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."), file.getOriginalFilename().length());
-		UUID uuid = UUID.randomUUID();
-		String newFileName = uuid.toString() + extension;
-		String savePath = "resources\\img\\";
-		String saveFile = ROOT_PATH+ savePath  + newFileName;
-		try { 
-			file.transferTo(new File(saveFile));
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
+	public String uploadTest(HttpServletRequest req) {
+		FilesController fc = new FilesController();
+		fc.upload(req,"cer");
 		return "redirect:fileUploadTest.do";
 	}
 
