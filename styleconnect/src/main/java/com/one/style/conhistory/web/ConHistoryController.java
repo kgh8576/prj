@@ -34,8 +34,10 @@ public class ConHistoryController {
 	public String consulting(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		ConHistoryVO vo = new ConHistoryVO();
 		HttpSession session = req.getSession();
-		
+		//디자이너 회원과 일반회원에 따른 구분 필요
+		//차후 수정
 		vo.setMemId((String)session.getAttribute("id"));  
+		
 		model.addAttribute("conHistoryList", conHistoryDao.conhistoryList(vo));
 		
 		return "consulting/consulting";

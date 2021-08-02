@@ -3,9 +3,16 @@
 <mapper	namespace="com.one.style.conhistory.mapper.ConhistoryMapper">
 
 	<select id="conHistoryList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
-		select * 
-			from consulting_history
-			where mem_id=#{memId}
+		select con_no, day, time, designer.id as des_id, name as des_name, title, detail, des_comment, codecontent as state
+  			from consulting_history, des_course, designer, commcodedetail
+  			where consulting_history.cour_no = des_course.cour_no
+    			and des_course.id = designer.id
+    			and consulting_history.state = commcodedetail.code
+    		<!-- 테스트 코드 !!!!추후수정!!!!!-->
+    			and des_course.id='des05'
+    		<!-- 원본 코드: and consulting_history.mem_id=#{memId} -->
+  			order by con_no desc
+  			<!-- 디자이너인 경우 디자이너 아이디로 검색하게 함 -->
 	</select>
 	
 	<select id="desCourseDetail" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.des.vo.DesVO">

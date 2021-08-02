@@ -19,4 +19,7 @@ public class ConHistoryVO {
 	private String desId;
 	private String title;
 	private long payNo;
+	
+	private String desName; //디자이너 이름
+	private String detail; //코스 상세정보
 }
