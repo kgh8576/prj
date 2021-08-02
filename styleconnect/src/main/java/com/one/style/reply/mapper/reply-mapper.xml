@@ -6,6 +6,11 @@
 		insert into reply values(#{contents}, sysdate, #{conNo})
 	</insert>
 
+	<insert id="updateReply" parameterType="com.one.style.reply.vo.ReplyVO">
+		update reply set contents = #{contents} where con_no = #{conNo}
+	</insert>
+
+
 	<select id="getReply" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.reply.vo.ReplyVO">
 		select * from reply where con_no = #{conNo}
 	</select>

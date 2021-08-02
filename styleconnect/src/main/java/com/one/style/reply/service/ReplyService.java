@@ -6,6 +6,7 @@ import com.one.style.review.vo.ReviewVO;
 
 public interface ReplyService {
 	void insertReply(ReplyVO vo);
+	void updateReply(ReplyVO vo);
 	ReplyVO getReply(ReviewVO vo);
 	DesVO canReplyCheck(ReviewVO vo);
 }

@@ -24,6 +24,11 @@ public class ReplyServiceImpl implements ReplyService {
 	public void insertReply(ReplyVO vo) {
 		map.insertReply(vo);
 	}
+	
+	@Override
+	public void updateReply(ReplyVO vo) {
+		map.updateReply(vo);
+	}
 
 	@Override
 	public ReplyVO getReply(ReviewVO vo) {

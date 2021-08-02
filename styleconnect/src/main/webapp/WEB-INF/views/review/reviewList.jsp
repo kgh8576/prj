@@ -82,7 +82,7 @@ elip{
             <ol class="breadcrumb opacity-5">
                 <li><a href="main.do">Home<svg class="svg-inline--fa fa-angle-right fa-w-8" data-fa-pseudo-element=":after" aria-hidden="true" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas" data-fa-pseudo-element=":after"></i> --></a></li>
                 <li><a href="#">디자이너 상세정보<svg class="svg-inline--fa fa-angle-right fa-w-8" data-fa-pseudo-element=":after" aria-hidden="true" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas" data-fa-pseudo-element=":after"></i> --></a></li>
-                <li class="active">상담 목록</li>
+                <li class="active"><a href="#">리뷰 목록</a></li>
             </ol>
             <h1 class="font-weight-300">${desName } 디자이너 후기</h1>
         </div>
@@ -115,7 +115,7 @@ elip{
 		<div>
 			<c:forEach items="${reviewListPaging }" var="vo">
 				<div class="margin-bottom-30px padding-20px box-shadow" onclick="goInfo('${vo.conNo}')">
-					<form action="reviewInfo.do" method="POST" id="${vo.conNo }_form">
+					<form action="reviewInfo.do" method="get" id="${vo.conNo }_form">
   						<input type="hidden" name="conNo" value="${vo.conNo}">
 					</form>
 					<h3>${vo.reviewTitle }</h3>

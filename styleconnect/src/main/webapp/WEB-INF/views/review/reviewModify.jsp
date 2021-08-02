@@ -100,7 +100,7 @@
 	<div class="col-lg-6">
 		<div class="margin-bottom-20px box-shadow">
 	        <div class="padding-20px background-white">
-	            <h3> ${consu.name } 디자이너의 [ ${reviewInfo.title } ] 서비스는 어떠셨나요? </h3>
+	            <h3> ${reviewInfo.name } 디자이너의 [ ${reviewInfo.title } ] 서비스는 어떠셨나요? </h3>
 	            <div class="alert alert-info alert-dismissible fade show" role="alert">
   					<h5>등록하시는 리뷰와 사진은 현행 법률에 부합하여야 하며 본 사의 이용 규칙에 따라야 합니다. <br>
   					 부적절한 게시물은 법률과 규칙에 따라 사전통보 없이 삭제될 수 있으며 서비스 이용이 제한될 수 있습니다.</h5>
