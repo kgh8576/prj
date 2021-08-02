@@ -233,9 +233,10 @@ $(document).ready(function(){
 			}
 		});
 	});
+	//실시간 중복아이디 확인
 	function checkId() {
 		$.ajax({
-			url : 'userIdCheck.do',
+			url : 'desinserinsertcheck.do',
 			data : {
 				id : $('#id').val(),
 			},
@@ -258,7 +259,25 @@ $(document).ready(function(){
 			}
 		})
 	};
+	
+	//인풋값 NuLL값인거 히든에 N값으로 변경시키기. 
 	function formCheck() {
+
+			var yncheck = document.getElementsByName("YesorNo");
+			var finalcheck = document.getElementsByClassName("finalcheck");
+			for(var i=0;i<yncheck.length; i++){
+				if(yncheck[i].checked){
+					finalcheck[i].value = "Y";
+				}else {
+					finalcheck[i].value = "N";
+				}
+			}
+		
+		frm.submit();
+	}
+
+	function nextpage() {
+
 		if (frm.id.value == "") {
 			alert("아이디를 입력하세요.");
 			frm.id.focus();
@@ -284,9 +303,10 @@ $(document).ready(function(){
 			frm.hp.focus();
 			return false;
 		}
-		if (frm.gender.value == "") {
-			alert("성별 확인 해주세요.");
-			frm.gender.focus();
+		if (frm.birth.value == "") {
+			alert("생년월일을 입력해주세요.");
+			frm.birth.focus();
+			return false;
 		}
 		if (frm.idCheck.value == 'unChecked') {
 			alert("탈퇴한 아이디이거나, 이미 사용중인 아이디입니다.");
@@ -300,11 +320,6 @@ $(document).ready(function(){
 			frm.pw2.focus();
 			return false;
 		}
-		frm.submit();
-	}
-
-	function nextpage() {
-
 		document.getElementById("1step").style.display = 'none';
 		document.getElementById("2step").style.display = 'block';
 		document.getElementById("3step").style.display = 'none';
@@ -316,6 +331,44 @@ $(document).ready(function(){
 		document.getElementById("3step").style.display = 'none';
 	}
 	function next2page() {
+
+			var checkCnt = 0;
+			var chkedbox = document.getElementsByClassName("check");
+			var majorgender = document.getElementsByClassName("foucsmajor");
+			
+			for(var i =0; i<chkedbox.length; i++){
+				if(chkedbox[i].checked){
+					checkCnt++;
+				}
+			}
+			if (frm.detailAddress.value == "") {
+				alert("상세주소를 입력하세요.");
+				frm.detailAddress.focus();
+				return false;
+			}
+			if (frm.roadAddress.value == "") {
+				alert("주소찾기를 눌러 주소를 추가해주세요.");
+				frm.addressform.focus();
+				return false;
+			}
+			if (frm.career.value == "") {
+				alert("경력사항을 짧게쓰셔도 좋으니 입력해주세요!");
+				frm.career.focus();
+				return false;
+			}
+			if ($('.foucsmajor').is(':checked')) {
+				
+			}else{
+				alert("서비스가능 성별을 체크해주세요.");
+				window.scrollBy( 0, -1000 );
+				return false;
+			}
+			
+			if(checkCnt==0){
+				alert("가능한 서비스를 한가지 이상을 체크해주세요.");
+				window.scrollBy( 0, -500 );
+				return false;
+			}			
 
 		document.getElementById("1step").style.display = 'none';
 		document.getElementById("2step").style.display = 'none';
@@ -390,7 +443,7 @@ $(document).ready(function(){
 
 				}).open();
 	}
-	
+	// 체크박스 3개제한
 	function count_ck(obj){
 
 		var chkbox = document.getElementsByName("major");
@@ -402,11 +455,12 @@ $(document).ready(function(){
 		}
 		if(chkCnt>3){
 			alert("3개 까지만 선택이 가능합니다.");
-			obj.checked = false;
+			
 			return false;
 		}
 	}
-
+	//전문분야 1개라도 클릭할수있게 
+	
 </script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -414,10 +468,9 @@ $(document).ready(function(){
 	<!--======= log_in_page =======-->
 	<div id="log-in"
 		class="site-form log-in-form box-shadow border-radius-10">
-
 		<div class="form-output">
 
-			<form id="frm" action="memberInsert.do" method="post" enctype="multipart/form-data">
+			<form id="frm" action="desinerinsert.do" method="post" enctype="multipart/form-data">
 				<div id="1step">
 					<div class="form-group label-floating">
 						<label class="control-label">이름</label> <input
@@ -480,12 +533,15 @@ $(document).ready(function(){
 				<div id="2step" style="display: none;">
 
 					<div class="form-group label-floating">
-						<label class="control-label">근무지 주소</label> <input type="button"
+						<label class="control-label">근무지 주소</label> 
+						<input type="button" id="addressform"
 							onclick="execDaumPostcode()" value="우편번호 찾기"
 							class="form-control required"
-							style="color: #8054c5; background-color: #ffd888;"> <input
+							style="color: #8054c5; background-color: #ffd888;"> 
+							<input
 							type="text" id="postcode" name="postcode" placeholder="우편번호"
-							readonly class="form-control required"> <input
+							readonly class="form-control required"> 
+							<input
 							type="text" id="roadAddress" name="roadAddress"
 							placeholder="도로명주소" readonly class="form-control required">
 						<input type="text" id="extraAddress" name="extraAddress"
@@ -497,11 +553,11 @@ $(document).ready(function(){
 					<div class="form-group label-floating">
 						<label class="control-label">전문분야</label>
 						<div class="select" style="text-align: center;">
-							<input type="radio" name="majorgender" id="majorgender"
-								value="MALE"><label for="majorgender">남자</label> <input
-								type="radio" name="majorgender" id="majorgender2" value="FEMALE"><label
-								for="majorgender2">여자</label> <input type="radio"
-								name="majorgender" id="majorgender3" value="ALL"><label
+							<input class="foucsmajor" type="radio" name="majorgender" id="majorgender"
+								value="MALE"><label for="majorgender">남자</label> 
+								<input class="foucsmajor" type="radio" name="majorgender" id="majorgender2" value="FEMALE"><label
+								for="majorgender2">여자</label> 
+								<input type="radio" class="foucsmajor" name="majorgender" id="majorgender3" value="ALL"><label
 								for="majorgender3">성별무관</label>
 						</div>
 
@@ -510,12 +566,16 @@ $(document).ready(function(){
 						<font id="chkNotice2" size="2"></font>
 					</div>
 					<div class="form-group label-floating">
-						<label class="control-label">다중선택가능</label>
+						<label class="control-label" id="erun18">다중선택가능</label>
 						<div class="select" style="text-align: center; ">
-							<input type="checkbox" style="display:none;" id="makeupyn" name="makeupyn" value="Y"><label style="width: 60px;" for="makeupyn"> 메이크업 </label> 
-							<input type="checkbox" style="display:none;" id="cutyn" name="cutyn" value="Y"><label style="width: 60px;" for="cutyn"> 커트 </label>
-							<input type="checkbox"style="display:none;"  id="permyn" name="permyn" value="Y"><label style="width: 60px;" for="permyn"> 펌 </label>
-							<input type="checkbox" style="display:none;" id="dyeyn" name="dyeyn" value="Y"> <label style="width: 60px;" for="dyeyn"> 염색 </label>
+							<input class="check" type="checkbox" style="display:none;" name="YesorNo" id="makeupyn1" value="Y" ><label style="width: 60px;" for="makeupyn1"> 메이크업 </label> 
+							<input class="finalcheck" type="hidden" id="makeupyn" name="makeupyn">
+							<input class="check" type="checkbox" style="display:none;" name="YesorNo" id="cutyn1" value="Y"><label style="width: 60px;" for="cutyn1"> 커트 </label>
+							<input class="finalcheck" type="hidden" id="cutyn" name="cutyn">
+							<input class="check" type="checkbox"style="display:none;" name="YesorNo" id="permyn1" value="Y"><label style="width: 60px;" for="permyn1"> 펌 </label>
+							<input class="finalcheck" type="hidden" id="permyn" name="permyn">
+							<input class="check" type="checkbox" style="display:none;" name="YesorNo" id="dyeyn1" value="Y"> <label style="width: 60px;" for="dyeyn1"> 염색 </label>
+							<input class="finalcheck" type="hidden" id="dyeyn" name="dyeyn">
 						</div>
 					</div>
 					<div class="form-group label-floating">
@@ -586,7 +646,7 @@ $(document).ready(function(){
 					<button type="button" onclick="back2page()"
 						class="btn btn-md btn-primary full-width">이전단계</button>
 					<button style="background-color: #141d86;" type="button"
-						id="desloginCheck" class="btn btn-md btn-primary full-width">가입하기</button>
+						onclick="formCheck()" class="btn btn-md btn-primary full-width">가입하기</button>
 
 
 					<p>

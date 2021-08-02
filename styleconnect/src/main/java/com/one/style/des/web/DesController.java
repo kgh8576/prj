@@ -1,6 +1,7 @@
 package com.one.style.des.web;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.UUID;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -21,12 +22,17 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
+import com.one.style.files.service.FilesService;
+import com.one.style.files.vo.FilesVO;
 
 @Controller
 public class DesController {
 
 	@Autowired
 	DesService desDao;
+	
+	@Autowired
+	FilesService fileDao;
 	
 	//디자이너 로그인
 	@RequestMapping("/desloginCheck.do")
@@ -38,7 +44,7 @@ public class DesController {
 		int cnt = 1;
 		if(b) {
 			cnt = 1;
-			session.setAttribute("id", dvo.getId());
+			session.setAttribute("did", dvo.getId());
 			session.setAttribute("user", dvo);
 			response.getWriter().print(cnt);
 		}else {
@@ -55,25 +61,59 @@ public class DesController {
 	public String desInsert() {
 		return "designer/designerinsert";
 	}
+	//디자이너 회원아이디 중복검사
+	@RequestMapping("/desinserinsertcheck.do")
+	public String desinerinsertcheck (HttpServletRequest request,HttpServletResponse response,DesVO vo) throws IOException {
+		String id = request.getParameter("id");
+		vo.setId(id);
+		System.out.println("디자이너 회원가입 아이디검사 = " + id);
+		boolean b = desDao.designerinsertcheck(vo);
+		int cnt = 1;
+		if(b) {
+			cnt = 1;
+			response.getWriter().print(cnt);
+		}
+		else {
+			cnt = 0;
+			response.getWriter().print(cnt);
+		}
+		return null;
+	}
 	
+	//디자이너 회원가입 실행
 	@RequestMapping("/desinerinsert.do")
 	public String desinerinsert(DesVO vo , HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		desDao.designerInsert(vo);
-		/*
-		 * UUID uuid = UUID.randomUUID();
-		 * 
-		 * String newFileName = uuid.toString();
-		 */
 		
-		return null;
+		System.out.println(vo.getMakeupyn());
+		String postcode = request.getParameter("postcode");
+		String roadAddress = request.getParameter("roadAddress");
+		String extraAddress = request.getParameter("extraAddress");
+		String detailAddress = request.getParameter("detailAddress");
+		
+		String address ="("+ postcode +")"+ " "+ roadAddress + " " + extraAddress + " " + detailAddress;
+		System.out.println(address);
+		vo.setLocation(address);
+		
+		
+		// 
+		int groupno = upload(request);
+		vo.setImggroupno(groupno);
+		
+		desDao.designerInsert(vo);
+		
+		session.setAttribute("did", vo.getId());
+		
+		return "redirect:main.do";
 	}
 	
-	
 
-	public class FileUpload {
-		public List<String> uploadTest(MultipartHttpServletRequest request) {
+		public int upload(HttpServletRequest req) {
+			MultipartHttpServletRequest request = (MultipartHttpServletRequest)req;
+			
+			FilesVO vo = new FilesVO();
+			
 			String rootUploadDir = "C:" + File.separator + "upload"; // 업로드 주소
 
 			File dir = new File(rootUploadDir);
@@ -92,6 +132,9 @@ public class DesController {
 
 			ArrayList<String> list = new ArrayList<String>();
 
+			//그룹번호 생성
+			
+			int groupno= fileDao.cergroupno();
 			while (iterator.hasNext()) {
 				fileLoop++;
 
@@ -111,10 +154,17 @@ public class DesController {
 						System.out.println("try 진입");
 						mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/sysFileName
 						list.add("원본파일명: " + orgFileName + ", 시스템파일명: " + sysFileName);
+						vo.setDesGroupNo(groupno);
+						vo.setFileName(orgFileName);
+						vo.setFileUuid(sysFileName);
+						fileDao.fileinsert(vo);
+						// 첨부파일 테이블 저장
+						// 파일테이블에 인설트
 
 					} catch (Exception e) {
 						list.add("파일 업로드 중 에러발생!!!");
 					}
+					
 				} // if
 			} // while
 
@@ -122,7 +172,6 @@ public class DesController {
 				System.out.println(string);
 			}
 			
-			return list;
+			return groupno;
 		}
-	}
 }

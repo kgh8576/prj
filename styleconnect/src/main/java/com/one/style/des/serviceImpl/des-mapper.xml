@@ -2,12 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.style.des.mapper.DesMapper">
 	<!-- 아이디 비밀번호체크 -->
-	<select id="dloginCheck" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
+	<select id="designerloginCheck" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
 		SELECT * FROM DESIGNER WHERE ID = #{id} AND PW = #{pw}
 	</select>
 	<!-- 로그인 -->
-	<select id="dlogin" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
+	<select id="designerlogin" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
 		SELECT * FROM DESIGNER WHERE ID = #{id} AND PW = #{pw}
 	</select>
-
+	<!-- 회원가입 아이디 중복체크 -->
+	<select id="designerinsertcheck" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
+		SELECT * FROM DESIGNER WHERE ID = #{id}
+	</select>
+	<insert id="designerInsert"><!-- #{cergroupno} -->
+		INSERT INTO DESIGNER VALUES
+		(#{id},#{pw},#{name},#{hp},#{location},#{gender},#{birth},0,'dcode001',#{career},sysdate,#{cergroupno},#{majorgender},#{makeupyn},#{cutyn},#{permyn},#{dyeyn},#{major},#{imggroupno},#{comments})
+	</insert>
 </mapper>

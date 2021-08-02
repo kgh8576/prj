@@ -13,6 +13,6 @@ public interface DesService {
 	public void designerInsert(DesVO vo);
 	public DesVO designerUpdate(DesVO vo);
 	public DesVO designerDelete(DesVO vo);
-	public boolean insertcheck(DesVO vo);
+	public boolean designerinsertcheck(DesVO vo);
 	
 }
