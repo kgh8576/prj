@@ -91,5 +91,10 @@ public class DesServiceImpl implements DesService {
 		System.out.println("boolean====" + N);
 		return N;
 	}
+	@Override
+	public DesVO designerUpdate(DesVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
