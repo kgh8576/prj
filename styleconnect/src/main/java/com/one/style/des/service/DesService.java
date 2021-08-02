@@ -7,12 +7,12 @@ import com.one.style.des.vo.DesVO;
 
 public interface DesService {
 
-	public List<DesVO> memList();
-	public boolean loginCheck(DesVO vo);
-	public DesVO login(DesVO vo);
-	public void memberInsert(DesVO vo);
-	public DesVO memberUpdate(DesVO vo);
-	public DesVO memberDelete(DesVO vo);
+	public List<DesVO> designerList();
+	public boolean designerloginCheck(DesVO vo);
+	public DesVO designerlogin(DesVO vo);
+	public void designerInsert(DesVO vo);
+	public DesVO designerUpdate(DesVO vo);
+	public DesVO designerDelete(DesVO vo);
 	public boolean insertcheck(DesVO vo);
 	
 }

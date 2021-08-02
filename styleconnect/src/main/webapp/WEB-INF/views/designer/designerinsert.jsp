@@ -390,6 +390,23 @@ $(document).ready(function(){
 
 				}).open();
 	}
+	
+	function count_ck(obj){
+
+		var chkbox = document.getElementsByName("major");
+		var chkCnt = 0;
+		for(var i=0;i<chkbox.length; i++){
+			if(chkbox[i].checked){
+				chkCnt++;
+			}
+		}
+		if(chkCnt>3){
+			alert("3개 까지만 선택이 가능합니다.");
+			obj.checked = false;
+			return false;
+		}
+	}
+
 </script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -400,7 +417,7 @@ $(document).ready(function(){
 
 		<div class="form-output">
 
-			<form id="frm" action="memberInsert.do" method="post">
+			<form id="frm" action="memberInsert.do" method="post" enctype="multipart/form-data">
 				<div id="1step">
 					<div class="form-group label-floating">
 						<label class="control-label">이름</label> <input
@@ -538,30 +555,30 @@ $(document).ready(function(){
 					<div class="form-group label-floating">
 						<p>특별히 잘하는 스타일링이 있나요? 3개만 선택해주세요!</p>
 						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major1" value="탈색"><label for="major1">탈색</label>
-							<input type="checkbox" style="display:none;" name="major" id="major2" value="댄디컷"><label for="major2">댄디컷</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major3" value="가르마펌"><label for="major3">가르마펌</label>
+							<input type="checkbox" style="display:none;" name="major" id="major1" value="탈색" onClick="count_ck(this);"><label for="major1">탈색</label>
+							<input type="checkbox" style="display:none;" name="major" id="major2" value="댄디컷" onClick="count_ck(this);"><label for="major2">댄디컷</label> 
+							<input type="checkbox" style="display:none;" name="major" id="major3" value="가르마펌" onClick="count_ck(this);"><label for="major3">가르마펌</label>
 						</div>
 					</div>
 					<div class="form-group label-floating">
 						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major4" value="모즈 컷"><label for="major4">모즈 컷</label>
-							<input type="checkbox" style="display:none;" name="major" id="major5" value="리젠트컷"><label for="major5">리젠트컷</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major6" value="포마드컷"><label for="major6">포마드컷</label>
+							<input type="checkbox" style="display:none;" name="major" id="major4" value="모즈 컷" onClick="count_ck(this);"><label for="major4">모즈 컷</label>
+							<input type="checkbox" style="display:none;" name="major" id="major5" value="리젠트컷" onClick="count_ck(this);"><label for="major5">리젠트컷</label> 
+							<input type="checkbox" style="display:none;" name="major" id="major6" value="포마드컷" onClick="count_ck(this);"><label for="major6">포마드컷</label>
 						</div>
 					</div>
 					<div class="form-group label-floating">
 						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major7" value="쉐도우펌"><label for="major7">쉐도우펌</label>
-							<input type="checkbox" style="display:none;" name="major" id="major8" value="메이크업"><label for="major8">메이크업</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major9" value="윈드펌"><label for="major9">윈드펌</label>
+							<input type="checkbox" style="display:none;" name="major" id="major7" value="쉐도우펌" onClick="count_ck(this);"><label for="major7">쉐도우펌</label>
+							<input type="checkbox" style="display:none;" name="major" id="major8" value="메이크업" onClick="count_ck(this);"><label for="major8">메이크업</label> 
+							<input type="checkbox" style="display:none;" name="major" id="major9" value="윈드펌" onClick="count_ck(this);"><label for="major9">윈드펌</label>
 						</div>
 					</div>
 					<div class="form-group label-floating">
 						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major10" value="벌룬펌"><label for="major10">벌룬펌</label>
-							<input type="checkbox" style="display:none;" name="major" id="major11" value="삭발"><label for="major11">삭발</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major12" value="투블럭"><label for="major12">투블럭</label>
+							<input type="checkbox" style="display:none;" name="major" id="major10" value="벌룬펌" onClick="count_ck(this);"><label for="major10">벌룬펌</label>
+							<input type="checkbox" style="display:none;" name="major" id="major11" value="삭발" onClick="count_ck(this);"><label for="major11">삭발</label> 
+							<input type="checkbox" style="display:none;" name="major" id="major12" value="투블럭" onClick="count_ck(this);"><label for="major12">투블럭</label>
 						</div>
 					</div>
 					

@@ -104,7 +104,7 @@
 								console.log(data);
 								location.href = "main.do";
 							} else {
-								$('#chkNotice').html('비밀번호 일치하지 않음<br><br>')
+								$('#chkNotice2').html('비밀번호 일치하지 않음<br><br>')
 										.attr('color', '#f82a2aa3');
 							}
 						},
@@ -128,6 +128,20 @@
 
 		document.getElementById("member").style.display = 'none';
 	}
+	$(function () {
+		$("#login_form").keypress(function(e) {
+			if(e.keyCode === 13) {
+				$('#loginCheck').click()
+			}
+		});
+		$("#dlogin_form").keypress(function(e) {
+			if(e.keyCode === 13) {
+				$('#desloginCheck').click()
+			}
+		});	
+	})
+	
+	
 </script>
 <br>
 <br>
@@ -145,7 +159,7 @@
 			<li class="li1" onclick="desshow()">디자이너</li>
 		</ul>
 		<div class="form-output">
-			<form>
+			<form action="" id="login_form">
 				<div class="form-group label-floating">
 					<label class="control-label">Your MEMBER ID</label> <input id="mid"
 						name="id" class="form-control" placeholder="아이디를 입력해주세요!"
@@ -204,7 +218,7 @@
 		</ul>
 
 		<div class="form-output">
-			<form>
+			<form action="" id="dlogin_form">
 				<div class="form-group label-floating">
 					<label class="control-label">Your ID</label> <input id="did"
 						name="id" class="form-control" placeholder="아이디를 입력해주세요!"
@@ -225,7 +239,7 @@
 					<a href="#" class="forgot">Forgot my Password</a>
 				</div>
 				<div style="text-align: left">
-					<font id="chkNotice" size="2"></font>
+					<font id="chkNotice2" size="2"></font>
 				</div>
 
 				<button type="button" id="desloginCheck"
