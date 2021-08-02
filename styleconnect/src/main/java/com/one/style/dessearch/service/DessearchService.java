@@ -9,6 +9,7 @@ public interface DessearchService {
 	List<DessearchVO> dessearchSelectList();
 	//디자이너 한명
 	DessearchVO dessearchSelect(DessearchVO vo);
+	List<DessearchVO> dessearchSelectReview(DessearchVO vo);
 	//컷,펌,염색,메이크업 리스트
 	List<DessearchVO> cutList();
 	List<DessearchVO> permList();
@@ -19,4 +20,7 @@ public interface DessearchService {
 	
 	//검색
 	List<DessearchVO> searchList(DessearchVO vo);
+	
+	//페이징
+	int permCnt();
 }
