@@ -33,19 +33,16 @@ public class WorkOpenServiceImpl implements WorkOpenService{
 		Collection<String> closeTimeColl = null;
 		
 		List<String> openTimeList = new ArrayList<String>(openTimeColl);
-		String reserTime = workOpenMapper.getReservationTime(vo);
-		String[]  reserTimes = null;
+		String[] reserTime = workOpenMapper.getReservationTime(vo);
+		
 		if (reserTime != null) {
-			reserTimes = reserTime.split(",");
-			reserTimeColl = new ArrayList(Arrays.asList(reserTimes));
+			reserTimeColl = new ArrayList(Arrays.asList(reserTime));
 			openTimeList.removeAll(reserTimeColl);
 		}
 		
-		String closeTime = workOpenMapper.getWorkCloseTime(vo);
-		String[]  closeTimes = null;
+		String[] closeTime = workOpenMapper.getWorkCloseTime(vo);
 		if (closeTime != null) {
-			closeTimes = closeTime.split(",");
-			closeTimeColl = new ArrayList(Arrays.asList(closeTimes));
+			closeTimeColl = new ArrayList(Arrays.asList(closeTime));
 			openTimeList.removeAll(closeTimeColl);
 		}
 		

@@ -8,4 +8,5 @@ import com.one.style.des.vo.DesVO;
 public interface ConhistoryService {
 	public List<ConHistoryVO> conhistoryList(ConHistoryVO vo);
 	public DesVO desCourseDetail(ConHistoryVO vo);
+	public int conHistoryInsert(ConHistoryVO vo);
 }

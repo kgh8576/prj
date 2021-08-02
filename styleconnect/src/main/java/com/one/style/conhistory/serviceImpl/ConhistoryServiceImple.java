@@ -23,5 +23,10 @@ public class ConhistoryServiceImple implements ConhistoryService {
 	public DesVO desCourseDetail(ConHistoryVO vo) {
 		return conHistoryMapper.desCourseDetail(vo);
 	}
+	@Override
+	public int conHistoryInsert(ConHistoryVO vo) {
+		conHistoryMapper.conHistoryInsert(vo);
+		return 0;
+	}
 
 }

@@ -16,4 +16,9 @@
 		where cour_no = #{courNo}
 	</select>
 	
+	<insert id="conHistoryInsert" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+		insert into CONSULTING_HISTORY
+		values
+		(seq_con() , #{day} ,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment} ,#{courNo} ,null,#{payNo})
+	</insert>
 </mapper>

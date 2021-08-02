@@ -7,14 +7,16 @@ import lombok.Data;
 @Data
 public class ConHistoryVO {
 	private int conNo;
-	private Date day;
+	private String day;
 	private String time;
 	private String state;
 	private int price;
-	private Date reservateDate;
+	private String reservateDate;
 	private String memId;
 	private String memComment;
 	private int courNo;
 	private String desComment;
 	private String desId;
+	private String title;
+	private long payNo;
 }

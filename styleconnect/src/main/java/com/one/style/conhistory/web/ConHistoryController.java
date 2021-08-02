@@ -40,6 +40,12 @@ public class ConHistoryController {
 		
 		return "consulting/consulting";
 	}
+	
+	@RequestMapping("conHistoryInsert.do")
+	public String conHistoryInsert(ConHistoryVO vo) {
+		conHistoryDao.conHistoryInsert(vo);
+		return "redirect:main.do";//나중에 마이페이지 가야됨 ㅋㅋ
+	}
 
 	
 }
