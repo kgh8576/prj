@@ -48,7 +48,7 @@ pageEncoding="UTF-8" %>
                        		<a href="Insertchoice.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>회원가입</a>
                        	</c:if>
                     	<c:if test="${not empty id }">
-							<a href="#">마이페이지</a>
+							<a href="mypage.do">마이페이지</a>
 							<a href="logout.do">로그아웃</a>
                         </c:if>
                         

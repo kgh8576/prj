@@ -10,7 +10,7 @@ public class DesVO {
 	private String id;
 	private String pw;
 	private String name;
-	private String hp;
+	private String Hp;
 	private String location;
 	private String gender;
 	private String birth;
@@ -31,5 +31,20 @@ public class DesVO {
 	private String detail;
 	private int price;
 	private int courNo;
+	
+	
+	//work_close
+	private int wcloseNo;
+	private Date closeDay;
+	private String closeTime;
+	
+	//work_open
+	private String mon;
+	private String tue;
+	private String wed;
+	private String thu;
+	private String fri;
+	private String sat;
+	private String sun;
 	
 }

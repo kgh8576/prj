@@ -10,8 +10,11 @@ public interface DesMapper {
 	public DesVO dloginCheck(DesVO vo);
 	public DesVO dlogin(DesVO vo);
 	public void memberInsert(DesVO vo);
-	public DesVO memberUpdate(DesVO vo);
+	public int desUpdate(DesVO vo);
 	public DesVO memberDelete(DesVO vo);
 	public boolean insertcheck(DesVO vo);
 	
+	
+	public DesVO selectDes(DesVO vo);
+	public DesVO  pwCheck(DesVO vo);
 }

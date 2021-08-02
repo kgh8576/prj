@@ -48,9 +48,9 @@ public class DesServiceImpl implements DesService {
 	}
 
 	@Override
-	public DesVO memberUpdate(DesVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public int desUpdate(DesVO vo) {
+		// 정보수정
+		return desMapper.desUpdate(vo);
 	}
 
 	@Override
@@ -63,6 +63,25 @@ public class DesServiceImpl implements DesService {
 	public boolean insertcheck(DesVO vo) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public DesVO selectDes(DesVO vo) {
+		// 디자이너 한명 선택
+		return desMapper.selectDes(vo);
+	}
+	@Override
+	public boolean pwCheck(DesVO vo) {
+		boolean N = false;
+		DesVO dvo = desMapper.pwCheck(vo);
+		System.out.println("dvo ::::" + dvo);
+		
+		if(dvo != null) {
+			N = true;
+		}else {
+			N = false;
+		}
+		System.out.println("boolean====" + N);
+		return N;
 	}
 
 }

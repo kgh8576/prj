@@ -11,8 +11,10 @@ public interface DesService {
 	public boolean loginCheck(DesVO vo);
 	public DesVO login(DesVO vo);
 	public void memberInsert(DesVO vo);
-	public DesVO memberUpdate(DesVO vo);
+	public int desUpdate(DesVO vo);
 	public DesVO memberDelete(DesVO vo);
 	public boolean insertcheck(DesVO vo);
 	
+	public DesVO selectDes(DesVO vo);
+	public boolean pwCheck(DesVO vo);
 }
