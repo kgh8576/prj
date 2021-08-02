@@ -9,7 +9,7 @@ public interface MemMapper {
 	public MemberVO loginCheck(MemberVO vo);
 	public MemberVO login(MemberVO vo);
 	public void memberInsert(MemberVO vo);
-	public MemberVO memberUpdate(MemberVO vo);
+	public void memberUpdate(MemberVO vo);
 	public MemberVO memberDelete(MemberVO vo);
 	public MemberVO insertCheck(MemberVO vo);
 	

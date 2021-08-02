@@ -7,6 +7,7 @@ import com.one.style.des.vo.DesVO;
 
 public interface DesService {
 
+	
 	public List<DesVO> designerList();
 	public boolean designerloginCheck(DesVO vo);
 	public DesVO designerlogin(DesVO vo);
@@ -14,5 +15,7 @@ public interface DesService {
 	public DesVO designerUpdate(DesVO vo);
 	public DesVO designerDelete(DesVO vo);
 	public boolean designerinsertcheck(DesVO vo);
-	
+	public int desUpdate(DesVO vo);
+	public DesVO selectDes(DesVO vo);
+	public boolean pwCheck(DesVO vo);
 }

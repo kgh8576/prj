@@ -48,8 +48,7 @@
 	
 	<!-- 펌디자이너 리스트 -->
 	<select id="permList" resultType="com.one.style.dessearch.vo.DessearchVO">
-		select * from(
-	select d.id, d.name, d.major, nvl2(r.rate,r.rate,0)as rate, rownum as rnum
+	select d.id, d.name, d.major, nvl2(r.rate,r.rate,0)as rate
 	from DESIGNER d
 	left join (
       select des_id ,  TRUNC(AVG(RATE),1) AS RATE
@@ -61,8 +60,7 @@
                        )
       group by des_id) r
       on d.id = r.des_id
-	where perm_yn ='Y')
-  	where rnum between #{firstCnt} and #{lastCnt}
+	where perm_yn ='Y'
 	</select>
 	
 	<!-- 염색디자이너 리스트 -->

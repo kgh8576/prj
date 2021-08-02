@@ -6,6 +6,8 @@ import com.one.style.des.vo.DesVO;
 
 public interface DesMapper {
 
+
+	
 	public List<DesVO> designerList();
 	public DesVO designerloginCheck(DesVO vo);
 	public DesVO designerlogin(DesVO vo);
@@ -13,5 +15,7 @@ public interface DesMapper {
 	public DesVO designerUpdate(DesVO vo);
 	public DesVO designerDelete(DesVO vo);
 	public DesVO designerinsertcheck(DesVO vo);
-	
+	public int desUpdate(DesVO vo);
+	public DesVO selectDes(DesVO vo);
+	public DesVO  pwCheck(DesVO vo);
 }
