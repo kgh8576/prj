@@ -19,6 +19,6 @@
 	<insert id="conHistoryInsert" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		insert into CONSULTING_HISTORY
 		values
-		(seq_con() , #{day} ,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment} ,#{courNo} ,null,#{payNo})
+		(seq_con() , #{day} ,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment} ,#{courNo} ,null,#{payNo}, 'N' ,'N')
 	</insert>
 </mapper>

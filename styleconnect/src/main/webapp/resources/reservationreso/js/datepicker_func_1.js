@@ -44,16 +44,18 @@ $('#DatePicker').datepicker({
 			type:"post",
 			data:desData,
 			success: function(data) {
-				
 				$(".can_reservation_time").html("");
 				var i = 1;
 				for (var time of data) {
 					var today = new Date();
+					var date = new Date(dateString);
 					today.setHours(0);
 					today.setMinutes(0);
 					today.setSeconds(0);
 					today.setMilliseconds(0);
 					date.setHours(0);
+					console.log(today);
+					console.log(date);
 					if (today.getTime() == date.getTime()){
 						var today = new Date();
 						date.setHours(time.split(':')[0]);
@@ -63,8 +65,9 @@ $('#DatePicker').datepicker({
 						if(date > today){
 							$(".can_reservation_time").append("<li><input type='radio' id='time_"+i+"' onclick='selectTime(\""+time+"\")' name='time' value='"+time+"'><label for='time_"+i+"'>"+time+"</label></li>");		
 						}
-					};
-					$(".can_reservation_time").append("<li><input type='radio' id='time_"+i+"' onclick='selectTime(\""+time+"\")' name='time' value='"+time+"'><label for='time_"+i+"'>"+time+"</label></li>");
+					}else{
+						$(".can_reservation_time").append("<li><input type='radio' id='time_"+i+"' onclick='selectTime(\""+time+"\")' name='time' value='"+time+"'><label for='time_"+i+"'>"+time+"</label></li>");	
+					}
 					i = i+1;
 				}
 			},
