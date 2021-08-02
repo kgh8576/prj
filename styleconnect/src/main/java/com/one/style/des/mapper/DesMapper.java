@@ -6,12 +6,12 @@ import com.one.style.des.vo.DesVO;
 
 public interface DesMapper {
 
-	public List<DesVO> memList();
-	public DesVO dloginCheck(DesVO vo);
-	public DesVO dlogin(DesVO vo);
-	public void memberInsert(DesVO vo);
-	public DesVO memberUpdate(DesVO vo);
-	public DesVO memberDelete(DesVO vo);
-	public boolean insertcheck(DesVO vo);
+	public List<DesVO> designerList();
+	public DesVO designerloginCheck(DesVO vo);
+	public DesVO designerlogin(DesVO vo);
+	public void designerInsert(DesVO vo);
+	public DesVO designerUpdate(DesVO vo);
+	public DesVO designerDelete(DesVO vo);
+	public DesVO designerinsertcheck(DesVO vo);
 	
 }

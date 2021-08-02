@@ -11,5 +11,17 @@ public class FilesServiceImpl implements FilesService {
 	
 	@Autowired FilesServiceMap map;
 
+	@Override
+	public int cergroupno() {
+		// TODO Auto-generated method stub
+		return map.cergroupno();
+	}
+
+	@Override
+	public void fileinsert(FilesVO vo) {
+		map.fileinsert();
+		
+	}
+
 	
 }

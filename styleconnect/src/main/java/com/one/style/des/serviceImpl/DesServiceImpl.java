@@ -24,7 +24,7 @@ public class DesServiceImpl implements DesService {
 	@Override
 	public boolean designerloginCheck(DesVO vo) {
 		boolean N = false;
-		DesVO dvo = desMapper.dloginCheck(vo);
+		DesVO dvo = desMapper.designerloginCheck(vo);
 		
 		if(dvo != null) {
 			N = true;
@@ -38,13 +38,13 @@ public class DesServiceImpl implements DesService {
 	@Override
 	public DesVO designerlogin(DesVO vo) {
 		// TODO Auto-generated method stub
-		return desMapper.dlogin(vo);
+		return desMapper.designerlogin(vo);
 	}
 
 	@Override
 	public void designerInsert(DesVO vo) {
-		// TODO Auto-generated method stub
 		
+		desMapper.designerInsert(vo);
 	}
 
 	@Override
@@ -60,9 +60,17 @@ public class DesServiceImpl implements DesService {
 	}
 
 	@Override
-	public boolean insertcheck(DesVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean designerinsertcheck(DesVO vo) {
+		boolean N = false;
+		DesVO dvo = desMapper.designerinsertcheck(vo);
+		
+		if(dvo != null) {
+			N = true;
+		} else {
+			N = false;
+		}
+		
+		return N;
 	}
 
 }
