@@ -11,12 +11,12 @@ public class HomeVO {
 	private String name;
 	private String gender;
 	private String majorGender;
+	private String major;
 	private String makeupYn;
 	private String cutYn;
 	private String dyeYn;
-	private String major;
 	private int rate;
 	private int count;
-	private String filePath;
+	private String fileUuid;
 	
 }
