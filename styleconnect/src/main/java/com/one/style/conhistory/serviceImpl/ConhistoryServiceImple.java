@@ -29,9 +29,5 @@ public class ConhistoryServiceImple implements ConhistoryService {
 		conHistoryMapper.conHistoryInsert(vo);
 		return 0;
 	}
-	public int seqTest() {
-		
-		return conHistoryMapper.seqTest();
-	}
 
 }

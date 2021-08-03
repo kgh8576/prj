@@ -16,7 +16,6 @@ import com.one.style.conhistory.vo.ConHistoryVO;
 @Controller
 public class ConHistoryController {
 	
-	
 	@Autowired
 	ConhistoryService conHistoryDao;
 	
