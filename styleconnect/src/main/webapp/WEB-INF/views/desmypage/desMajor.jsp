@@ -1,31 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>전문분야 설정</title>
 <style>
-.select input[type=radio] {
-	display: none;
-}
-/* .select input[type=checkbox] {
-	display: none;
-} */
-.select input[type=radio]+label {
-	display: inline-block;
-	cursor: pointer;
-	height: 24px;
-	width: 90px;
-	border: 1px solid #333;
-	line-height: 24px;
-	text-align: center;
-	font-weight: bold;
-	font-size: 13px;
-	margin-right: 15px;
-	margin-left: 15px;
-}
-
 .select input[type=checkbox]+label {
 	display: inline-block;
 	cursor: pointer;
@@ -40,19 +21,9 @@
 	margin-left: 15px;
 }
 
-.select input[type=radio]+label {
-	background-color: #fff;
-	color: #333;
-}
-
 .select input[type=checkbox]+label {
 	background-color: #fff;
 	color: #333;
-}
-
-.select input[type=radio]:checked+label {
-	background-color: #333;
-	color: #fff;
 }
 
 .select input[type=checkbox]:checked+label {
@@ -84,17 +55,6 @@ body {margin: 10px;}
   font-family: verdana;
   font-style: italic;
 } 
-
-.filebox input[type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip:rect(0,0,0,0);
-  border: 0;
-}
 
 .filebox label {
   display: inline-block;
@@ -168,11 +128,35 @@ img{
 	height: 100px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+//major 선택 3개로 제한
+	$(document).ready(function(){
+		$("input[type='checkbox']").on("click",function(){
+			let count = $("input:checked[type='checkbox']").length;
+			
+			if(count > 3){
+				$(this).prop("checked",false);
+				alert("3개까지만 선택할 수 있습니다.");
+			}
+		});	
+	});
+	
+</script>
 </head>
 <body>
 					<form id="frm" action="" method="post">
 					<div class="form-group label-floating">
 						<p>특별히 잘하는 스타일링이 있나요? 3개만 선택해주세요!</p>
+						
+						<div>
+						 <input type="checkbox" id="m1" name="m1"value="댄디컷" <c:if test="${des.major =='댄디컷'}">selected</c:if> />
+						 <label for="m1"> 댄디컷d</label>
+						</div>
+						
+						
+						
+						
 						 <div class="select" style="text-align: center;">
 						 	<div>
 						 	<img alt="" src="images/Tulips.jpg">
@@ -180,7 +164,7 @@ img{
 							</div>
 							<div>
 						 	<img alt="" src="images/Tulips.jpg">
-							<input type="checkbox" style="display:none;" name="major" id="major2" value="댄디컷"><label for="major2">댄디컷</label> 
+							<input type="checkbox" style="display:none;" name="major" id="major2" value="댄디컷" <c:if test="${des.major =='댄디컷'}">:checked</c:if>><label for="major2">댄디컷</label> 
 							</div>
 							<div>
 						 	<img alt="" src="images/Tulips.jpg">
@@ -188,27 +172,7 @@ img{
 							</div>
 						</div>
 					</div>
-					<div class="form-group label-floating">
-						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major4" value="모즈 컷"><label for="major4">모즈 컷</label>
-							<input type="checkbox" style="display:none;" name="major" id="major5" value="리젠트컷"><label for="major5">리젠트컷</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major6" value="포마드컷"><label for="major6">포마드컷</label>
-						</div>
-					</div>
-					<div class="form-group label-floating">
-						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major7" value="쉐도우펌"><label for="major7">쉐도우펌</label>
-							<input type="checkbox" style="display:none;" name="major" id="major8" value="메이크업"><label for="major8">메이크업</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major9" value="윈드펌"><label for="major9">윈드펌</label>
-						</div>
-					</div>
-					<div class="form-group label-floating">
-						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major10" value="벌룬펌"><label for="major10">벌룬펌</label>
-							<input type="checkbox" style="display:none;" name="major" id="major11" value="삭발"><label for="major11">삭발</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major12" value="투블럭"><label for="major12">투블럭</label>
-						</div>
-					</div>	
+					
 				</form>
 
 

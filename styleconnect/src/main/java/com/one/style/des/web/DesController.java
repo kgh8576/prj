@@ -115,19 +115,17 @@ public class DesController {
 	@RequestMapping("mypage.do")
 	public String mypage(HttpServletRequest request,Model model,DesVO vo) {
 		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("id");
+		String desId = (String) session.getAttribute("did");
 		vo.setId(desId);
 		vo = desDao.selectDes(vo);
-		model.addAttribute("des", desDao.selectDes(vo));
 		return "desmypage/desMypage";
 	}
 	//마이페이지 - 내정보 관리
 	@RequestMapping("desInfo.do")
 	public String desInfo(HttpServletRequest request, Model model, DesVO vo) {
 		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("id");
+		String desId = (String) session.getAttribute("did");
 		vo.setId(desId);
-		vo = desDao.selectDes(vo);
 		model.addAttribute("des", desDao.selectDes(vo));
 		return "desmypage/desInfo";
 	}
@@ -136,7 +134,7 @@ public class DesController {
 	@RequestMapping("desPwCheck.do")
 	public String desPwCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
 		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("id");
+		String desId = (String) session.getAttribute("did");
 		vo.setId(desId);
 		
 		String desPw = request.getParameter("desPw");
@@ -187,7 +185,11 @@ public class DesController {
 		return "desmypage/desSchedule";
 	}
 	@RequestMapping("desMajor.do")
-	public String desMajor(HttpServletRequest requset, Model model, DesVO vo) {
+	public String desMajor(HttpServletRequest request, Model model, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
+		model.addAttribute("des", desDao.selectDes(vo));
 		
 		return "desmypage/desMajor";
 	}
