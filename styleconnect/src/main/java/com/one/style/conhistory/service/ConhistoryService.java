@@ -9,5 +9,4 @@ public interface ConhistoryService {
 	public List<ConHistoryVO> conhistoryList(ConHistoryVO vo);
 	public DesVO desCourseDetail(ConHistoryVO vo);
 	public int conHistoryInsert(ConHistoryVO vo);
-	public int seqTest();
 }
