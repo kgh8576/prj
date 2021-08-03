@@ -29,7 +29,7 @@
 		(seq_con() , #{day} ,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment} ,#{courNo} ,null,#{payNo}, 'N' ,'N')
 	</insert>
 	
-	<select id="seqTest" resultType="_int">
+	<select id="seqTest" resultType="int">
 		select test_seq.nextval from dual 
 	</select>
 	

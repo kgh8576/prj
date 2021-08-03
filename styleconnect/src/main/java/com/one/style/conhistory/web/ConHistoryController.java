@@ -21,6 +21,7 @@ public class ConHistoryController {
 	
 	@RequestMapping("reservation.do")
 	public String reservation(Model model , HttpServletRequest req , HttpServletResponse resp) {
+		System.out.println(conHistoryDao.seqTest());
 		String courNo =  req.getParameter("courNo");
 		ConHistoryVO vo = new ConHistoryVO();
 		vo.setCourNo(Integer.parseInt(courNo));
