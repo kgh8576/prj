@@ -24,11 +24,9 @@ public class SeleniumTest {
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static final String WEB_DRIVER_PATH = "C:/chromedriver.exe";
+    public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
-    private String[] urls;
-    private String[] hashtags;
 	
     public static void main(String[] args) {
         SeleniumTest selTest = new SeleniumTest();
@@ -55,14 +53,11 @@ public class SeleniumTest {
         	driver.manage().window().maximize();
         	driver.get(base_url);
         	Thread.sleep(3000);
-        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(1) > div > label > input")).sendKeys("internet2dot0"); 
-        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(2) > div > label > input")).sendKeys("crawlcrawl"); 
+        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(1) > div > label > input")).sendKeys("internet2dot02021"); // 로그인 비번
+        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(2) > div > label > input")).sendKeys("crawlcrawl"); // 로그인 비밀번호
         	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(3) > button")).click();
         	Thread.sleep(6000);
-        	driver.findElement(By.cssSelector("#react-root > section > main > div > div > div > section > div > button")).click();
-        	Thread.sleep(6000);
-        	driver.findElement(By.xpath("/html/body/div[5]/div/div/div/div[3]/button[2]")).click();
-        	driver.get("https://www.instagram.com/explore/tags/%EB%82%A8%EC%9E%90%EB%A8%B8%EB%A6%AC/");
+        	driver.get("https://www.instagram.com/explore/tags/%EB%82%A8%EC%9E%90%EB%A8%B8%EB%A6%AC/"); // tag/남자태그/ 로 이동
         	Thread.sleep(6000);
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,25 +66,28 @@ public class SeleniumTest {
     
     public void runCrawl() {
     	try {
-        	System.out.println("------------------");
-        	WebElement mainDiv = driver.findElement(By.xpath("/html/body/div[1]/section/main/article/div[2]/div"));
-        	List<WebElement> div3List = mainDiv.findElements(By.tagName("div"));
-        	for (WebElement div3 : div3List) {
-        		List<WebElement> divList = div3.findElements(By.tagName("div"));
-        		for (WebElement div : divList) {
-					div.click();
-					Thread.sleep(3000);
-					driver.findElement(By.xpath("/html/body/div[5]/div[3]/button")).sendKeys(Keys.ENTER);;
-					Thread.sleep(3000);
-				}
-				
-			}
-        	//System.out.println(str);
-        	Thread.sleep(60000000);
-            driver.close();
+    		String crawlText = "";
+        	WebElement mainDiv = driver.findElement(By.xpath("/html/body/div[1]/div/div/section/main/article/div[2]/div/div[1]/div[1]/a/div")); // 페이지에서 클릭해줄 div를 가져오는 과정
+    		mainDiv.click();
+    		Thread.sleep(5000);
+    		
+    		for(int i=1; i <= 100; i++) {
+    			System.out.println(i + " Times try");
+//    			System.out.println(driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/article/div[3]/div[1]")).getText()); // 본문 내용
+    			crawlText += driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/article/div[3]/div[1]")).getText();
+    			driver.findElement(By.xpath("/html/body/div[5]/div[1]/div/div/a[2]")).click(); // 다음 게시글 버튼
+				Thread.sleep(4000);	
+    		}
+        		
+            SplitClass split = new SplitClass();
+    		split.splitTest(crawlText);
+    		
         } catch (Exception e) {
             e.printStackTrace();
+        } finally{
+        	driver.close();
         }
+    	
     }
     
     
