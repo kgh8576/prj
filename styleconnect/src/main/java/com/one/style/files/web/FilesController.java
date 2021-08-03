@@ -26,7 +26,7 @@ public class FilesController {
 	public int upload(HttpServletRequest req , String fileState) {
 		MultipartHttpServletRequest request = (MultipartHttpServletRequest)req;
 		FilesVO vo = new FilesVO();
-		String rootUploadDir = "C:\\Users\\kgh85\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\img"; // 업로드 주소
+		String rootUploadDir = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\img"; // 업로드 주소
 		File dir = new File(rootUploadDir);
 		if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성
 			dir.mkdirs();
@@ -43,6 +43,7 @@ public class FilesController {
 
 		//그룹번호 생성
 		int groupno = filesDao.cerGroupNo();
+		System.out.println(groupno);
 		while (iterator.hasNext()) {
 			fileLoop++;
 

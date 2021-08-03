@@ -4,6 +4,6 @@ import com.one.style.files.vo.FilesVO;
 
 public interface FilesService {
 
-	int cerGroupNo();
-	void fileinsert(FilesVO vo);
+	public int cerGroupNo();
+	public void fileinsert(FilesVO vo);
 }

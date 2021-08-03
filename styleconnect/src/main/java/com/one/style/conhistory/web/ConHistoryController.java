@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.style.conhistory.service.ConhistoryService;
 import com.one.style.conhistory.vo.ConHistoryVO;
-import com.one.style.wokrOpen.service.WorkOpenService;
 
 @Controller
 public class ConHistoryController {

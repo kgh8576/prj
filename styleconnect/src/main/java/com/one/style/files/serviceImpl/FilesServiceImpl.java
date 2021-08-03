@@ -15,6 +15,7 @@ public class FilesServiceImpl implements FilesService {
 
 	@Override
 	public int cerGroupNo() {
+		System.out.println("1");
 		return map.cerGroupNo();
 	}
 
