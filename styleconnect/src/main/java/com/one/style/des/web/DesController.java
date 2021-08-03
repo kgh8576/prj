@@ -99,10 +99,9 @@ public class DesController {
 		System.out.println(address);
 		vo.setLocation(address);
 		
-		FilesController fc = new FilesController();
 		// 
-		int groupno = fc.upload(request , "cer");
-		vo.setImggroupno(groupno);
+//		int groupno = fc.upload(request , "cer");
+//		vo.setImggroupno(groupno);
 		desDao.designerInsert(vo);
 		
 		session.setAttribute("did", vo.getId());

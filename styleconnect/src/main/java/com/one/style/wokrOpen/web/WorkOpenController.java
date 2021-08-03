@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.one.style.files.service.FilesService;
 import com.one.style.files.web.FilesController;
 import com.one.style.wokrOpen.service.WorkOpenService;
 import com.one.style.wokrOpen.vo.WorkOpenVO;
@@ -28,6 +29,9 @@ public class WorkOpenController {
 	
 	@Autowired
 	WorkOpenService workOpenDao;
+	
+	@Autowired
+	FilesService fileservice;
 
 	@RequestMapping("workTime.do")
 	@ResponseBody
@@ -42,8 +46,7 @@ public class WorkOpenController {
 
 	@RequestMapping("/uploadTest.do")
 	public String uploadTest(HttpServletRequest req) {
-		FilesController fc = new FilesController();
-		fc.upload(req,"cer");
+		fileservice.upload(req,"cer");
 		return "redirect:fileUploadTest.do";
 	}
 
