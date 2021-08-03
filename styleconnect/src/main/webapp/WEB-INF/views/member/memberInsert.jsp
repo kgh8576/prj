@@ -75,9 +75,9 @@ $(document).ready(function(){
 		})
 	};
 	//비밀번호 정규화
-	var password = $('#pw');
+	var password = document.getElementById("pw");
 	
-	password.onblur = function (e) {
+	password.onchange = function (e) {
 		$.ajax({
 			url : 'sendpassword.do',
 			data : {
@@ -86,12 +86,13 @@ $(document).ready(function(){
 			type : 'post',
 			success : function(data) {
 				if(data == 1){
-					$('#chkNotice').html('사용할수있는 비밀번호입니다.').attr('color',
-					'#f82a2aa3');
+					$('#chkNoticeP').html('사용할수있는 비밀번호입니다.').attr('color',
+					'#132bab');
+					$('#passwordpass').val('Checked');
 				}else {
-					$('#chkNotice').html('사용할수 없는 비밀번호입니다.').attr('color',
+					$('#chkNoticeP').html('사용할수 없는 비밀번호입니다.').attr('color',
 					'#f82a2aa3');
-					$('#pw').val('');
+					$('#passwordpass').val('unChecked');
 					frm.pw.focus();
 				}
 			},
@@ -134,7 +135,6 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 
 		password.keyup(function() {
 			if (pswd2.val() == "") {
-				chkNotice.html('');
 			} else {
 				if (pswd2.val() != pswd.val()) {
 					chkNotice.html('비밀번호 일치하지 않음<br><br>').attr('color',
@@ -209,12 +209,17 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 			frm.id.focus();
 			return false;
 		}
-
+		if(frm.passwordpass.value =='unChecked') {
+			alert("비밀번호 형식이 맞지않습니다. 다시한번 확인해주세요.");
+			frm.pw.focus();
+			return false;
+		}
 		if (frm.passwordCheck.value == 'unChecked') {
 			alert("비밀번호를 다시 한번 똑같이 입력해주세요.");
 			frm.pw2.focus();
 			return false;
 		}
+		
 		frm.submit();
 	}
 	
@@ -245,6 +250,12 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 					<label class="control-label">Password</label> <input
 						class="form-control" placeholder="비밀번호 입력" type="password" id="pw"
 						name="pw">
+						<input type="hidden" id="passwordpass" name="passwordpass" value="unChecked">
+						<p>'숫자', '문자' 무조건 1개 이상, '최소 8자에서 최대 20자' 허용 <br>(특수문자는 정의된 특수문자만 사용 가능)</p>
+						<div style="text-align: left">
+					<font id="chkNoticeP" size="2"></font>
+					
+				</div>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">Password Check</label> <input
@@ -254,6 +265,7 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 				</div>
 				<div style="text-align: left">
 					<font id="chkNotice" size="2"></font>
+					
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">생년월일</label> <input

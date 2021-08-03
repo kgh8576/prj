@@ -84,7 +84,7 @@ public class DesController {
 	public Boolean sendpassword (HttpServletRequest request) {
 		
 		String password = request.getParameter("pw");
-		String check = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d~!@#$%^&*()+|=]{8,20}$\r\n";
+		String check = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d~!@#$%^&*()+|=]{8,20}$";
 		
 		boolean finalcheck = Pattern.matches(check, password);
 		System.out.println(finalcheck);

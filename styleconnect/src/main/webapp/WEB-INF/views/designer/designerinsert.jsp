@@ -306,8 +306,35 @@ $(document).ready(function(){
 				
 			})
 		};
+		//비밀번호 정규화
+		var password = document.getElementById("pw");
+		
+		password.onchange = function (e) {
+			$.ajax({
+				url : 'sendpassword.do',
+				data : {
+					pw : $('#pw').val(),
+				},
+				type : 'post',
+				success : function(data) {
+					if(data == 1){
+						$('#chkNoticeP').html('사용할수있는 비밀번호입니다.').attr('color',
+						'#132bab');
+						$('#passwordpass').val('Checked');
+					}else {
+						$('#chkNoticeP').html('사용할수 없는 비밀번호입니다.').attr('color',
+						'#f82a2aa3');
+						$('#passwordpass').val('unChecked');
+						frm.pw.focus();
+					}
+				},
+				error : function(err) {
+					console.log(err);
+					console.log("비밀번호 검증오류");
+				}
+			});
+		};
 	});
-	
 ///////////////////////  
 //실시간 중복아이디 확인
 //////////////////////
@@ -395,11 +422,7 @@ $(document).ready(function(){
 			frm.name.focus();
 			return false;
 		}
-		if (frm.hppass.value == "unChecked") {
-			alert("핸드폰번호 인증을 해주세요.");
-			frm.hp.focus();
-			return false;
-		}
+		
 		if (frm.birth.value == "") {
 			alert("생년월일을 입력해주세요.");
 			frm.birth.focus();
@@ -411,10 +434,20 @@ $(document).ready(function(){
 			frm.id.focus();
 			return false;
 		}
+		if(frm.passwordpass.value =='unChecked') {
+			alert("비밀번호 형식이 맞지않습니다. 다시한번 확인해주세요.");
+			frm.pw.focus();
+			return false;
+		}
 
 		if (frm.passwordCheck.value == 'unChecked') {
 			alert("비밀번호를 다시 한번 똑같이 입력해주세요.");
 			frm.pw2.focus();
+			return false;
+		}
+		if (frm.hppass.value == "unChecked") {
+			alert("핸드폰번호 인증을 해주세요.");
+			frm.hp.focus();
 			return false;
 		}
 		document.getElementById("1step").style.display = 'none';
@@ -584,20 +617,27 @@ $(document).ready(function(){
 					<div style="text-align: left">
 						<font id="chkNotice2" size="2"></font>
 					</div>
-					<div class="form-group label-floating">
-						<label class="control-label">Password</label> <input
-							class="form-control" placeholder="비밀번호 입력" type="password"
-							id="pw" name="pw">
-					</div>
-					<div class="form-group label-floating">
-						<label class="control-label">Password Check</label> <input
-							class="form-control" placeholder="비밀번호 확인" type="password"
-							id="pw2" name="pw2"> <input type="hidden"
-							id="passwordCheck" name="passwordCheck" value="unChecked">
-					</div>
-					<div style="text-align: left">
-						<font id="chkNotice" size="2"></font>
-					</div>
+						<div class="form-group label-floating">
+					<label class="control-label">Password</label> <input
+						class="form-control" placeholder="비밀번호 입력" type="password" id="pw"
+						name="pw">
+						<input type="hidden" id="passwordpass" name="passwordpass" value="unChecked">
+						<p>'숫자', '문자' 무조건 1개 이상, '최소 8자에서 최대 20자' 허용 <br>(특수문자는 정의된 특수문자만 사용 가능)</p>
+						<div style="text-align: left">
+					<font id="chkNoticeP" size="2"></font>
+					
+				</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">Password Check</label> <input
+						class="form-control" placeholder="비밀번호 확인" type="password"
+						id="pw2" name="pw2">
+						<input type="hidden" id="passwordCheck" name="passwordCheck" value="unChecked">
+				</div>
+				<div style="text-align: left">
+					<font id="chkNotice" size="2"></font>
+					
+				</div>
 					<div class="form-group label-floating">
 						<label class="control-label">생년월일</label> <input
 							class="form-control" placeholder="우측 달력을 눌러주세요" type="date"
