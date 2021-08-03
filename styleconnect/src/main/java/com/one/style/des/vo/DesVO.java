@@ -32,6 +32,10 @@ public class DesVO {
 	private int price;
 	private int courNo;
 	
+	//file
+	private int fileNo;
+	private String fileState;
+	private String fileUuid;
 	
 	//work_close
 	private int wcloseNo;

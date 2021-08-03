@@ -19,4 +19,6 @@ public interface DesMapper {
 	public int desUpdate(DesVO vo);
 	public DesVO selectDes(DesVO vo);
 	public DesVO pwCheck(DesVO vo);
+	public DesVO selectDesPro(DesVO vo);
+	public int desProUpdate(DesVO vo);
 }

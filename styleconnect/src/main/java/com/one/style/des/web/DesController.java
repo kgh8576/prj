@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
@@ -29,10 +32,9 @@ public class DesController {
 	DesService desDao;
 	
 	@Autowired
-	FilesService filesDao;
+	FilesService fileservice;
 	
-
-	// 디자이너 로그인
+	//디자이너 로그인
 	@RequestMapping("/desloginCheck.do")
 	public String desloginCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
 		HttpSession session = request.getSession();
@@ -209,7 +211,7 @@ public class DesController {
 		HttpSession session = request.getSession();
 		String desId = (String) session.getAttribute("did");
 		vo.setId(desId);
-		model.addAttribute("des", desDao.selectDes(vo));
+		model.addAttribute("des", desDao.selectDesPro(vo));
 		return "desmypage/desInfo";
 	}
 	
@@ -254,6 +256,13 @@ public class DesController {
 		
 		System.out.println("업데이트 행 수: " + n);
 		System.out.println("=============================="+pw);
+		return "redirect:desInfo.do";
+	}
+	@RequestMapping("desProUpdate.do")
+	public String desProUpdate(HttpServletRequest request, DesVO vo) {
+		desDao.desProUpdate(vo);
+		
+		fileservice.upload(request, "pro");
 		return "redirect:desInfo.do";
 	}
 	
