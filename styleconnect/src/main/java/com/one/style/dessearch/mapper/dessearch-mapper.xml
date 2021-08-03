@@ -99,7 +99,7 @@
 	
 	<!-- 디자이너 한명 상세정보 -->
 	<select id="dessearchSelect" parameterType="String" resultType="com.one.style.dessearch.vo.DessearchVO">
-	select d.id, d.name, d.major,d.career, d.major_gender, d.img_group_no, nvl2(r.rate,r.rate,0)as rate
+	select d.id, d.name, d.major,d.career, d.major_gender, nvl2(r.rate,r.rate,0)as rate
 	from DESIGNER d
 	left join (
       select des_id ,  TRUNC(AVG(RATE),1) AS RATE

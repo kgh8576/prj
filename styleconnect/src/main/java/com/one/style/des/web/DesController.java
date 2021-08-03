@@ -33,6 +33,8 @@ public class DesController {
 	@Autowired
 	DesService desDao;
 	
+	@Autowired
+	FilesService filesDao;
 	
 	
 	
@@ -85,7 +87,7 @@ public class DesController {
 	
 	//디자이너 회원가입 실행
 	@RequestMapping("/desinerinsert.do")
-	public String desinerinsert(DesVO vo , HttpServletRequest request) {
+	public String desinerinsert(DesVO vo , MultipartHttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 		
@@ -99,11 +101,8 @@ public class DesController {
 		System.out.println(address);
 		vo.setLocation(address);
 		
-		// 
-//		int groupno = fc.upload(request , "cer");
-//		vo.setImggroupno(groupno);
 		desDao.designerInsert(vo);
-		
+		filesDao.upload(request, "cer", vo.getId());
 		session.setAttribute("did", vo.getId());
 		
 		return "redirect:main.do";

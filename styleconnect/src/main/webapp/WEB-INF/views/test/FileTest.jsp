@@ -11,11 +11,11 @@
 	<br>
 	<form method="post" action="uploadTest.do" enctype="multipart/form-data">
 	  <div>
-	    file : <input type="file" name="file">
+	    file : <input type="file" name="file" multiple="multiple" >
 	  </div>
   	<input type="submit">
   	
-  	<img alt="실패중" src="${pageContext.request.contextPath}">
+  	<img alt="실패중" src="${pageContext.request.contextPath}/resources/img/202108215144418-1.png">
 </form>
 </body>
 </html>

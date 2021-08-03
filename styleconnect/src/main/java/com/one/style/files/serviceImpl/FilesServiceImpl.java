@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,17 +24,17 @@ public class FilesServiceImpl implements FilesService {
 	@Autowired 
 	FilesMapper map;
 
-
-	public int upload(HttpServletRequest req , String fileState) {
-		MultipartHttpServletRequest request = (MultipartHttpServletRequest)req;
+	//전송할 파일 요충 req /파일 종류 fileState /파일 소유 디자이너 des_id
+	public void upload(MultipartHttpServletRequest req , String fileState ,String des_id) {
+		MultipartHttpServletRequest request = req;
 		FilesVO vo = new FilesVO();
 		String rootUploadDir = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\img"; // 업로드 주소
 		File dir = new File(rootUploadDir);
 		if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성
 			dir.mkdirs();
 		}
-		Iterator<String> iterator = request.getFileNames(); // 업로드된 파일정보 수집(2개 - file1,file2)
-
+		List<MultipartFile> files = request.getFiles("file"); // 업로드된 파일정보 수집(2개 - file1,file2)
+		
 		int fileLoop = 0;
 		String uploadFileName;
 		MultipartFile mFile = null;
@@ -41,17 +42,11 @@ public class FilesServiceImpl implements FilesService {
 		String sysFileName = ""; // 변환된 파일명
 
 		ArrayList<String> list = new ArrayList<String>();
-
-		//그룹번호 생성
-		int groupno = map.cerGroupNo();
-		System.out.println(groupno);
-		while (iterator.hasNext()) {
+		for (MultipartFile file : files)  {
 			fileLoop++;
 
-			uploadFileName = iterator.next();
-			mFile = request.getFile(uploadFileName);
 
-			orgFileName = mFile.getOriginalFilename();
+			orgFileName = file.getOriginalFilename();
 			String extension = orgFileName.substring(orgFileName.lastIndexOf("."),orgFileName.length());
 
 			if (orgFileName != null && orgFileName.length() != 0) { // sysFileName 생성
@@ -62,16 +57,15 @@ public class FilesServiceImpl implements FilesService {
 
 				try {
 					System.out.println("try 진입");
-					mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/sysFileName
+					file.transferTo(new File(dir + File.separator + sysFileName)); // C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\img
+					// 첨부파일 테이블 저장
+					// 파일테이블에 인설트
 					list.add("원본파일명: " + orgFileName + ", 시스템파일명: " + sysFileName);
-					vo.setDesGroupNo(groupno);
+					vo.setDes_id(des_id);
 					vo.setFileName(orgFileName);
 					vo.setFileUuid(sysFileName);
 					vo.setFileState(fileState);
 					map.fileinsert(vo);
-					// 첨부파일 테이블 저장
-					// 파일테이블에 인설트
-
 				} catch (Exception e) {
 					list.add("파일 업로드 중 에러발생!!!");
 				}
@@ -82,7 +76,5 @@ public class FilesServiceImpl implements FilesService {
 		for (String string : list) {
 			System.out.println(string);
 		}
-		
-		return groupno;
 	}
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 public class FilesVO {
 
 	private int fileNo;
-	private int desGroupNo;
+	private String des_id;
 	private String fileName;
 	private String fileUuid;
 	private String fileState;

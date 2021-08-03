@@ -16,8 +16,6 @@ public class DessearchVO {
 	private String permYN;
 	private String dyeYN;
 	private String major;
-	private int imgGroupNo;
-	private int cerGroupNo;
 	private String[] majors;
 	//review
 	private int conNo;
