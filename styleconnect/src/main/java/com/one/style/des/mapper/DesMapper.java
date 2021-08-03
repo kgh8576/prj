@@ -15,7 +15,8 @@ public interface DesMapper {
 	public DesVO designerUpdate(DesVO vo);
 	public DesVO designerDelete(DesVO vo);
 	public DesVO designerinsertcheck(DesVO vo);
+	//디자이너 마이페이지
 	public int desUpdate(DesVO vo);
 	public DesVO selectDes(DesVO vo);
-	public DesVO  pwCheck(DesVO vo);
+	public DesVO pwCheck(DesVO vo);
 }

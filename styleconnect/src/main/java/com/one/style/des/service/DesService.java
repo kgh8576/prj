@@ -15,6 +15,7 @@ public interface DesService {
 	public DesVO designerUpdate(DesVO vo);
 	public DesVO designerDelete(DesVO vo);
 	public boolean designerinsertcheck(DesVO vo);
+	//디자이너 마이페이지
 	public int desUpdate(DesVO vo);
 	public DesVO selectDes(DesVO vo);
 	public boolean pwCheck(DesVO vo);

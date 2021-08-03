@@ -43,16 +43,26 @@ pageEncoding="UTF-8" %>
                     </div>
                     <div class="col-lg-3 col-md-12">
                         <hr class="margin-bottom-0px d-block d-sm-none">
-                       	<c:if test="${empty id }">
-							<a href="loginpage.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그인</a>
+                        
+                        	<c:if test="${empty id && empty did }">
+                        	<a href="loginpage.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그인</a>
                        		<a href="Insertchoice.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>회원가입</a>
-                       	</c:if>
+                        	</c:if>
+                        	
+                       
+                   	 <hr class="margin-bottom-0px d-block d-sm-none">
                     	<c:if test="${not empty id }">
+							<a href="logout.do">로그아웃</a>
+                        </c:if> 
+                        <!-- 디자이너 마이페이지 -->
+                         <hr class="margin-bottom-0px d-block d-sm-none">
+                        <c:if test="${not empty did }">
 							<a href="mypage.do">마이페이지</a>
 							<a href="logout.do">로그아웃</a>
                         </c:if>
-                        
+                        <!-- 디자이너 마이페이지 -->
                     </div>
+                    
                 </div>
            
             </div>
