@@ -10,10 +10,12 @@
 
 <div align="center">
 
-<a href="desInfo.do">내정보 관리</a><br/>
-<a href="desSchedule.do">스케쥴 관리</a><br/>
-<a href="desStyle.do">스타일링 이력</a><br/>
-<a href="desStyle.do">전문분야 설정</a>
+<a href="desInfo.do">내정보 관리 - 기본정보 수정</a><br/>
+<a href="desSchedule.do">스케쥴 관리 - 상담내역목록/상담내역 상세정보/상담화면이동</a><br/>
+<a href="desStyle.do">스타일링 이력 - 스타일링이력 조회/등록/수정</a><br/>
+<a href="desStyle.do">전문분야 설정 - major수정</a>
+<hr/>
+<a href="desStyle.do">상담내역 - 상담내역목록/상담내역 상세정보조회/등록/수정/삭제</a>
 </div>
 <div class="row justify-content-center">
                 <div class="col-lg-7">

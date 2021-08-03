@@ -97,5 +97,15 @@ public class DesServiceImpl implements DesService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public DesVO selectDesPro(DesVO vo) {
+		// 디자이너 프로필 수정
+		return desMapper.selectDesPro(vo);
+	}
+	@Override
+	public int desProUpdate(DesVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.desProUpdate(vo);
+	}
 
 }
