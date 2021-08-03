@@ -159,11 +159,20 @@ body {margin: 10px;}
   background-color: #337ab7;
   border-color: #2e6da4;
 }
+.hpcheckbtn1 {
+width: 20%;display: flex;padding: 10px 13px;color: #fff;
+    border: solid 1px rgba(0,0,0,.08);height: 50px;
+    background-color: #575757;
+}
 </style>
 </head>
 
 <script>
 $(document).ready(function(){
+	//페이지가 시작할때 이벤트발생
+	/////////////////////////
+	//이미지 미리보기 이벤트 event handler
+	////////////////////////
 	   var fileTarget = $('.filebox .upload-hidden');
 
 	    fileTarget.on('change', function(){
@@ -181,6 +190,9 @@ $(document).ready(function(){
 	    });
 
 	    //preview image 
+	/////////////////////////
+	//이미지 미리보기 이벤트 event handler
+	////////////////////////
 	    var imgTarget = $('.preview-image .upload-hidden');
 
 	    imgTarget.on('change', function(){
@@ -209,10 +221,10 @@ $(document).ready(function(){
 	            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
 	        }
 	    });
-	});
-	//비밀번호 실시간체크
-	$(function() {
-		var password = $('input[type=password]');
+	  ///////////////////////  
+	  //비밀번호 실시간체크
+	  //////////////////////
+	    var password = $('input[type=password]');
 		var chkNotice = $('#chkNotice');
 		var pswd = $('#pw');
 		var pswd2 = $('#pw2');
@@ -232,8 +244,74 @@ $(document).ready(function(){
 				}
 			}
 		});
+		
+		
+		///////////////////////  
+		//핸드폰인증번호체크
+		//////////////////////
+		var hpnumber = document.getElementById("hpcheck");
+		hpnumber.onchange = function (e) {
+			$.ajax({
+				url : 'checkSMS.do',
+				data : {
+					insertCode : $('#hpcheck').val(),
+				},
+				type : 'post',
+				success : function(data) {
+					console.log(data);
+					if (data == 1) {
+						$('#hppass').val('Checked');
+						$('#chkNotice3').html('인증이 완료되었습니다.').attr('color',
+						'#f82a2aa3');
+					} else {
+						$('#hppass').val('unChecked');
+						$('#chkNotice3').html('인증번호가 틀렸습니다.').attr('color',
+						'#f82a2aa3');
+					}
+				},
+				error : function(err) {
+					console.log(err);
+					console.log("핸드폰번호 인증 에러");
+				}
+			})
+		};
+		$("#hpcheckbtn").on("click",hpcheckbtn);
+		////////////////////////
+		// 핸드폰번호 정규식 ///////
+		// 검증 /////////////////
+		////////////////////////
+		var hpnumber = document.getElementById("hp");
+		hpnumber.onblur = function (e) {
+			$.ajax({
+				url : 'realhpcheck.do',
+				data : {
+					hp : $('#hp').val(),
+				},
+				type : 'post',
+				success : function(data) {
+					if(data == 1){
+						$('#chkNotice3').html('입력완료 인증번호받기를 눌러주세요.').attr('color',
+						'#f82a2aa3');
+					}else {
+						$('#chkNotice3').html('휴대폰번호 형식이 맞지않습니다.').attr('color',
+						'#f82a2aa3');
+						$('#hp').val('');
+						frm.hp.focus();
+					}
+				},
+				error : function(err) {
+					console.log(err);
+					console.log("핸드폰번호 정규식 에러");
+				}
+				
+			})
+		};
 	});
-	//실시간 중복아이디 확인
+	
+///////////////////////  
+//실시간 중복아이디 확인
+//////////////////////
+	
 	function checkId() {
 		$.ajax({
 			url : 'desinserinsertcheck.do',
@@ -259,7 +337,26 @@ $(document).ready(function(){
 			}
 		})
 	};
-	
+//핸드폰인증 번호전송
+	function hpcheckbtn() {
+		
+	$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
+		'#f82a2aa3');
+		$.ajax({
+			url : 'sendSMS.do',
+			data : {
+				hp : $('#hp').val(),
+			},
+			type : 'post',
+			success : function(data) {
+				frm.hpcheck.focus();
+			},
+			error : function(err) {
+				console.log(err);
+				console.log("휴대폰 인증에러");
+			}
+		})
+	};
 	//인풋값 NuLL값인거 히든에 N값으로 변경시키기. 
 	function formCheck() {
 
@@ -298,8 +395,8 @@ $(document).ready(function(){
 			frm.name.focus();
 			return false;
 		}
-		if (frm.hp.value == "") {
-			alert("핸드폰 번호를 입력해주세요.");
+		if (frm.hppass.value == "unChecked") {
+			alert("핸드폰번호 인증을 해주세요.");
 			frm.hp.focus();
 			return false;
 		}
@@ -516,8 +613,14 @@ $(document).ready(function(){
 					</div>
 					<div class="form-group label-floating">
 						<label class="control-label">핸드폰 번호</label> <input
-							class="form-control" placeholder="핸드폰번호입력" type="text" name="hp"
-							id="hp">
+							class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp"
+							id="hp"  min="11" maxlength="11">
+							<input style="width: 80%;display: flex;float: left;"
+							class="form-control" placeholder="인증번호" type="text" name="hpcheck"
+							id="hpcheck">
+							<input type="hidden" id="hppass" name="hppass" value="unChecked">
+							<button type="button" class="hpcheckbtn1" id="hpcheckbtn" name="hpcheckbtn">인증하기</button>
+							<font id="chkNotice3" size="2"></font>
 					</div>
 
 					<button type="button" onclick="nextpage()"

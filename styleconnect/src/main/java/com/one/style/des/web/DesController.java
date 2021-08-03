@@ -1,43 +1,34 @@
 package com.one.style.des.web;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
-import java.util.UUID;
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
-import com.one.style.files.service.FilesService;
-import com.one.style.files.vo.FilesVO;
 import com.one.style.files.web.FilesController;
 
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Controller
 public class DesController {
 
 	@Autowired
 	DesService desDao;
-	
-	
-	
-	
-	
-	//디자이너 로그인
+
+	// 디자이너 로그인
 	@RequestMapping("/desloginCheck.do")
 	public String desloginCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
 		HttpSession session = request.getSession();
@@ -45,73 +36,162 @@ public class DesController {
 		dvo = desDao.designerlogin(vo);
 		boolean b = desDao.designerloginCheck(vo);
 		int cnt = 1;
-		if(b) {
+		if (b) {
 			cnt = 1;
 			session.setAttribute("did", dvo.getId());
 			session.setAttribute("user", dvo);
 			response.getWriter().print(cnt);
-		}else {
+		} else {
 			cnt = 0;
 			response.getWriter().print(cnt);
 		}
-		
-		
+
 		return null;
 	}
-	
-	//디자이너 회우너가입페이지 이동
+
+	// 디자이너 회우너가입페이지 이동
 	@RequestMapping("/desinsertpage.do")
 	public String desInsert() {
 		return "designer/designerinsert";
 	}
-	//디자이너 회원아이디 중복검사
+
+	// 디자이너 회원아이디 중복검사
 	@RequestMapping("/desinserinsertcheck.do")
-	public String desinerinsertcheck (HttpServletRequest request,HttpServletResponse response,DesVO vo) throws IOException {
+	public String desinerinsertcheck(HttpServletRequest request, HttpServletResponse response, DesVO vo)
+			throws IOException {
 		String id = request.getParameter("id");
 		vo.setId(id);
 		System.out.println("디자이너 회원가입 아이디검사 = " + id);
 		boolean b = desDao.designerinsertcheck(vo);
 		int cnt = 1;
-		if(b) {
+		if (b) {
 			cnt = 1;
 			response.getWriter().print(cnt);
-		}
-		else {
+		} else {
 			cnt = 0;
 			response.getWriter().print(cnt);
 		}
 		return null;
 	}
-	
-	//디자이너 회원가입 실행
+	//패스워드 정규화검사
+	@RequestMapping("sendpassword.do")
+	@ResponseBody
+	public Boolean sendpassword (HttpServletRequest request) {
+		
+		String password = request.getParameter("pw");
+		String check = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d~!@#$%^&*()+|=]{8,20}$\r\n";
+		
+		boolean finalcheck = Pattern.matches(check, password);
+		System.out.println(finalcheck);
+		return finalcheck;		
+		
+	}
+	// 디자이너 회원가입 실행
 	@RequestMapping("/desinerinsert.do")
-	public String desinerinsert(DesVO vo , HttpServletRequest request) {
-		
+	public String desinerinsert(DesVO vo, HttpServletRequest request) {
+
 		HttpSession session = request.getSession();
-		
+
 		System.out.println(vo.getMakeupyn());
 		String postcode = request.getParameter("postcode");
 		String roadAddress = request.getParameter("roadAddress");
 		String extraAddress = request.getParameter("extraAddress");
 		String detailAddress = request.getParameter("detailAddress");
-		
-		String address ="("+ postcode +")"+ " "+ roadAddress + " " + extraAddress + " " + detailAddress;
+
+		String address = "(" + postcode + ")" + " " + roadAddress + " " + extraAddress + " " + detailAddress;
 		System.out.println(address);
 		vo.setLocation(address);
-		
+
 		FilesController fc = new FilesController();
-		// 
-		int groupno = fc.upload(request , "cer");
+		//
+		int groupno = fc.upload(request, "cer");
 		vo.setImggroupno(groupno);
 		desDao.designerInsert(vo);
-		
+
 		session.setAttribute("did", vo.getId());
-		
+
 		return "redirect:main.do";
 	}
-	
-
+	//핸드폰번호 정규식
+	@RequestMapping("realhpcheck.do")
+	@ResponseBody
+	public boolean realhpcheck (HttpServletRequest request) {
 		
+		String phoneNumber = request.getParameter("hp");
+		String check = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$";
+		
+		boolean finalcheck = Pattern.matches(check, phoneNumber);
+		System.out.println(finalcheck);
+		return finalcheck;		
+		
+	}
+	//핸드폰인증번호
+	@RequestMapping("sendSMS.do")
+	@ResponseBody
+	public String SendSMS (HttpServletRequest req) throws IOException {
+		HttpSession session = req.getSession();
+		String targetNum = req.getParameter("hp");
+		Random rand = new Random();
+		String textCode = "";
+		for(int i=0; i<4; i++) {
+			String ran = Integer.toString(rand.nextInt(10));
+			textCode += ran;
+		}
+		
+		String api_key = "NCSVASOPKECZYZIF";
+		String api_secret = "SPLU6MAYGHQOZRJPOCQ1FJ62XALYQMLJ";
+		Message coolsms = new Message(api_key, api_secret);
+		
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", targetNum);
+		params.put("from", "01055313076");
+		params.put("type", "SMS");
+		params.put("text", "Style Connect 인증번호는 " + textCode + " 입니다.");
+		params.put("petMart", "petMart v1.0"); // application name and version
+		
+		System.out.println(params.get("text"));
+		
+		try {
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.toString());
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+		}
+		
+		session.setAttribute("textCode", textCode);
+		//문자 전송시 세션시간확인
+		session.setAttribute("sessiontime", System.currentTimeMillis());
+		
+		return null;
+	}
+	
+	//인증번호 인증
+	
+	@RequestMapping("checkSMS.do")
+	@ResponseBody
+	public Boolean checkSMS(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String insertCode = request.getParameter("insertCode");
+		String Code = (String) session.getAttribute("textCode");
+		Long sessiontime = (Long) session.getAttribute("sessiontime");
+		Long realtime = System.currentTimeMillis();
+		// 문자전송후 시간과 현재시간계산 3분 세션타임.
+		Long difftime = (realtime - sessiontime)/1000/60;
+		
+		boolean YorN = true;
+		if(difftime > 3) {
+			YorN = false;
+			session.removeAttribute("textCode");
+		} else if(insertCode .equals(Code)) {
+			YorN = true;
+		}else {
+			YorN = false;
+		}
+		
+		
+		return YorN;
+	}
 	
 	//마이페이지
 	@RequestMapping("mypage.do")
