@@ -22,8 +22,15 @@
 	<!-- 디자이너 선택 -->
 	<select id="selectDes" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
 		SELECT * 
-		FROM DESIGNER 
+		FROM DESIGNER
 		WHERE ID = #{id}
+	</select>
+	<!-- 디자이너 선택 - 프로필사진 -->
+	<select id="selectDesPro" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
+		SELECT D.NAME, D.ID, D.GENDER,D.HP, D.BIRTH, D.PW, D.LOCATION, F.FILE_NO, F.FILE_STATE, F.FILE_UUID
+		FROM DESIGNER D , FILES F
+		WHERE D.ID=F.DES_ID AND F.FILE_STATE= 'pro'
+		 	AND D.ID= #{id}
 	</select>
 	<!-- 기존비밀번호 확인 -->
 	<select id="pwCheck" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
@@ -38,4 +45,12 @@
 	set hp= #{hp}, location= #{location}, pw= #{pw}, gender= #{gender}
 	where id= #{id}
 	</update>
+	
+	<!-- 디자이너 수정 -->
+	<update id="desProUpdate" parameterType="com.one.style.des.vo.DesVO">
+	update files
+	set file_state = 'del'
+	where file_uuid= #{fileUuid}
+	</update>
+	
 </mapper>

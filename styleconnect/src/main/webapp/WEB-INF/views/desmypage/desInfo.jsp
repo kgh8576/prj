@@ -65,20 +65,22 @@ $(function() {
 		}
 		frm.submit();
 	}
+	function readURL(input) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		      document.getElementById('preview').src = e.target.result;
+		    };
+		    reader.readAsDataURL(input.files[0]);
+		  } else {
+		    document.getElementById('preview').src = "";
+		  }
+		}
+	
 
 </script>
 <body>
-<form action="desUpdate.do" method="post" id="frm" name="frm">
-<input type="text" id="gender" name="gender" value="${des.gender }">
-<!-- <input type="hidden" id="id" name="id" value="${des.id }" > -->
-<input type="hidden" id="state" name="state" value="${des.state }" >
-<input type="hidden" id="career" name="career" value="${des.career }" >
-<%-- <input type="hidden" id="regday" name="regday" value="${des.regday }" >
-<input type="hidden" id="cergroupno" name="cergroupno" value="${des.cergroupno }" >
-<input type="hidden" id="majorgender" name="majorgender" value="${des.majorgender }" >
-<input type="hidden" id="makeupyn" name="makeupyn" value="${des.makeupyn }" >
-<input type="hidden" id="cutyn" name="cutyn" value="${des.cutyn }" >
-<input type="hidden" id="cergroupno" name="cergroupno" value="${des.cergroupno }" > --%>
+
 
     <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
@@ -91,18 +93,29 @@ $(function() {
                             <li><a href="mypage.do">MyPage</a></li>
                             <li class="active">My Profile</li>
                         </ol>
-                        <h1 class="font-weight-300">${des.name } 디자이너 정보 </h1>
+                        <h1 class="font-weight-300">${des.name } 디자이너 정보dd </h1>
                     </div>
                 </div>
                 <!-- // Page Title -->
 
                 <div class="row margin-tb-45px full-width">
+                
+                	<!-- 프로필 이미지 업로드 -->
+                    <form method="post" action="desProUpdate.do"  enctype="multipart/form-data">
+                    <input type="hidden" value="${des.fileUuid}" name="fileUuid">
                     <div class="col-md-4">
                         <div class="padding-15px background-white">
-                            <a href="#" class="d-block margin-bottom-10px"><img src="http://placehold.it/500x500" alt=""></a>
-                            <a href="#" class="btn btn-sm  text-white background-main-color btn-block">Upload Image</a>
+                            <a href="" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/${des.fileUuid}" alt=""></a>
+                            <input type="file" onchange="readURL(this);" >
+                            <button type="submit"  >수저ㅓㅇ</button>
+                            <a  class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">이미지 수정하기 </a>
                         </div>
                     </div>
+                    </form>
+                    <!-- 프로필 이미지 업로드 끝 -->
+                    
+                    <form action="desUpdate.do" method="post" id="frm" name="frm" >
+					<input type="text" id="gender" name="gender" value="${des.gender }">
                     <div class="col-md-8">
                       <div class="row">
                           <div class="col-md-6 margin-bottom-20px">
@@ -162,13 +175,14 @@ $(function() {
 						</div>
                   <!-- 비밀번호 변경 끝// -->
                         <a  class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">Update Profile</a>
-						<button type="button" onclick="formCheck()"> 수정</button>
+						<button type="button" onclick="formCheck()"> 수정ddddd</button>
                     </div>
+        			</form>
                 </div>
 
             </div>
         </div>
-        </form>
+        </div>
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->
       

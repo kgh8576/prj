@@ -3,6 +3,7 @@ package com.one.style.des.web;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
+import com.one.style.files.service.FilesService;
 import com.one.style.files.web.FilesController;
 
+import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Controller
@@ -26,8 +29,10 @@ public class DesController {
 
 	@Autowired
 	DesService desDao;
-
-	// 디자이너 로그인
+	
+	@Autowired
+	FilesService fileservice;
+	
 	@RequestMapping("/desloginCheck.do")
 	public String desloginCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
 		HttpSession session = request.getSession();
@@ -72,6 +77,7 @@ public class DesController {
 		}
 		return null;
 	}
+	
 	//패스워드 정규화검사
 	@RequestMapping("sendpassword.do")
 	@ResponseBody
@@ -100,13 +106,8 @@ public class DesController {
 		String address = "(" + postcode + ")" + " " + roadAddress + " " + extraAddress + " " + detailAddress;
 		System.out.println(address);
 		vo.setLocation(address);
-
-		FilesController fc = new FilesController();
-		//
-		int groupno = fc.upload(request, "cer");
-		vo.setImggroupno(groupno);
 		desDao.designerInsert(vo);
-
+//		fileservice.upload(request, "cer", vo.getId());
 		session.setAttribute("did", vo.getId());
 
 		return "redirect:main.do";
@@ -210,6 +211,7 @@ public class DesController {
 		vo.setId(desId);
 		vo = desDao.selectDes(vo);
 		model.addAttribute("des", desDao.selectDes(vo));
+		model.addAttribute("des", desDao.selectDesPro(vo));
 		return "desmypage/desInfo";
 	}
 	
@@ -254,6 +256,13 @@ public class DesController {
 		
 		System.out.println("업데이트 행 수: " + n);
 		System.out.println("=============================="+pw);
+		return "redirect:desInfo.do";
+	}
+	@RequestMapping("desProUpdate.do")
+	public String desProUpdate(HttpServletRequest request, DesVO vo) {
+		desDao.desProUpdate(vo);
+		
+//		fileservice.upload(request, "pro");
 		return "redirect:desInfo.do";
 	}
 	

@@ -22,4 +22,5 @@ public class ConHistoryVO {
 	
 	private String desName; //디자이너 이름
 	private String detail; //코스 상세정보
+	// private int timeDifference; //상담시간과 현재시간과의 차이
 }

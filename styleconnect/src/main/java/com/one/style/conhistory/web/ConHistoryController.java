@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +33,23 @@ public class ConHistoryController {
 	public String consulting(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		ConHistoryVO vo = new ConHistoryVO();
 		HttpSession session = req.getSession();
-		//디자이너 회원과 일반회원에 따른 구분 필요
-		//차후 수정
-		vo.setMemId((String)session.getAttribute("id"));  
+
+		//일반회원으로 로그인한 경우
+		if(session.getAttribute("id") != null) {
+			vo.setMemId((String)session.getAttribute("id")); 
+		//디자이너으로 로그인한 경우
+		} else if (session.getAttribute("did") != null) {
+			vo.setDesId((String)session.getAttribute("did")); 
+		}
+		System.out.println("세션값 테스트) 디자이너 아이디: " + (String)session.getAttribute("did"));
+		
+		System.out.println("vo값 테스트) 일반회원 아이디: " +  vo.getMemId());
+		System.out.println("vo값 테스트) 디자이너 아이디: " +  vo.getDesId());
+		 
 		
 		model.addAttribute("conHistoryList", conHistoryDao.conhistoryList(vo));
+		
+
 		
 		return "consulting/consulting";
 	}
