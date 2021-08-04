@@ -7,25 +7,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.one.style.crawldata.service.CrawlDataService;
+import com.one.style.crawldata.vo.CrawlDataVO;
 import com.one.style.home.service.HomeService;
 import com.one.style.home.vo.HomeVO;
 
 @RestController
 public class AjaxHomeContoller {
 	
-	@Autowired HomeService homeDao; 
+	@Autowired HomeService homeDao;
+	
 
 	// 카테고리별 top3 디자이너 이름, 평점, 파일경로 가져오는 쿼리
-	@RequestMapping("ajaxTopHairDesChange.do")
-	public List<HomeVO> getHairDesTop(@RequestParam("keyword") String keyword) {
-		List<HomeVO> list = homeDao.ajaxTopHairDes(keyword);
+	@RequestMapping("ajaxTopDesChange.do")
+	public List<HomeVO> getDesTop(@RequestParam("keyword") String keyword) {
+		List<HomeVO> list = homeDao.ajaxTopDesInfo(keyword);
 		return list;
 	}
 	
-	// 총 리뷰 수 카운트 쿼리
-	@RequestMapping("ajaxTopHairDesCount.do")
-	public List<HomeVO> getHairDesTopCount(@RequestParam("keyword") String keyword) {
-		List<HomeVO> list = homeDao.ajaxTopHairDesCount(keyword);
+	// 카테고리별 top3 디자이너 총 리뷰 수 카운트 쿼리
+	@RequestMapping("ajaxTopDesCount.do")
+	public List<HomeVO> getDesTopCount(@RequestParam("keyword") String keyword) {
+		List<HomeVO> list = homeDao.ajaxTopDesCount(keyword);
 		return list;
 	}
+	
+
 }
