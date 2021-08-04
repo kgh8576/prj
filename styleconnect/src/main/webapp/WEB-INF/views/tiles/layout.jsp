@@ -36,6 +36,8 @@
     <script  src="${pageContext.request.contextPath}/resources/assets/js/jquery-3.2.1.min.js"></script>
     <!-- fontawesome  -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <style type="text/css">
+    </style>
 </head>
 
 <body>
@@ -46,9 +48,7 @@
 		<article>
 			<tiles:insertAttribute name="body"/>
 		</article>
-		<footer>
 			<tiles:insertAttribute name="footer"/>
-		</footer>
 	</div>
 	<script  src="${pageContext.request.contextPath}/resources/assets/js/sticky-sidebar.js"></script>
     <script  src="${pageContext.request.contextPath}/resources/assets/js/YouTubePopUp.jquery.js"></script>

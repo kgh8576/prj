@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %>
-<footer class="padding-tb-100px background-main-color wow fadeInUp">
+<footer class="padding-tb-50px background-main-color wow fadeInUp">
         <div class="container">
             <div class="row">
                 <div class="col-lg-2">

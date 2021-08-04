@@ -22,7 +22,7 @@
 </form>
 <!-- 검색창 끝 -->
 <!-- 디자이너 카테고리 박스 -->
-<div class="margin-tb-30px">
+<div class="margin-tb-100px">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
