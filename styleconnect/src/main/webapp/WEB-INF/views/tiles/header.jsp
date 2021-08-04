@@ -5,19 +5,13 @@ pageEncoding="UTF-8" %>
 <html>
 
 <head>
-<title>StyleConnect에 방문해주셔서 감사합니다.</title>
-
+	<title>StyleConnect에 방문해주셔서 감사합니다.</title>
 </head>
 
 <body>
-
-
-
     <header>
         <div id="fixed-header-dark" class="header-output fixed-header">
             <div class="container header-in">
-                
- 
                 <div class="row">
                     <div class="col-lg-2 col-md-12">
                         <a class="mobile-toggle padding-13px background-main-color" href="#"><i class="fas fa-bars"></i></a>
@@ -43,15 +37,13 @@ pageEncoding="UTF-8" %>
                     </div>
                     <div class="col-lg-3 col-md-12">
                         <hr class="margin-bottom-0px d-block d-sm-none">
-                        
                         	<c:if test="${empty id && empty did }">
                         	<a href="loginpage.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그인</a>
                        		<a href="Insertchoice.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>회원가입</a>
                         	</c:if>
-                        	
-                       
                    	 <hr class="margin-bottom-0px d-block d-sm-none">
                     	<c:if test="${not empty id }">
+                    		<a href="membermypage.do">마이페이지</a>
 							<a href="logout.do">로그아웃</a>
                         </c:if> 
                         <!-- 디자이너 마이페이지 -->
@@ -62,9 +54,7 @@ pageEncoding="UTF-8" %>
                         </c:if>
                         <!-- 디자이너 마이페이지 -->
                     </div>
-                    
                 </div>
-           
             </div>
         </div>
     </header>

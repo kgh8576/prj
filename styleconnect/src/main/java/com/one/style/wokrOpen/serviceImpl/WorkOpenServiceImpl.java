@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.one.style.files.vo.FilesVO;
 import com.one.style.wokrOpen.mapper.WorkOpenMapper;
 import com.one.style.wokrOpen.service.WorkOpenService;
 import com.one.style.wokrOpen.vo.WorkOpenVO;
@@ -46,7 +47,9 @@ public class WorkOpenServiceImpl implements WorkOpenService{
 		return realWrokTime;
 	}
 	
-	
+	public FilesVO getFileUuidTest(FilesVO vo) {
+		return workOpenMapper.getFileUuidTest(vo);
+	}
 	
 	
 }

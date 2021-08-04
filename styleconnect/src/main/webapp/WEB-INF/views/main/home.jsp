@@ -9,23 +9,46 @@ pageEncoding="UTF-8" %>
     <style>
     </style>
     <script>
-    	function topHairDesChange(keyword){
-    		// 헤어디자이너 top3 이름, 평점, 이미지 경로 가져오는 ajax
+    
+    	// 페이지 로드 시 cut 디자이너(디폴트값) 데이터 뿌리기
+    	$(function(){
+    		topDesChange('cut');
+    		topDesChange('makeUp');
+    	});
+    	
+    	function crawl(){
+    		$.ajax({
+    			url:'crawl.do',
+    			success:function(result){
+    				console.log(result);
+    			},
+    			error:function(err){
+    				console.log(err);
+    			}
+    		});
+    	}
+    	
+		// 버튼 클릭 시 디자이너 top3 이름, 평점, 이미지 경로 가져오는 ajax    		
+    	function topDesChange(keyword){
         	$.ajax({
-        		url:'ajaxTopHairDesChange.do',
+        		url:'ajaxTopDesChange.do',
         		data:{ keyword:keyword },
         		success:function(result){
         			console.log(result);
+        			if (keyword != 'makeUp'){
+        				var targetKeyword = 'Hair';
+        			}
+       				else{
+       					var targetKeyword = 'MakeUp';
+       				}
         			for(var i = 0; i < result.length; i++){
-        				$('#targetHairName'+(i+1)).text(result[i].name);
-        				$('#targetHairStar'+(i+1)).html(''); // 별 칸 다 지우고 ajax로 평점만큼 별 채워넣기
-        				for(var j = 0; j < result[i].rate; j++){
-        					console.log(result[i].rate);
-        					$('#targetHairStar'+(i+1)).append('<li class="active"></li>');	
+        				$('#target'+targetKeyword+'Name'+(i+1)).text(result[i].name); // 이름 변경
+        				$('#target'+targetKeyword+'Star'+(i+1)).html(''); // 별점 다 지우기
+        				for(var j = 0; j < result[i].rate; j++){ // 별점 변경
+        					$('#target'+targetKeyword+'Star'+(i+1)).append('<li class="active"></li>');	
         				}
-        				//$('#targetHairImage'+(i+1)).html(''); // 이미지 칸 지우고 ajax로 경로 채워넣기
-        				//$('#targetHairImage'+(i+1)).append('<a href="reviewList.do?name="'+result[i].name+'><img src="'+result[i].filePath+'" alt=""></a>');
-        				$('#targetHairImage'+(i+1)).append('<a href="reviewList.do?name="'+result[i].name+'</a>');
+        				$('#target'+targetKeyword+'Image'+(i+1)).attr('src', '${pageContext.request.contextPath}/resources/img/'+result[i].fileUuid); // 파일 이미지 변경
+        				$('#target'+targetKeyword+'ATag'+(i+1)).attr('href', 'desListSelect.do?id='+result[i].id); // A태그 링크 변경
         			}
         		},
         		error:function(err){
@@ -34,11 +57,18 @@ pageEncoding="UTF-8" %>
         	});
         	// 총 리뷰 수 가져오는 ajax
         	$.ajax({
-        		url:'ajaxTopHairDesCount.do',
+        		url:'ajaxTopDesCount.do',
         		data:{ keyword:keyword },
         		success:function(ratingResult){
+        			if (keyword != 'makeUp'){
+        				var targetKeyword = 'Hair';
+        			}
+       				else{
+       					var targetKeyword = 'MakeUp';
+       				}
+        			
         			for(var i = 0; i < ratingResult.length; i++){
-        				$('#targetHairRating'+(i+1)).text('총 리뷰 수 '+ratingResult[i].count+'건');
+        				$('#target'+targetKeyword+'ReviewCnt'+(i+1)).text('총 리뷰 수 '+ratingResult[i].count+'건');
         			}
         		},
         		error:function(err){
@@ -80,6 +110,7 @@ pageEncoding="UTF-8" %>
 									<a href="#" class="text-primary">#구자혁</a>
 									<a href="#" class="text-primary">#병지컷</a>
 									<a href="reviewList.do?desId=des04">테스트테스트</a>
+									<button onclick="crawl()">크롤링테스트</button>
 								</div>
                             </div>
                         </form>
@@ -152,7 +183,6 @@ pageEncoding="UTF-8" %>
                     </div>
                 </div>
 
-
                 <div class="col-lg-3 col-md-6 sm-mb-30px wow fadeInUp" data-wow-delay="0.2s">
                     <div class="service text-center opacity-hover-7 hvr-bob">
                         <div class="icon margin-bottom-10px">
@@ -163,7 +193,6 @@ pageEncoding="UTF-8" %>
                     </div>
                 </div>
 
-
                 <div class="col-lg-3 col-md-6 sm-mb-30px wow fadeInUp" data-wow-delay="0.4s">
                     <div class="service text-center opacity-hover-7 hvr-bob">
                         <div class="icon margin-bottom-10px">
@@ -173,7 +202,6 @@ pageEncoding="UTF-8" %>
                         <p class="text-grey-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
                     </div>
                 </div>
-
 
                 <div class="col-lg-3 col-md-6 sm-mb-30px wow fadeInUp" data-wow-delay="0.6s">
                     <div class="service text-center opacity-hover-7 hvr-bob">
@@ -199,9 +227,9 @@ pageEncoding="UTF-8" %>
                     <div class="row">
                         <div class="col-md-4 wow fadeInUp">
                             <h1 class="text-second-color font-weight-300 text-sm-center text-lg-right margin-tb-15px">헤어 디자이너 TOP3</h1>
-							<button type="button" class="btn btn-info" onclick="topHairDesChange('cut')">컷</button>
-                            <button type="button" class="btn btn-info" onclick="topHairDesChange('perm')">펌</button>
-                            <button type="button" class="btn btn-info" onclick="topHairDesChange('dye')">염색</button>
+							<button type="button" class="btn btn-info" onclick="topDesChange('cut')">컷</button>
+                            <button type="button" class="btn btn-info" onclick="topDesChange('perm')">펌</button>
+                            <button type="button" class="btn btn-info" onclick="topDesChange('dye')">염색</button>
                         </div>
                         <div class="col-md-6 wow fadeInUp" data-wow-delay="0.4s">
                             <p class="text-grey-2"></p>
@@ -217,20 +245,15 @@ pageEncoding="UTF-8" %>
 
                 <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
                     <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="thum" id="targetHairImage1">
-                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
+                        <div class="thum">
+                            <a href="#" id="targetHairATag1"><img id="targetHairImage1" src="http://placehold.it/400x400" alt=""></a>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName1">이름 자리</a></h5>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetHairStar1">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
                                 </ul>
-                                <small class="float-right text-grey-2" id="targetHairRating1">레이팅</small>
+                                <small class="float-right text-grey-2" id="targetHairReviewCnt1">리뷰수</small>
                             </div>
                         </div>
                     </div>
@@ -238,20 +261,15 @@ pageEncoding="UTF-8" %>
                 
                 <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
                     <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="thum" id="targetHairImage2">
-                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
+                        <div class="thum">
+                            <a href="#" id="targetHairATag2"><img id="targetHairImage2" src="http://placehold.it/400x400" alt=""></a>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName2">이름 자리</a></h5>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetHairStar2">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
                                 </ul>
-                                <small class="float-right text-grey-2" id="targetHairRating2">리뷰수, 레이팅 자리</small>
+                                <small class="float-right text-grey-2" id="targetHairReviewCnt2">리뷰수</small>
                             </div>
                         </div>
                     </div>
@@ -259,21 +277,15 @@ pageEncoding="UTF-8" %>
                 
                 <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
                     <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="thum" id="targetHairImage3">
-                            <a href="#"><img src="http://placehold.it/400x400" alt=""></a>
+                        <div class="thum">
+                            <a href="#" id="targetHairATag3"><img id="targetHairImage3" src="http://placehold.it/400x400" alt=""></a>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName3">이름 자리</a></h5>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetHairStar3">
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li class="active"></li>
-                                    <li></li>
-                                    
                                 </ul>
-                                <small class="float-right text-grey-2" id="targetHairRating3">리뷰수, 레이팅 자리</small>
+                                <small class="float-right text-grey-2" id="targetHairReviewCnt3">리뷰수</small>
                             </div>
                         </div>
                     </div>
@@ -291,9 +303,6 @@ pageEncoding="UTF-8" %>
                     <div class="row">
                         <div class="col-md-4 wow fadeInUp">
                             <h1 class="text-second-color font-weight-300 text-sm-center text-lg-right margin-tb-8px">메이크업 디자이너 TOP3</h1>
-                            <button type="button" class="btn btn-info">cate1</button>
-                            <button type="button" class="btn btn-info">cate2</button>
-                            <button type="button" class="btn btn-info">cate3</button>
                         </div>
                         <div class="col-md-6 wow fadeInUp" data-wow-delay="0.4s">
                             <p class="text-grey-2"></p>
@@ -305,6 +314,60 @@ pageEncoding="UTF-8" %>
                 </div>
             </div>
 
+			<div class="row">
+
+                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="thum">
+                            <a href="#" id="targetMakeUpATag1"><img id="targetMakeUpImage1" src="http://placehold.it/400x400" alt=""></a>
+                        </div>
+                        <div class="padding-30px">
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetMakeUpName1">이름 자리</a></h5>
+                            <div class="rating clearfix">
+                                <ul class="float-left" id="targetMakeUpStar1">
+                                </ul>
+                                <small class="float-right text-grey-2" id="targetMakeUpReviewCnt1">리뷰수</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="thum">
+                            <a href="#" id="targetMakeUpATag2"><img id="targetMakeUpImage2" src="http://placehold.it/400x400" alt=""></a>
+                        </div>
+                        <div class="padding-30px">
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetMakeUpName2">이름 자리</a></h5>
+                            <div class="rating clearfix">
+                                <ul class="float-left" id="targetMakeUpStar2">
+                                </ul>
+                                <small class="float-right text-grey-2" id="targetMakeUpReviewCnt2">리뷰수</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="thum">
+                            <a href="#" id="targetMakeUpATag3"><img id="targetMakeUpImage3" src="http://placehold.it/400x400" alt=""></a>
+                        </div>
+                        <div class="padding-30px">
+                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetMakeUpName3">이름 자리</a></h5>
+                            <div class="rating clearfix">
+                                <ul class="float-left" id="targetMakeUpStar3">
+                                </ul>
+                                <small class="float-right text-grey-2" id="targetMakeUpReviewCnt3">리뷰수</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+
+            </div>
            
         </div>
     </section>
@@ -424,43 +487,5 @@ pageEncoding="UTF-8" %>
 
         </div>
     </section>
-
-
-    <footer class="padding-tb-100px background-main-color wow fadeInUp">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <a class="d-inline-block margin-tb-15px"><img src="assets/img/logo-2.png" alt=""></a>
-                </div>
-                <div class="col-lg-4">
-                    <p class="text-white opacity-7">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="footer-menu margin-tb-15px margin-lr-0px padding-0px list-unstyled float-lg-right">
-                        <li><a href="#" class="text-white">Featured</a></li>
-                        <li><a href="#" class="text-white">Feedback</a></li>
-                        <li><a href="#" class="text-white">Ask a Question</a></li>
-                        <li><a href="#" class="text-white">Team</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="border-white opacity-4 margin-tb-45px">
-            <div class="row">
-                <div class="col-lg-6">
-                    <p class="margin-0px text-white opacity-7 sm-mb-15px">© 2018 tabib Health Directory | All Right Reserved. </p>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="social-icon style-2 float-lg-right">
-                        <li class="list-inline-item"><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="list-inline-item"><a class="youtube" href="#"><i class="fab fa-youtube"></i></a></li>
-                        <li class="list-inline-item"><a class="linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li class="list-inline-item"><a class="google" href="#"><i class="fab fa-google-plus"></i></a></li>
-                        <li class="list-inline-item"><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li class="list-inline-item"><a class="rss" href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

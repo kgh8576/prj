@@ -17,15 +17,13 @@ public class DesVO {
 	private int point;
 	private String state;
 	private String career;
-	private Date regday;
-	private int cergroupno;
+	private String regday;
 	private String majorgender;
 	private String makeupyn;
 	private String cutyn;
 	private String permyn;
 	private String dyeyn;
 	private String major;
-	private int imggroupno;
 	private String comments;
 	private String title;
 	private String detail;

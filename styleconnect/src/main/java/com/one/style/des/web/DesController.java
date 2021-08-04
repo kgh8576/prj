@@ -2,6 +2,7 @@ package com.one.style.des.web;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
 import com.one.style.files.service.FilesService;
-import com.one.style.files.web.FilesController;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
@@ -34,23 +36,26 @@ public class DesController {
 	FilesService fileservice;
 	
 	@RequestMapping("/desloginCheck.do")
-	public String desloginCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
+	@ResponseBody
+	public Map desloginCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
 		HttpSession session = request.getSession();
-		DesVO dvo = new DesVO();
-		dvo = desDao.designerlogin(vo);
-		boolean b = desDao.designerloginCheck(vo);
-		int cnt = 1;
-		if (b) {
-			cnt = 1;
-			session.setAttribute("did", dvo.getId());
-			session.setAttribute("user", dvo);
-			response.getWriter().print(cnt);
-		} else {
-			cnt = 0;
-			response.getWriter().print(cnt);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		int cnt = 0;
+		//1.id로 단건조회
+		DesVO dvo = desDao.designerlogin(vo);
+		
+		if (dvo != null) {
+			
+			boolean b = encoder.matches(vo.getPw(), dvo.getPw());
+			
+			if(b) {
+				cnt = 1;
+				session.setAttribute("did", dvo.getId());
+				session.setAttribute("user", dvo);
+			}
 		}
-
-		return null;
+		
+		return Collections.singletonMap("result", cnt);
 	}
 
 	// 디자이너 회우너가입페이지 이동
@@ -96,15 +101,15 @@ public class DesController {
 	public String desinerinsert(DesVO vo, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
-
-		System.out.println(vo.getMakeupyn());
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 		String postcode = request.getParameter("postcode");
 		String roadAddress = request.getParameter("roadAddress");
 		String extraAddress = request.getParameter("extraAddress");
 		String detailAddress = request.getParameter("detailAddress");
+		String endoerPw = encoder.encode(vo.getPw());
+		vo.setPw(endoerPw);
 
 		String address = "(" + postcode + ")" + " " + roadAddress + " " + extraAddress + " " + detailAddress;
-		System.out.println(address);
 		vo.setLocation(address);
 		desDao.designerInsert(vo);
 //		fileservice.upload(request, "cer", vo.getId());
@@ -197,46 +202,32 @@ public class DesController {
 	@RequestMapping("mypage.do")
 	public String mypage(HttpServletRequest request,Model model,DesVO vo) {
 		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("id");
+		String desId = (String) session.getAttribute("did");
 		vo.setId(desId);
 		vo = desDao.selectDes(vo);
-		model.addAttribute("des", desDao.selectDes(vo));
 		return "desmypage/desMypage";
 	}
+	
 	//마이페이지 - 내정보 관리
-	@RequestMapping("desInfo.do")
-	public String desInfo(HttpServletRequest request, Model model, DesVO vo) {
-		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("id");
-		vo.setId(desId);
-		vo = desDao.selectDes(vo);
-		model.addAttribute("des", desDao.selectDes(vo));
-		model.addAttribute("des", desDao.selectDesPro(vo));
-		return "desmypage/desInfo";
-	}
+		@RequestMapping("desInfo.do")
+		public String desInfo(HttpServletRequest request, Model model, DesVO vo) {
+			HttpSession session = request.getSession();
+			String desId = (String) session.getAttribute("did");
+			vo.setId(desId);
+			model.addAttribute("des", desDao.selectDes(vo));
+			return "desmypage/desInfo";
+		}
 	
 	//마이페이지 - 내정보 관리 - 비밀번호 확인
-	@RequestMapping("desPwCheck.do")
-	public String desPwCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
-		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("id");
-		vo.setId(desId);
-		
-		String desPw = request.getParameter("desPw");
-		vo.setPw(desPw);
-		System.out.println("==============비밀번호"+ desPw);
-		boolean b = desDao.pwCheck(vo);
-		int cnt =1;
-		
-		if(b) {
-			cnt = 1;
-			response.getWriter().print(cnt);
-		}else {
-			cnt = 0;
-			response.getWriter().print(cnt);
+		@RequestMapping("desPwCheck.do")
+		public String desPwCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
+			HttpSession session = request.getSession();
+			String desId = (String) session.getAttribute("did");
+			vo.setId(desId);
+
+			String desPw = request.getParameter("desPw");
+			return "desmypage/desSchedule";
 		}
-		return null;
-	}
 	
 	@RequestMapping("desUpdate.do")
 	public String desUpdate(HttpServletRequest request,Model model, DesVO vo ) {
@@ -277,8 +268,12 @@ public class DesController {
 		return "desmypage/desSchedule";
 	}
 	@RequestMapping("desMajor.do")
-	public String desMajor(HttpServletRequest requset, Model model, DesVO vo) {
-		
+	public String desMajor(HttpServletRequest request, Model model, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
+		model.addAttribute("des", desDao.selectDes(vo));
+
 		return "desmypage/desMajor";
 	}
 	

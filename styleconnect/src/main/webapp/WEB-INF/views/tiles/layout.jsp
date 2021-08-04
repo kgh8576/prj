@@ -36,23 +36,19 @@
     <script  src="${pageContext.request.contextPath}/resources/assets/js/jquery-3.2.1.min.js"></script>
     <!-- fontawesome  -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <style type="text/css">
+    </style>
 </head>
 
 <body>
 	<div class="container-fluid">
-		<header>
-			<h2><a href="main.do">Style Connect</a></h2>
-		</header>
 		<nav>
 			<tiles:insertAttribute name="header" />
 		</nav>
 		<article>
 			<tiles:insertAttribute name="body"/>
 		</article>
-		<footer>
-			copyright
-		</footer>
-		
+			<tiles:insertAttribute name="footer"/>
 	</div>
 	<script  src="${pageContext.request.contextPath}/resources/assets/js/sticky-sidebar.js"></script>
     <script  src="${pageContext.request.contextPath}/resources/assets/js/YouTubePopUp.jquery.js"></script>
