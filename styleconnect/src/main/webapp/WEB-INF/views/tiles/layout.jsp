@@ -40,9 +40,6 @@
 
 <body>
 	<div class="container-fluid">
-		<header>
-			<h2><a href="main.do">Style Connect</a></h2>
-		</header>
 		<nav>
 			<tiles:insertAttribute name="header" />
 		</nav>
@@ -50,9 +47,8 @@
 			<tiles:insertAttribute name="body"/>
 		</article>
 		<footer>
-			copyright
+			<tiles:insertAttribute name="footer"/>
 		</footer>
-		
 	</div>
 	<script  src="${pageContext.request.contextPath}/resources/assets/js/sticky-sidebar.js"></script>
     <script  src="${pageContext.request.contextPath}/resources/assets/js/YouTubePopUp.jquery.js"></script>
