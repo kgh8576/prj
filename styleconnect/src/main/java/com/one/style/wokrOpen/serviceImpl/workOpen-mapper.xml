@@ -28,4 +28,9 @@
 		          )
 	</select>
 
+	<select id="getFileUuidTest" parameterType="com.one.style.files.vo.FilesVO" resultType="com.one.style.files.vo.FilesVO">
+		select file_uuid from files
+		where des_id = #{des_id}
+	</select>
+
 </mapper>
