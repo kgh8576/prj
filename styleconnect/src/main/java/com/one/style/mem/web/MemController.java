@@ -1,20 +1,26 @@
 package com.one.style.mem.web;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemberVO;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 @Controller
 public class MemController {
@@ -31,30 +37,28 @@ public class MemController {
 	
 	// 맴버 로그인체크
 	@RequestMapping("/loginCheck.do")
-	public String logincheck(HttpServletRequest request,HttpServletResponse response, MemberVO vo) throws IOException {
+	@ResponseBody
+	public Map logincheck(HttpServletRequest request,HttpServletResponse response, MemberVO vo) throws IOException {
 		HttpSession session = request.getSession();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		int cnt = 0;
+		//1.id로 단건조회
+		MemberVO mvo = memberDao.login(vo);
 		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		MemberVO mvo = new MemberVO();
-		vo.setId(id);
-		vo.setPw(pw);
-		mvo = memberDao.login(vo);
-		boolean b = memberDao.loginCheck(vo);
-		int cnt = 1;
-		if (b) {
-			cnt = 1;
-			session.setAttribute("id", mvo.getId());
-			session.setAttribute("user",mvo);
-			response.getWriter().print(cnt);
-		} else {
-			cnt = 0;
-			response.getWriter().print(cnt);
+		//2.vo == null id가 없음 리턴
+		if(mvo != null)  {
+			// id가 있으면 패스워드 (match)비교
+			boolean b = encoder.matches(vo.getPw(), mvo.getPw());
+			// 패스워드 같을 경우
+			if (b) {
+				cnt = 1;
+				session.setAttribute("id", mvo.getId());
+				session.setAttribute("user",mvo);				
+			} 
+			// 패스워드 다를 경우
 			
-		}
-		
-		
-		return null;
+		}		
+		return Collections.singletonMap("result", cnt);
 	}
 	
 	//로그아웃
@@ -94,6 +98,11 @@ public class MemController {
 	@RequestMapping("/memberInsert.do")
 	public String memberInsert(MemberVO vo,HttpServletRequest request) {
 		HttpSession session = request.getSession();
+
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String encoderPW = encoder.encode(vo.getPw());
+		vo.setPw(encoderPW);
+		
 		memberDao.memberInsert(vo);
 		session.setAttribute("id", vo.getId());
 		

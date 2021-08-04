@@ -52,6 +52,7 @@ pageEncoding="UTF-8" %>
                        
                    	 <hr class="margin-bottom-0px d-block d-sm-none">
                     	<c:if test="${not empty id }">
+                    		<a href="membermypage.do">마이페이지</a>
 							<a href="logout.do">로그아웃</a>
                         </c:if> 
                         <!-- 디자이너 마이페이지 -->
