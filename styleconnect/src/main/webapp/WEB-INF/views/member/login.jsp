@@ -60,9 +60,9 @@
 						},
 						type : 'post',
 						success : function(data) {
-							console.log(data);
-							if (data == 1) {
-								console.log(data);
+							console.log(data.result);
+							if (data.result == 1) {
+								console.log(data.result);
 								location.href = "main.do";
 							} else {
 								$('#chkNotice').html('비밀번호 일치하지 않음<br><br>')
@@ -99,9 +99,9 @@
 						},
 						type : 'post',
 						success : function(data) {
-							console.log(data);
-							if (data == 1) {
-								console.log(data);
+							console.log(data.result);
+							if (data.result == 1) {
+								console.log(data.result);
 								location.href = "main.do";
 							} else {
 								$('#chkNotice2').html('비밀번호 일치하지 않음<br><br>')

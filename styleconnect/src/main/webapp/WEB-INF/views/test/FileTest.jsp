@@ -13,9 +13,12 @@
 	  <div>
 	    file : <input type="file" name="file" multiple="multiple" >
 	  </div>
-  	<input type="submit">
-  	
-  	<img alt="실패중" src="${pageContext.request.contextPath}/resources/img/202108215144418-1.png">
-</form>
+	  	<input type="submit">
+	  	<br>
+	  	<img width="300" height="300" alt="실패중" src="${pageContext.request.contextPath}/resources/img/202108215144418-1.png">
+	  	
+	</form>
+	<br><br><br>
+	<img width="300" height="300" alt="실패중" src="${pageContext.request.contextPath}/resources/img/${uuid.fileUuid}">
 </body>
 </html>

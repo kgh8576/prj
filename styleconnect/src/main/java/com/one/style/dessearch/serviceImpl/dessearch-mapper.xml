@@ -6,7 +6,7 @@
 	<select id="dessearchSelectList" resultType="com.one.style.dessearch.vo.DessearchVO">
 	
 	</select>
-	<!-- 페이징/카운트 -->
+	<!-- 페이징/카운트rr -->
 	<select id="permCnt" resultType="int">
 		select count(*) from designer where PERM_YN='Y'
 	</select>

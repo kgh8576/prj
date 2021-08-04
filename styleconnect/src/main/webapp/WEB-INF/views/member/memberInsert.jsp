@@ -16,7 +16,7 @@ $(document).ready(function(){
 	//페이지 시작할때 이벤트발생
 ///////////////////////  
 	//핸드폰인증번호체크
-	//////////////////////
+	////////////////////////
 	var hpnumber = document.getElementById("hpcheck");
 	hpnumber.onchange = function (e) {
 		$.ajax({

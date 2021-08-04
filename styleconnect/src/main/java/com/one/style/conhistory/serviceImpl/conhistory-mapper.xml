@@ -1,38 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper	namespace="com.one.style.conhistory.mapper.ConhistoryMapper">
+<mapper
+	namespace="com.one.style.conhistory.mapper.ConhistoryMapper">
 
-	<select id="conHistoryList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
-		select con_no, to_char(day, 'YYYY-mm-dd') as day, time, designer.id as des_id, name as des_name, title, detail, des_comment, codecontent as state
-  			from consulting_history, des_course, designer, commcodedetail
-  			where consulting_history.cour_no = des_course.cour_no
-    			and des_course.id = designer.id
-    			and consulting_history.state = commcodedetail.code
-    	
-    	<if test = 'memId != null'> 
-    			and consulting_history.mem_id=#{memId}
-    	</if> 
-    	<if test='desId != null'>
-    			and des_course.id=#{desId}
-    	</if>
-  			order by con_no desc
-
+	<!-- 상담하기 페이지: 상담 내역 리스트 반환-->
+	<select id="conHistoryList"
+		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
+		resultType="com.one.style.conhistory.vo.ConHistoryVO">
+		select con_no, <!-- 상담번호 -->
+				to_char(day, 'YYYY-mm-dd') as day, <!--형식 변환된 서비스 날짜(ex)2021-01-01) -->
+				time,	<!-- 서비스 시간 -->	
+				TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-sysdate)*24*60) as remaining_time, <!-- 상담까지 남은 시간 -->
+				designer.id as des_id, <!-- 디자이너 아이디 -->
+				name as des_name, <!-- 디자이너 이름 -->
+				title, <!-- 상담 코스 제목 -->
+				detail, <!-- 상담 코스 상세내용 -->
+				des_comment, <!-- 디자이너 코멘트 -->
+				codecontent as state <!-- 공통코드를 참조한 예약 진행상황(ex)예약중, 상담중) -->
+			from consulting_history, des_course, designer, commcodedetail
+			where consulting_history.cour_no = des_course.cour_no
+				and des_course.id = designer.id
+				and consulting_history.state = commcodedetail.code
+		<if test='memId != null'> <!-- 일반회원 로그인 시 일반회원 아이디로 검색 -->
+				and consulting_history.mem_id=#{memId}
+		</if>
+		<if test='desId != null'> <!-- 디자이너 로그인 시 디자이너 아이디로 검색-->
+				and des_course.id=#{desId}
+		</if>
+		order by con_no desc
 	</select>
+
+	<!-- 상담하기 페이지: 상담 참여 시 DB의 consulting_history 테이블의 mem_attend 또는 des_attend 값을 N에서 Y로 변경-->
+	<update id="conHistoryAttendUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+		<if test='memId != null'>
+		update consulting_history set mem_attend = 'Y', state='ccode004' where con_no = #{conNo}
+		</if>
+		<if test='desId != null'>
+		update consulting_history set des_attend = 'Y', state='ccode004' where con_no = #{conNo}
+		</if>
+	</update>
 	
-	<select id="desCourseDetail" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.des.vo.DesVO">
-		select cour_no, d.id , d.name , d.career , major , dc.title , dc.detail, price
+	<select id="desCourseDetail"
+		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
+		resultType="com.one.style.des.vo.DesVO">
+		select cour_no, d.id , d.name , d.career , major , dc.title
+		, dc.detail, price
 		from designer d
 		join des_course dc
 		on d.id = dc.id
 		where cour_no = #{courNo}
 	</select>
-	
-	<insert id="conHistoryInsert" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+
+	<insert id="conHistoryInsert"
+		parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		insert into CONSULTING_HISTORY
 		values
-		(seq_con() , #{day} ,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment} ,#{courNo} ,null,#{payNo}, 'N' ,'N')
+		(seq_con() , #{day}
+		,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment}
+		,#{courNo} ,null,#{payNo}, 'N' ,'N')
 	</insert>
-	
-	
-	
+
+
+
 </mapper>

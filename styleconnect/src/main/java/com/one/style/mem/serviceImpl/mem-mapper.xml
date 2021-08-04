@@ -5,13 +5,8 @@
 	<select id="memList" resultType="com.one.style.mem.vo.MemberVO">
 		select * from member
 	</select>
-
-	<select id="loginCheck" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
-		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
-	</select>
-	
 	<select id="login" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
-		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+		SELECT * FROM MEMBER WHERE ID = #{id}
 	</select>
 	
 	<select id="insertCheck" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">

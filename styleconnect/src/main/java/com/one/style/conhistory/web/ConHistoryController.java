@@ -4,11 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.maven.shared.invoker.SystemOutHandler;
 import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.style.conhistory.service.ConhistoryService;
 import com.one.style.conhistory.vo.ConHistoryVO;
@@ -28,27 +31,21 @@ public class ConHistoryController {
 		return "reservation/reservation";
 	}
 	
+	//상담하기 페이지: 상담 내역 리스트 반환
 	@RequestMapping("consulting.do")
 	public String consulting(Model model , HttpServletRequest req , HttpServletResponse resp) {
-		ConHistoryVO vo = new ConHistoryVO();
 		HttpSession session = req.getSession();
-
-		//일반회원으로 로그인한 경우
+		ConHistoryVO vo = new ConHistoryVO();
+		
+		//일반회원인 경우
 		if(session.getAttribute("id") != null) {
 			vo.setMemId((String)session.getAttribute("id")); 
-		//디자이너으로 로그인한 경우
+		//디자이너인 경우
 		} else if (session.getAttribute("did") != null) {
 			vo.setDesId((String)session.getAttribute("did")); 
 		}
-		System.out.println("세션값 테스트) 디자이너 아이디: " + (String)session.getAttribute("did"));
-		
-		System.out.println("vo값 테스트) 일반회원 아이디: " +  vo.getMemId());
-		System.out.println("vo값 테스트) 디자이너 아이디: " +  vo.getDesId());
-		 
 		
 		model.addAttribute("conHistoryList", conHistoryDao.conhistoryList(vo));
-		
-
 		
 		return "consulting/consulting";
 	}
@@ -57,6 +54,31 @@ public class ConHistoryController {
 	public String conHistoryInsert(ConHistoryVO vo) {
 		conHistoryDao.conHistoryInsert(vo);
 		return "redirect:main.do";//나중에 마이페이지 가야됨 ㅋㅋ
+	}
+	
+	//상담하기 페이지: 상담 참여 시 DB의 consulting_history 테이블의 mem_attend 또는 des_attend 값을 N에서 Y로 변경
+	@RequestMapping(value = "conHistoryAttendUpdate.do", method=RequestMethod.GET)
+	@ResponseBody
+	public String conHistoryAttendUpdate(HttpServletRequest req, int conNo) {
+		HttpSession session = req.getSession();
+		ConHistoryVO vo = new ConHistoryVO();
+		
+		vo.setConNo(conNo);
+		
+		//일반회원인 경우
+		if(session.getAttribute("id") != null) {
+			vo.setMemId((String)session.getAttribute("id")); 	 
+		//디자이너인 경우
+		} else if (session.getAttribute("did") != null) {
+			vo.setDesId((String)session.getAttribute("did"));
+		}
+		int n = conHistoryDao.conHistoryAttendUpdate(vo);
+		
+		System.out.println("---------------------------" + n);
+		
+		String testString="test String";
+		
+		return testString;
 	}
 
 	
