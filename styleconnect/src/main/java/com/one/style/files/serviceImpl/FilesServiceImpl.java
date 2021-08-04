@@ -26,6 +26,7 @@ public class FilesServiceImpl implements FilesService {
 
 	//전송할 파일 요충 req /파일 종류 fileState /파일 소유 디자이너 des_id
 	public void upload(MultipartHttpServletRequest req , String fileState ,String des_id) {
+		System.out.println("=============================================실행체크");
 		MultipartHttpServletRequest request = req;
 		FilesVO vo = new FilesVO();
 		String rootUploadDir = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\img"; // 업로드 주소
@@ -41,6 +42,7 @@ public class FilesServiceImpl implements FilesService {
 		String orgFileName = ""; // 진짜 파일명
 		String sysFileName = ""; // 변환된 파일명
 
+		System.out.println("----------------------"+orgFileName);
 		ArrayList<String> list = new ArrayList<String>();
 		for (MultipartFile file : files)  {
 			fileLoop++;
@@ -48,7 +50,6 @@ public class FilesServiceImpl implements FilesService {
 
 			orgFileName = file.getOriginalFilename();
 			String extension = orgFileName.substring(orgFileName.lastIndexOf("."),orgFileName.length());
-
 			if (orgFileName != null && orgFileName.length() != 0) { // sysFileName 생성
 				System.out.println("if문 진입");
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
@@ -65,6 +66,7 @@ public class FilesServiceImpl implements FilesService {
 					vo.setFileName(orgFileName);
 					vo.setFileUuid(sysFileName);
 					vo.setFileState(fileState);
+					
 					map.fileinsert(vo);
 				} catch (Exception e) {
 					list.add("파일 업로드 중 에러발생!!!");
