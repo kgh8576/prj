@@ -19,8 +19,10 @@ public class ConHistoryVO {
 	private String desId;
 	private String title;
 	private long payNo;
+	private String memAttend;
+	private String desAttend;
 	
 	private String desName; //디자이너 이름
 	private String detail; //코스 상세정보
-	// private int timeDifference; //상담시간과 현재시간과의 차이
+	private int remainingTime; //남은 상담 시간
 }
