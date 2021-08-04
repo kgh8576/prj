@@ -58,4 +58,18 @@
 	
 	</select>
 	
+	
+	<select id="memDetail" parameterType="String" resultType="com.one.style.mem.vo.MemDetailVO">
+		select m.id, name, gender, location, md.MAKEUP_YN, md.CUT_YN, md.PERM_YN, md.DYE_YN
+		from mem_detail md, member m
+		where md.id = m.id
+		and m.id = #{id}
+	</select>
+	
+	<select id="rcmdDesByConHis" parameterType="com.one.style.home.vo.HomeVO" resultType="com.one.style.home.vo.HomeVO">
+		
+	</select>
+	
+	<select id="rcmdDesByRate" parameterType="com.one.style.home.vo.HomeVO" resultType="com.one.style.home.vo.HomeVO">
+	</select>
 </mapper>

@@ -119,50 +119,44 @@ pageEncoding="UTF-8" %>
             </div>
             <!-- 검색창 끝 -->
             <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="row">
-                        <div class="col-md-3 col-6 sm-mb-30px wow fadeInUp">
-                            <a href="#" class="d-block border-radius-15 hvr-float hvr-sh2">
-                                <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
-                                    <div class="icon margin-bottom-15px opacity-7">
-                                        <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-1.png" alt="">
-                                    </div>
-                                    Doctors
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 col-6 sm-mb-30px wow fadeInUp" data-wow-delay="0.2s">
-                            <a href="#" class="d-block border-radius-15 hvr-float hvr-sh2">
-                                <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
-                                    <div class="icon margin-bottom-15px opacity-7">
-                                        <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-2.png" alt="">
-                                    </div>
-                                    Clinics
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 col-6 wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="#" class="d-block border-radius-15 hvr-float hvr-sh2">
-                                <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
-                                    <div class="icon margin-bottom-15px">
-                                        <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-3.png" alt="">
-                                    </div>
-                                    Labs
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="#" class="d-block border-radius-15 hvr-float hvr-sh2">
-                                <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
-                                    <div class="icon margin-bottom-15px opacity-7">
-                                        <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-4.png" alt="">
-                                    </div>
-                                    Pharmacies
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                
+                <!-- 디자이너 추천 영역 -->
+				<c:if test="${empty memDetail }">
+	               	<!-- modal Btn -->
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#preferenceFrmModal">
+					  더 나은 서비스 제공을 위해서 시간을 내주세요!
+					</button>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        ...
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <button type="button" class="btn btn-primary">Save changes</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					
+					
+				</c:if>
+				<c:if test="${not empty memDetail }">
+					<div>다른 회원들이 많이 찾은 디자이너입니다</div>
+					<div>평가가 좋은 디자이너입니다</div>
+				</c:if>
+				
+
+                
             </div>
         </div>
     </section>
@@ -487,5 +481,6 @@ pageEncoding="UTF-8" %>
 
         </div>
     </section>
+    
 </body>
 </html>

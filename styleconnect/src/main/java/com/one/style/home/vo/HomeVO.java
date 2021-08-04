@@ -17,6 +17,7 @@ public class HomeVO {
 	private String makeupYn;
 	private String cutYn;
 	private String dyeYn;
+	private String permYn;
 	private int rate;
 	private int count;
 	private String fileUuid;
