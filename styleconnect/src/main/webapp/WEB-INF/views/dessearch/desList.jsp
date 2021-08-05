@@ -28,12 +28,7 @@
 								 <!-- 디자이너 프로필 이미지 -->
 									<div class="thum">
 										<a href="desListSelect.do?id=${vo.id}">
-											<c:if test="${vo.fileUuid == '0'}">
-											<img src="resources/img/프로필 이미지 아이콘.png" alt="">
-											</c:if>
-											<c:if test="${vo.fileUuid != '0'}">
 											<img src="resources/img/${vo.fileUuid }" alt="">
-											</c:if>
 										</a>
 									</div>
 								<!-- 디자이너 프로필 이미지 -->
