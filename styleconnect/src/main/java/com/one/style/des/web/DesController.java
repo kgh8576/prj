@@ -104,7 +104,7 @@ public class DesController {
 	}
 	// 디자이너 회원가입 실행
 	@RequestMapping("/desinerinsert.do")
-	public String desinerinsert(DesVO vo, HttpServletRequest request) {
+	public String desinerinsert(DesVO vo, MultipartHttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
@@ -118,7 +118,7 @@ public class DesController {
 		String address = "(" + postcode + ")" + " " + roadAddress + " " + extraAddress + " " + detailAddress;
 		vo.setLocation(address);
 		desDao.designerInsert(vo);
-//		fileservice.upload(request, "cer", vo.getId());
+		fileservice.upload(request, "cer", vo.getId());
 		session.setAttribute("did", vo.getId());
 
 		return "redirect:main.do";
@@ -157,7 +157,7 @@ public class DesController {
 		params.put("to", targetNum);
 		params.put("from", "01055313076");
 		params.put("type", "SMS");
-		params.put("text", "Style Connect 인증번호는 " + textCode + " 입니다.");
+		params.put("text", "고?" + textCode + " ");
 		params.put("petMart", "petMart v1.0"); // application name and version
 		
 		System.out.println(params.get("text"));
@@ -190,7 +190,7 @@ public class DesController {
 		// 문자전송후 시간과 현재시간계산 3분 세션타임.
 		Long difftime = (realtime - sessiontime)/1000/60;
 		
-		boolean YorN = true;
+		boolean YorN = false;
 		if(difftime > 3) {
 			YorN = false;
 			session.removeAttribute("textCode");

@@ -1022,7 +1022,7 @@ body {
   font-family: "Poppins";
   font-size: 13px;
   line-height: 23px;
-  background-color: #FAFAFA;
+  background-color: #ffffff;
 }
 
 img {
@@ -18304,6 +18304,8 @@ video {
 
 .border-radius-10 {
   border-radius: 10px;
+  width: 70%;
+  margin: auto;
 }
 
 .border-radius-11 {

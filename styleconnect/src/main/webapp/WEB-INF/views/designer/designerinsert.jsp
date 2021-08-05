@@ -782,8 +782,7 @@ body {
 						<div class="filebox bs3-primary preview-image">
 							<input class="upload-name" value="파일선택" disabled="disabled"
 								style="width: 200px;"> <label for="cergroupno">업로드</label>
-							<input type="file" name="cergroupno" id="cergroupno"
-								class="upload-hidden">
+							<input type="file" name="file" id="cergroupno" class="upload-hidden">
 						</div>
 
 
