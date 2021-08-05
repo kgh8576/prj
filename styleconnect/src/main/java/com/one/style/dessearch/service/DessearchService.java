@@ -23,4 +23,6 @@ public interface DessearchService {
 	
 	//페이징
 	int permCnt();
+	//디자이너 프로필 이미지
+	List<DessearchVO> desProImg(DessearchVO vo);
 }

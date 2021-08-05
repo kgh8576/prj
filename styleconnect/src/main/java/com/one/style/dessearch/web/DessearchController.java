@@ -34,6 +34,7 @@ public class DessearchController {
 	public String desListSelect(Model model,DessearchVO vo) {
 		model.addAttribute("designer",dao.dessearchSelect(vo));
 		model.addAttribute("review",dao.dessearchSelectReview(vo));
+		model.addAttribute("img",dao.desProImg(vo));
 		System.out.println(vo.getMName());
 	return("dessearch/desListSelect");
 	}

@@ -13,13 +13,10 @@
             <h1 class="font-weight-300">${designer.name} 디자이너</h1>
         </div>
     </div>
-
-
     <div class="margin-tb-30px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-
                     <div class="margin-bottom-30px box-shadow">
                         <img src="http://placehold.it/1600x850" alt="">
                         <div class="padding-30px background-white">
@@ -74,7 +71,12 @@
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
                                 <div class="row">
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
+                                <%-- 	<c:forEach items="${img }" var="img">
+                                	
+                                		 <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></a></div>
+                                	
+                                	</c:forEach> --%>
+                                   
                                     <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
                                     <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
                                     <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
@@ -100,10 +102,10 @@
                                         <!-- 별점 -->
                                          <div class="rating clearfix">
                                         	<ul class="float-left">
-                                        	<c:forEach begin="1" end="${designer.rate }">
+                                        	<c:forEach begin="1" end="${review.rate }">
 												<li class="active"></li>
 											</c:forEach> 
-										 	평점 ${designer.rate }
+										 	평점 ${review.rate }
                                         	</ul>
                                     	</div>
                                         <!-- 별점 끝-->
@@ -113,7 +115,7 @@
                           </ul>
 							</c:forEach>
                                 <div align="right">
-                                <a href="reviewList.do?desId=des04" >>리뷰 더 보기 </a>
+                                <a href="reviewList.do?id=${review.id }" >>리뷰 더 보기 </a>
                                     </div>
                         </div>
                     </div>
@@ -150,7 +152,7 @@
 									</div>
                             <!-- //디자이너 major 태그 -->
                             <!-- 상담목록가기 버튼 -->
-                             <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
+                             <div class="col-4"><a href="courseList.do?id=${review.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
                         </div>
                         </div>
                         </div>

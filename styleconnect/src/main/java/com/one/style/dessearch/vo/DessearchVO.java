@@ -36,4 +36,7 @@ public class DessearchVO {
 	private int firstCnt;
 	private int lastCnt;
 	private int totalCnt;
+	
+	//files
+	private String fileUuid;
 }

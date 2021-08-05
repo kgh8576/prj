@@ -17,4 +17,5 @@ public interface DessearchMapper {
 		List<DessearchVO> searchList(DessearchVO vo);
 		int permCnt();
 		List<DessearchVO> desPaging();
+		List<DessearchVO> desProImg(DessearchVO vo);
 }

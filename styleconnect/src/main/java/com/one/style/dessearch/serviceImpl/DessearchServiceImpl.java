@@ -75,4 +75,10 @@ public class DessearchServiceImpl implements DessearchService {
 		// 페이징
 		return sqlSession.selectOne("permCnt");
 	}
+
+	@Override
+	public List<DessearchVO> desProImg(DessearchVO vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("desProImg", vo);
+	}
 }
