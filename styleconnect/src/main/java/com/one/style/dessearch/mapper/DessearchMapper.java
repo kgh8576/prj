@@ -7,7 +7,7 @@ import com.one.style.dessearch.vo.DessearchVO;
 public interface DessearchMapper {
 	
 		List<DessearchVO> dessearchSelectList();
-		DessearchVO dessearchSelect(String id);
+		DessearchVO dessearchSelect(DessearchVO vo);
 		List<DessearchVO> dessearchSelectReview(DessearchVO vo);
 		List<DessearchVO> cutList();
 		List<DessearchVO> permList();

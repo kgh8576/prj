@@ -31,9 +31,12 @@ public class DessearchController {
 	}
 	//디자이너상세페이지
 	@RequestMapping("desListSelect.do")
-	public String desListSelect(Model model,DessearchVO vo) {
+	public String desListSelect(Model model,DessearchVO vo, HttpServletRequest request) {
+		
+		
 		model.addAttribute("designer",dao.dessearchSelect(vo));
 		model.addAttribute("review",dao.dessearchSelectReview(vo));
+		
 		//model.addAttribute("img",dao.desProImg(vo));
 	return("dessearch/desListSelect");
 	}

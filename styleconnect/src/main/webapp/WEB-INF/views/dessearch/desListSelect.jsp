@@ -71,15 +71,11 @@
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
                                 <div class="row">
-                                <%-- 	<c:forEach items="${img }" var="img1">
-                                	
-                                		 <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></a></div>
-                                	
-                                	</c:forEach> --%>
-                                   
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
+                                <%-- 	<c:forEach items="${img}" var="img1"> 
+                                		<c:if test="${img1.fileState eq 'pro' }">
+                                		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
+                                	</c:if></c:forEach>  --%>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -97,7 +93,7 @@
                                 <li class="border-bottom-1 border-grey-1 margin-bottom-20px">
                                     <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                     <div class="margin-left-85px">
-                                        <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 글쓴이 : ${review1.MName} </a>
+                                        <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 작성자 : ${review1.MName} </a>
                                        <%--  <span class="text-extra-small">상담명 :  <a href="#" class="text-main-color">${review1.title }</a></span> --%>
                                         <!-- 별점 -->
                                          <div class="rating clearfix">
@@ -115,7 +111,7 @@
                           </ul>
 							</c:forEach>
                                 <div align="right">
-                                <!-- <a href="reviewList.do?id=${review1.id }">>리뷰 더 보기 </a> -->
+                                <a href="reviewList.do?desId=${review1.id }">>리뷰 더 보기 </a>
                                     </div>
                         </div>
                     </div>
@@ -152,7 +148,7 @@
 									</div>
                             <!-- //디자이너 major 태그 -->
                             <!-- 상담목록가기 버튼 -->
-                             <!--  <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>-->
+                             <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
                         </div>
                         </div>
                         </div>
