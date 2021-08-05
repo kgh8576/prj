@@ -71,9 +71,9 @@
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
                                 <div class="row">
-                                <%-- 	<c:forEach items="${img }" var="img">
+                                <%-- 	<c:forEach items="${img }" var="img1">
                                 	
-                                		 <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></a></div>
+                                		 <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></a></div>
                                 	
                                 	</c:forEach> --%>
                                    
@@ -92,30 +92,30 @@
                         <div class="padding-30px background-white">
                             <h3><i class="far fa-star margin-right-10px text-main-color"></i> 리뷰 </h3>
                             <hr>
-							<c:forEach items="${review}" var="review">
+							<c:forEach items="${review}" var="review1">
                             <ul class="commentlist padding-0px margin-0px list-unstyled text-grey-3">
                                 <li class="border-bottom-1 border-grey-1 margin-bottom-20px">
                                     <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                     <div class="margin-left-85px">
-                                        <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 글쓴이 : ${review.MName} </a>
-                                       <%--  <span class="text-extra-small">상담명 :  <a href="#" class="text-main-color">${review.title }</a></span> --%>
+                                        <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 글쓴이 : ${review1.MName} </a>
+                                       <%--  <span class="text-extra-small">상담명 :  <a href="#" class="text-main-color">${review1.title }</a></span> --%>
                                         <!-- 별점 -->
                                          <div class="rating clearfix">
                                         	<ul class="float-left">
-                                        	<c:forEach begin="1" end="${review.rate }">
+                                        	<c:forEach begin="1" end="${review1.rate }">
 												<li class="active"></li>
 											</c:forEach> 
-										 	평점 ${review.rate }
+										 	평점 ${review1.rate }
                                         	</ul>
                                     	</div>
                                         <!-- 별점 끝-->
-                                        <p class="margin-top-15px text-grey-2">${review.title } </p>
+                                        <p class="margin-top-15px text-grey-2">${review1.title } </p>
                                		</div>
                               	</li>
                           </ul>
 							</c:forEach>
                                 <div align="right">
-                                <a href="reviewList.do?id=${review.id }" >>리뷰 더 보기 </a>
+                                <!-- <a href="reviewList.do?id=${review1.id }">>리뷰 더 보기 </a> -->
                                     </div>
                         </div>
                     </div>
@@ -132,12 +132,12 @@
                         <!-- 별점 -->
                          <div class="rating clearfix">
                                         <ul class="float-left">
-                                          <c:if test="${vo.rate != 0 }">
-										<c:forEach begin="1" end="${vo.rate }">
+                                          <c:if test="${designer.rate != 0 }">
+										<c:forEach begin="1" end="${designer.rate }">
 												<li class="active"></li>
-										</c:forEach>  평점 ${vo.rate }
+										</c:forEach>  평점 ${designer.rate }
 										</c:if>
-										<c:if test="${vo.rate == 0 }">
+										<c:if test="${designer.rate == 0 }">
 											등록된 후기가 없습니다.
 										</c:if>
                                         </ul>
@@ -152,7 +152,7 @@
 									</div>
                             <!-- //디자이너 major 태그 -->
                             <!-- 상담목록가기 버튼 -->
-                             <div class="col-4"><a href="courseList.do?id=${review.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
+                             <!--  <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>-->
                         </div>
                         </div>
                         </div>
