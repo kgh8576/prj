@@ -37,7 +37,7 @@ public class DessearchController {
 		model.addAttribute("designer",dao.dessearchSelect(vo));
 		model.addAttribute("review",dao.dessearchSelectReview(vo));
 		
-		model.addAttribute("img",dao.desProImg(vo));
+		//model.addAttribute("img",dao.desProImg(vo));
 	return("dessearch/desListSelect");
 	}
 	

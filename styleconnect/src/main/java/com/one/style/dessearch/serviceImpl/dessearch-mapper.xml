@@ -121,6 +121,22 @@
 	where makeup_yn ='Y'
 	</select>
 	
+	<!-- 디자이너 한명 상세정보 -->
+	<select id="dessearchSelect" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
+	select d.id, d.name, d.major,d.career, d.major_gender, nvl2(r.rate,r.rate,0)as rate
+	from DESIGNER d
+	left join (
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
+      from review
+      where des_id in (
+                       select id
+                       from DESIGNER d
+                       )
+      group by des_id) r
+      on d.id = r.des_id
+	where d.id= #{id}
+	</select>
+	
 	<!-- 디자이너 상세정보 리뷰 -->
 	<select id="dessearchSelectReview" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
 	select r.title, r.rate,r.des_id, m.name as mName
