@@ -93,29 +93,47 @@ $(function() {
                             <li><a href="mypage.do">MyPage</a></li>
                             <li class="active">My Profile</li>
                         </ol>
-                        <h1 class="font-weight-300">${des.name } 디자이너 정보dd </h1>
+                        <h1 class="font-weight-300">${des.name } 디자이너 정보</h1>
                     </div>
                 </div>
                 <!-- // Page Title -->
 
                 <div class="row margin-tb-45px full-width">
                 
-                	<!-- 프로필 이미지 업로드 -->
-                    <form method="post" action="desProUpdate.do"  enctype="multipart/form-data">
-                    <input type="hidden" value="${des.fileUuid}" name="fileUuid">
+             <!-- 프로필 이미지 업로드 -->
+                <!-- 이미지 등록  -->
+                	<c:if test="${empty despro.fileUuid  }">
+                	<form method="post" action="desProUp.do" enctype="multipart/form-data">
+                	 <input type="hidden" value="${despro.fileUuid}" name="fileUuid">
                     <div class="col-md-4">
                         <div class="padding-15px background-white">
-                            <a href="" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/${des.fileUuid}" alt=""></a>
+                            <a href="" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/이미지 등록.png" alt=""></a>
+                            <input type="file" name="file" onchange="readURL(this);" >
+                            <button type="submit">등록</button>
+                        </div>
+                    </div>
+                	</form>
+                	</c:if>
+                <!-- 이미지 등록// -->
+                <!-- 이미지 수정 -->	
+                	<c:if test="${not empty despro.fileUuid  }">
+                    <form method="post" action="desProUpdate.do"  enctype="multipart/form-data">
+                    <input type="hidden" value="${despro.fileUuid}" name="fileUuid">
+                    <div class="col-md-4">
+                        <div class="padding-15px background-white">
+                            <a href="" class="d-block margin-bottom-10px">
+                            <img id="preview" src="${pageContext.request.contextPath}/resources/img/${despro.fileUuid}" alt=""></a>
                             <input type="file" onchange="readURL(this);" >
-                            <button type="submit"  >수저ㅓㅇ</button>
+                            <button type="submit" >수정</button>
                             <a  class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">이미지 수정하기 </a>
                         </div>
                     </div>
                     </form>
-                    <!-- 프로필 이미지 업로드 끝 -->
+                    </c:if>
+                 <!-- 이미지 수정// -->
+               <!-- 프로필 이미지 업로드 끝 -->
                     
                     <form action="desUpdate.do" method="post" id="frm" name="frm" >
-					<input type="text" id="gender" name="gender" value="${des.gender }">
                     <div class="col-md-8">
                       <div class="row">
                           <div class="col-md-6 margin-bottom-20px">
@@ -134,8 +152,8 @@ $(function() {
                            <div class="col-md-6 margin-bottom-20px">
                               <label><i class="fas fa-mobile-alt margin-right-10px"></i> 성별</label>
                               <select id="gender" name="gender" > 
-                              			<option value="MALE" <c:if test="${des.gender =='남'}">selected</c:if>>Male</option>
-										<option value="FEMALE" <c:if test="${des.gender == '여'}">selected</c:if>>Female</option>
+                              			<option value="MALE" disabled="disabled" <c:if test="${des.gender =='남'}">selected</c:if>>Male</option>
+										<option value="FEMALE" disabled="disabled"<c:if test="${des.gender == '여'}">selected</c:if>>Female</option>
                               </select>
                           </div>
                           <div class="col-md-6 margin-bottom-20px">

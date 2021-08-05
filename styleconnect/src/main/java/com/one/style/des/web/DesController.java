@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.velocity.runtime.directive.Foreach;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,9 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
+import com.one.style.dessearch.service.DessearchService;
 import com.one.style.files.service.FilesService;
 
 import edu.emory.mathcs.backport.java.util.Collections;
@@ -34,6 +37,9 @@ public class DesController {
 	
 	@Autowired
 	FilesService fileservice;
+	
+	@Autowired
+	DessearchService desSearchDao;
 	
 	@RequestMapping("/desloginCheck.do")
 	@ResponseBody
@@ -212,9 +218,10 @@ public class DesController {
 		@RequestMapping("desInfo.do")
 		public String desInfo(HttpServletRequest request, Model model, DesVO vo) {
 			HttpSession session = request.getSession();
-			String desId = (String) session.getAttribute("did");
+			String desId = (String)session.getAttribute("did");
 			vo.setId(desId);
 			model.addAttribute("des", desDao.selectDes(vo));
+			model.addAttribute("despro", desDao.selectDesPro(vo));
 			return "desmypage/desInfo";
 		}
 	
@@ -228,18 +235,16 @@ public class DesController {
 			String desPw = request.getParameter("desPw");
 			return "desmypage/desSchedule";
 		}
-	
+	//마이페이지>기본정보 업데이트
 	@RequestMapping("desUpdate.do")
 	public String desUpdate(HttpServletRequest request,Model model, DesVO vo ) {
 		String hp = request.getParameter("hp");
 		String loc = request.getParameter("location");
 		String pw = request.getParameter("pw");
-		String gender = request.getParameter("gender");
 		
 		vo.setHp(hp);
 		vo.setLocation(loc);
 		vo.setPw(pw);
-		vo.setGender(gender);
 		
 		System.out.println("아이디 값 체크: " + vo.getId());
 		
@@ -249,21 +254,52 @@ public class DesController {
 		System.out.println("=============================="+pw);
 		return "redirect:desInfo.do";
 	}
-	@RequestMapping("desProUpdate.do")
-	public String desProUpdate(HttpServletRequest request, DesVO vo) {
-		desDao.desProUpdate(vo);
+	//마이페이지 major수정 
+	@RequestMapping("majorUpdate.do")
+	public String majorUpdate(HttpServletRequest request, DesVO vo) {
+		//System.out.println(request.getParameter("major"));
+		String[] major = request.getParameterValues("major");
 		
-//		fileservice.upload(request, "pro");
+		//vo.setMajor(major);
+		for (String string : major) {
+			System.out.println(string);
+			System.out.println(major[0]);
+		}
+		
+		return "redirect:desMajor.do";
+	}
+	//프로필사진 수정
+	@RequestMapping("desProUpdate.do")
+	public String desProUpdate(MultipartHttpServletRequest request, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		String uuid = request.getParameter("fileUuid");
+		vo.setId(desId);
+		vo.setFileUuid(uuid);
+		
+		desDao.desProUpdate(vo);
+		fileservice.upload(request, "pro", desId);
+		return "redirect:desInfo.do";
+	}
+	//프로필사진 등록
+	@RequestMapping("desProUp.do")
+	public String desProUp(MultipartHttpServletRequest request, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
+		System.out.println("==========================="+desId);
+		fileservice.upload(request,"pro",desId);
+		System.out.println();
 		return "redirect:desInfo.do";
 	}
 	
 	@RequestMapping("desStyle.do")
-	public String desStyle(HttpServletRequest requset, Model model, DesVO vo) {
+	public String desStyle(HttpServletRequest request, Model model, DesVO vo) {
 		
 		return "desmypage/desStyle";
 	}
 	@RequestMapping("desSchedule.do")
-	public String desSchedule(HttpServletRequest requset, Model model, DesVO vo) {
+	public String desSchedule(HttpServletRequest request, Model model, DesVO vo) {
 		
 		return "desmypage/desSchedule";
 	}
@@ -271,9 +307,12 @@ public class DesController {
 	public String desMajor(HttpServletRequest request, Model model, DesVO vo) {
 		HttpSession session = request.getSession();
 		String desId = (String) session.getAttribute("did");
+		String major  = (String) session.getAttribute("major");
 		vo.setId(desId);
+		vo.setMajor(major);
 		model.addAttribute("des", desDao.selectDes(vo));
-
+		System.out.println("=================아이디"+desId);
+		
 		return "desmypage/desMajor";
 	}
 	

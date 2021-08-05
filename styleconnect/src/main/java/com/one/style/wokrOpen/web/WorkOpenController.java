@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.one.style.files.mapper.FilesMapper;
 import com.one.style.files.service.FilesService;
+import com.one.style.files.vo.FilesVO;
 import com.one.style.files.web.FilesController;
 import com.one.style.wokrOpen.service.WorkOpenService;
 import com.one.style.wokrOpen.vo.WorkOpenVO;
@@ -46,6 +47,9 @@ public class WorkOpenController {
 
 	@RequestMapping("fileUploadTest.do")
 	public String uploadView(Model model) {
+		FilesVO vo = new FilesVO();
+		vo.setDes_id("des05");
+		model.addAttribute("uuid", workOpenDao.getFileUuidTest(vo));
 		return "test/FileTest";
 	}
 

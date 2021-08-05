@@ -3,7 +3,7 @@
 <mapper namespace="com.one.style.home.mapper.HomeServiceMap">
 
 	<!-- 메인에서 평점 순 top3 디자이너 가져오기 -->
-	<select id="ajaxTopHairDes" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
+	<select id="ajaxTopDesInfo" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
 	  select id, name, major, trunc(rate) as rate, f.FILE_UUID
 	  from FILES f,
 	    (select id, name, major, avg(rate) as rate
@@ -29,7 +29,7 @@
 	</select>
 	
 	<!-- 전체 후기 건수 가져오기 -->
-	<select id="ajaxTopHairDesCount" parameterType="string" resultType="com.one.style.home.vo.HomeVO">	
+	<select id="ajaxTopDesCount" parameterType="string" resultType="com.one.style.home.vo.HomeVO">	
 		select des_id, count(*) as count
 		from review
 		where des_id in
@@ -57,7 +57,19 @@
 		group by des_id
 	
 	</select>
-
 	
-
+	
+	<select id="memDetail" parameterType="String" resultType="com.one.style.mem.vo.MemDetailVO">
+		select m.id, name, gender, location, md.MAKEUP_YN, md.CUT_YN, md.PERM_YN, md.DYE_YN
+		from mem_detail md, member m
+		where md.id = m.id
+		and m.id = #{id}
+	</select>
+	
+	<select id="rcmdDesByConHis" parameterType="com.one.style.home.vo.HomeVO" resultType="com.one.style.home.vo.HomeVO">
+		
+	</select>
+	
+	<select id="rcmdDesByRate" parameterType="com.one.style.home.vo.HomeVO" resultType="com.one.style.home.vo.HomeVO">
+	</select>
 </mapper>

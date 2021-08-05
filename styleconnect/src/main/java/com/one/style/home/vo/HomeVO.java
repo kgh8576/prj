@@ -1,5 +1,7 @@
 package com.one.style.home.vo;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +17,10 @@ public class HomeVO {
 	private String makeupYn;
 	private String cutYn;
 	private String dyeYn;
+	private String permYn;
 	private int rate;
 	private int count;
 	private String fileUuid;
+	
 	
 }
