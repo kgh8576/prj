@@ -45,6 +45,7 @@
 		<nav>
 			<tiles:insertAttribute name="header" />
 		</nav>
+		<br><br><br>
 		<article>
 			<tiles:insertAttribute name="body"/>
 		</article>

@@ -104,7 +104,7 @@ public class DesController {
 	}
 	// 디자이너 회원가입 실행
 	@RequestMapping("/desinerinsert.do")
-	public String desinerinsert(DesVO vo, HttpServletRequest request) {
+	public String desinerinsert(DesVO vo, MultipartHttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
@@ -118,7 +118,7 @@ public class DesController {
 		String address = "(" + postcode + ")" + " " + roadAddress + " " + extraAddress + " " + detailAddress;
 		vo.setLocation(address);
 		desDao.designerInsert(vo);
-//		fileservice.upload(request, "cer", vo.getId());
+		fileservice.upload(request, "cer", vo.getId());
 		session.setAttribute("did", vo.getId());
 
 		return "redirect:main.do";
