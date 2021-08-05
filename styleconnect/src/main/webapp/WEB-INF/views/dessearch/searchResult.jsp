@@ -46,8 +46,10 @@
 							<div class="col-lg-4 col-md-6 hvr-bob margin-bottom-45px">
 								<div class="background-white box-shadow">
 									<div class="thum">
-										<a href="desListSelect.do?id=${vo.id}"><img
-											src="images/Desert.jpg" alt=""></a>
+										<a href="desListSelect.do?id=${vo.id}">
+										<c:if test="${vo.fileUuid != '0'}">
+										<img src="resources/img/이미지 등록.png" alt="">
+										</c:if></a>
 									</div>
 									<div class="padding-30px">
 									<div>

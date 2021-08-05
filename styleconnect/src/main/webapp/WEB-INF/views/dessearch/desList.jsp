@@ -22,7 +22,7 @@
 				<div class="col-lg-8">
 					<div class="row">
 						<!-- Doctor -->
-						<c:forEach items="${des}" var="vo">
+						<c:forEach items="${designer}" var="vo">
 							<div class="col-lg-4 col-md-6 hvr-bob margin-bottom-45px">
 								<div class="background-white box-shadow">
 									<div class="thum">
