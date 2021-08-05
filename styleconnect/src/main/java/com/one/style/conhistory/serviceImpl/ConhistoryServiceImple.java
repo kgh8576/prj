@@ -18,9 +18,9 @@ public class ConhistoryServiceImple implements ConhistoryService {
 	
 	//상담하기 페이지: 상담 내역 리스트 반환
 	@Override
-	public List<ConHistoryVO> conhistoryList(ConHistoryVO vo) {
+	public List<ConHistoryVO> conHistoryListSelect(ConHistoryVO vo) {
 		
-		return conHistoryMapper.conHistoryList(vo);
+		return conHistoryMapper.conHistoryListSelect(vo);
 	}
 	public DesVO desCourseDetail(ConHistoryVO vo) {
 		return conHistoryMapper.desCourseDetail(vo);

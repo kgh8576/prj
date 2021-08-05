@@ -4,7 +4,7 @@
 	namespace="com.one.style.conhistory.mapper.ConhistoryMapper">
 
 	<!-- 상담하기 페이지: 상담 내역 리스트 반환-->
-	<select id="conHistoryList"
+	<select id="conHistoryListSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
 		select con_no, <!-- 상담번호 -->

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.one.style.admin.mapper.AdminMapper">
+
+	 
+	 <!-- 페이징 -->
+	<select id="memberListSelect"
+		resultType="com.one.style.mem.vo.MemberVO">
+		
+		select id, <!-- 아이디 -->
+				pw, <!-- 비밀번호 -->
+				name, <!-- 이름 -->
+				gender, <!-- 성별 -->
+				to_char(birth, 'YYYY-mm-dd') as birth, <!-- 형식 변경한 생년월일(ex)2021-01-01) -->
+				REGEXP_REPLACE(hp, '(.{3})(.+)(.{4})', '\1-\2-\3') as hp, <!-- 형식 변경한 휴대폰 번호(ex)010-1111-1111) -->
+				point, <!-- 적립금 -->
+				regday <!-- 가입일 -->
+		from member
+		
+	</select>
+	
+	<!--
+	<select id="memberOneSelect"
+		parameterType="com.one.style.mem.vo.MemberVO"
+		resultType="com.one.style.mem.vo.MemberVO">
+		
+		select * from member where id= #{id}
+		
+	</select>
+	-->
+
+
+
+</mapper>
