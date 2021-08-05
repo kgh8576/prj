@@ -76,6 +76,51 @@ pageEncoding="UTF-8" %>
         		}
         	});
     	}
+		function preFrmSubmit(){
+			if( $("input:checkbox[name=YesorNo]:checked").length == 0 ){
+				alert("필요한 서비스를 체크하세요");
+				return false;
+			}
+			if( location == 'false' ){
+				alert("지역을 입력해주세요");
+				return false;
+			}
+			
+			var locations = $('#location option:selected').val();
+			var yncheck = document.getElementsByName("YesorNo");
+			for (var i = 0; i < yncheck.length; i++) {
+				if (yncheck[i].checked) {
+					yncheck[i].value = "Y";
+				} else {
+					yncheck[i].value = "N";
+				}
+			}
+			var permYn = $('#permyn1').val();
+			var cutYn = $('#cutyn1').val();
+			var dyeYn = $('#dyeyn1').val();
+			var makeUpYn = $('#makeupyn1').val();
+			
+			$.ajax({
+				url:'memDetailInsert.do',
+				method:'post',
+				data:{
+						permYn : permYn,
+						cutYn : cutYn,
+						dyeYn : dyeYn,
+						makeupYn : makeUpYn,
+						location : locations
+					},
+				success:function(result){
+					alert(result);
+					location.reload();
+				},
+				error:function(err){
+					console.log(err);
+				}
+				
+			});
+		}
+		
     </script>
 </head>
 
@@ -113,22 +158,23 @@ pageEncoding="UTF-8" %>
 									<button onclick="crawl()">크롤링테스트</button>
 								</div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>
             <!-- 검색창 끝 -->
+
+    </section>
             <div class="row justify-content-center">
-                
-                <!-- 디자이너 추천 영역 -->
-				<c:if test="${empty memDetail }">
+               <!-- 디자이너 추천 영역 -->
+				<c:if test="${empty memDetail && not empty id }">
 	               	<!-- modal Btn -->
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#preferenceFrmModal">
 					  더 나은 서비스 제공을 위해서 시간을 내주세요!
 					</button>
+					
 					<!-- Modal -->
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog">
+					<div class="modal fade" id="preferenceFrmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+					  <div class="modal-dialog modal-lg">
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -137,30 +183,87 @@ pageEncoding="UTF-8" %>
 					        </button>
 					      </div>
 					      <div class="modal-body">
-					        ...
+					      	<form id="preferenceFrm" action="memDetailInsert.do" method="post">
+						      	<h5>내가 필요한 서비스는...</h5>
+						      	<h6 align="right" style="color: grey;">다중 선택 가능</h6>
+								<div class="select" style="text-align: center;" id="needService">
+									<input class="check" type="checkbox" name="YesorNo" id="makeupyn1" value="Y"><label style="width: 60px;" for="makeupyn1"> 메이크업 </label> <input class="finalcheck" type="hidden" id="makeupyn" name="makeupyn">
+									<input class="check" type="checkbox" name="YesorNo" id="cutyn1" value="Y"><label style="width: 60px;" for="cutyn1"> 커트 </label> <input class="finalcheck" type="hidden" id="cutyn" name="cutyn">
+									<input class="check" type="checkbox" name="YesorNo" id="permyn1" value="Y"><label style="width: 60px;" for="permyn1"> 펌 </label> <input class="finalcheck" type="hidden" id="permyn" name="permyn">
+									<input class="check" type="checkbox" name="YesorNo" id="dyeyn1" value="Y"> <label style="width: 60px;" for="dyeyn1"> 염색 </label> <input class="finalcheck" type="hidden" id="dyeyn" name="dyeyn">
+								</div>
+								
+								<h5>내 거주지는...</h5>
+								<div class="input-group mb-3" align="center" >
+								  <select class="custom-select" id="location" name="location">
+								  	<option disabled="disabled" selected="selected" value="false">거주지 선택</option>
+								  	<optgroup label="시">
+									    <option value="서울">서울</option>
+									    <option value="부산">부산</option>
+									    <option value="인천">인천</option>
+									    <option value="대구">대구</option>
+									    <option value="대전">대전</option>
+									    <option value="광주">광주</option>
+									    <option value="울산">울산</option>
+								  	</optgroup>
+								  	<optgroup label="도">
+									    <option value="경기도">경기도</option>
+									    <option value="충청도">충청도</option>
+									    <option value="경상도">경상도</option>
+									    <option value="전라도">전라도</option>
+									    <option value="제주도">제주도</option>
+								    </optgroup>
+								  </select>
+								</div>
+							</form>
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary">Save changes</button>
+					        <button type="button" class="btn btn-primary" onclick="preFrmSubmit()">제출</button>
 					      </div>
 					    </div>
 					  </div>
 					</div>
 					
-					
-					
 				</c:if>
 				<c:if test="${not empty memDetail }">
-					<div>다른 회원들이 많이 찾은 디자이너입니다</div>
-					<div>평가가 좋은 디자이너입니다</div>
+					<div class="row">
+						<div>다른 회원들이 많이 찾은 디자이너입니다</div>
+		                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+		                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+		                        <div class="thum">
+		                            <a href="#" id="rcmdDesByConHis1"><img id="rcmdDesByConHisImg1" src="http://placehold.it/400x400" alt=""></a>
+		                        </div>
+		                        <div class="padding-30px">
+		                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="rcmdDesByConHisName1">${rcmdDesByConHis.name }</a></h5>
+		                            <div class="rating clearfix">
+		                                <ul class="float-left" id="rcmdDesByConHisStar1">
+		                                </ul>
+		                                <small class="float-right text-grey-2" id="rcmdDesByConHisReviewCnt1">리뷰수</small>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                
+						<div>평가가 좋은 디자이너입니다</div>
+	   	                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
+		                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
+		                        <div class="thum">
+		                            <a href="#" id="rcmdDesByConHis2"><img id="rcmdDesByConHisImg2" src="http://placehold.it/400x400" alt=""></a>
+		                        </div>
+		                        <div class="padding-30px">
+		                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="rcmdDesByConHisName2">이름 자리</a></h5>
+		                            <div class="rating clearfix">
+		                                <ul class="float-left" id="rcmdDesByConHisStar2">
+		                                </ul>
+		                                <small class="float-right text-grey-2" id="rcmdDesByConHisReviewCnt2">리뷰수</small>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+            		</div>
+            
 				</c:if>
-				
-
-                
             </div>
-        </div>
-    </section>
-
 
     <section class="padding-tb-100px">
         <div class="container">

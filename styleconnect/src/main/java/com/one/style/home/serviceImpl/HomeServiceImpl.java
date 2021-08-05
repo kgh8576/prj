@@ -34,15 +34,21 @@ public class HomeServiceImpl implements HomeService{
 
 	//메인페이지 추천 디자이너 별점 수 기준
 	@Override
-	public HomeVO rcmdDesByRate(String id) {
-		return map.rcmdDesByRate(id);
+	public HomeVO rcmdDesByRate(MemDetailVO vo) {
+		return map.rcmdDesByRate(vo);
 	}
 
 	//메인페이지 추천 디자이너 내역 수 기준
 	@Override
-	public HomeVO rcmdDesByConHis(String id) {
-		return map.rcmdDesByConHis(id);
+	public HomeVO rcmdDesByConHis(MemDetailVO vo) {
+		return map.rcmdDesByConHis(vo);
 	}
+
+	@Override
+	public void memDetailInsert(MemDetailVO vo) {
+		map.memDetailInsert(vo);
+	}
+
 
 	
 }

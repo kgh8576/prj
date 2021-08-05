@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.one.style.home.service.HomeService;
 import com.one.style.mem.service.MemService;
+import com.one.style.mem.vo.MemDetailVO;
 
 @Controller
 public class HomeController {
@@ -24,13 +25,20 @@ public class HomeController {
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest req) {
+		
+		// 로그인되어 있는 경우 추천 디자이너 뿌리기
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
-//		model.addAttribute("memDetail", homeDao.memDetail(id));
-//		model.addAttribute("rcmdDesByConHis", homeDao.rcmdDesByConHis(id));
-//		model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(id));
+		if (id != null) {
+			MemDetailVO memDetail = homeDao.memDetail(id);
+			model.addAttribute("memDetail", memDetail);
+			if (memDetail != null) {
+				model.addAttribute("rcmdDesByConHis", homeDao.rcmdDesByConHis(memDetail));
+				model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(memDetail));	
+			}
+		}
 		return "main/home";
 	}
-
+	
 	
 }
