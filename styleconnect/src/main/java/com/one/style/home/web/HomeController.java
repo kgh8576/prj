@@ -26,11 +26,9 @@ public class HomeController {
 	public String home(Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
-		model.addAttribute("memDetail", homeDao.memDetail(id));
-		model.addAttribute("rcmdDesByConHis", homeDao.rcmdDesByConHis(id));
-		model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(id));
-		
-		
+//		model.addAttribute("memDetail", homeDao.memDetail(id));
+//		model.addAttribute("rcmdDesByConHis", homeDao.rcmdDesByConHis(id));
+//		model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(id));
 		return "main/home";
 	}
 
