@@ -71,10 +71,10 @@
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
                                 <div class="row">
-                                <%-- 	<c:forEach items="${img}" var="img1"> 
+                                 	<c:forEach items="${img}" var="img1"> 
                                 		<c:if test="${img1.fileState eq 'pro' }">
                                 		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
-                                	</c:if></c:forEach>  --%>
+                                	</c:if></c:forEach>  
                                   
                                 </div>
                             </div>
