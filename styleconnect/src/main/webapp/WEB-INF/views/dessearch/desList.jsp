@@ -21,14 +21,17 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="row">
-						<!-- Doctor -->
-						<c:forEach items="${designer}" var="vo">
+						<!-- Designer -->
+								<c:forEach items="${designer}" var="vo">
 							<div class="col-lg-4 col-md-6 hvr-bob margin-bottom-45px">
 								<div class="background-white box-shadow">
+								 <!-- 디자이너 프로필 이미지 -->
 									<div class="thum">
-										<a href="desListSelect.do?id=${vo.id}"><img
-											src="images/Desert.jpg" alt=""></a>
+										<a href="desListSelect.do?id=${vo.id}">
+											<img src="resources/img/${vo.fileUuid }" alt="">
+										</a>
 									</div>
+								<!-- 디자이너 프로필 이미지 -->
 									<div class="padding-30px">
 									<div>
 										<c:set var="majors" value="${fn:split(vo.major,',')}"></c:set>

@@ -39,4 +39,5 @@ public class DessearchVO {
 	
 	//files
 	private String fileUuid;
+	private String fileState;
 }

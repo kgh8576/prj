@@ -34,7 +34,7 @@
 								<a href="cutList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
 								<div class = "background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
-										<img src="assets/img/icon/categorie-1.png" alt="">
+										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/hair-cut.png" alt="">
 									</div>
 											컷 전문
 								</div>
@@ -44,7 +44,7 @@
 								<a href="permList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
 								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
-										<img src="assets/img/icon/categorie-1.png" alt="">
+										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/hair-perm.png" alt="">
 									</div>
 										펌 전문
 									</div>
@@ -54,7 +54,7 @@
 								<a href="dyeList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
 								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
-										<img src="assets/img/icon/categorie-2.png" alt="">
+										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/hair-dye.png" alt="">
 									</div>
 										염색 전문
 									</div>
