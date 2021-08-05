@@ -171,7 +171,9 @@
                             )
            group by des_id)r
  	on d.id = r.des_id
-  	left join files f 
+  	left join (select file_uuid, file_name,des_id
+                from files
+                where file_state='pro')f 
   	on d.id = f.des_id
  	where id in (
               select id from des_course 
