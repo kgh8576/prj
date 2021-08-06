@@ -249,7 +249,7 @@
 								<div class="col-md-6">
 									<c:if test="${conhis.codecontent eq '상담완료' }">
 										<div>
-											<label> 상담내역 </label>
+											<label> 상담내역 123</label>
 											<h3>${conhis.title }</h3>
 											<p>예약날짜 : ${conhis.day }</p>
 											<p>예약시간 : ${conhis.time }</p>
