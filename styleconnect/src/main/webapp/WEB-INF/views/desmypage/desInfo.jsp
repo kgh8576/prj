@@ -243,8 +243,8 @@ $(function() {
                     </c:if>
                  <!-- 이미지 수정// -->
                <!-- 프로필 이미지 업로드 끝 -->
-               <!-- 개인정보 수정 -->     
-                    <form action="desUpdate.do" method="post" id="frm" name="frm" >
+   <!-- 개인정보 수정 -->     
+                    <form action="desUpdate.do" method="post" id="frm" name="frm" enctype="multipart/form-data">
                     <input type="hidden" id="pw" name="pw" value="${des.pw }">  
                     <input type="hidden" id="major" name="major" value="${des.major }">
                     <div class="col-md-8">
@@ -316,25 +316,40 @@ $(function() {
 						</div>
 					</div>
 				 <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="far fa-user margin-right-10px"></i> 경력사항 </label>
+                              <label><i class="far fa-user margin-right-10px"></i> 경력사항</label>
 						<textarea class="textarea"
 							id="career" name="career" >${des.career }</textarea>
 					</div>
 					<div style="text-align: left">
 						<font id="chkNotice" size="2"></font>
 					</div>
-
-					<div class="form-group label-floating">
-						<p>재직증명서나 미용자격증등을 첨부해주시면됩니다.</p>
+					<!-- 자격증 첨부  form 나눠야함!!!!-->
+					<form action="desProUpdate.do" method="post" id="frm" name="frm" enctype="multipart/form-data">
+						<div class="col-md-6 margin-bottom-20px">
+                              <label><i class="far fa-user margin-right-10px"></i> 자격증 첨부</label>
+						<!-- 자격증 등록(없을경우) -->
+						<c:if test="${empty des.fileUuid }">
+						<div class="form-group label-floating">
+							<p>재직증명서나 미용자격증등을 첨부해주시면됩니다.</p>
 						<div class="filebox bs3-primary preview-image">
-							<input class="upload-name" value="파일선택" disabled="disabled"
-								style="width: 200px;"> <label for="cergroupno">업로드</label>
-							<input type="file" name="file" id="cergroupno" class="upload-hidden">
+							<input type="file" name="fileUuid" id="cergroupno" multiple="multiple" class="upload-hidden">
 						</div>
-						
-				</div>
-                <!--// 비밀번호 변경 -->
-               <!-- <!--     기존 비밀번호 체크
+						</div>
+						</c:if>
+						<!-- 자격증 수정(있을경우) -->
+						<c:if test="${not empty des.fileUuid }">
+						<div class="form-group label-floating">
+							<p>재직증명서나 미용자격증등을 재첨부해주시면됩니다.</p>
+						<div class="filebox bs3-primary preview-image">
+							<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;"> <label for="cergroupno">업로드</label>
+							<input type="file" name="fileUuid" id="cergroupno" class="upload-hidden">
+						</div>
+						</div>
+						</c:if>
+						</form>
+					<!-- 자격증 첨부 -->
+               	<!--// 비밀번호 변경 -->
+               	<!-- <!--     기존 비밀번호 체크
                      <div class="col-md-6 margin-bottom-20px">
                               <label><i class="fas fa-lock margin-right-10px"></i> 기존 비밀번호</label>
                               <input id="originpw" name="originpw" type="password" class="form-control form-control-sm" oninput="checkPw()">

@@ -244,7 +244,8 @@ public class DesController {
 		}
 	//마이페이지>기본정보 업데이트
 	@RequestMapping("desUpdate.do")
-	public String desUpdate(HttpServletRequest request,Model model, DesVO vo ) {
+	public String desUpdate(MultipartHttpServletRequest request,Model model, DesVO vo ) {
+		//기본정보
 		vo.setHp(request.getParameter("hp"));
 		vo.setLocation(request.getParameter("location"));
 		vo.setPw(request.getParameter("pw"));
@@ -254,10 +255,15 @@ public class DesController {
 		vo.setCutyn(request.getParameter("cutyn"));
 		vo.setDyeyn(request.getParameter("dyeyn"));
 		vo.setCareer(request.getParameter("career"));
-		System.out.println("아이디 값 체크: " + vo.getId());
 		
+		//자격증
+		vo.setFileUuid(request.getParameter("fileUuid"));
+		fileservice.upload(request,"cer",request.getParameter("id"));
+
+		desDao.desProUpdate(vo);
 		int n = desDao.desUpdate(vo);
 		System.out.println("업데이트 행 수: " + n);
+
 		return "redirect:desInfo.do";
 	}
 	//전문분야 페이지
