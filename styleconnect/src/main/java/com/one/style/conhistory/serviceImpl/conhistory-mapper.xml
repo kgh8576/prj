@@ -55,7 +55,7 @@
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		insert into CONSULTING_HISTORY
 		values
-		(seq_con() , #{day}
+		(seq_con() , to_date(#{day},'YY/MM/DD')
 		,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment}
 		,#{courNo} ,null,#{payNo}, 'N' ,'N')
 	</insert>
