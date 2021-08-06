@@ -49,4 +49,10 @@ public class DesVO {
 	private String sat;
 	private String sun;
 	
+	// 페이징 관련
+	private int pageCnt;
+	private int lastCnt;
+	private int firstCnt;
+	private String pullValue;
+	
 }

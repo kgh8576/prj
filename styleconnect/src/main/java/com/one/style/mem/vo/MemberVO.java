@@ -14,6 +14,12 @@ public class MemberVO {
 	private String gender;
 	private String birth;
 	private int point;
-	private Date regday;
+	private String regday;
+	
+	// 페이징 관련
+	private int pageCnt;
+	private int lastCnt;
+	private int firstCnt;
+	private String pullValue;
 	
 }

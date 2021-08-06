@@ -3,10 +3,11 @@
 <mapper
 	namespace="com.one.style.conhistory.mapper.ConhistoryMapper">
 
-	<!-- 상담하기 페이지: 상담 내역 리스트 반환-->
+	<!-- 상담하기 페이지: 상태가 예약확정, 상담중인 상담 내역 리스트 반환-->
 	<select id="conHistoryListSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
+		
 		select con_no, <!-- 상담번호 -->
 				to_char(day, 'YYYY-mm-dd') as day, <!--형식 변환된 서비스 날짜(ex)2021-01-01) -->
 				time,	<!-- 서비스 시간 -->	
@@ -18,25 +19,30 @@
 				des_comment, <!-- 디자이너 코멘트 -->
 				codecontent as state <!-- 공통코드를 참조한 예약 진행상황(ex)예약중, 상담중) -->
 			from consulting_history, des_course, designer, commcodedetail
-			where consulting_history.cour_no = des_course.cour_no
-				and des_course.id = designer.id
-				and consulting_history.state = commcodedetail.code
-		<if test='memId != null'> <!-- 일반회원 로그인 시 일반회원 아이디로 검색 -->
+			where consulting_history.cour_no = des_course.cour_no <!-- 테이블 조인 조건 -->
+				and des_course.id = designer.id <!-- 테이블 조인 조건 -->
+				and consulting_history.state = commcodedetail.code <!-- 테이블 조인 조건 -->
+				and commcodedetail.codecontent in ('예약확정', '상담중')<!-- 진행상황이 예약확정, 상담중인 행 검색 -->
+			<if test='memId != null'> <!-- 일반회원 로그인 시 일반회원 아이디로 검색 -->
 				and consulting_history.mem_id=#{memId}
-		</if>
-		<if test='desId != null'> <!-- 디자이너 로그인 시 디자이너 아이디로 검색-->
+			</if>
+			<if test='desId != null'> <!-- 디자이너 로그인 시 디자이너 아이디로 검색-->
 				and des_course.id=#{desId}
-		</if>
-		order by con_no desc
+			</if>
+			order by con_no desc
 	</select>
 
-	<!-- 상담하기 페이지: 상담 참여 시 DB의 consulting_history 테이블의 mem_attend 또는 des_attend 값을 N에서 Y로 변경-->
+	<!-- 상담하기 페이지: 
+			상담 참여 시 DB의 consulting_history 테이블의 mem_attend 또는 des_attend 값을 N에서 Y로 변경, 
+			state를 ccode004(상담중)으로 변경 -->
 	<update id="conHistoryAttendUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		<if test='memId != null'>
-		update consulting_history set mem_attend = 'Y', state='ccode004' where con_no = #{conNo}
+		update consulting_history set mem_attend = 'Y', state='ccode004' 
+			where con_no = #{conNo}
 		</if>
 		<if test='desId != null'>
-		update consulting_history set des_attend = 'Y', state='ccode004' where con_no = #{conNo}
+		update consulting_history set des_attend = 'Y', state='ccode004' 
+			where con_no = #{conNo}
 		</if>
 	</update>
 	

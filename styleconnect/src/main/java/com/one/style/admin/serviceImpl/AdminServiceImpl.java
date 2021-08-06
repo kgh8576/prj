@@ -15,11 +15,21 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	AdminMapper adminMapper;	
 	
-	public List<MemberVO> memberListSelect(){
-		return adminMapper.memberListSelect();	
+	public List<MemberVO> memberListSelect(MemberVO vo){
+		return adminMapper.memberListSelect(vo);	
 	}
-	public List<DesVO> designerListSelect(){
+	
+	@Override
+	public int memberListTotalCountSelect() {
+		return adminMapper.memberListTotalCountSelect();
+	}
+	
+	public List<DesVO> designerListSelect(DesVO vo){
 		return null;
-		
+	}
+	
+	@Override
+	public int designerListTotalCountSelect() {
+		return adminMapper.designerListTotalCountSelect();
 	}
 }

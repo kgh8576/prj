@@ -78,7 +78,7 @@ function goChatting(conNo) {
     		<p class="text-grey-2">남은시간: ${conHistory.remainingTime}</p>
     		<p>*상담시간 10분 전부터 상담 참여 가능합니다.</p>
     		<!-- 하드코딩? 원본코드: &&(${conHistory.remainingTime}>-30 || ${conHistory.remainingTime}<10)-->
-    		<c:if test = "${(conHistory.state eq '예약확정' || conHistory.state eq '상담중' )&& (conHistory.remainingTime ge -30 || onHistory.remainingTime le 10) }">
+    		<c:if test = "${conHistory.remainingTime ge -30 || conHistory.remainingTime le 10}">
     			<!-- 공통 코드 참조해서 상담중으로 update -->
     			<!-- document.get~ 으로 사용하면 보다 쉽게 페이지에서 동작하는 함수를 알 수 있으나 일단 걍 만듦 -->
     			<button onclick="goChatting(${conHistory.conNo});">상담 참여 생성 테스트</button>
