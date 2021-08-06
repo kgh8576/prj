@@ -12,7 +12,7 @@
 	</select>
 	<insert id="designerInsert"><!-- #{cergroupno} -->
 		INSERT INTO DESIGNER VALUES
-		(#{id},#{pw},#{name},#{hp},#{location},#{gender},#{birth},0,'dcode001',#{career},sysdate,#{majorgender},#{makeupyn},#{cutyn},#{permyn},#{dyeyn},#{major},null)
+		(#{id},#{pw},#{name},#{hp},#{location},#{gender},to_date(#{birth},'YY/MM/DD'),0,'dcode001',#{career},sysdate,#{majorgender},#{makeupyn},#{cutyn},#{permyn},#{dyeyn},#{major},null)
 	</insert>
 	
 	

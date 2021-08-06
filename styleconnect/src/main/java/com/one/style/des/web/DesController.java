@@ -110,7 +110,7 @@ public class DesController {
 	// 디자이너 회원가입 실행
 	@RequestMapping("/desinerinsert.do")
 	public String desinerinsert(DesVO vo, MultipartHttpServletRequest request) {
-
+		System.out.println(vo.getBirth());
 		HttpSession session = request.getSession();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 		String postcode = request.getParameter("postcode");
