@@ -22,5 +22,5 @@ public interface DesService {
 	
 	public DesVO selectDesPro(DesVO vo);
 	public int desProUpdate(DesVO vo);
-	
+	public int desmajorUpdate(DesVO vo);
 }

@@ -132,7 +132,7 @@ img{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 //major 선택 3개로 제한
-/* 	$(document).ready(function(){
+ 	$(document).ready(function(){
 		$("input[type='checkbox']").on("click",function(){
 			let count = $("input:checked[type='checkbox']").length;
 			
@@ -141,7 +141,7 @@ img{
 				alert("3개까지만 선택할 수 있습니다.");
 			}
 		});	
-	}); */
+	}); 
 	
 
 	function updateMajor(){
@@ -172,9 +172,9 @@ img{
 </head>
 <body>
 				<form name="frm" id="frm" action="majorUpdate.do" method="post">
-						
+				<input type="hidden" name="id" id="id" value="${des.id }"> 
 					<div align="center">
-							 디자이너 전문분야 <br/>
+							 ${des.id } 디자이너 전문분야 <br/>
 							<c:set var="majors" value="${fn:split(des.major,',')}"></c:set>
 							<c:set var="selectmajor" value="${des.major }"></c:set>
 							<c:forEach var="major" items="${majors}" >
@@ -212,8 +212,9 @@ img{
 										
 				</div>
 			</form>
+			<div align="center">
 			<button onclick="updateMajor()">수정하기</button>
-
+			</div>	
 
 </body>
 </html>

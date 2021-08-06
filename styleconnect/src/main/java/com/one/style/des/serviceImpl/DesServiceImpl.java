@@ -62,7 +62,7 @@ public class DesServiceImpl implements DesService {
 
 	@Override
 	public boolean designerinsertcheck(DesVO vo) {
-		boolean N = false;
+		boolean N = false; 
 		DesVO dvo = desMapper.designerinsertcheck(vo);
 		
 		if(dvo != null) {
@@ -106,6 +106,11 @@ public class DesServiceImpl implements DesService {
 	public int desProUpdate(DesVO vo) {
 		// TODO Auto-generated method stub
 		return desMapper.desProUpdate(vo);
+	}
+	@Override
+	public int desmajorUpdate(DesVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.desmajorUpdate(vo);
 	}
 
 }

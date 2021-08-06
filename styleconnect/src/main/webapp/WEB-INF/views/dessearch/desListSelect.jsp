@@ -18,7 +18,10 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
-                        <img src="http://placehold.it/1600x850" alt="">
+                       	<c:forEach items="${img}" var="img1"> 
+                                		<c:if test="${img1.fileState eq 'thum' }">
+                                		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
+                                	</c:if></c:forEach>  
                         <div class="padding-30px background-white">
                             <div class="row">
                                 <div class="col-lg-6">

@@ -123,7 +123,7 @@ $(function() {
                         <div class="padding-15px background-white">
                             <a href="" class="d-block margin-bottom-10px">
                             <img id="preview" src="${pageContext.request.contextPath}/resources/img/${despro.fileUuid}" alt=""></a>
-                            <input type="file" onchange="readURL(this);" >
+                             <input type="file" name="file" onchange="readURL(this);" >
                             <button type="submit" >수정</button>
                             <a  class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">이미지 수정하기 </a>
                         </div>

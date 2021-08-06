@@ -1,7 +1,9 @@
 package com.one.style.des.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -10,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.velocity.runtime.directive.Foreach;
 import org.json.simple.JSONObject;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -258,13 +262,22 @@ public class DesController {
 	@RequestMapping("majorUpdate.do")
 	public String majorUpdate(HttpServletRequest request, DesVO vo) {
 		//System.out.println(request.getParameter("major"));
+		System.out.println("아이디값-----------------------"+request.getParameter("id"));
+		vo.setId(request.getParameter("id"));
 		String[] major = request.getParameterValues("major");
-		
-		//vo.setMajor(major);
 		for (String string : major) {
-			System.out.println(string);
-			System.out.println(major[0]);
+//			System.out.println("string;;;"+string);
 		}
+//		System.out.println(major[0]+","+major[1]+","+major[2]);		
+		
+		//문자열 합치기
+		List<String> majors = new ArrayList<String>();
+		majors.add(major[0]);
+		majors.add(major[1]);
+		majors.add(major[2]);
+		String seperatedToComma = StringUtil.join(majors, ",");
+		vo.setMajor(seperatedToComma);
+		desDao.desmajorUpdate(vo);
 		
 		return "redirect:desMajor.do";
 	}

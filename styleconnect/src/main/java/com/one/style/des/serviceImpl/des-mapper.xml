@@ -43,6 +43,7 @@
 	where id= #{id}
 	</update>
 	
+	
 	<!-- 디자이너 프로필사진수정 -->
 	<update id="desProUpdate" parameterType="com.one.style.des.vo.DesVO">
 	update files
@@ -51,10 +52,10 @@
 	</update>
 	
 	<!-- 디자이너 major 수정 -->
-	<update id="majorUpdate" parameterType="com.one.style.des.vo.DesVO">
+	<update id="desmajorUpdate" parameterType="com.one.style.des.vo.DesVO">
 	update designer 
 	set major= #{major}
-	where id= #{id}
+	where id= #{id,jdbcType=VARCHAR}
 	</update>
 	
 </mapper>
