@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.one.style.crawldata.service.CrawlDataService;
 import com.one.style.home.service.HomeService;
 import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemDetailVO;
@@ -22,7 +23,9 @@ public class HomeController {
 	MemService memberDao;
 	@Autowired
 	HomeService homeDao;
-
+	@Autowired
+	CrawlDataService crawlDao;
+	
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest req) {
 		
@@ -34,9 +37,10 @@ public class HomeController {
 			model.addAttribute("memDetail", memDetail);
 			if (memDetail != null) {
 				model.addAttribute("rcmdDesByConHis", homeDao.rcmdDesByConHis(memDetail));
-				model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(memDetail));	
+				model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(memDetail));
 			}
 		}
+		model.addAttribute("hashTag", crawlDao.getCrawlList());
 		return "main/home";
 	}
 	

@@ -3,15 +3,43 @@
 <mapper
 	namespace="com.one.style.memdetail.mapper.MemdetailMapper">
 	<!-- 핸드폰번호 변경 -->
-	<update id="hpchange" parameterType="com.one.style.mem.vo.MemberVO">
+	<update id="hpchange"
+		parameterType="com.one.style.mem.vo.MemberVO">
 		UPDATE MEMBER SET HP = #{hp} WHERE ID = #{id}
 	</update>
 	<!-- 비밀번호 변경 -->
-	<update id="pwchange" parameterType="com.one.style.mem.vo.MemberVO">
+	<update id="pwchange"
+		parameterType="com.one.style.mem.vo.MemberVO">
 		UPDATE MEMBER SET PW = #{pw} WHERE ID = #{id}
 	</update>
 	<!-- 상담내역 출력 -->
-	<select id="conhisList">
-		SELECT * FROM CONSULTING_HISTORY WHERE MEMID = #{memId}
+	<select id="conhisList"
+		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
+		resultType="com.one.style.conhistory.vo.ConHistoryVO">
+		SELECT 
+		
+		a.day,a.time,a.state,a.price,
+		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
+		
+		b.code,b.CODECONTENT,
+		
+		c.title,c.detail,
+		
+		d.name AS desName,d.career,d.major
+		
+		FROM 
+		CONSULTING_HISTORY a, COMMCODEDETAIL b , 
+		DES_COURSE c, DESIGNER d
+		
+		WHERE a.state = b.code
+		
+		AND c.cour_no = a.cour_no
+		AND d.id = c.id
+		AND MEM_ID = #{memId}
 	</select>
+	<!-- 회원탈퇴 -->
+	<delete id="memexit"
+		parameterType="com.one.style.mem.vo.MemberVO">
+		DELETE FROM MEMBER WHERE ID = #{id}
+	</delete>
 </mapper>

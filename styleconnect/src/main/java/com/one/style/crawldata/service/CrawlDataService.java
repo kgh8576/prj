@@ -10,5 +10,5 @@ public interface CrawlDataService {
 	 public void splitTest(String crawlText);
 	 public void start();
 	 void insertCrawl(CrawlDataVO vo);
-	 List<CrawlDataVO> getCrawlList();
+	 CrawlDataVO getCrawlList();
 }

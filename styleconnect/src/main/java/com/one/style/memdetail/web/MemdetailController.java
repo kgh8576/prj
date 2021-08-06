@@ -1,5 +1,7 @@
 package com.one.style.memdetail.web;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.memdetail.service.MemdetailService;
@@ -26,13 +29,15 @@ public class MemdetailController {
 	
 	//마이페이지 이동
 	@RequestMapping("/membermypage.do")
-	public String membermypage(Model model ,HttpServletRequest request,MemberVO vo) {
+	public String membermypage(Model model ,HttpServletRequest request,MemberVO vo,ConHistoryVO cvo) {
 		HttpSession session = request.getSession();
 		
 		String id = (String) session.getAttribute("id");
 		vo.setId(id);
+		cvo.setMemId(id);
 		model.addAttribute("user",memDao.login(vo));
-		
+		model.addAttribute("conhis",memdetailDao.conhisList(cvo));
+		System.out.println(memdetailDao.conhisList(cvo));
 		
 		return "mymenu/mymenu";
 	}
@@ -85,5 +90,39 @@ public class MemdetailController {
 		}
 	
 		return cnt;
+	}
+	//회원탈퇴페이지이동
+	@RequestMapping("/exitpage.do")
+	public String exitpage () {
+		return "mymenu/memexit";
+	}
+	//회원탈퇴
+	@RequestMapping("/memexit.do")
+	@ResponseBody
+	public int memexit (MemberVO vo, HttpServletRequest request) {
+		//세션에있는 ID값호출
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		//아이디값 vo객체에 담아줌
+		vo.setId(id);
+		//암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
+		//ID와 PASSWORD MVO에 담아줌
+		MemberVO mvo = memDao.login(vo);
+		//VO(입력받은 비밀번호값)과 MVO(DB에 저장된 비밀번호값)매칭확인
+		boolean b = encoder.matches(vo.getPw(), mvo.getPw());
+		int YorN = 0;
+		//매칭해서 TRUE가 나온다면
+		if(b) {
+			//회원정보삭제 실행
+			memdetailDao.memexit(mvo);
+			YorN = 1;
+			//세션끊기
+			session.invalidate();
+			
+		}
+		//1OR2를 리턴해줌
+		System.out.println(YorN);
+		return YorN;
 	}
 }

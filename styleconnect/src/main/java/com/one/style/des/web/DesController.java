@@ -105,7 +105,7 @@ public class DesController {
 	// 디자이너 회원가입 실행
 	@RequestMapping("/desinerinsert.do")
 	public String desinerinsert(DesVO vo, MultipartHttpServletRequest request) {
-
+		System.out.println(vo.getBirth());
 		HttpSession session = request.getSession();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 		String postcode = request.getParameter("postcode");
@@ -132,7 +132,6 @@ public class DesController {
 		String check = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$";
 		
 		boolean finalcheck = Pattern.matches(check, phoneNumber);
-		System.out.println(finalcheck);
 		return finalcheck;		
 		
 	}
