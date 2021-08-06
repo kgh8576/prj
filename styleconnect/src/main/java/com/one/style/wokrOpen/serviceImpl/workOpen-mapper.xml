@@ -14,13 +14,13 @@
 	<select id="getReservationTime" parameterType="com.one.style.wokrOpen.vo.WorkOpenVO" resultType="string">
 		select time
 		from consulting_history
-		where day = #{searchDate}
+		where day = to_date(#{searchDate},"YY/MM/DD")
 		and cour_no = #{courNo}
 	</select>
 	<select id="getWorkCloseTime" parameterType="com.one.style.wokrOpen.vo.WorkOpenVO" resultType="string">
 		select close_time
 		from work_close
-		where close_day = #{searchDate}
+		where close_day = to_date(#{searchDate},"YY/MM/DD")
 		and id = (
 		          select id
 		          from des_course
