@@ -49,6 +49,7 @@ pageEncoding="UTF-8" %>
                         <!-- 디자이너 마이페이지 -->
                          <hr class="margin-bottom-0px d-block d-sm-none">
                         <c:if test="${not empty did }">
+							<input type="hidden" id="did" name="did" value="${did }">
 							<a href="mypage.do">마이페이지</a>
 							<a href="logout.do">로그아웃</a>
                         </c:if>

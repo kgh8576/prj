@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
 import com.one.style.dessearch.service.DessearchService;
+import com.one.style.dessearch.vo.DessearchVO;
 import com.one.style.files.service.FilesService;
 
 import edu.emory.mathcs.backport.java.util.Collections;
@@ -136,6 +137,7 @@ public class DesController {
 		String check = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$";
 		
 		boolean finalcheck = Pattern.matches(check, phoneNumber);
+		System.out.println(finalcheck);
 		return finalcheck;		
 		
 	}
@@ -214,6 +216,8 @@ public class DesController {
 		String desId = (String) session.getAttribute("did");
 		vo.setId(desId);
 		vo = desDao.selectDes(vo);
+
+		model.addAttribute("my", desDao.selectDes(vo)); 
 		return "desmypage/desMypage";
 	}
 	
@@ -241,34 +245,38 @@ public class DesController {
 	//마이페이지>기본정보 업데이트
 	@RequestMapping("desUpdate.do")
 	public String desUpdate(HttpServletRequest request,Model model, DesVO vo ) {
-		String hp = request.getParameter("hp");
-		String loc = request.getParameter("location");
-		String pw = request.getParameter("pw");
-		
-		vo.setHp(hp);
-		vo.setLocation(loc);
-		vo.setPw(pw);
-		
+		vo.setHp(request.getParameter("hp"));
+		vo.setLocation(request.getParameter("location"));
+		vo.setPw(request.getParameter("pw"));
+		vo.setMajorgender(request.getParameter("majorgender"));
+		vo.setMakeupyn(request.getParameter("makeupyn"));
+		vo.setPermyn(request.getParameter("permyn"));
+		vo.setCutyn(request.getParameter("cutyn"));
+		vo.setDyeyn(request.getParameter("dyeyn"));
+		vo.setCareer(request.getParameter("career"));
 		System.out.println("아이디 값 체크: " + vo.getId());
 		
 		int n = desDao.desUpdate(vo);
-		
 		System.out.println("업데이트 행 수: " + n);
-		System.out.println("=============================="+pw);
 		return "redirect:desInfo.do";
+	}
+	//전문분야 페이지
+	@RequestMapping("desMajor.do")
+	public String desMajor(HttpServletRequest request, Model model, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		String major  = (String) session.getAttribute("major");
+		vo.setId(desId);
+		vo.setMajor(major);
+		model.addAttribute("des", desDao.selectDes(vo));
+		
+		return "desmypage/desMajor";
 	}
 	//마이페이지 major수정 
 	@RequestMapping("majorUpdate.do")
 	public String majorUpdate(HttpServletRequest request, DesVO vo) {
-		//System.out.println(request.getParameter("major"));
-		System.out.println("아이디값-----------------------"+request.getParameter("id"));
 		vo.setId(request.getParameter("id"));
 		String[] major = request.getParameterValues("major");
-		for (String string : major) {
-//			System.out.println("string;;;"+string);
-		}
-//		System.out.println(major[0]+","+major[1]+","+major[2]);		
-		
 		//문자열 합치기
 		List<String> majors = new ArrayList<String>();
 		majors.add(major[0]);
@@ -276,8 +284,8 @@ public class DesController {
 		majors.add(major[2]);
 		String seperatedToComma = StringUtil.join(majors, ",");
 		vo.setMajor(seperatedToComma);
-		desDao.desmajorUpdate(vo);
 		
+		desDao.desmajorUpdate(vo);
 		return "redirect:desMajor.do";
 	}
 	//프로필사진 수정
@@ -315,17 +323,14 @@ public class DesController {
 		
 		return "desmypage/desSchedule";
 	}
-	@RequestMapping("desMajor.do")
-	public String desMajor(HttpServletRequest request, Model model, DesVO vo) {
+	
+	@RequestMapping("desCourse.do")
+	public String desCourse(Model model, DessearchVO vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String desId = (String) session.getAttribute("did");
-		String major  = (String) session.getAttribute("major");
 		vo.setId(desId);
-		vo.setMajor(major);
-		model.addAttribute("des", desDao.selectDes(vo));
-		System.out.println("=================아이디"+desId);
-		
-		return "desmypage/desMajor";
+		model.addAttribute("course",desSearchDao.courseList(vo));
+		return "desmypage/desCourse";
 	}
 	
 }
