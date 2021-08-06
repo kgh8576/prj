@@ -243,7 +243,7 @@ function hpsubmit() {
                     </div>
                 </div>
                 <div style="text-align: left;">
-			<p> 새로운 사람이 되어서 더이상 이용 하시지 않으시려면? <a href="" style="color: red;"> 회원탈퇴 바로가기 ☜ </a> </p>
+			<p> 새로운 사람이 되어서 더이상 이용 하시지 않으시려면? <a href="exitpage.do" style="color: red;"> 회원탈퇴 바로가기 ☜ </a> </p>
 				</div>            
             </div>
         </div>

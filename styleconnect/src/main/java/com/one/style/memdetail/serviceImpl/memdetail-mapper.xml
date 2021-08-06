@@ -14,4 +14,8 @@
 	<select id="conhisList">
 		SELECT * FROM CONSULTING_HISTORY WHERE MEMID = #{memId}
 	</select>
+	<!-- 회원탈퇴 -->
+	<delete id="memexit" parameterType="com.one.style.mem.vo.MemberVO">
+		DELETE FROM MEMBER WHERE ID = #{id}
+	</delete>
 </mapper>

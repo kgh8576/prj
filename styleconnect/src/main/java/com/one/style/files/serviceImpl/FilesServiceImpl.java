@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,9 @@ public class FilesServiceImpl implements FilesService {
 		System.out.println("=============================================실행체크");
 		MultipartHttpServletRequest request = req;
 		FilesVO vo = new FilesVO();
-		String rootUploadDir = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\img"; // 업로드 주소
+		
+		String rootUploadDir = req.getSession().getServletContext().getRealPath("/resources/img");; // 업로드 주소
+		System.out.println(rootUploadDir);
 		File dir = new File(rootUploadDir);
 		if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성
 			dir.mkdirs();

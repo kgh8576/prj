@@ -136,7 +136,6 @@ public class DesController {
 		String check = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$";
 		
 		boolean finalcheck = Pattern.matches(check, phoneNumber);
-		System.out.println(finalcheck);
 		return finalcheck;		
 		
 	}

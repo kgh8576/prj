@@ -34,5 +34,11 @@ public class MemdetailServiceImpl implements MemdetailService {
 		return null;
 	}
 
+	@Override
+	public void memexit(MemberVO vo) {
+		// TODO Auto-generated method stub
+		detailMapper.memexit(vo);
+	}
+
 	
 }
