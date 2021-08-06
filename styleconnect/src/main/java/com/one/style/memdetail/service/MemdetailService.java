@@ -10,4 +10,5 @@ public interface MemdetailService {
 	public void hpchange(MemberVO vo);
 	public void pwchange(MemberVO vo);
 	public List<ConHistoryVO> conhisList(ConHistoryVO vo);
+	public void memexit(MemberVO vo);
 }

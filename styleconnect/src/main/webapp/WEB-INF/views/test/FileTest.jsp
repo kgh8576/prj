@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 	<br>
@@ -20,5 +22,10 @@
 	</form>
 	<br><br><br>
 	<img width="300" height="300" alt="실패중" src="${pageContext.request.contextPath}/resources/img/${uuid.fileUuid}">
+	
+	<form action="" id = "frm">
+		<input type="text" id = "id" name = "name" value="">
+	</form>
+		<button onclick="test()"></button>
 </body>
 </html>
