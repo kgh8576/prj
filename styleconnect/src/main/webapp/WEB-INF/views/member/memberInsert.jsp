@@ -106,9 +106,7 @@ $(document).ready(function(){
 
 //핸드폰인증 번호전송
 function hpcheckbtn() {
-	
-$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
-	'#f82a2aa3');
+	var button_joinus = document.getElementById('hpcheckbtn');
 	$.ajax({
 		url : 'sendSMS.do',
 		data : {
@@ -117,6 +115,9 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 		type : 'post',
 		success : function(data) {
 			frm.hpcheck.focus();
+			button_joinus.disabled = true;
+			$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
+			'#f82a2aa3');
 		},
 		error : function(err) {
 			console.log(err);
@@ -173,6 +174,14 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 			}
 		})
 	};
+	function siche_next() {
+		if (document.getElementById("hp").value.length==11) {
+			document.getElementById("hpcheck").focus();
+		}
+		if (document.getElementById("hpcheck").value.length==4) {
+			document.getElementById("hpfinalcheck").focus();
+		}
+	}
 	function formCheck() {
 		if (frm.id.value == "") {
 			alert("아이디를 입력하세요.");
@@ -283,10 +292,10 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 									<div class="form-group label-floating">
 						<label class="control-label">핸드폰 번호</label> <input
 							class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp"
-							id="hp" min="11" maxlength="11">
+							id="hp" min="11" maxlength="11" onkeyup="siche_next()">
 							<input style="width: 80%;display: flex;float: left;"
 							class="form-control" placeholder="인증번호" type="text" name="hpcheck"
-							id="hpcheck">
+							id="hpcheck" onkeyup="siche_next()">
 							<input type="hidden" id="hppass" name="hppass" value="unChecked">
 							<button type="button" class="hpcheckbtn1" id="hpcheckbtn" name="hpcheckbtn">인증하기</button>
 							<font id="chkNotice3" size="2"></font>
@@ -299,7 +308,7 @@ $('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
 					</div>
 				</div>
 
-				<button type="button" onclick="formCheck()" class="btn btn-md btn-primary full-width">가입하기</button>>
+				<button type="button" id="hpfinalcheck" onclick="formCheck()" class="btn btn-md btn-primary full-width">가입하기</button>>
 
 				<div class="or"></div>
 

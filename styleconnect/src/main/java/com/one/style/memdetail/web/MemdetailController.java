@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.memdetail.service.MemdetailService;
@@ -28,13 +29,15 @@ public class MemdetailController {
 	
 	//마이페이지 이동
 	@RequestMapping("/membermypage.do")
-	public String membermypage(Model model ,HttpServletRequest request,MemberVO vo) {
+	public String membermypage(Model model ,HttpServletRequest request,MemberVO vo,ConHistoryVO cvo) {
 		HttpSession session = request.getSession();
 		
 		String id = (String) session.getAttribute("id");
 		vo.setId(id);
+		cvo.setMemId(id);
 		model.addAttribute("user",memDao.login(vo));
-		
+		model.addAttribute("conhis",memdetailDao.conhisList(cvo));
+		System.out.println(memdetailDao.conhisList(cvo));
 		
 		return "mymenu/mymenu";
 	}
