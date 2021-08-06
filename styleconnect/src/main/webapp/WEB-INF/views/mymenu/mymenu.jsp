@@ -170,6 +170,7 @@
 				<!-- // Page Title -->
 
 				<div class="row margin-tb-45px full-width">
+					<div class="col-md-2"></div>
 					<div class="col-md-8">
 						<div class="row">
 							<div class="col-md-6 margin-bottom-20px">
@@ -230,12 +231,10 @@
 							</div>
 						</div>
 						<hr class="margin-tb-40px">
-						<c:forEach var="conhis" items="${conhis }">
-							<div class="row">
-
-								<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-6">
+								<c:forEach var="conhis" items="${conhis }">
 									<c:if test="${conhis.codecontent eq '예약중' }">
-										<div>
 											<label> 예약중인 내역 </label>
 											<h3>${conhis.title }</h3>
 											<p>예약날짜 : ${conhis.day }</p>
@@ -243,10 +242,11 @@
 											<p>예약신청한날짜 : ${conhis.reservateDate }</p>
 											<p>디자이너 : ${conhis.desName }</p>
 											<p>상세정보 : ${conhis.detail }</p>
-										</div>
 									</c:if>
-								</div>
-								<div class="col-md-6">
+								</c:forEach>
+							</div>
+							<div class="col-md-6">
+								<c:forEach var="conhis" items="${conhis }">
 									<c:if test="${conhis.codecontent eq '상담완료' }">
 										<div>
 											<label> 상담내역</label>
@@ -258,17 +258,17 @@
 											<p>상세정보 : ${conhis.detail }</p>
 										</div>
 									</c:if>
-								</div>
+								</c:forEach>
 							</div>
-						</c:forEach>
-
+							</div>
+						<div style="text-align: left;">
+							<p>
+								새로운 사람이 되어서 더이상 이용 하시지 않으시려면? <a href="exitpage.do"
+									style="color: red;"> 회원탈퇴 바로가기 ☜ </a>
+							</p>
+						</div>
 					</div>
-					<div style="text-align: left;">
-						<p>
-							새로운 사람이 되어서 더이상 이용 하시지 않으시려면? <a href="exitpage.do"
-								style="color: red;"> 회원탈퇴 바로가기 ☜ </a>
-						</p>
-					</div>
+					<div class="col-md-2"></div>
 				</div>
 			</div>
 		</div>
