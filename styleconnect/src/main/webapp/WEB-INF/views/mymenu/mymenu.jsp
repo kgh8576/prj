@@ -200,11 +200,18 @@ function hpsubmit() {
                               </div>
                               </form>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6" style="margin-bottom: 20px">
                               <label><i class="fas fa-link margin-right-10px"></i> 가입 하신날짜 : ${user.regday }</label>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-6" style="margin-bottom: 20px">
                               <label><i class="fas fa-info margin-right-10px"></i> 현재 보유중인 적립금 :　 ${user.point } 　POINT</label>
+                          </div>
+                          <div class="col-md-6 margin-bottom-20px">
+                              <label><i class="fas fa-lock margin-right-10px"></i></label>
+                              <a href="pwchangepage.do">비밀번호 변경하기</a>
+                          </div>
+                          <div class="col-md-6 margin-bottom-20px">
+                              <label><i></i></label>                             
                           </div>
                       </div>
                       <hr class="margin-tb-40px">
@@ -235,7 +242,9 @@ function hpsubmit() {
 
                     </div>
                 </div>
-
+                <div style="text-align: left;">
+			<p> 새로운 사람이 되어서 더이상 이용 하시지 않으시려면? <a href="" style="color: red;"> 회원탈퇴 바로가기 ☜ </a> </p>
+				</div>            
             </div>
         </div>
         </div>

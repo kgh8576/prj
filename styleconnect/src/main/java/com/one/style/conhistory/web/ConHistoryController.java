@@ -1,5 +1,7 @@
 package com.one.style.conhistory.web;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,6 +39,9 @@ public class ConHistoryController {
 		HttpSession session = req.getSession();
 		ConHistoryVO vo = new ConHistoryVO();
 		
+		//session.setAttribute("id", "2");
+		session.setAttribute("did", "12343");
+		
 		//일반회원인 경우
 		if(session.getAttribute("id") != null) {
 			vo.setMemId((String)session.getAttribute("id")); 
@@ -45,7 +50,7 @@ public class ConHistoryController {
 			vo.setDesId((String)session.getAttribute("did")); 
 		}
 		
-		model.addAttribute("conHistoryList", conHistoryDao.conhistoryList(vo));
+		model.addAttribute("conHistoryList", conHistoryDao.conHistoryListSelect(vo));
 		
 		return "consulting/consulting";
 	}
@@ -57,9 +62,9 @@ public class ConHistoryController {
 	}
 	
 	//상담하기 페이지: 상담 참여 시 DB의 consulting_history 테이블의 mem_attend 또는 des_attend 값을 N에서 Y로 변경
-	@RequestMapping(value = "conHistoryAttendUpdate.do", method=RequestMethod.GET)
+	@RequestMapping(value = "conHistoryAttendUpdate.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String conHistoryAttendUpdate(HttpServletRequest req, int conNo) {
+	public HashMap<String, String> conHistoryAttendUpdate(HttpServletRequest req, int conNo) {
 		HttpSession session = req.getSession();
 		ConHistoryVO vo = new ConHistoryVO();
 		
@@ -72,13 +77,13 @@ public class ConHistoryController {
 		} else if (session.getAttribute("did") != null) {
 			vo.setDesId((String)session.getAttribute("did"));
 		}
-		int n = conHistoryDao.conHistoryAttendUpdate(vo);
 		
-		System.out.println("---------------------------" + n);
+		conHistoryDao.conHistoryAttendUpdate(vo);
 		
-		String testString="test String";
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("reply", "응답");
 		
-		return testString;
+		return map;
 	}
 
 	

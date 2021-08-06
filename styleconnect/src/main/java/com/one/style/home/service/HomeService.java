@@ -10,6 +10,7 @@ public interface HomeService {
 	public List<HomeVO> ajaxTopDesInfo(String keyword);
 	public List<HomeVO> ajaxTopDesCount(String keyword);
 	public MemDetailVO memDetail(String id);
-	public HomeVO rcmdDesByRate(String id);
-	public HomeVO rcmdDesByConHis(String id);
+	public HomeVO rcmdDesByRate(MemDetailVO vo);
+	public HomeVO rcmdDesByConHis(MemDetailVO vo);
+	void memDetailInsert(MemDetailVO vo);
 }

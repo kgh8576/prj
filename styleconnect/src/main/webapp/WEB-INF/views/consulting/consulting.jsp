@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 
 <!-- 1.(1)state가 예약확정 (2)현재시간으로부터 10분 후 이내면 버튼으로 변경 및 활성화-->
@@ -12,16 +12,19 @@
 
 <script>
 function goChatting(conNo) {
-	//window.location.href = "about:blank";
-	console.log(conNo);
+	//ajax 사용할지 페이지 이동할지 아니면 새로운 페이지를 띄울지 결정
+	window.location.href = 'https://192.168.0.15:8443/chatting.do?conNo=' + conNo;
 	
 	$.ajax({
-		url:'/conHistoryAttendUpdate.do?conNo=' + conNo,
-		type:'GET',
-		success:function(data){
-			console.log('update ajax 성공', data);
-		},error:function(error){
-			console.log('update ajax 실패', error);
+		url:'conHistoryAttendUpdate.do',
+		type:'POST',
+		data: {
+			conNo : conNo
+		},
+		success:function(){
+			console.log('success');
+		},error:function(r){
+			console.log('fail');
 		}
 	});
 }
@@ -75,7 +78,7 @@ function goChatting(conNo) {
     		<p class="text-grey-2">남은시간: ${conHistory.remainingTime}</p>
     		<p>*상담시간 10분 전부터 상담 참여 가능합니다.</p>
     		<!-- 하드코딩? 원본코드: &&(${conHistory.remainingTime}>-30 || ${conHistory.remainingTime}<10)-->
-    		<c:if test = "${conHistory.state eq '예약확정' && (conHistory.remainingTime ge -30 || onHistory.remainingTime le 10) }">
+    		<c:if test = "${(conHistory.state eq '예약확정' || conHistory.state eq '상담중' )&& (conHistory.remainingTime ge -30 || onHistory.remainingTime le 10) }">
     			<!-- 공통 코드 참조해서 상담중으로 update -->
     			<!-- document.get~ 으로 사용하면 보다 쉽게 페이지에서 동작하는 함수를 알 수 있으나 일단 걍 만듦 -->
     			<button onclick="goChatting(${conHistory.conNo});">상담 참여 생성 테스트</button>

@@ -4,57 +4,62 @@
 
 	<!-- 메인에서 평점 순 top3 디자이너 가져오기 -->
 	<select id="ajaxTopDesInfo" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
-	  select id, name, major, trunc(rate) as rate, f.FILE_UUID
-	  from FILES f,
-	    (select id, name, major, avg(rate) as rate
-	    from designer d, review r
-	    where d.id = r.des_id
-	    <if test="keyword == 'cut'">
+	
+	
+	select id, name, major, trunc(rate) as rate, nvl(f.FILE_UUID,'0.png')
+	from (
+      select * from (select id, name, major, avg(rate) as rate
+      from designer d, review r
+      where d.id = r.des_id
+	    <if test='keyword == "cut"'>
 	    and cut_yn = 'Y'
 	    </if>
-	    <if test="keyword == 'perm'">
+	    <if test='keyword == "perm"'>
 	    and perm_yn = 'Y'
 	    </if>
-	    <if test="keyword == 'dye'">
+	    <if test='keyword == "dye"'>
 	    and dye_yn = 'Y'
 	    </if>
-	    <if test="keyword == 'makeUp'">
+	    <if test='keyword == "makeUp"'>
 	    and makeup_yn = 'Y'
 	    </if>
-	    group by id, name, major
-	    order by 4 desc) inSq
-	  where rownum between 1 and 3
-	  and f.DES_ID(+) = id
-	  and f.FILE_STATE = 'pro'
+      group by id, name, major
+      order by 4 desc)
+      where rownum between 1 and 3
+      ) inSq
+left join 
+(select file_uuid , des_id
+        from files
+        where file_state = 'pro') f
+on inSq.id = f.des_id
 	</select>
 	
-	<!-- 전체 후기 건수 가져오기 -->
-	<select id="ajaxTopDesCount" parameterType="string" resultType="com.one.style.home.vo.HomeVO">	
-		select des_id, count(*) as count
-		from review
-		where des_id in
-		  (select id
-		  from
-		    (select id, name, trunc(rate) as rate from
-		      (select id, name, avg(rate) as rate
-		      from review r, designer d
-		      where r.des_id = d.id
-		      <if test="keyword == 'perm'">
-		      and PERM_YN = 'Y'
-		      </if>
-		  	  <if test="keyword == 'cut'">
-			  and cut_yn = 'Y'	  
-			  </if>
-			  <if test="keyword == 'dye'">
-			  and dye_yn = 'Y'
-			  </if>
-			  <if test="keyword == 'makeUp'">
-			  and makeup_yn = 'Y'
-			  </if>
-		      group by id, name
-		      order by 3 desc)
-		    where rownum between 1 and 3))
-		group by des_id
+	<!-- Top3 디자이너 후기 건수 가져오기 -->
+	<select id="ajaxTopDesCount" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
+	
+	select inSq.id, count(*)
+	from review r,
+	  (select * from 
+	      (select id, name, major, avg(rate) as rate
+	      from designer d, review r
+	      where d.id = r.des_id
+	      <if test='keyword == "cut"'>
+		    and cut_yn = 'Y'
+		    </if>
+		    <if test='keyword == "perm"'>
+		    and perm_yn = 'Y'
+		    </if>
+		    <if test='keyword == "dye"'>
+		    and dye_yn = 'Y'
+		    </if>
+		    <if test='keyword == "makeUp"'>
+		    and makeup_yn = 'Y'
+		    </if>
+	      group by id, name, major
+	      order by 4 desc)
+	  where rownum between 1 and 3) inSq
+	where inSq.id = r.des_id
+	group by inSq.id
 	
 	</select>
 	
@@ -66,10 +71,101 @@
 		and m.id = #{id}
 	</select>
 	
-	<select id="rcmdDesByConHis" parameterType="com.one.style.home.vo.HomeVO" resultType="com.one.style.home.vo.HomeVO">
-		
+	<select id="rcmdDesByConHis" parameterType="com.one.style.mem.vo.MemDetailVO" resultType="com.one.style.home.vo.HomeVO">
+		select * from
+		      (select lastSq.id, name, major, file_uuid, count(*)
+		      from consulting_history ch,
+		            (select outSq.*, dc.cour_no
+		            from des_course dc,
+		                    (select insq.id, insq.name, insq.major, f.FILE_UUID
+		                    from files f,
+		                            (select *
+		                            from designer
+		                            where (major_gender = #{gender} or major_gender = 'ALL')
+		                            and
+		                              (
+				                        <if test='makeupYn == "Y"'>
+				                          makeup_yn = 'Y'
+				                          <if test='cutYn == "Y" or permYn == "Y" or dyeYn == "Y"'>
+				                            or
+				                          </if>
+				                        </if>
+				                        <if test='cutYn == "Y"' >
+				                          cut_yn = 'Y'
+				                          <if test='permYn == "Y" or dyeYn == "Y"'>
+				                            or
+				                          </if>
+				                        </if>
+				                        <if test='permYn == "Y"' >
+				                          perm_yn = 'Y'
+				                          <if test='dyeYn == "Y"'>
+				                            or
+				                          </if>
+				                        </if>
+				                        <if test='dyeYn == "Y"' >
+				                          dye_yn = 'Y'
+				                        </if>
+				                        )
+		                            )inSq
+		                    where inSq.id = f.des_id
+		                    and file_state = 'pro'
+		                    )outSq
+		            where dc.id = outSq.id)lastSq
+		      where ch.cour_no = lastSq.cour_no
+		      group by lastSq.id, name, major, file_uuid
+		      order by count(*) desc)
+		where rownum = 1
+
 	</select>
 	
-	<select id="rcmdDesByRate" parameterType="com.one.style.home.vo.HomeVO" resultType="com.one.style.home.vo.HomeVO">
+	<select id="rcmdDesByRate" parameterType="com.one.style.mem.vo.MemDetailVO" resultType="com.one.style.home.vo.HomeVO">
+	
+		select id, name, major, file_uuid, trunc(rate) as rate
+		from
+		    (select id, name, major, file_uuid, avg(rate) as rate
+		    from review r,
+		        (select insq.id, insq.name, insq.major, f.FILE_UUID
+		        from files f,
+		            (select *
+		            from designer
+		            where (major_gender = #{gender} or major_gender = 'ALL')
+		            and
+		              (
+	                   <if test='makeupYn == "Y"'>
+	                     makeup_yn = 'Y'
+	                     <if test='cutYn == "Y" or permYn == "Y" or dyeYn == "Y"'>
+	                       or
+	                     </if>
+	                   </if>
+	                   <if test='cutYn == "Y"' >
+	                     cut_yn = 'Y'
+	                     <if test='permYn == "Y" or dyeYn == "Y"'>
+	                       or
+	                     </if>
+	                   </if>
+	                   <if test='permYn == "Y"'>
+	                     perm_yn = 'Y'
+	                     <if test='dyeYn == "Y"'>
+	                       or
+	                     </if>
+	                   </if>
+	                   <if test='dyeYn == "Y"' >
+	                     dye_yn = 'Y'
+	                   </if>
+	                   )
+		            )inSq
+		        where inSq.id = f.des_id
+		        and file_state = 'pro'
+		        )outSq
+		    where outSq.id = r.des_id
+		    group by id, name, major, file_uuid
+		    order by 5 desc) lastSq
+		where rownum = 1
+	
 	</select>
+	
+	<insert id="memDetailInsert" parameterType="com.one.style.mem.vo.MemDetailVO">
+		insert into mem_detail values(#{location}, #{makeupYn}, #{cutYn}, #{permYn}, #{dyeYn}, null, #{id})		
+	</insert>
+	
 </mapper>

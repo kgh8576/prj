@@ -6,5 +6,12 @@
 	<update id="hpchange" parameterType="com.one.style.mem.vo.MemberVO">
 		UPDATE MEMBER SET HP = #{hp} WHERE ID = #{id}
 	</update>
-	
+	<!-- 비밀번호 변경 -->
+	<update id="pwchange" parameterType="com.one.style.mem.vo.MemberVO">
+		UPDATE MEMBER SET PW = #{pw} WHERE ID = #{id}
+	</update>
+	<!-- 상담내역 출력 -->
+	<select id="conhisList">
+		SELECT * FROM CONSULTING_HISTORY WHERE MEMID = #{memId}
+	</select>
 </mapper>
