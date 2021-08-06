@@ -1,12 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Tabib HTML5 Health Directory Template</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     <style>
+
+
+body {
+ font-family: 'Lato', sans-serif;
+}
+.wrapper {
+padding-top: 120px;
+}
+.card-body{
+    text-align: center;
+    box-shadow: 0px 15px 15px -8px rgba(0,0,0,0.5)
+}
+.card-body h6 {
+font-size: 14px;
+}
+.card-title {
+text-transform: uppercase;
+font-weight: bold;
+font-size: 24px;
+}
+
+@media (max-width: 800px){
+    .mx-30{
+        margin-bottom: 30px;
+    }
+}
+
+    
     </style>
     <script>
     
@@ -49,6 +80,12 @@ pageEncoding="UTF-8" %>
         				}
         				$('#target'+targetKeyword+'Image'+(i+1)).attr('src', '${pageContext.request.contextPath}/resources/img/'+result[i].fileUuid); // 파일 이미지 변경
         				$('#target'+targetKeyword+'ATag'+(i+1)).attr('href', 'desListSelect.do?id='+result[i].id); // A태그 링크 변경
+        				var sliced = result[i].major.split(',');
+        				$('#target'+targetKeyword+'HashTag'+(i+1)).html('');
+        				for(var j = 0; j < sliced.length; j++){ // 해시태그 추가해주고 링크 걸기
+        					$('#target'+targetKeyword+'HashTag'+(i+1)).append('<a href="searchList.do?search='+sliced[j]+'"> <span class="text-grey-2">#'+sliced[j]+'</span> </a>');
+        				}
+            			$('#target'+targetKeyword+'HashTag'+(i+1)).append('');
         			}
         		},
         		error:function(err){
@@ -70,6 +107,10 @@ pageEncoding="UTF-8" %>
         			for(var i = 0; i < ratingResult.length; i++){
         				$('#target'+targetKeyword+'ReviewCnt'+(i+1)).text('총 리뷰 수 '+ratingResult[i].count+'건');
         			}
+        			
+
+                    
+        			
         		},
         		error:function(err){
         			console.log(err);
@@ -125,6 +166,11 @@ pageEncoding="UTF-8" %>
 </head>
 
 <body>
+
+
+
+
+
     <section class="banner padding-tb-200px sm-ptb-80px background-overlay" style="background-image: url('http://placehold.it/1600x830');">
         <div class="container z-index-2 position-relative">
             <div class="title text-center">
@@ -133,7 +179,8 @@ pageEncoding="UTF-8" %>
             </div>
             <!-- 검색창 -->
             <div class="row justify-content-center margin-tb-60px">
-                <div class="col-lg-8">
+            	<div class="col-lg-2"></div>
+                <div class="col-lg-7">
                     <div class="listing-search">
                         <form id="frm" action="searchList.do" method="post">
  							<div class="margin-bottom-30px">
@@ -159,9 +206,24 @@ pageEncoding="UTF-8" %>
 								</div>
                             </div>
                     </div>
+                    <div class="col-lg-3">
+                         <div class="hashTagList" style="display: inline-block; width: 200px; overflow:auto; "  >
+                         	인스타그램 인기 검색 태그
+							<div class="list-group">
+						  		<a href="#" class="list-group-item list-group-item-action">${hashTag.first }</a>
+						  		<a href="#" class="list-group-item list-group-item-action">${hashTag.two }</a>
+						  		<a href="#" class="list-group-item list-group-item-action">${hashTag.three }</a>
+						  		<a href="#" class="list-group-item list-group-item-action">${hashTag.four }</a>
+						  		<a href="#" class="list-group-item list-group-item-action">${hashTag.five }</a>
+							</div>
+						</div>
+                    </div>
+                    <div class="col-lg-2"></div>
                 </div>
             </div>
             <!-- 검색창 끝 -->
+
+
 
     </section>
             <div class="row justify-content-center">
@@ -226,41 +288,71 @@ pageEncoding="UTF-8" %>
 					
 				</c:if>
 				<c:if test="${not empty memDetail }">
-					<div class="row">
-						<div>다른 회원들이 많이 찾은 디자이너입니다</div>
-		                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-		                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-		                        <div class="thum">
-		                            <a href="#" id="rcmdDesByConHis1"><img id="rcmdDesByConHisImg1" src="http://placehold.it/400x400" alt=""></a>
-		                        </div>
-		                        <div class="padding-30px">
-		                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="rcmdDesByConHisName1">${rcmdDesByConHis.name }</a></h5>
-		                            <div class="rating clearfix">
-		                                <ul class="float-left" id="rcmdDesByConHisStar1">
+				
+				
+				<div class="wrapper">
+        <div class="container">
+        	<h2 class="text-title-large text-main-color font-weight-200 margin-bottom-15px" align="center">당신을 위한 맞춤 디자이너</h2><br><br>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+            	<h3 align="center">가장 핫한 디자이너</h3>
+            	<a href="desListSelect.do?id=${rcmdDesByConHis.id}">
+                <div class="card mx-30">
+                  <img src="${pageContext.request.contextPath}/resources/img/${rcmdDesByConHis.fileUuid }" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">${rcmdDesByConHis.name } 디자이너</h5>
+<h6>
+<c:set var="majors" value="${fn:split(rcmdDesByConHis.major,',')}"></c:set>
+<c:forEach var="major" items="${majors}">
+    <a href="searchList.do?search=${major }"> <span class="text-secondary">#${major}</span> </a>
+</c:forEach>
+
+
+</h6>
+<p class="card-text">
+                            <div class="rating clearfix">
+                                <strong class="float-center text-grey-2" id="rcmdDesByConHisReviewCnt">
+                                총 진행 건수 ${rcmdDesByConHis.count } 건
+								</strong>
+                            </div>
+</p>
+</div>
+</div></a>
+</div>
+				<div class="col-md-6 col-lg-4">
+                <h3 align="center">호평일색 디자이너</h3>
+                <a href="desListSelect.do?id=${rcmdDesByRate.id}">
+                <div class="card mx-30">
+                  <img src="${pageContext.request.contextPath}/resources/img/${rcmdDesByRate.fileUuid }" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">${rcmdDesByRate.name } 디자이너</h5>
+<h6>
+<c:set var="majors2" value="${fn:split(rcmdDesByRate.major,',')}"></c:set>
+<c:forEach var="major2" items="${majors2}">
+    <a href="searchList.do?search=${major2 }"> <span class="text-secondary">#${major2}</span> </a>
+</c:forEach>
+</h6>
+<p class="card-text">
+		                            <div class="rating clearfix" style="display: inline-block;">
+		                                <ul class="float-left" id="rcmdDesByRateStar">
+                       						<c:forEach begin="1" end="${rcmdDesByRate.rate }">
+												<li class="active"></li>
+											</c:forEach>
+											<c:forEach begin="${rcmdDesByRate.rate+1}" end="5">
+												<li></li>
+											</c:forEach>
 		                                </ul>
-		                                <small class="float-right text-grey-2" id="rcmdDesByConHisReviewCnt1">리뷰수</small>
+		                                <small class="float-right text-grey-2" id="rcmdDesByRateReviewCnt"></small>
 		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-		                
-						<div>평가가 좋은 디자이너입니다</div>
-	   	                <div class="col-lg-3 col-md-6 hvr-bob sm-mb-45px">
-		                    <div class="background-white box-shadow wow fadeInUp" data-wow-delay="0.2s">
-		                        <div class="thum">
-		                            <a href="#" id="rcmdDesByConHis2"><img id="rcmdDesByConHisImg2" src="http://placehold.it/400x400" alt=""></a>
-		                        </div>
-		                        <div class="padding-30px">
-		                            <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="rcmdDesByConHisName2">이름 자리</a></h5>
-		                            <div class="rating clearfix">
-		                                <ul class="float-left" id="rcmdDesByConHisStar2">
-		                                </ul>
-		                                <small class="float-right text-grey-2" id="rcmdDesByConHisReviewCnt2">리뷰수</small>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-            		</div>
+
+</p>
+</div>
+</div></a>
+</div>
+</div>
+</div>
+</div>
+				
             
 				</c:if>
             </div>
@@ -347,6 +439,11 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName1">이름 자리</a></h5>
+  		                          	<div id="targetHairHashTag1">
+									</div>
+                            
+                            
+                            
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetHairStar1">
                                 </ul>
@@ -363,6 +460,8 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName2">이름 자리</a></h5>
+                            <div id="targetHairHashTag2">
+                            </div>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetHairStar2">
                                 </ul>
@@ -379,6 +478,8 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetHairName3">이름 자리</a></h5>
+                            <div id="targetHairHashTag3">
+                            </div>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetHairStar3">
                                 </ul>
@@ -420,6 +521,8 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetMakeUpName1">이름 자리</a></h5>
+                            <div id="targetMakeUpHashTag1">
+                            </div>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetMakeUpStar1">
                                 </ul>
@@ -436,6 +539,8 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetMakeUpName2">이름 자리</a></h5>
+                            <div id="targetMakeUpHashTag2">
+                            </div>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetMakeUpStar2">
                                 </ul>
@@ -452,6 +557,8 @@ pageEncoding="UTF-8" %>
                         </div>
                         <div class="padding-30px">
                             <h5 class="margin-tb-15px"><a class="text-dark" href="#" id="targetMakeUpName3">이름 자리</a></h5>
+                            <div id="targetMakeUpHashTag3">
+                            </div>
                             <div class="rating clearfix">
                                 <ul class="float-left" id="targetMakeUpStar3">
                                 </ul>

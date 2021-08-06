@@ -177,7 +177,7 @@
 							Remember Me
 						</label>
 					</div>
-					<a href="#" class="forgot">Forgot my Password</a>
+					<a href="recoverIdPwPage.do" class="forgot">Forgot my ID/Password</a>
 				</div>
 				<div style="text-align: left">
 					<font id="chkNotice" size="2"></font>

@@ -4,7 +4,7 @@
 
 	<!-- 메인에서 평점 순 top3 디자이너 가져오기 -->
 	<select id="ajaxTopDesInfo" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
-	select id, name, major, trunc(rate), file_uuid
+	select id, name, major, trunc(rate) as rate, file_uuid
 	from
 	  (select id, name, major, rate, nvl(f.FILE_UUID,'0.png') as file_uuid
 		from (
@@ -39,7 +39,7 @@
 	<!-- Top3 디자이너 후기 건수 가져오기 -->
 	<select id="ajaxTopDesCount" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
 	
-	select inSq.id, count(*)
+	select inSq.id, count(*) as count
 	from review r,
 	  (select * from 
 	      (select id, name, major, avg(rate) as rate
@@ -80,7 +80,7 @@
 	      (
 	      select * from
 	                        (
-	                         select d.id , d.name , d.major ,count(*) as feq
+	                         select d.id , d.name , d.major ,count(*) as count
 	                         from CONSULTING_HISTORY c
 	                         join des_course dc
 	                         on c.cour_no = dc.cour_no

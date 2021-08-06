@@ -22,7 +22,7 @@ public class CrawlDataController {
 	}
 	
 	@RequestMapping("getCrawlData.do")
-	public List<CrawlDataVO> getCrawlData(){
+	public CrawlDataVO getCrawlData(){
 		return crawlDao.getCrawlList(); 
 	}
 	
