@@ -42,7 +42,7 @@ public class AjaxHomeContoller {
 		HttpSession session = req.getSession();
 		vo.setId((String)session.getAttribute("id"));
 		homeDao.memDetailInsert(vo);
-		return "ajax 통신 완료!!!";
+		return "ajax OK!!!";
 	}
 	
 

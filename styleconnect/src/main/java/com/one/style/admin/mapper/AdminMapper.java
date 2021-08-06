@@ -7,6 +7,9 @@ import com.one.style.mem.vo.MemberVO;
 
 public interface AdminMapper {
 	
-	public List<MemberVO> memberListSelect();
-	public List<DesVO> designerListSelect();
+	public List<MemberVO> memberListSelect(MemberVO vo);
+	public int memberListTotalCountSelect();
+	public List<DesVO> designerListSelect(DesVO vo);
+	public int designerListTotalCountSelect();
+	
 }

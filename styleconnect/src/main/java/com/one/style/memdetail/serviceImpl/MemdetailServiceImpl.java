@@ -31,7 +31,7 @@ public class MemdetailServiceImpl implements MemdetailService {
 	@Override
 	public List<ConHistoryVO> conhisList(ConHistoryVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return detailMapper.conhisList(vo);
 	}
 
 	@Override

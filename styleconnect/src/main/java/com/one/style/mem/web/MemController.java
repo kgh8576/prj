@@ -110,4 +110,14 @@ public class MemController {
 	public String insertchoice() {
 		return "member/insertchoicepage";
 	}
+	
+	
+	//ID/PW 찾기 페이지이동
+	@RequestMapping("/recoverIdPwPage.do")
+	public String forgotIdPWPage() {
+		return "member/recoverIdPwPage";
+	}
+	
+	//ID/PW 찾기
+	
 }

@@ -152,7 +152,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 	}
     
 	@Override
-	public List<CrawlDataVO> getCrawlList() {
+	public CrawlDataVO getCrawlList() {
 		return map.getCrawlList();
 	}
 	
