@@ -1,6 +1,5 @@
 package com.one.style.des.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,20 +77,7 @@ public class DesServiceImpl implements DesService {
 		// 디자이너 한명 선택
 		return desMapper.selectDes(vo);
 	}
-	@Override
-	public boolean pwCheck(DesVO vo) {
-		boolean N = false;
-		DesVO dvo = desMapper.pwCheck(vo);
-		System.out.println("dvo ::::" + dvo);
-		
-		if(dvo != null) {
-			N = true;
-		}else {
-			N = false;
-		}
-		System.out.println("boolean====" + N);
-		return N;
-	}
+
 	@Override
 	public DesVO designerUpdate(DesVO vo) {
 		// TODO Auto-generated method stub
@@ -99,18 +85,28 @@ public class DesServiceImpl implements DesService {
 	}
 	@Override
 	public DesVO selectDesPro(DesVO vo) {
-		// 디자이너 프로필 수정
+		// 디자이너 프로필 사진
 		return desMapper.selectDesPro(vo);
 	}
 	@Override
-	public int desProUpdate(DesVO vo) {
-		// TODO Auto-generated method stub
-		return desMapper.desProUpdate(vo);
+	public int desFileUpdate(DesVO vo) {
+		// 디자이너 파일 수정
+		return desMapper.desFileUpdate(vo);
 	}
 	@Override
 	public int desmajorUpdate(DesVO vo) {
-		// TODO Auto-generated method stub
+		// 디자이너 전문분야 수정
 		return desMapper.desmajorUpdate(vo);
+	}
+	@Override
+	public DesVO selectDesCer(DesVO vo) {
+		// 디자이너 증명서 
+		return desMapper.selectDesCer(vo);
+	}
+	@Override
+	public void pwchange(DesVO vo) {
+		// TODO Auto-generated method stub
+		desMapper.pwchange(vo);
 	}
 
 }

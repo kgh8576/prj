@@ -34,6 +34,7 @@ public class DesVO {
 	private int fileNo;
 	private String fileState;
 	private String fileUuid;
+	private String fileName;
 	
 	//work_close
 	private int wcloseNo;

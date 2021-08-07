@@ -8,6 +8,9 @@
 <title>디자이너마이페이지 - 내정보 관리</title>
 </head>
 <style>
+#frm{
+		width: 640px;
+}
 .select input[type=checkbox]+label {
 	display: inline-block;
 	cursor: pointer;
@@ -21,7 +24,6 @@
 	margin-right: 15px;
 	margin-left: 15px;
 }
-
 .select input[type=checkbox]+label {
 	background-color: #fff;
 	color: #333;
@@ -40,8 +42,8 @@
 }
 
 .textarea {
-	width: 410px;
-	height: 400px;
+	width: 310px;
+	height: 200px;
 	resize: none;
 	border-radius: 0px;
 	-webkit-box-shadow: none;
@@ -119,79 +121,34 @@ body {margin: 10px;}
 
 </style>
 <script>
-
-//비밀번호 확인
-function checkPw(){
-	$.ajax({
-		url : "desPwCheck.do",
-		data : {
-			pw : $('#originpw').val(),
-		},
-		type : 'post',
-		succes: function(data){
-			console.log(data);
-			if(data ==1){
-				$('#chkNotice2').html('비밀번호가 일치합니다').attr('color','#f82a2aa3');
-				$('#pwCheck').val('Checked');
-			}else{
-				$('#chkNotice2').html('비밀번호가 일치하지 않습니다. 다시 입력하세요').attr('color','#f82a2aa3');
-				$('#pwCheck').val('unChecked');
-			}
-		},
-		error: function(err){
-			console.log(err);
-			console.log("중복검사 에러");
-		}
-	})
-}
-
-//비밀번호 실시간체크
-$(function() {
-	var password = $('input[type=password]');
-	var chkNotice = $('#chkNotice');
-	var pswd = $('#pw');
-	var pswd2 = $('#pw2');
-
-	password.keyup(function() {
-		if (pswd2.val() == "") {
-			chkNotice.html('');
-		} else {
-			if (pswd2.val() != pswd.val()) {
-				chkNotice.html('비밀번호 일치하지 않음<br><br>').attr('color',
-						'#f82a2aa3');
-				$('#passwordCheck').val('unChecked');
-			} else {
-				chkNotice.html('비밀번호 일치함<br><br>').attr('color',
-						'#199894b3');
-				$('#passwordCheck').val('Checked');
-			}
-		}
-	});
-});
-	/* function formCheck(){
-		if (frm.passwordCheck.value == 'unChecked') {
-			alert("비밀번호를 다시 한번 똑같이 입력해주세요.");
-			frm.pw2.focus();
-			return false;
-		}
-		frm.submit();
-	} */
-	function readURL(input) {
-		  if (input.files && input.files[0]) {
-		    var reader = new FileReader();
-		    reader.onload = function(e) {
-		      document.getElementById('preview').src = e.target.result;
-		    };
-		    reader.readAsDataURL(input.files[0]);
-		  } else {
-		    document.getElementById('preview').src = "";
-		  }
-		}
+function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview').src = "";
+	  }
+	}
+function readURL2(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('preview2').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('preview2').src = "";
+	  }
+	}
 	
-
+function hpchange() {
+	document.getElementById("phoneNochange").style.display = 'block';
+}
 </script>
 <body>
-
 
     <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
@@ -201,57 +158,50 @@ $(function() {
                     <div class="container">
                         <ol class="breadcrumb opacity-5">
                             <li><a href="#">Home</a></li>
-                            <li><a href="mypage.do">MyPage</a></li>
+                            <li><a href="#">Dashboard</a></li>
                             <li class="active">My Profile</li>
                         </ol>
-                        <h1 class="font-weight-300">${des.name } 디자이너 정보</h1>
+                        <h1 class="font-weight-300">My Profile</h1>
                     </div>
                 </div>
                 <!-- // Page Title -->
-
+<!-- 개인정보 수정 -->
                 <div class="row margin-tb-45px full-width">
-                
-             <!-- 프로필 이미지 업로드 -->
-                <!-- 이미지 등록  -->
-                	<c:if test="${empty despro.fileUuid  }">
-                	<form method="post" action="desProUp.do" enctype="multipart/form-data">
-                	 <input type="hidden" value="${despro.fileUuid}" name="fileUuid">
                     <div class="col-md-4">
                         <div class="padding-15px background-white">
-                            <a href="" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/이미지 등록.png" alt=""></a>
-                            <input type="file" name="file" onchange="readURL(this);" >
-                            <button type="submit">등록</button>
+                        <!-- 프로필 이미지 -->
+                			<!-- 이미지 등록  -->
+                			<c:if test="${empty despro.fileUuid  }">
+                				<form method="post" action="desProUpdate.do" enctype="multipart/form-data">
+                	 			<input type="hidden" value="${despro.fileUuid}" name="fileUuid">
+                            	<a href="#" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/이미지 등록.png" alt=""></a>
+                             	<input type="file" name="file" onchange="readURL(this);" >
+                            	<button type="submit" class="btn btn-sm  text-white background-main-color btn-block">이미지 등록하기</button>
+                        		</form>
+                        	</c:if>
+                        <!-- 이미지 등록// -->
+                        <!-- 이미지 수정 -->
+                        	<c:if test="${not empty despro.fileUuid  }">
+                			 <form method="post" action="desProUpdate.do"  enctype="multipart/form-data">
+                	 		  <input type="hidden" value="${despro.fileUuid}" name="fileUuid">
+                            	<a href="#" class="d-block margin-bottom-10px"> <img id="preview" src="${pageContext.request.contextPath}/resources/img/${despro.fileUuid}" alt=""></a>
+                             	<input type="file" name="file" onchange="readURL(this);" >
+                            	<button class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 이미지 수정하기 </button>
+                       		 </form>
+                       		</c:if>
                         </div>
                     </div>
-                	</form>
-                	</c:if>
-                <!-- 이미지 등록// -->
-                <!-- 이미지 수정 -->	
-                	<c:if test="${not empty despro.fileUuid  }">
-                    <form method="post" action="desProUpdate.do"  enctype="multipart/form-data">
-                    <input type="hidden" value="${despro.fileUuid}" name="fileUuid">
-                    <div class="col-md-4">
-                        <div class="padding-15px background-white">
-                            <a href="" class="d-block margin-bottom-10px">
-                            <img id="preview" src="${pageContext.request.contextPath}/resources/img/${despro.fileUuid}" alt=""></a>
-                             <input type="file" name="file" onchange="readURL(this);" >
-                            <button type="submit" >수정</button>
-                            <a  class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">이미지 수정하기 </a>
-                        </div>
-                    </div>
-                    </form>
-                    </c:if>
-                 <!-- 이미지 수정// -->
-               <!-- 프로필 이미지 업로드 끝 -->
-   <!-- 개인정보 수정 -->     
-                    <form action="desUpdate.do" method="post" id="frm" name="frm" enctype="multipart/form-data">
-                    <input type="hidden" id="pw" name="pw" value="${des.pw }">  
-                    <input type="hidden" id="major" name="major" value="${des.major }">
+                    	<!-- 이미지 수정// -->
+                      <!-- 프로필 이미지// -->
+                   <!-- 기본정보 수정 -->
                     <div class="col-md-8">
+                        <form action="desUpdate.do" method="post" id="frm" name="frm" enctype="multipart/form-data">
                       <div class="row">
+                    	<input type="hidden" id="pw" name="pw" value="${des.pw }">  
+                   		 <input type="hidden" id="major" name="major" value="${des.major }">
                           <div class="col-md-6 margin-bottom-20px">
                               <label><i class="far fa-user margin-right-10px"></i> 이름  </label>
-                              <input id="name" name="name" type="text" class="form-control form-control-sm" readonly="readonly" value="${des.name }">
+                               <input id="name" name="name" type="text" class="form-control form-control-sm" readonly="readonly" value="${des.name }">
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
                               <label><i class="far fa-user margin-right-10px"></i> ID </label>
@@ -277,27 +227,22 @@ $(function() {
                               <label><i class="fas fa-mobile-alt margin-right-10px"></i> Address</label>
                               <input id="location" name="location"  type="tel" class="form-control form-control-sm" value="${des.location }">
                           </div>
-                        
                       </div>
                       <hr class="margin-tb-40px">
-                      <div>
-                    <!-- 전문분야 -->
-                      <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="far fa-user margin-right-10px"></i> 전문성별 ${des.majorgender } </label>
-						<div class="select" style="text-align: center;">
-							<input class="foucsmajor" type="radio" name="majorgender" id="majorgender" value="MALE" <c:if test="${des.majorgender == 'MALE'}">checked</c:if> ><label for="majorgender">남자</label>
-							<input class="foucsmajor" type="radio" name="majorgender" id="majorgender2" value="FEMALE"<c:if test="${des.majorgender == 'FEMALE'}">checked</c:if> ><label for="majorgender2">여자</label> 
-							<input type="radio" class="foucsmajor" name="majorgender" id="majorgender3" value="ALL"<c:if test="${des.majorgender == 'ALL'}">checked</c:if> ><label for="majorgender3">성별무관</label>
-						</div>
-					</div>
-					<!-- 전문분야 -->
-					<div style="text-align: left">
-						<font id="chkNotice2" size="2"></font>
-					</div>
-					 <div class="col-md-6 margin-bottom-20px">
+                      <!-- 전문분야 -->
+                      <div class="row">
+                          <div class="col-md-6 margin-bottom-20px">
+                               <label><i class="far fa-user margin-right-10px"></i> 전문성별 ${des.majorgender } </label>
+                              <div class="select" style="text-align: center;">
+								<input class="foucsmajor" type="radio" name="majorgender" id="majorgender" value="MALE" <c:if test="${des.majorgender == 'MALE'}">checked</c:if> ><label for="majorgender">남자</label>
+								<input class="foucsmajor" type="radio" name="majorgender" id="majorgender2" value="FEMALE"<c:if test="${des.majorgender == 'FEMALE'}">checked</c:if> ><label for="majorgender2">여자</label> 
+								<input type="radio" class="foucsmajor" name="majorgender" id="majorgender3" value="ALL"<c:if test="${des.majorgender == 'ALL'}">checked</c:if> ><label for="majorgender3">성별무관</label>
+							 </div>
+                          </div>
+                          <div class="col-md-6 margin-bottom-20px">
                               <label><i class="far fa-user margin-right-10px"></i> 전문분야 </label>
-						<div class="select" style="text-align: center;">
-							<input class="check" type="checkbox" style="display: none;"
+                              <div class="select" style="text-align: center;">
+                             <input class="check" type="checkbox" style="display: none;"
 								name="makeupyn" id="makeupyn1" value="Y" <c:if test="${des.makeupyn == 'Y' }">checked</c:if> ><label
 								style="width: 60px;" for="makeupyn1"> 메이크업 </label> <input
 								class="finalcheck" type="hidden" id="makeupyn" name="makeupyn">
@@ -313,82 +258,99 @@ $(function() {
 								name="dyeyn" id="dyeyn1" value="Y" <c:if test="${des.dyeyn == 'Y' }">checked</c:if>> <label
 								style="width: 60px;" for="dyeyn1"> 염색 </label> <input
 								class="finalcheck" type="hidden" id="dyeyn" name="dyeyn">
-						</div>
-					</div>
-				 <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="far fa-user margin-right-10px"></i> 경력사항</label>
-						<textarea class="textarea"
-							id="career" name="career" >${des.career }</textarea>
-					</div>
-					<div style="text-align: left">
-						<font id="chkNotice" size="2"></font>
-					</div>
-					<!-- 자격증 첨부  form 나눠야함!!!!-->
-					<form action="desProUpdate.do" method="post" id="frm" name="frm" enctype="multipart/form-data">
-						<div class="col-md-6 margin-bottom-20px">
-                              <label><i class="far fa-user margin-right-10px"></i> 자격증 첨부</label>
-						<!-- 자격증 등록(없을경우) -->
-						<c:if test="${empty des.fileUuid }">
-						<div class="form-group label-floating">
-							<p>재직증명서나 미용자격증등을 첨부해주시면됩니다.</p>
-						<div class="filebox bs3-primary preview-image">
-							<input type="file" name="fileUuid" id="cergroupno" multiple="multiple" class="upload-hidden">
-						</div>
-						</div>
-						</c:if>
-						<!-- 자격증 수정(있을경우) -->
-						<c:if test="${not empty des.fileUuid }">
-						<div class="form-group label-floating">
-							<p>재직증명서나 미용자격증등을 재첨부해주시면됩니다.</p>
-						<div class="filebox bs3-primary preview-image">
-							<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;"> <label for="cergroupno">업로드</label>
-							<input type="file" name="fileUuid" id="cergroupno" class="upload-hidden">
-						</div>
-						</div>
-						</c:if>
-						</form>
-					<!-- 자격증 첨부 -->
-               	<!--// 비밀번호 변경 -->
-               	<!-- <!--     기존 비밀번호 체크
-                     <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="fas fa-lock margin-right-10px"></i> 기존 비밀번호</label>
-                              <input id="originpw" name="originpw" type="password" class="form-control form-control-sm" oninput="checkPw()">
-                          	<input type="hidden" id="pwCheck" name="pwCheck" value="unChecked">	
                           </div>
-                         <div style="text-align: left">
-							<font id="chkNotice2" size="2"></font>
-						</div>
-				   기존 비밀번호 체크 끝 --> 
-                       <!--    <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="fas fa-lock margin-right-10px"></i> 새비밀번호</label>
-                              <input id="pw" name="pw" type="password" class="form-control form-control-sm">
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="fas fa-lock margin-right-10px"></i> 새비밀번호 확인</label>
-                              <input id="pw2" name="pw2" type="password" class="form-control form-control-sm">
-                              <input type="hidden" id="passwordCheck" name="passwordCheck" value="unChecked">
+                              <label><i class="far fa-user margin-right-10px"></i>경력사항</label><br/>
+								<textarea  class="textarea" id="career" name="career" >${des.career }</textarea>
                           </div>
-                          <div style="text-align: left">
-							<font id="chkNotice" size="2"></font>
-						</div> -->
-                  <!-- 비밀번호 변경 끝// -->
-                        <a  class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">Update Profile</a>
-						<button type="submit" > 수정ddddd</button>
+                          <div class="col-md-6 margin-bottom-20px">
+								<label><i class="fas fa-lock margin-right-10px"></i></label> <a
+									href="despwchangepage.do">비밀번호 변경하기</a>
+							</div>
+                          </div>
+                         	<div align="center">
+                        		<button type="submit" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">수정하기</button>
+            				</div>
+            		</form>
+            		<!-- 기본정보 수정 끝// -->
+            		<!-- 증명서 제출 -->
+            		<hr class="margin-tb-40px">
+            		<!-- 증명서 첨부(등록) -->
+            			<c:if test="${empty descer.fileUuid }">
+                          <div class="col-md-6 margin-bottom-20px">
+                          <label><i class="far fa-user margin-right-10px"></i> 재직증명서나 미용자격증 등 첨부 </label>
+                      		<button type="button" onclick="hpchange()">증명서 제출하기</button><br/>
+                      		<div id="phoneNochange" style="display: none;">
+                      		<form method="post" action="desCerUp.do" enctype="multipart/form-data">
+								<img id="preview2" src="${pageContext.request.contextPath}/resources/img/${descer.fileUuid}" alt="">
+                	 			<input type="hidden" value="${descer.fileUuid}" name="fileUuid">
+                             	<input type="file" name="file" onchange="readURL2(this);" >
+                             	<button type="submit">등록</button>
+                            </form>
+							</div>
+                      		</div>
+                      	</c:if>
+                      <!-- 재첨부 끝// -->
+            		<!-- 증명서 재첨부(수정) -->
+            		<c:if test="${not empty descer.fileUuid }">
+                          <div class="col-md-6 margin-bottom-20px">
+                          <label><i class="far fa-user margin-right-10px"></i> 재직증명서나 미용자격증 등 재첨부 <br/> (*재첨부시 기존 파일은 전부 삭제됩니다.) </label>
+                      		<button type="button" onclick="hpchange()">증명서 제출하기</button><br/>${descer.fileName }
+                      		<div id="phoneNochange" style="display: none;">
+                      		<form method="post" action="desCerUpdate.do" enctype="multipart/form-data">
+								<img id="preview2" src="${pageContext.request.contextPath}/resources/img/${descer.fileUuid}" alt="">
+                	 			<input type="hidden" value="${descer.fileUuid}" name="fileUuid">
+                             	<input type="file" name="file" onchange="readURL2(this);" >
+                             	<button type="submit">등록</button>
+                            </form>
+							</div>
+                      		</div>
+                     </c:if>
+                      <!-- 재첨부 끝// -->
+                     <!-- 증명서 제출 끝// -->
+            			</div>
+            		</div>
                     </div>
-        			</form>
                 </div>
 
             </div>
         </div>
-        </div>
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->
-      
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <span>© 2018 tabib Health Directory | All Right Reserved <a class="text-grey-2 margin-left-15px" href="https://themeforest.net/user/nile-theme/portfolio" target="_blank">Powered by : Nile Theme</a></span>
+                </div>
+            </div>
+        </footer>
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
           <i class="fa fa-angle-up"></i>
         </a>
-       
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="page-login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
 </body>
+
 </html>

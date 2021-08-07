@@ -29,6 +29,9 @@ import com.one.style.des.vo.DesVO;
 import com.one.style.dessearch.service.DessearchService;
 import com.one.style.dessearch.vo.DessearchVO;
 import com.one.style.files.service.FilesService;
+import com.one.style.mem.service.MemService;
+import com.one.style.mem.vo.MemberVO;
+import com.one.style.memdetail.service.MemdetailService;
 
 import edu.emory.mathcs.backport.java.util.Collections;
 import net.nurigo.java_sdk.api.Message;
@@ -45,6 +48,12 @@ public class DesController {
 	
 	@Autowired
 	DessearchService desSearchDao;
+	
+	@Autowired
+	MemService memDao;
+	
+	@Autowired
+	MemdetailService memdetailDao;
 	
 	@RequestMapping("/desloginCheck.do")
 	@ResponseBody
@@ -229,6 +238,7 @@ public class DesController {
 			vo.setId(desId);
 			model.addAttribute("des", desDao.selectDes(vo));
 			model.addAttribute("despro", desDao.selectDesPro(vo));
+			model.addAttribute("descer", desDao.selectDesCer(vo));
 			return "desmypage/desInfo";
 		}
 	
@@ -242,7 +252,7 @@ public class DesController {
 			String desPw = request.getParameter("desPw");
 			return "desmypage/desSchedule";
 		}
-	//마이페이지>기본정보 업데이트
+	//마이페이지 - 기본정보 업데이트
 	@RequestMapping("desUpdate.do")
 	public String desUpdate(MultipartHttpServletRequest request,Model model, DesVO vo ) {
 		//기본정보
@@ -255,18 +265,96 @@ public class DesController {
 		vo.setCutyn(request.getParameter("cutyn"));
 		vo.setDyeyn(request.getParameter("dyeyn"));
 		vo.setCareer(request.getParameter("career"));
-		
-		//자격증
-		vo.setFileUuid(request.getParameter("fileUuid"));
-		fileservice.upload(request,"cer",request.getParameter("id"));
-
-		desDao.desProUpdate(vo);
-		int n = desDao.desUpdate(vo);
-		System.out.println("업데이트 행 수: " + n);
+		desDao.desUpdate(vo);
 
 		return "redirect:desInfo.do";
 	}
-	//전문분야 페이지
+	//비밀번호변경 페이지 이동
+		@RequestMapping("/despwchangepage.do")
+		public String pwchangepage() {
+			return "desmypage/pwchangepage";
+		}
+	//비밀번호변경
+	@RequestMapping("/despwchange.do")
+	@ResponseBody
+	public int pwchange(HttpServletRequest request,DesVO vo) {
+		//세션에있는 아이디를 가지고온다
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("did");
+		vo.setId(id);
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
+		String pw = request.getParameter("gupw");
+		String newpassword = request.getParameter("pw");
+		//암호화시킨 기존비밀번호
+		//String encoderPW = encoder.encode(pw);
+		//암호화시킨 새로운비밀번호
+		String NEWencoderPW = encoder.encode(newpassword);
+		// 결과값리턴을 위해서 cnt 선언
+		int cnt = 0;
+		// DB에 있는 password값 가지고오기
+		DesVO dvo = desDao.designerlogin(vo);
+		//입력들어온 pw값과 DB에 있는 password 값을 비교 맞으면 true / 틀리면 false
+		boolean b = encoder.matches(pw, dvo.getPw());
+		// 비교한 패스워드가 같을경우
+		if(b) {
+			//vo에 암호화된 새로운 PW 를 넣고
+			vo.setPw(NEWencoderPW);
+			//비밀번호 업데이트시킴
+			desDao.pwchange(vo);
+			cnt = 1;
+		}
+	
+		return cnt;
+	}
+	//자격증 파일 등록
+	@RequestMapping("desCerUp.do")
+	public String desCerUp(MultipartHttpServletRequest request, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
+		fileservice.upload(request,"cer",desId);
+		System.out.println();
+		return "redirect:desInfo.do";
+	}
+	//자격증 파일 재첨부 
+	@RequestMapping("desCerUpdate.do")
+	public String desCerUpdate(MultipartHttpServletRequest request, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		String uuid = request.getParameter("fileUuid");
+		vo.setId(desId);
+		vo.setFileUuid(uuid);
+			
+		desDao.desFileUpdate(vo);
+		fileservice.upload(request,"cer",desId);
+		return "redirect:desInfo.do";
+	}
+	//프로필사진 등록
+	@RequestMapping("desProUp.do")
+	public String desProUp(MultipartHttpServletRequest request, DesVO vo) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
+		System.out.println("==========================="+desId);
+		fileservice.upload(request,"pro",desId);
+		System.out.println();
+		return "redirect:desInfo.do";
+	}
+	//프로필사진 수정
+		@RequestMapping("desProUpdate.do")
+		public String desProUpdate(MultipartHttpServletRequest request, DesVO vo) {
+			HttpSession session = request.getSession();
+			String desId = (String) session.getAttribute("did");
+			String uuid = request.getParameter("fileUuid");
+			vo.setId(desId);
+			vo.setFileUuid(uuid);
+				
+			desDao.desFileUpdate(vo);
+			fileservice.upload(request, "pro", desId);
+			return "redirect:desInfo.do";
+		}
+	//마이페이지 major페이지
 	@RequestMapping("desMajor.do")
 	public String desMajor(HttpServletRequest request, Model model, DesVO vo) {
 		HttpSession session = request.getSession();
@@ -293,30 +381,6 @@ public class DesController {
 		
 		desDao.desmajorUpdate(vo);
 		return "redirect:desMajor.do";
-	}
-	//프로필사진 수정
-	@RequestMapping("desProUpdate.do")
-	public String desProUpdate(MultipartHttpServletRequest request, DesVO vo) {
-		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("did");
-		String uuid = request.getParameter("fileUuid");
-		vo.setId(desId);
-		vo.setFileUuid(uuid);
-		
-		desDao.desProUpdate(vo);
-		fileservice.upload(request, "pro", desId);
-		return "redirect:desInfo.do";
-	}
-	//프로필사진 등록
-	@RequestMapping("desProUp.do")
-	public String desProUp(MultipartHttpServletRequest request, DesVO vo) {
-		HttpSession session = request.getSession();
-		String desId = (String) session.getAttribute("did");
-		vo.setId(desId);
-		System.out.println("==========================="+desId);
-		fileservice.upload(request,"pro",desId);
-		System.out.println();
-		return "redirect:desInfo.do";
 	}
 	
 	@RequestMapping("desStyle.do")
