@@ -200,16 +200,28 @@ public class DesMypageController {
 	//마이페이지/상담목록 관리페이지
 	@RequestMapping("desCourse.do")
 	public String desCourse(Model model, DessearchVO vo, HttpServletRequest request) {
+		model.addAttribute("course",desSearchDao.courseList(vo));
+		return "desmypage/desCourse";
+	}
+	//마이페이지/상담목록 관리페이지/상담목록 생성
+	@RequestMapping("desCourseRegister.do")
+	public String desCourseRegister(Model model, DessearchVO vo,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String desId = (String) session.getAttribute("did");
 		vo.setId(desId);
 		model.addAttribute("course",desSearchDao.courseList(vo));
-		return "desmypage/desCourse";
-	}
-	//마이페이지/상담목록 관리페이지 - 상담목록 생성하기
-	@RequestMapping("desCourseRegister.do")
-	public String desCourseRegister(Model model, DessearchVO vo) {
-		
 		return "desmypage/desCourseRegister";
+	}
+	@RequestMapping("desCourseInsert.do")
+	public String desCourseInsert(Model model, DesVO vo, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String desId = (String)session.getAttribute("id");
+		vo.setId(desId);
+		System.out.println("아이디-------------------------------------------"+desId);
+
+		
+		desMyDao.desCourseInsert(vo);
+
+	return "redirect:desCourse.do";
 	}
 }

@@ -25,11 +25,7 @@ public class DesVO {
 	private String dyeyn;
 	private String major;
 	private String comments;
-	private String title;
-	private String detail;
-	private int price;
-	private int courNo;
-	
+
 	//file
 	private int fileNo;
 	private String fileState;
@@ -56,4 +52,9 @@ public class DesVO {
 	private int firstCnt;
 	private String pullValue;
 	
+	//course
+	private String title;
+	private String detail;
+	private String price;
+	private int courNo;
 }

@@ -44,5 +44,15 @@ public class DesMypageServiceImpl implements DesMypageService {
 		// 비밀번호 변경
 		desMapper.pwchange(vo);
 	}
+	@Override
+	public void desCourseInsert(DesVO vo) {
+		//상담등록
+		desMapper.desCourseInsert(vo);
+	}
+	@Override
+	public int desCourseUpdate(DesVO vo) {
+		//상담 수정
+		return desMapper.desCourseUpdate(vo);
+	}
 
 }

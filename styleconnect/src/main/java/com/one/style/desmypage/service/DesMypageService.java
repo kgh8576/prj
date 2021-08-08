@@ -11,4 +11,7 @@ public interface DesMypageService {
 	public DesVO selectDesPro(DesVO vo);
 	public DesVO selectDesCer(DesVO vo);
 	public void pwchange(DesVO vo);
+	//상담등록
+	public void desCourseInsert(DesVO vo);
+	public int desCourseUpdate(DesVO vo);
 }

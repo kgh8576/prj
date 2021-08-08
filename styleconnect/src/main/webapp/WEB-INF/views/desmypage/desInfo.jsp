@@ -173,6 +173,7 @@ function hpchange() {
                 			<!-- 이미지 등록  -->
                 			<c:if test="${empty despro.fileUuid  }">
                 				<form method="post" action="desProUpdate.do" enctype="multipart/form-data">
+                	 			 <label ><i class="far fa-images margin-right-10px"></i> 프로필 사진 등록</label>
                 	 			<input type="hidden" value="${despro.fileUuid}" name="fileUuid">
                             	<a href="#" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/이미지 등록.png" alt=""></a>
                              	<input type="file" name="file" onchange="readURL(this);" >
@@ -183,6 +184,7 @@ function hpchange() {
                         <!-- 이미지 수정 -->
                         	<c:if test="${not empty despro.fileUuid  }">
                 			 <form method="post" action="desProUpdate.do"  enctype="multipart/form-data">
+                			  <label ><i class="far fa-images margin-right-10px"></i> 프로필 사진 수정</label>
                 	 		  <input type="hidden" value="${despro.fileUuid}" name="fileUuid">
                             	<a href="#" class="d-block margin-bottom-10px"> <img id="preview" src="${pageContext.request.contextPath}/resources/img/${despro.fileUuid}" alt=""></a>
                              	<input type="file" name="file" onchange="readURL(this);" >
@@ -213,7 +215,7 @@ function hpchange() {
                               <input id="birth" name="birth" type="text" readonly="readonly" value="${des.birth }" class="form-control form-control-sm" >
                           </div>
                            <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="fas fa-mobile-alt margin-right-10px"></i> 성별</label>
+                              <label><i class="fas fa-mobile-alt margin-right-10px"></i> 성별</label><br/>
                               <select id="gender" name="gender" disabled="disabled"> 
                               			<option value="MALE"  <c:if test="${des.gender =='남'}">selected</c:if>>Male</option>
 										<option value="FEMALE" <c:if test="${des.gender == '여'}">selected</c:if>>Female</option>
@@ -224,7 +226,7 @@ function hpchange() {
                               <input id="hp" name="hp"  type="text" class="form-control form-control-sm" value="${des.hp }">
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="fas fa-mobile-alt margin-right-10px"></i> Address</label>
+                              <label><i class="far fa-map margin-right-10px"></i> Address</label>
                               <input id="location" name="location"  type="tel" class="form-control form-control-sm" value="${des.location }">
                           </div>
                       </div>
@@ -232,7 +234,7 @@ function hpchange() {
                       <!-- 전문분야 -->
                       <div class="row">
                           <div class="col-md-6 margin-bottom-20px">
-                               <label><i class="far fa-user margin-right-10px"></i> 전문성별 ${des.majorgender } </label>
+                               <label><i class="far fa-flag margin-right-10px"></i> 전문성별 ${des.majorgender } </label>
                               <div class="select" style="text-align: center;">
 								<input class="foucsmajor" type="radio" name="majorgender" id="majorgender" value="MALE" <c:if test="${des.majorgender == 'MALE'}">checked</c:if> ><label for="majorgender">남자</label>
 								<input class="foucsmajor" type="radio" name="majorgender" id="majorgender2" value="FEMALE"<c:if test="${des.majorgender == 'FEMALE'}">checked</c:if> ><label for="majorgender2">여자</label> 
@@ -240,7 +242,7 @@ function hpchange() {
 							 </div>
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="far fa-user margin-right-10px"></i> 전문분야 </label>
+                              <label><i class="far fa-flag margin-right-10px"></i> 전문분야 </label>
                               <div class="select" style="text-align: center;">
                              <input class="check" type="checkbox" style="display: none;"
 								name="makeupyn" id="makeupyn1" value="Y" <c:if test="${des.makeupyn == 'Y' }">checked</c:if> ><label
@@ -261,16 +263,16 @@ function hpchange() {
                           </div>
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
-                              <label><i class="far fa-user margin-right-10px"></i>경력사항</label><br/>
+                              <label><i class="far fa-list-alt margin-right-10px"></i>경력사항</label><br/>
 								<textarea  class="textarea" id="career" name="career" >${des.career }</textarea>
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
 								<label><i class="fas fa-lock margin-right-10px"></i></label> <a
-									href="despwchangepage.do">비밀번호 변경하기</a>
+									href="despwchangepage.do" >비밀번호 변경하기</a>
 							</div>
                           </div>
                          	<div align="center">
-                        		<button type="submit" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">수정하기</button>
+                        		<button type="submit" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">기본정보 수정하기</button>
             				</div>
             		</form>
             		<!-- 기본정보 수정 끝// -->
@@ -295,7 +297,7 @@ function hpchange() {
             		<!-- 증명서 재첨부(수정) -->
             		<c:if test="${not empty descer.fileUuid }">
                           <div class="col-md-6 margin-bottom-20px">
-                          <label><i class="far fa-user margin-right-10px"></i> 재직증명서나 미용자격증 등 재첨부 <br/> (*재첨부시 기존 파일은 전부 삭제됩니다.) </label>
+                          <label><i class="far fa-folder-open margin-right-10px"></i> 재직증명서나 미용자격증 등 재첨부 <br/> (*재첨부시 기존 파일은 전부 삭제됩니다.) </label>
                       		<button type="button" onclick="hpchange()">증명서 제출하기</button><br/>${descer.fileName }
                       		<div id="phoneNochange" style="display: none;">
                       		<form method="post" action="desCerUpdate.do" enctype="multipart/form-data">

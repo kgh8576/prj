@@ -18,24 +18,34 @@
 
 	<!-- 디자이너 수정 -->
 	<update id="desUpdate" parameterType="com.one.style.des.vo.DesVO">
-	update designer 
-	set hp= #{hp}, location= #{location}, pw= #{pw}, major= #{major},
-	 	major_gender=#{majorgender},career=#{career},makeup_yn=#{makeupyn},perm_yn=#{permyn},cut_yn=#{cutyn},dye_yn=#{dyeyn}
-	where id= #{id}
+	UPDATE DESIGNER 
+	SET HP= #{HP}, LOCATION= #{LOCATION}, PW= #{PW}, MAJOR= #{MAJOR},
+	 	MAJOR_GENDER=#{MAJORGENDER},CAREER=#{CAREER},MAKEUP_YN=#{MAKEUPYN},PERM_YN=#{PERMYN},CUT_YN=#{CUTYN},DYE_YN=#{DYEYN}
+	WHERE ID= #{ID}
 	</update>
 	
 	<!-- 디자이너 파일수정 -->
 	<update id="desFileUpdate" parameterType="com.one.style.des.vo.DesVO">
-	update files
-	set file_state = 'del'
-	where file_uuid= #{fileUuid}
+	UPDATE FILES
+	SET FILE_STATE = 'DEL'
+	WHERE FILE_UUID= #{fileUuid}
 	</update>
 
 	<!-- 디자이너 major 수정 -->
 	<update id="desmajorUpdate" parameterType="com.one.style.des.vo.DesVO">
-	update designer 
-	set major= #{major}
-	where id= #{id,jdbcType=VARCHAR}
+	UPDATE DESIGNER 
+	SET MAJOR= #{major}
+	WHERE ID= #{id,jdbcType=VARCHAR}
 	</update>
 	
+	<!-- 상담등록 -->
+	<insert id="desCourseInsert">
+	insert into (select cour_no,id,title,detail,price from des_course where id=#{id})
+	values(cour_no_seq.nextval, #{id}, #{title}, #{detail}, #{price})
+	</insert>
+	
+	<!-- 상담수정 -->
+	<delete id="desCourseUpdate">
+	
+	</delete>
 </mapper>

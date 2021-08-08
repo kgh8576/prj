@@ -38,7 +38,7 @@
                                     <a class="d-block h4  text-capitalize margin-bottom-8px" href="#">${vo.title} </a>
                                     <div class="meta">
                                         <span class="margin-right-20px text-extra-small"><a href="#" class="text-main-color"> ${vo.name }</a>디자이너</span>
-                        			상담번호:${vo.courNo }
+                        			상담번호:${vo.courNo } / ${vo.price }원
                         			 <hr>
                                         <span> ${vo.detail }  </span>
                                         <div align="right">
