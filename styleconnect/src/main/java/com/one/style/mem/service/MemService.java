@@ -1,6 +1,7 @@
 package com.one.style.mem.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.one.style.mem.vo.MemberVO;
 
@@ -13,5 +14,6 @@ public interface MemService {
 	public MemberVO memberUpdate(MemberVO vo);
 	public MemberVO memberDelete(MemberVO vo);
 	public boolean insertcheck(MemberVO vo);
-	
+	public String getUserIdByHpName(Map<String, String> map);
+	public int updateUserPwByHpName(Map<String, String> map);
 }

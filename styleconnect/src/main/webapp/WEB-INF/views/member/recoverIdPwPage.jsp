@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 	.li1{
 	 display: inline-block;
@@ -49,94 +50,83 @@
 }
 </style>
 <script>
-	
-	var frm;
-	var frmHp;
-	var hpcheck;
-	var hpnumber = document;
-	
-	$(function(){
-		///////////////////////  
-		//핸드폰인증번호체크
-		//////////////////////
-		hpnumber.onchange = function(e) {
-			hpnumber = frmhp;
-			$.ajax({
-				url : 'checkSMS.do',
-				data : {
-					insertCode : hpnumber,
-				},
-				type : 'post',
-				success : function(data) {
-					console.log(data);
-					if (data == 1) {
-						$('#hppass').val('Checked');
-						$('#chkNotice3').html('인증이 완료되었습니다.')
-								.attr('color', '#f82a2aa3');
-						
-					} else {
-						$('#hppass').val('unChecked');
-						$('#chkNotice3').html('인증번호가 틀렸습니다.')
-								.attr('color', '#f82a2aa3');
-					}
-				},
-				error : function(err) {
-					console.log(err);
-					console.log("핸드폰번호 인증 에러");
-				}
-			})
-		};
-		$("#hpcheckbtn").on("click", hpcheckbtn);
-		////////////////////////
-		// 핸드폰번호 정규식 ///////
-		// 검증 /////////////////
-		////////////////////////
-		var hpnumber = document.getElementById("hp");
-		hpnumber.onblur = function(e) {
-			$.ajax({
-				url : 'realhpcheck.do',
-				data : {
-					hp : $('#hp').val(),
-				},
-				type : 'post',
-				success : function(data) {
-					if (data == 1) {
-						$('#chkNotice3').html(
-								'입력완료 인증번호받기를 눌러주세요.').attr(
-								'color', '#f82a2aa3');
-					} else {
-						$('#chkNotice3').html(
-								'휴대폰번호 형식이 맞지않습니다.').attr(
-								'color', '#f82a2aa3');
-						$('#hp').val('');
-						frm.hp.focus();
-					}
-				},
-				error : function(err) {
-					console.log(err);
-					console.log("핸드폰번호 정규식 에러");
-				}
 
-			})
-		};
+	var hp;
+	var pw;
+	var searchTable;
+	var name;
+	
+	function realhpcheck(){
+
+		$.ajax({
+			url : 'realhpcheck.do',
+			data : {
+				hp : $('#hp').val(),
+			},
+			type : 'post',
+			success : function(data) {
+				if (data == 1) {
+					$('#chkNotice').html(
+							'입력완료 인증번호받기를 눌러주세요.').attr(
+							'color', '#f82a2aa3');
+				} else {
+					$('#chkNotice').html(
+							'휴대폰번호 형식이 맞지않습니다.').attr(
+							'color', '#f82a2aa3');
+					$('#hp').val('');
+					$('#hp').focus();
+				}
+			},
+			error : function(err) {
+				console.log(err);
+				console.log("핸드폰번호 정규식 에러");
+			}
+		})
+	}
+	
+	function smsCheck(){
+		$.ajax({
+			url : 'checkSMS.do',
+			data : {
+				insertCode : $('#hpcheck').val(),
+			},
+			type : 'post',
+			success : function(data) {
+				console.log(data);
+				if (data == 1) {
+					$('#hppass').val('Checked');
+					$('#chkNotice').html('인증이 완료되었습니다.')
+							.attr('color', '#f82a2aa3');
+					
+				} else {
+					$('#hppass').val('unChecked');
+					$('#chkNotice').html('인증번호가 틀렸습니다.')
+							.attr('color', '#f82a2aa3');
+				}
+			},
+			error : function(err) {
+				console.log(err);
+				console.log("핸드폰번호 인증 에러");
+			}
+		})
 		
-	});
+	}
 	
 	function hpcheckbtn() {
-		var button_joinus = document.getElementById('hpcheckbtn');
-		if (frmHp == "") {
+		var button_joinus = $('#hpcheckbtn');
+		if ( $('#hp').val() == "" ) {
 			alert("핸드폰번호를 입력해주세요.");
 		} else {
 			$.ajax({
 				url : 'sendSMS.do',
 				data : {
-					hp : $('#hp').val(),
+					hp : $('#hp').val()
 				},
 				type : 'post',
 				success : function(data) {
-					frm.hpcheck.focus();
+					$('#hpcheck').focus();
 					button_joinus.disabled = true;
-					$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
+					$('#chkNotice').html('인증번호가 전송되었습니다.').attr('color',
 							'#f82a2aa3');
 				},
 				error : function(err) {
@@ -148,42 +138,151 @@
 	};
 	
 	function membershow() {
-		document.getElementById("member").style.display = 'block';
-		document.getElementById("des").style.display = 'none';
-		frm = document.getElementById("m_frm");
-		frmHp = frm.hp.value;
-		hpcheck = frm.mhpcheck.value;
-		
+		document.getElementById("memCheckedBar").style.display = 'block';
+		document.getElementById("desCheckedBar").style.display = 'none';
 	}
 	function desshow() {
-		document.getElementById("des").style.display = 'block';
-		document.getElementById("member").style.display = 'none';
-		frm = document.getElementById("d_frm");
-		frmHp = frm.hp.value;
-		hpcheck = frm.dhpcheck.value;
+		document.getElementById("desCheckedBar").style.display = 'block';
+		document.getElementById("memCheckedBar").style.display = 'none';
 	}
-	function nextpage(){
-		if (frm.hppass.value == "unChecked") {
+	function getId(){
+		if ( $('#hppass').value == "unChecked" ) {
 			alert("핸드폰번호 인증을 해주세요.");
-			frm.hp.focus();
+			$('#hp').focus();
 			return false;
 		}
-/*		
-		if (frm.passwordpass.value == 'unChecked') {
-			alert("비밀번호 형식이 맞지않습니다. 다시한번 확인해주세요.");
-			frm.pw.focus();
+		if ( $('#name').value == "" ) {
+			alert("이름을 기재하세요.");
+			$('#name').focus();
 			return false;
 		}
-
-		if (frm.passwordCheck.value == 'unChecked') {
-			alert("비밀번호를 다시 한번 똑같이 입력해주세요.");
-			frm.pw2.focus();
-			return false;
-		}
-*/		
 		
+		if ( document.getElementById("memCheckedBar").style.display == 'none' ){
+			searchTable = 'designer'; 
+		} else {
+			searchTable = 'member';
+		}
+		
+		$.ajax({
+			url : 'getUserIdByHpName.do',
+			data : {
+				hp : $('#hp').val(),
+				name : $('#name').val(),
+				searchTable : searchTable
+			},
+			type : 'post',
+			success : function(data) {
+				document.getElementById("log-in").style.display = 'none';
+				document.getElementById("getIdDiv").style.display = 'block';
+				$('#getId').append(data);
+				
+				hp = $('#hp').val();
+				name = $('#name').val();
+			},
+			error : function(err) {
+				console.log(err);
+				console.log("인증에러");
+			}
+		});
+	}
+		
+	function nextpage(){
+		document.getElementById("getIdDiv").style.display = 'none';
+		document.getElementById("updatePwDiv").style.display = 'block';
 	}
 	
+		
+	
+	//비밀번호 정규화
+	function sendpassword(){
+		$.ajax({
+			url : 'sendpassword.do',
+			data : {
+				pw : $('#pw').val(),
+			},
+			type : 'post',
+			success : function(data) {
+				if(data == 1){
+					$('#chkNoticeP').html('사용할수있는 비밀번호입니다.').attr('color',
+					'#132bab');
+					$('#passwordpass').val('Checked');
+				}else {
+					$('#chkNoticeP').html('사용할수 없는 비밀번호입니다.').attr('color',
+					'#f82a2aa3');
+					$('#passwordpass').val('unChecked');
+					$('#pw').focus();
+				}
+			},
+			error : function(err) {
+				console.log(err);
+				console.log("비밀번호 검증 오류");
+			}
+		});
+	}
+	
+	//비밀번호 실시간체크
+	$(function() {
+		var password = $('input[type=password]');
+		var chkNotice = $('#chkNoticeP2');
+		var pswd = $('#pw');
+		var pswd2 = $('#pw2');
+
+		password.keyup(function() {
+			if (pswd2.val() == "") {
+			} else {
+				if (pswd2.val() != pswd.val()) {
+					chkNotice.html('비밀번호 일치하지 않음<br><br>').attr('color',
+							'#f82a2aa3');
+					$('#passwordCheck').val('unChecked');
+				} else {
+					chkNotice.html('비밀번호 일치함<br><br>').attr('color',
+							'#199894b3');
+					$('#passwordCheck').val('Checked');
+				}
+			}
+		});
+	});
+	
+	function updatePw(){
+			if ($('#pw').val() == '' ){
+				alert("비밀번호를 입력해주세요.");
+				return false;
+			}
+			if ($('#passwordpass').val() == 'unChecked') {
+				alert("비밀번호 형식이 맞지 않습니다. 다시한번 확인해주세요.");
+				$('#pw').focus();
+				return false;
+			}
+			if ($('#passwordCheck').val() == 'unChecked') {
+				alert("비밀번호를 다시 한 번 똑같이 입력해주세요.");
+				$('#pw2').focus();
+				return false;
+			}
+			
+			pw = $('#pw').val();
+			
+			$.ajax({
+				url : 'updateUserPwByHpName.do',
+				data : {
+					hp : hp,
+					name : name,
+					searchTable : searchTable,
+					pw : pw
+				},
+				type : 'post',
+				success : function(data) {
+					alert('성공했습니다. 재 로그인하세요');
+					console.log(data);
+					location.href='main.do';
+				},
+				error : function(err) {
+					console.log(err);
+					console.log("비밀번호 변경 에러");
+				}
+			});
+	}
+	
+
 	
 </script>
 </head>
@@ -194,62 +293,75 @@
 	<!--======= log_in_page =======-->
 
 	<div id="log-in" class="site-form log-in-form box-shadow border-radius-10">
-		<ul class="ul1">
+		<ul id="memCheckedBar" class="ul1">
 			<li class="lit" onclick="membershow()">일반</li>
 			<li class="li1" onclick="desshow()">디자이너</li>
 		</ul>
-		<div class="form-output">
-			<form action="" id="m_frm">
-				<div class="form-group label-floating">
-					<label class="control-label">핸드폰 번호</label>
-					<input class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp" id="hp" min="11" maxlength="11">
-					<input style="width: 80%; display: flex; float: left;" class="form-control" placeholder="인증번호" type="text" name="mhpcheck" id="mhpcheck"
-						onchange="smsCheck()">
-					<input type="hidden" id="hppass" name="hppass" value="unChecked">
-					<button type="button" class="hpcheckbtn1" id="hpcheckbtn" name="hpcheckbtn">인증하기</button>
-					<font id="chkNotice3" size="2"></font>
-				</div>
-				<button type="button" onclick="nextpage()" class="btn btn-md btn-primary full-width">다음단계</button>
-			</form>
-
-
-		</div>
-	</div>
-
-</div>
-
-
-
-<div class="container margin-bottom-100px" id="des"
-	style="display: none;">
-	<!--======= log_in_page =======-->
-	<div id="log-in"
-		class="site-form log-in-form box-shadow border-radius-10">
-		<ul class="ul1">
+		<ul id="desCheckedBar" class="ul1" style="display: none;">
 			<li class="li1" onclick="membershow()">일반</li>
 			<li class="lit" onclick="desshow()">디자이너</li>
 		</ul>
-
 		<div class="form-output">
-			<form action="" id="d_frm">
 				<div class="form-group label-floating">
-					<label class="control-label">핸드폰 번호</label>
-					<input class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp" id="hp" min="11" maxlength="11">
-					<input style="width: 80%; display: flex; float: left;" class="form-control" placeholder="인증번호" type="text" name="dhpcheck" id="dhpcheck"
-						onchange="smsCheck()">
-					<input type="hidden" id="hppass" name="hppass" value="unChecked">
-					<button type="button" class="hpcheckbtn1" id="hpcheckbtn" name="hpcheckbtn">인증하기</button>
-					<font id="chkNotice3" size="2"></font>
+					<label class="control-label">이름</label>
+					<input id="name" name="name" class="form-control" placeholder="이름을 입력해주세요!" type="text">
 				</div>
-				<button type="button" onclick="nextpage()" class="btn btn-md btn-primary full-width">다음단계</button>
-			</form>
+				<div class="form-group label-floating">
+					<form action="" id="m_frm">
+					<label class="control-label">핸드폰 번호</label>
+					<input class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp" id="hp" min="11" maxlength="11" onblur="realhpcheck()">
+					<input style="width: 80%; display: flex; float: left;" class="form-control" placeholder="인증번호" type="text" name="hpcheck" id="hpcheck"
+						onchange="smsCheck()">
+					<input type="hidden" id="mhppass" name="hppass" value="unChecked">
+					</form>
+					<button type="button" class="hpcheckbtn1" id="hpcheckbtn" name="hpcheckbtn" onclick="hpcheckbtn()">인증하기</button>
+					<font id="chkNotice" size="2"></font>
+				</div>
+				<button type="button" onclick="getId()" class="btn btn-md btn-primary full-width">아이디 찾기</button>
 		</div>
 	</div>
+	
+	
+	<div id="getIdDiv" class="site-form log-in-form box-shadow border-radius-10" style="display: none;">
+		<div class="form-output">
+				<div class="form-group label-floating">
+					<label class="control-label">조회된 아이디는</label><getId id="getId"></getId>
+				</div>
+				<button type="button" onclick="nextpage()" class="btn btn-md btn-primary full-width">비밀번호 찾기</button>
+		</div>
+	</div>
+	
+
+	<div id="updatePwDiv" class="site-form log-in-form box-shadow border-radius-10" style="display: none;">
+		<div class="form-output">
+				<div class="form-group label-floating">
+					<label class="control-label">Password</label> <input
+						class="form-control" placeholder="비밀번호 입력" type="password" id="pw" onchange="sendpassword()" name="pw">
+						<input type="hidden" id="passwordpass" name="passwordpass" value="unChecked">
+						<p>'숫자', '문자' 무조건 1개 이상, '최소 8자에서 최대 20자' 허용 <br>(특수문자는 정의된 특수문자만 사용 가능)</p>
+						<div style="text-align: left">
+					<font id="chkNoticeP" size="2"></font>
+					
+				</div>
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">Password Check</label> <input
+						class="form-control" placeholder="비밀번호 확인" type="password"
+						id="pw2" name="pw2">
+						<input type="hidden" id="passwordCheck" name="passwordCheck" value="unChecked">
+				</div>
+				<div style="text-align: left">
+					<font id="chkNoticeP2" size="2"></font>
+				<button type="button" onclick="updatePw()" class="btn btn-md btn-primary full-width">비밀번호 변경</button>
+		</div>
+	</div>
+
+	
+
+			
 </div>
 
 
-
-</form>
 
 
 </body>

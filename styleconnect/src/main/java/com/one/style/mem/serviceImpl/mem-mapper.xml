@@ -16,4 +16,27 @@
 	<insert id="memberInsert" parameterType="com.one.style.mem.vo.MemberVO">
 		INSERT INTO MEMBER VALUES(#{id},#{pw},#{name},#{hp},#{gender},to_date(#{birth},'YYYY/MM/DD'),0,sysdate)
 	</insert>
+	
+	<!-- rownum = 1 주어서 한 행만 리턴될텐데도 여러행이 리턴되었다면서 단일 VO로 받아지지가 않음... 잘 모르지만 List<MemberVO>로 해결 -->
+	<select id="getUserIdByHpName" parameterType="hashMap" resultType="com.one.style.mem.vo.MemberVO">
+		<if test='searchTable == "designer"'>
+			select * from designer
+		</if>
+		<if test='searchTable == "member"'>
+			select * from member
+		</if>
+			where hp = #{hp} and name = #{name}
+			and rownum = 1
+	</select>
+	
+	<update id="updateUserPwByHpName" parameterType="hashMap">
+		<if test='searchTable == "designer"'>
+			update designer
+		</if>
+		<if test='searchTable == "member"'>
+			update member
+		</if>
+			set pw = #{pw}
+			where name = #{name} and hp = #{hp}
+	</update>
 </mapper>

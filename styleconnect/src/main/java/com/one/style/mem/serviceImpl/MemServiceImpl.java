@@ -1,6 +1,7 @@
 package com.one.style.mem.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -75,6 +76,19 @@ public class MemServiceImpl implements MemService {
 	public MemberVO memberDelete(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	
+//회원ID찾기
+	@Override
+	public String getUserIdByHpName(Map<String, String> map) {
+		List<MemberVO> list = memMapper.getUserIdByHpName(map);
+		return list.get(0).getId();
+	}
+
+	@Override
+	public int updateUserPwByHpName(Map<String, String> map) {
+		return memMapper.updateUserPwByHpName(map);
 	}
 
 }
