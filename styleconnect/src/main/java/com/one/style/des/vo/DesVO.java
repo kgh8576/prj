@@ -35,12 +35,12 @@ public class DesVO {
 	private String fileState;
 	private String fileUuid;
 	private String fileName;
-	
+		
 	//work_close
 	private int wcloseNo;
 	private Date closeDay;
 	private String closeTime;
-	
+		
 	//work_open
 	private String mon;
 	private String tue;
@@ -49,11 +49,10 @@ public class DesVO {
 	private String fri;
 	private String sat;
 	private String sun;
-	
+		
 	// 페이징 관련
 	private int pageCnt;
 	private int lastCnt;
 	private int firstCnt;
 	private String pullValue;
-	
 }

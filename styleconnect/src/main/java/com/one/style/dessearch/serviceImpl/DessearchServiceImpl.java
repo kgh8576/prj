@@ -25,7 +25,7 @@ public class DessearchServiceImpl implements DessearchService {
 	@Override
 	public DessearchVO dessearchSelect(DessearchVO vo) {
 		// 디자이너 한명 조회
-		return sqlSession.selectOne("dessearchSelect", vo.getId());
+		return sqlSession.selectOne("dessearchSelect", vo);
 	}
 
 	@Override

@@ -23,6 +23,7 @@
 					<div class="row">
 						<!-- Designer -->
 								<c:forEach items="${designer}" var="vo">
+								<input type="hidden" id="id" name="id" value="${vo.id }">
 							<div class="col-lg-4 col-md-6 hvr-bob margin-bottom-45px">
 								<div class="background-white box-shadow">
 								 <!-- 디자이너 프로필 이미지 -->
@@ -40,8 +41,8 @@
 											</c:forEach>
 									</div>
 										<h5 class="margin-tb-15px">
-											<a class="text-dark" href="desListSelect.do?id=${vo.id }">${vo.name }
-												디자이너</a>
+											<a class="text-dark" href="desListSelect.do?id=${vo.id }">${vo.name }디자이너</a>
+											
 										</h5>
 										<div class="rating clearfix">
 											<ul class="float-left">

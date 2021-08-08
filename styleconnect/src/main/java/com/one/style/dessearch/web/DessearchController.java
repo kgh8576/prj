@@ -32,6 +32,10 @@ public class DessearchController {
 	//디자이너상세페이지
 	@RequestMapping("desListSelect.do")
 	public String desListSelect(Model model,DessearchVO vo, HttpServletRequest request) {
+		String id = request.getParameter("id");
+		vo.setId(id);
+		System.out.println("===========================아이디"+id);
+		
 		model.addAttribute("designer",dao.dessearchSelect(vo));
 		model.addAttribute("review",dao.dessearchSelectReview(vo));
 		
@@ -53,8 +57,8 @@ public class DessearchController {
 	
 	//컷 디자이너 목록
 	@RequestMapping("cutList.do")
-	public String cutList(Model model, DessearchVO vo) {		
-	model.addAttribute("designer",dao.cutList());
+	public String cutList(Model model, HttpServletRequest request) {		
+		model.addAttribute("designer",dao.cutList());
 	
 	return("dessearch/desList");
 	}
