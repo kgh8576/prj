@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
 import com.one.style.desmypage.service.DesMypageService;
@@ -209,8 +210,10 @@ public class DesMypageController {
 
 	// 마이페이지/스케쥴 관리페이지
 	@RequestMapping("desSchedule.do")
-	public String desSchedule(HttpServletRequest request, Model model, DesVO vo) {
-
+	public String desSchedule(HttpServletRequest request, Model model, ConHistoryVO vo) {
+		
+		model.addAttribute("sche",desMyDao.desScheList(vo));
+			
 		return "desmypage/desSchedule";
 	}
 
@@ -254,4 +257,5 @@ public class DesMypageController {
 		desMyDao.desCourseUpdate(vo);
 		return "redirect:desCourseUpdate.do?courNo="+vo.getCourNo();
 	}
+	
 }

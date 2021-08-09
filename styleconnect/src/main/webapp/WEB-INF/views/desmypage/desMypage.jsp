@@ -9,7 +9,6 @@
 <body>
 
 <div align="center">
-ddddd
 ${my.id }
 </div>
 <input type="hidden" id="did" name="did" value="${did }">

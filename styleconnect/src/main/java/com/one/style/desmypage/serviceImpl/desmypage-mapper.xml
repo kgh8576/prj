@@ -81,4 +81,23 @@
 	<select id="desCourSeq" resultType="com.one.style.des.vo.DesVO">
 	 select COUR_NO_SEQ.currval as cour_no from dual
 	</select>
+	
+	<!-- 스케쥴 -->
+	<select id="desScheList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO" >
+	SELECT 
+    a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date, a.time,a.state,a.price,
+		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
+		a.con_no,
+		b.code,b.CODECONTENT,
+		c.title,c.detail,
+		d.name AS desName,d.career,d.major,d.id as des_id
+	FROM 
+		CONSULTING_HISTORY a, COMMCODEDETAIL b , 
+		DES_COURSE c, DESIGNER d
+	WHERE a.state = b.code
+	AND to_char(day,'YY/MM/DD')||' '||time > to_char(sysdate-1/24/60*30,'YY/MM/DD hh24:mi')
+	AND c.cour_no = a.cour_no
+	AND d.id = c.id
+	AND d.id = #{desId}
+	</select>
 </mapper>
