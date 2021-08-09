@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- 삭제 함수 -->
+
+
 <br><br><br><br><br><br><br><br><br><br>
 <h1>디자이너 관리 페이지</h1>
 <!-- 셀렉트 박스로 상태 구분하여 보여줌, 검색창 -->
@@ -19,6 +22,8 @@
 		<td>진행상황</td>
 		<td>가입일</td>
 		<td>코멘트</td>
+		<td>파일 넘버</td>
+		<!-- 수정 버튼 클릭 시 수정 폼페이지로 이동 -->
 		<td>처리</td>
 	</tr>
 	<c:forEach var="designer" items="${designerList }">
@@ -30,16 +35,19 @@
 		<td>${designer.hp}</td>
 		<td>${designer.location}</td>
 		<td>${designer.career}</td>
-		<td>메이크업: ${designer.makeup_yn}<br>
-			컷: ${designer.cut_yn}<br>
-			펌: ${designer.perm_yn}<br>
-			염색: ${designer.dye_yn}</td>
+		<td>메이크업: ${designer.makeupyn}<br>
+			컷: ${designer.cutyn}<br>
+			펌: ${designer.permyn}<br>
+			염색: ${designer.dyeyn}</td>
 		<td>${designer.regday}</td>
 		<td>${designer.major}</td>
 		<td>${designer.state}</td>
 		<td>${designer.regday}</td>
 		<td>${designer.comments}</td>
-		<td>수정/삭제</td>
+		<td>${designer.fileNo}</td>
+		<td><button onclick="location.href='designerInformationUpdateForm.do'">수정</button>
+			<button>삭제</button>
+		</td>
 	</tr>
 	</c:forEach>
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.one.style.admin.mapper.AdminMapper;
 import com.one.style.admin.service.AdminService;
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;
 import com.one.style.mem.vo.MemberVO;
 
@@ -24,12 +25,28 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.memberListTotalCountSelect();
 	}
 	
+	@Override
+	public List<ConHistoryVO> memberConHistoryListSelect(ConHistoryVO vo) {
+		return adminMapper.memberConHistoryListSelect(vo);
+	}
+	
+	@Override
+	public int memberConHistoryListTotalCountSelect(ConHistoryVO vo) {
+		return adminMapper.memberConHistoryListTotalCountSelect(vo);
+	}
+	
 	public List<DesVO> designerListSelect(DesVO vo){
-		return null;
+		return adminMapper.designerListSelect(vo);
 	}
 	
 	@Override
 	public int designerListTotalCountSelect() {
 		return adminMapper.designerListTotalCountSelect();
 	}
+
+	@Override
+	public List<ConHistoryVO> designerConHistoryListSelect(ConHistoryVO vo) {
+		return adminMapper.designerConHistoryListSelect(vo);
+	}
+
 }

@@ -12,13 +12,39 @@
 		parameterType="com.one.style.mem.vo.MemberVO">
 		UPDATE MEMBER SET PW = #{pw} WHERE ID = #{id}
 	</update>
-	<!-- 상담내역 출력 -->
+	<!-- 가장가까운예약목록 출력 -->
 	<select id="conhisList"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
+			SELECT 
+		
+		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date, a.time,a.state,a.price,
+		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
+		a.con_no,
+				
+		b.code,b.CODECONTENT,
+		
+		c.title,c.detail,
+		
+		d.name AS desName,d.career,d.major
+		
+		FROM 
+		CONSULTING_HISTORY a, COMMCODEDETAIL b , 
+		DES_COURSE c, DESIGNER d
+		
+		WHERE a.state = b.code
+   		AND to_char(day,'YY/MM/DD')||' '||time > to_char(sysdate-1/24/60*30,'YY/MM/DD hh24:mi')
+		AND c.cour_no = a.cour_no
+		AND d.id = c.id
+		AND MEM_ID = #{memId}
+    
+    	ORDER BY LASTST_DATE asc
+	</select>
+	<select id="conhisListend" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
+		 <![CDATA[
 		SELECT 
 		
-		a.day,a.time,a.state,a.price,
+		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date, a.time,a.state,a.price,
 		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
 		
 		b.code,b.CODECONTENT,
@@ -32,14 +58,29 @@
 		DES_COURSE c, DESIGNER d
 		
 		WHERE a.state = b.code
-		
+  		AND to_char(day,'YY/MM/DD')||' '||time < to_char(sysdate,'YY/MM/DD hh24:mi')
 		AND c.cour_no = a.cour_no
 		AND d.id = c.id
 		AND MEM_ID = #{memId}
+    
+  		ORDER BY LASTST_DATE desc
+  		 ]]>
 	</select>
 	<!-- 회원탈퇴 -->
 	<delete id="memexit"
 		parameterType="com.one.style.mem.vo.MemberVO">
 		DELETE FROM MEMBER WHERE ID = #{id}
 	</delete>
+	
+	
+	<!-- 예약 취소 가능 날짜 조회 쿼리 -->
+	<select id="getCancleDate" resultType="String" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+		SELECT to_char(day-3,'YYYY/MM/DD')||' '||time AS cancleDate
+  		FROM CONSULTING_HISTORY WHERE con_no = #{conNo}
+	</select>
+	<!-- 예약취소 -->
+	<update id="reservationcancle" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+		update consulting_history set state = 'ccode003' where con_no = #{conNo}
+	</update>
+	
 </mapper>

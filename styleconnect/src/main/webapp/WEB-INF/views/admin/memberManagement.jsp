@@ -2,9 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script>
+function memberConHistoryListSelect(id) {
+
+	$.ajax({
+		url : "memberConHistoryUpdateForm.do?&memId="+ id,
+		type : "GET",
+		dataType: "json",
+		success : function(data) {
+			console.log(data);
+			//for(var i = 0; i < memberConHistoryList.length; i++){
+			//	console.log('conNo: ' + memberConHistoryList[i].conNo);
+			//}
+		}
+	});
+}
+</script>
+
 <br><br><br><br><br><br><br><br><br><br>
 <h1>일반회원 관리 페이지</h1>
-<!-- 검색창 -->
+<!-- 검색창 추가 -->
 <table>
 	<tr>
 		<td>회원ID</td>
@@ -23,7 +40,9 @@
 		<td>${member.birth}</td>
 		<td>${member.hp}</td>
 		<td>${member.regday}</td> 
-		<td>수정/삭제</td>
+		<td><button onclick="memberConHistoryListSelect(${member.id})">수정</button>
+			<button>삭제</button>
+		</td>
 	</tr>
 	</c:forEach>
 	

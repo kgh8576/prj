@@ -10,5 +10,9 @@ public interface MemdetailMapper {
 	public void hpchange(MemberVO vo);
 	public void pwchange(MemberVO vo);
 	public List<ConHistoryVO> conhisList(ConHistoryVO vo);
+	public List<ConHistoryVO> conhisListend(ConHistoryVO vo);
 	public void memexit(MemberVO vo);
+	public String getCancleDate(ConHistoryVO vo); 
+	public void reservationcancle(ConHistoryVO vo);
+	
 }

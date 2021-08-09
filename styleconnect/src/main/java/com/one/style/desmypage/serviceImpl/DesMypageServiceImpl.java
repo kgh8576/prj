@@ -1,6 +1,8 @@
 package com.one.style.desmypage.serviceImpl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -53,6 +55,26 @@ public class DesMypageServiceImpl implements DesMypageService {
 	public int desCourseUpdate(DesVO vo) {
 		//상담 수정
 		return desMapper.desCourseUpdate(vo);
+	}
+	@Override
+	public DesVO desCourseSelect(DesVO vo) {
+		// 상담선택
+		return desMapper.desCourseSelect(vo);
+	}
+	@Override
+	public List<DesVO> selectDesThum() {
+		// TODO Auto-generated method stub
+		return desMapper.selectDesThum();
+	}
+	@Override
+	public List<DesVO> desCourseList(DesVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.desCourseList(vo);
+	}
+	@Override
+	public DesVO desCourSeq() {
+		// TODO Auto-generated method stub
+		return desMapper.desCourSeq();
 	}
 
 }

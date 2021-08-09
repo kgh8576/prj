@@ -227,41 +227,84 @@
 									href="pwchangepage.do">비밀번호 변경하기</a>
 							</div>
 							<div class="col-md-6 margin-bottom-20px">
-								<label><i></i></label>
+								<label><i></i></label><a href="noshow.do">Noshow</a>
 							</div>
 						</div>
 						<hr class="margin-tb-40px">
 						<div class="row">
 							<div class="col-md-6">
-								<c:forEach var="conhis" items="${conhis }">
-									<c:if test="${conhis.codecontent eq '예약중' }">
-											<label> 예약중인 내역 </label>
-											<h3>${conhis.title }</h3>
-											<p>예약날짜 : ${conhis.day }</p>
-											<p>예약시간 : ${conhis.time }</p>
-											<p>예약신청한날짜 : ${conhis.reservateDate }</p>
-											<p>디자이너 : ${conhis.desName }</p>
-											<p>상세정보 : ${conhis.detail }</p>
-									</c:if>
-								</c:forEach>
+								<strong> 가장 가까운 예약목록 </strong>><br> <br>
+								<c:choose>
+									<c:when test="${!empty conhis}">
+										<c:forEach var="conhis" begin="0" end="0"
+											items="${conhis }">
+											<c:if test="${conhis.codecontent eq '예약중' }">
+												<div>
+													<h3>${conhis.title }</h3>
+													<p>예약날짜 : ${conhis.day }</p>
+													<p>예약시간 : ${conhis.time }</p>
+													<p>예약신청한날짜 : ${conhis.reservateDate }</p>
+													<p>디자이너 : ${conhis.desName }</p>
+													<p>상세정보 : ${conhis.detail }</p>
+												</div>
+												<div style="text-align: center;">
+													<a href="consulting.do" style="color: blue">상담하러가기</a>
+
+													<a style="margin-left: 100px;" href="conhispage.do" style="color: blue">더보기</a>
+												</div>
+											</c:if>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<div>
+											<p>아직까지 예약된 내역이없습니다!</p>
+											<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
+											<a href="category.do" style="color: blue">찾으러가기!</a>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="col-md-6">
-								<c:forEach var="conhis" items="${conhis }">
-									<c:if test="${conhis.codecontent eq '상담완료' }">
+								<strong> 상담이 끝난 목록</strong>><br>
+								<br>
+								<c:choose>
+									<c:when test="${!empty conhisends}">
+										<c:forEach var="conhisend" begin="1" end="1"
+											items="${conhisends }">
+											<c:if test="${conhisend.codecontent eq '상담완료'}">
+												<div>
+													<h3>${conhisend.title }</h3>
+													<p>예약날짜 : ${conhisend.day }</p>
+													<p>예약시간 : ${conhisend.time }</p>
+													<p>예약신청한날짜 : ${conhisend.reservateDate }</p>
+													<p>디자이너 : ${conhisend.desName }</p>
+													<p>상세정보 : ${conhisend.detail }</p>
+												</div>
+												
+												<div style="text-align: center;">
+													<a href="conhispage.do" style="color: blue">더보기</a>
+												</div>
+											</c:if>
+											<c:if test="${conhisend.codecontent ne '상담완료'}">
+												<div>
+													<p>아직까지 컨설팅 받은 내역이없습니다!</p>
+													<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
+													<a href="category.do" style="color: blue">찾으러가기!</a>
+												</div>
+											</c:if>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
 										<div>
-											<label> 상담내역</label>
-											<h3>${conhis.title }</h3>
-											<p>예약날짜 : ${conhis.day }</p>
-											<p>예약시간 : ${conhis.time }</p>
-											<p>예약신청한날짜 : ${conhis.reservateDate }</p>
-											<p>디자이너 : ${conhis.desName }</p>
-											<p>상세정보 : ${conhis.detail }</p>
+											<p>아직까지 컨설팅 받은 내역이없습니다!</p>
+											<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
+											<a href="category.do" style="color: blue">찾으러가기!</a>
 										</div>
-									</c:if>
-								</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</div>
-							</div>
-						<div style="text-align: left;">
+						</div>
+						<div style="text-align: left; margin-top: 200px">
 							<p>
 								새로운 사람이 되어서 더이상 이용 하시지 않으시려면? <a href="exitpage.do"
 									style="color: red;"> 회원탈퇴 바로가기 ☜ </a>
