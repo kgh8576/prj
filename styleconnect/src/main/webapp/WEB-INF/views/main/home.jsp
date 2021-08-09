@@ -210,7 +210,7 @@ font-size: 24px;
 								</div>
                             </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                          <div class="hashTagList" style="display: inline-block; width: 200px; overflow:auto; "  >
                          	인스타그램 인기 검색 태그
 							<div class="list-group">

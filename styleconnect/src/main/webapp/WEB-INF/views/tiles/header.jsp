@@ -14,11 +14,12 @@ pageEncoding="UTF-8" %>
             <div class="container header-in">
                 <div class="row">
                     <div class="col-lg-2 col-md-12">
-                        <a class="mobile-toggle padding-13px background-main-color" href="main.do"></a>
+                    	<a href="main.do">
+	                    	<img alt="" src="${pageContext.request.contextPath}/resources/img/logo.jpg">
+                    	</a>
                     </div>
                     <div class="col-lg-7 col-md-12 position-inherit">
                         <ul id="menu-main" class="nav-menu float-lg-right link-padding-tb-20px">
-                        	<li><a href="main.do">임시 메인으로 가기~</a></li>
                         	<li><a href="consulting.do">상담하기</a></li>
                         	<li><a href="category.do">디자이너 찾기</a></li>
                         	<li><a href="#">설문조사</a></li>           	
