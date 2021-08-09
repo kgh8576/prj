@@ -40,5 +40,24 @@ public class MemdetailServiceImpl implements MemdetailService {
 		detailMapper.memexit(vo);
 	}
 
+	@Override
+	public List<ConHistoryVO> conhisListend(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		return detailMapper.conhisListend(vo);
+	}
+
+	@Override
+	public String getCancleDate(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		return detailMapper.getCancleDate(vo);
+	}
+
+	@Override
+	public void reservationcancle(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		detailMapper.reservationcancle(vo);
+	}
+	
+
 	
 }
