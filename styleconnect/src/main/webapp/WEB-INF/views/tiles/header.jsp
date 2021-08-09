@@ -14,7 +14,7 @@ pageEncoding="UTF-8" %>
             <div class="container header-in">
                 <div class="row">
                     <div class="col-lg-2 col-md-12">
-                        <a class="mobile-toggle padding-13px background-main-color" href="#"><i class="fas fa-bars"></i></a>
+                        <a class="mobile-toggle padding-13px background-main-color" href="main.do"></a>
                     </div>
                     <div class="col-lg-7 col-md-12 position-inherit">
                         <ul id="menu-main" class="nav-menu float-lg-right link-padding-tb-20px">
