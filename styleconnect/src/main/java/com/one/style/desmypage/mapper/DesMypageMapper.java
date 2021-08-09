@@ -14,4 +14,6 @@ public interface DesMypageMapper {
 	//상담등록
 	public void desCourseInsert(DesVO vo);
 	public int desCourseUpdate(DesVO vo);
+	
+	DesVO desCourseSelect(DesVO vo);
 }

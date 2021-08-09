@@ -54,5 +54,10 @@ public class DesMypageServiceImpl implements DesMypageService {
 		//상담 수정
 		return desMapper.desCourseUpdate(vo);
 	}
+	@Override
+	public DesVO desCourseSelect(DesVO vo) {
+		// 상담선택
+		return desMapper.desCourseSelect(vo);
+	}
 
 }

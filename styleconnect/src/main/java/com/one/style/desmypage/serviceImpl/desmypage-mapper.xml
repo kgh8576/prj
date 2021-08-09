@@ -40,12 +40,19 @@
 	
 	<!-- 상담등록 -->
 	<insert id="desCourseInsert">
-	insert into (select cour_no,id,title,detail,price from des_course where id=#{id})
-	values(cour_no_seq.nextval, #{id}, #{title}, #{detail}, #{price})
+	INSERT INTO (SELECT COUR_NO,ID,TITLE,DETAIL,PRICE FROM DES_COURSE WHERE ID=#{ID})
+	VALUES(COUR_NO_SEQ.NEXTVAL, #{ID}, #{TITLE}, #{DETAIL}, #{PRICE})
 	</insert>
 	
 	<!-- 상담수정 -->
-	<delete id="desCourseUpdate">
+	<update id="desCourseUpdate">
 	
-	</delete>
+	</update>
+	
+	<!-- 상담선택 -->
+	<select id="desCourseSelect" parameterType="com.one.style.desmypage.vo.DesVO" resultType="com.one.style.desmypage.vo.DesVO">
+	SELECT COUR_NO,TITLE,DETAIL,PRICE,ID 
+	FROM DES_COURSE 
+	WHERE COUR_NO=#{COURNO}
+	</select>
 </mapper>

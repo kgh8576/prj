@@ -224,4 +224,11 @@ public class DesMypageController {
 
 	return "redirect:desCourse.do";
 	}
+	
+	@RequestMapping("desCourseUpdate.do")
+	public String desCourseUpdate(Model model, DesVO vo) {
+		
+		model.addAttribute("course",desMyDao.desCourseSelect(vo));
+		return "desmypage/desCourseUpdate";
+	}
 }

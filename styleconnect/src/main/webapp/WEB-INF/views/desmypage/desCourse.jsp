@@ -59,7 +59,7 @@ h1{
                         			 <hr>
                                         <span> ${vo.detail }  </span>
                                         <div align="right">
-                                        <a href="reservation.do?courNo=${vo.courNo }" >>수정하기</a>
+                                        <a href="desCourseUpdate.do?courNo=${vo.courNo }" >>수정하기</a>
                                     	</div>
                                     </div>
                                 </div>
