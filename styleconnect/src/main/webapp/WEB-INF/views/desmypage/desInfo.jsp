@@ -244,22 +244,18 @@ function hpchange() {
                           <div class="col-md-6 margin-bottom-20px">
                               <label><i class="far fa-flag margin-right-10px"></i> 전문분야 </label>
                               <div class="select" style="text-align: center;">
-                             <input class="check" type="checkbox" style="display: none;"
-								name="makeupyn" id="makeupyn1" value="Y" <c:if test="${des.makeupyn == 'Y' }">checked</c:if> ><label
-								style="width: 60px;" for="makeupyn1"> 메이크업 </label> <input
-								class="finalcheck" type="hidden" id="makeupyn" name="makeupyn">
-							<input class="check" type="checkbox" style="display: none;"
-								name="cutyn" id="cutyn1" value="Y"<c:if test="${des.cutyn == 'Y' }">checked</c:if>><label
-								style="width: 60px;" for="cutyn1"> 커트 </label> <input
-								class="finalcheck" type="hidden" id="cutyn" name="cutyn">
-							<input class="check" type="checkbox" style="display: none;"
-								name="permyn" id="permyn1" value="Y"<c:if test="${des.permyn == 'Y' }">checked</c:if>><label
-								style="width: 60px;" for="permyn1"> 펌 </label> <input
-								class="finalcheck" type="hidden" id="permyn" name="permyn">
-							<input class="check" type="checkbox" style="display: none;"
-								name="dyeyn" id="dyeyn1" value="Y" <c:if test="${des.dyeyn == 'Y' }">checked</c:if>> <label
-								style="width: 60px;" for="dyeyn1"> 염색 </label> <input
-								class="finalcheck" type="hidden" id="dyeyn" name="dyeyn">
+                             <input class="check" type="checkbox" style="display: none;" name="makeupyn" id="makeupyn1" value="Y" 
+                             <c:if test="${des.makeupyn == 'Y' }">checked</c:if> >
+                             <label style="width: 60px;" for="makeupyn1"> 메이크업 </label>
+							<input class="check" type="checkbox" style="display: none;" name="cutyn" id="cutyn1" value="Y"
+							<c:if test="${des.cutyn == 'Y' }">checked</c:if>>
+							<label style="width: 60px;" for="cutyn1"> 커트 </label> 
+							<input class="check" type="checkbox" style="display: none;" name="permyn" id="permyn1" value="Y"
+							<c:if test="${des.permyn == 'Y' }">checked</c:if>>
+							<label style="width: 60px;" for="permyn1"> 펌 </label> 
+							<input class="check" type="checkbox" style="display: none;" name="dyeyn" id="dyeyn1" value="Y" 
+							<c:if test="${des.dyeyn == 'Y' }">checked</c:if>>
+							 <label style="width: 60px;" for="dyeyn1"> 염색 </label> 
                           </div>
                           </div>
                           <div class="col-md-6 margin-bottom-20px">

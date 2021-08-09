@@ -10,7 +10,7 @@ public class DesVO {
 	private String id;
 	private String pw;
 	private String name;
-	private String Hp;
+	private String hp;
 	private String location;
 	private String gender;
 	private String birth;
@@ -28,7 +28,7 @@ public class DesVO {
 	private String title;
 	private String detail;
 	private int price;
-	private int courNo;
+	private String courNo;
 	
 	//file
 	private int fileNo;

@@ -9,4 +9,5 @@ import com.one.style.files.vo.FilesVO;
 public interface FilesService {
 
 	public void upload(MultipartHttpServletRequest req , String fileState,String des_id);
+	public void upload(MultipartHttpServletRequest req , String fileState ,String des_id , String courNo);
 }

@@ -25,7 +25,7 @@ h1{
         <div class="container">
             <ol class="breadcrumb opacity-5">
                 <li><a href="main.do">Home</a></li>
-                <li><a href="desListSelect.do?id=${did}">디자이너 상세정보</a></li>
+                <li><a href="desListSelect.do">디자이너 상세정보</a></li>
                 <li class="active">상담 목록</li>
             </ol>
           <c:forEach items="${course }" var="vo" begin="1" end="1">
@@ -45,21 +45,21 @@ h1{
              </div>
              </c:if>
 			<!-- 상담목록있을경우(조회,수정,삭제) -->
-				<c:forEach items="${course}" var="vo">
 				<button id='cbtn'onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/>
+				<c:forEach items="${course}" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">
                         <div class="row no-gutters">
-                            <div class="img-in col-lg-5"><a href="#"><img src="http://placehold.it/400x240" alt=""></a></div>
+                            <div class="img-in col-lg-5"><a href="#"><img src="resources/img/${vo.fileUuid }" alt=""></a></div>
                             <div class="col-lg-7">
                                 <div class="padding-25px">
                                     <a class="d-block h4  text-capitalize margin-bottom-8px" href="#">${vo.title} </a>
                                     <div class="meta">
-                                        <span class="margin-right-20px text-extra-small"><a href="#" class="text-main-color"> ${vo.name }</a>디자이너</span>
                         			상담번호:${vo.courNo }
                         			 <hr>
                                         <span> ${vo.detail }  </span>
                                         <div align="right">
                                         <a href="desCourseUpdate.do?courNo=${vo.courNo }" >>수정하기</a>
+                                        <input type="hidden" id="courNo" name="courNo" value="${vo.courNo }">
                                     	</div>
                                     </div>
                                 </div>
