@@ -5,12 +5,12 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class DesVO {
+public class DesMypageVO {
 
 	private String id;
 	private String pw;
 	private String name;
-	private String Hp;
+	private String hp;
 	private String location;
 	private String gender;
 	private String birth;
@@ -56,5 +56,5 @@ public class DesVO {
 	private String title;
 	private String detail;
 	private String price;
-	private int courNo;
+	private String courNo;
 }

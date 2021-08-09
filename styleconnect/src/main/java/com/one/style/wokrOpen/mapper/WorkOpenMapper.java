@@ -9,4 +9,5 @@ public interface WorkOpenMapper {
 	public String[] getReservationTime(WorkOpenVO vo);
 	public String[] getWorkCloseTime(WorkOpenVO vo);
 	public FilesVO getFileUuidTest(FilesVO vo);
+	public String dateTest();
 }

@@ -29,7 +29,8 @@ public class ConHistoryVO {
 	private String codecontent; //예약상황
 	private String major; //디자이너 전문분야
 	private String career; //디자이너 커리어
-	
+	private String laststDate; //예약시간
+	private String cancleDate; //예약취소
 	// 페이징 관련
 	private int pageCnt;
 	private int lastCnt;

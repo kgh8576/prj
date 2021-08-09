@@ -37,10 +37,31 @@ public class MemdetailController {
 		cvo.setMemId(id);
 		model.addAttribute("user",memDao.login(vo));
 		model.addAttribute("conhis",memdetailDao.conhisList(cvo));
+		model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
 		System.out.println(memdetailDao.conhisList(cvo));
-		
+		System.out.println(memdetailDao.conhisListend(cvo));
 		return "mymenu/mymenu";
 	}
+	//상담내역 리스트
+		@RequestMapping("/conhispage.do")
+		public String conhispage(Model model ,HttpServletRequest request,MemberVO vo,ConHistoryVO cvo) {
+			HttpSession session = request.getSession();
+			
+			String id = (String) session.getAttribute("id");
+			cvo.setMemId(id);
+			model.addAttribute("conhis",memdetailDao.conhisList(cvo));
+			return "mymenu/conhispage";
+		}
+		//노쇼
+				@RequestMapping("/noshow.do")
+				public String noshow(Model model ,HttpServletRequest request,MemberVO vo,ConHistoryVO cvo) {
+					HttpSession session = request.getSession();
+					
+					String id = (String) session.getAttribute("id");
+					cvo.setMemId(id);
+					model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
+					return "mymenu/noshow";
+				}
 	//핸드폰번호 변경
 	@RequestMapping("/hpchange.do")
 	public String hpchange(HttpServletRequest request , MemberVO vo) {
@@ -124,5 +145,20 @@ public class MemdetailController {
 		//1OR2를 리턴해줌
 		System.out.println(YorN);
 		return YorN;
+	}
+	
+	//예약날짜계산
+	@RequestMapping("/paycancle.do")
+	@ResponseBody
+	public String paycancle (ConHistoryVO vo) {
+		
+		
+		return memdetailDao.getCancleDate(vo);
+	}
+	//예약취소
+	@RequestMapping("/reservationcancle.do")
+	public void reservationcancle (ConHistoryVO vo) {
+		
+		memdetailDao.reservationcancle(vo);
 	}
 }

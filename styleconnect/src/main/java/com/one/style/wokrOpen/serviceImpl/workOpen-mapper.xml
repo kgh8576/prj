@@ -32,5 +32,15 @@
 		select file_uuid from files
 		where des_id = #{des_id}
 	</select>
+	
+	<select id="dateTest" resultType="String">
+			SELECT to_char(day-3,'YYYY/MM/DD')||' '||time AS paycancle
+			FROM CONSULTING_HISTORY
+			WHERE con_no = '2108090081'
+	</select>
+	
+
+	
+	
 
 </mapper>
