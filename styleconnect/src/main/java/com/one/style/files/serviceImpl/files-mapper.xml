@@ -3,6 +3,6 @@
 <mapper namespace="com.one.style.files.mapper.FilesMapper">
 	
 	<insert id="fileinsert" parameterType="com.one.style.files.vo.FilesVO">
-		INSERT INTO FILES VALUES(file_no_seq.nextval,#{des_id},#{fileName},#{fileUuid},#{fileState},sysdate)
+		INSERT INTO FILES VALUES(file_no_seq.nextval,#{des_id},#{fileName},#{fileUuid},#{fileState},sysdate,#{courNo})
 	</insert>
 </mapper>

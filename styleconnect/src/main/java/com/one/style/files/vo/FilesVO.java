@@ -12,5 +12,6 @@ public class FilesVO {
 	private String fileUuid;
 	private String fileState;
 	private String fileRegDate;
+	private String courNo;
 	
 }
