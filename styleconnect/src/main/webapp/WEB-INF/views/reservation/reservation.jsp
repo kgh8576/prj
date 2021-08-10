@@ -132,12 +132,9 @@
 										<h2>디자이너가 했던 사진들</h2>
 										<div class="pictures magnific-gallery clearfix">
 											<figure>
-												<a
-													href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_1.jpg"
-													title="Photo title" data-effect="mfp-zoom-in"><img
-													src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg"
-													data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_1.jpg"
-													class="lazy" alt=""></a>
+												<a href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_1.jpg" title="Photo title" data-effect="mfp-zoom-in">
+													<img src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg" data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_1.jpg" class="lazy" alt="">
+												</a>
 											</figure>
 											<figure>
 												<a
@@ -167,7 +164,7 @@
 												<a
 													href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_5.jpg"
 													title="Photo title" data-effect="mfp-zoom-in"><span
-													class="d-flex align-items-center justify-content-center">+10</span><img
+													class="d-flex align-items-center justify-content-center">+더보기</span><img
 													src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg"
 													data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_5.jpg"
 													class="lazy" alt=""></a>

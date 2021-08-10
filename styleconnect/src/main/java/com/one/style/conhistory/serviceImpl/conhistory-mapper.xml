@@ -65,7 +65,9 @@
 		,#{time},'ccode001',#{price},sysdate , #{memId} , #{memComment}
 		,#{courNo} ,null,#{payNo}, 'N' ,'N')
 	</insert>
-
+	<select id="">
+	
+	</select>
 
 
 </mapper>
