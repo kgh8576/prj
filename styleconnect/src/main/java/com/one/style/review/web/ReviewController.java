@@ -74,7 +74,7 @@ public class ReviewController {
 	public String reviewRegister(String id, int conNo, Model model) {
 		ReviewVO vo = new ReviewVO();
 		vo.setMemId(id);
-		vo.setConNo(conNo); // 더미 
+		vo.setConNo(conNo); // 더미 1
 		if (reviewDao.canReviewRegCheckDate(vo) && reviewDao.canReviewRegCheckExist(vo) ) {  // 컨설팅 일자 이후 3일 이내이면서, 리뷰가 존재하지 않는 경우 등록 가능
 			model.addAttribute("conNo", vo.getConNo());
 			model.addAttribute("consultInfo", reviewDao.getHistoryForInsert(vo));
