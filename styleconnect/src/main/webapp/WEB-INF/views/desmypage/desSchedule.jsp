@@ -24,27 +24,27 @@
                 <!-- // Page Title -->
                 <div class="row margin-top-45px">
                     <!-- Booking item -->
+                            <!-- 예약내역 -->
+                           <c:forEach items="${sche }" var="vo">
                     <div class="col-lg-6 margin-bottom-45px full-width">
                         <div class="background-white thum-hover box-shadow  hvr-float">
                             
-                            <!-- 예약내역 -->
-                           <c:forEach items="${sche }" var="vo">
                             <div class="padding-30px full-width">
                                 <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                 <div class="margin-left-85px">
-                                    <a class="d-block text-dark text-medium margin-bottom-5px" href="#">${vo.desId} Bakhita alrawi </a>
-                                    <div class="d-block padding-tb-5px">Date :  <a href="#" class="text-main-color">July 15, 2016</a></div>
-                                    <div class="d-block padding-tb-5px">Listing Name :  <a href="#" class="text-main-color">Alrayan Eye Clinic</a></div>
-                                    <div class="d-block padding-tb-5px">Email :  <a href="#" class="text-main-color">info@yourmail.com</a></div>
-                                    <div class="d-block padding-tb-5px">Phone  :  <a href="#" class="text-main-color">0022219653258</a></div>
-                                    <p class="margin-top-15px text-grey-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
-                                    <a href="#" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> Approve</a>
-                                    <a href="#" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> Delete</a>
+                                    <a class="d-block text-dark text-medium margin-bottom-5px" href="#">${vo.title } </a>
+                                    <div class="d-block padding-tb-5px">예약날짜 :  <a href="#" class="text-main-color">${vo.day } </a></div>
+                                    <div class="d-block padding-tb-5px">예약시간 :  <a href="#" class="text-main-color"> ${vo.time }</a></div>
+                                    <div class="d-block padding-tb-5px">신청날짜 :  <a href="#" class="text-main-color"> ${vo.laststDate }</a></div>
+                                    <div class="d-block padding-tb-5px">예약자  :  <a href="#" class="text-main-color"></a></div>
+                                    <p class="margin-top-15px text-grey-2"> <a><예약자 코멘트></a> ${vo.memComment } </p>
+                                    <a href="#" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> 예약승인 </a>
+                                    <a href="#" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> 예약거부 </a>
                                 </div>
                             </div>
-                           </c:forEach>
                         </div>
                     </div>
+                           </c:forEach>
                     <!-- // Booking item -->
                 </div>
             </div>

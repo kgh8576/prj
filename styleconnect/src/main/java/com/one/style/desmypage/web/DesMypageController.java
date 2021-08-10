@@ -203,15 +203,16 @@ public class DesMypageController {
 
 	// 마이페이지/스타일링 관리페이지
 	@RequestMapping("desStyle.do")
-	public String desStyle(HttpServletRequest request, Model model, DesVO vo) {
+	public String desStyle(Model model, DesVO vo) {
 
 		return "desmypage/desStyle";
 	}
 
 	// 마이페이지/스케쥴 관리페이지
 	@RequestMapping("desSchedule.do")
-	public String desSchedule(HttpServletRequest request, Model model, ConHistoryVO vo) {
-		
+	public String desSchedule( Model model, ConHistoryVO vo, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		vo.setDesId((String) session.getAttribute("did"));
 		model.addAttribute("sche",desMyDao.desScheList(vo));
 			
 		return "desmypage/desSchedule";
@@ -219,15 +220,14 @@ public class DesMypageController {
 
 	// 마이페이지/상담목록 관리페이지
 	@RequestMapping("desCourse.do")
-	public String desCourse(Model model, DesVO vo, HttpServletRequest request) {
+	public String desCourse(Model model, DesVO vo) {
 		model.addAttribute("course", desMyDao.desCourseList(vo));
 		return "desmypage/desCourse";
 	}
 
 	// 마이페이지/상담목록 관리페이지/상담생성 페이지
 	@RequestMapping("desCourseRegister.do")
-	public String desCourseRegister(Model model, DessearchVO vo, HttpServletRequest request) {
-		
+	public String desCourseRegister(Model model, DessearchVO vo) {
 		return "desmypage/desCourseRegister";
 	}
 
@@ -248,7 +248,7 @@ public class DesMypageController {
 		model.addAttribute("course", desMyDao.desCourseSelect(vo));
 		return "desmypage/desCourseUpdate";
 	}
-	
+	// 마이페이지/상담목록 관리페이지/상담수정페이지 - 상담 수정
 	@RequestMapping("desCourseUp.do")
 	public String desCourseUpdate(Model model,DesVO vo, MultipartHttpServletRequest request) {
 		
