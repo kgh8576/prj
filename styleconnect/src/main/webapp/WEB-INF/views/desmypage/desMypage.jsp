@@ -9,7 +9,6 @@
 <body>
 
 <div align="center">
-ddddd
 ${my.id }
 </div>
 <input type="hidden" id="did" name="did" value="${did }">
@@ -32,7 +31,7 @@ ${my.id }
                                     <div class="icon margin-bottom-15px opacity-7">
                                         <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-2.png" alt="">
                                     </div>
-                                    스케쥴 관리
+                                    상담내역관리
                                 </div>
                             </a>
                         </div>
@@ -62,7 +61,17 @@ ${my.id }
                                     <div class="icon margin-bottom-15px opacity-7">
                                         <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-4.png" alt="">
                                     </div>
-                                    상담내역
+                                    상담목록
+                                </div>
+                            </a>
+                        </div>
+                         <div class="col-md-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
+                            <a href="" class="d-block border-radius-15 hvr-float hvr-sh2">
+                                <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
+                                    <div class="icon margin-bottom-15px opacity-7">
+                                        <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-4.png" alt="">
+                                    </div>
+                                    스케쥴관리
                                 </div>
                             </a>
                         </div>

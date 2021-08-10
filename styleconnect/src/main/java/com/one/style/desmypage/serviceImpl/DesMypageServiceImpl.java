@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;
 import com.one.style.desmypage.mapper.DesMypageMapper;
 import com.one.style.desmypage.service.DesMypageService;
@@ -75,6 +76,11 @@ public class DesMypageServiceImpl implements DesMypageService {
 	public DesVO desCourSeq() {
 		// TODO Auto-generated method stub
 		return desMapper.desCourSeq();
+	}
+	@Override
+	public List<DesVO> desScheList(ConHistoryVO vo) {
+		// 
+		return desMapper.desScheList(vo);
 	}
 
 }
