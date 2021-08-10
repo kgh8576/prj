@@ -16,6 +16,9 @@ import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.memdetail.service.MemdetailService;
+import com.one.style.review.vo.ReviewVO;
+
+import mx4j.tools.config.DefaultConfigurationBuilder.New;
 
 
 @Controller
@@ -64,12 +67,15 @@ public class MemdetailController {
 	}
 	@RequestMapping("/confinish.do")
 	public String confinish(Model model, ConHistoryVO cvo, HttpServletRequest request) {
-		
+		ReviewVO rvo = new ReviewVO();
 		HttpSession session = request.getSession();
 		
 		String id = (String) session.getAttribute("id");
 		cvo.setMemId(id);
 		model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
+		rvo.setMemId(id);
+		rvo.setConNo(cvo.getConNo());
+		model.addAttribute("review",memdetailDao.reviewyoumu(rvo));
 		return "mymenu/confinish";
 		
 	}
