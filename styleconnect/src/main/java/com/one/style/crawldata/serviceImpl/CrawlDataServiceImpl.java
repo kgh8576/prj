@@ -81,9 +81,9 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     		for(int i=1; i <= 50; i++) {
     			System.out.println(i + " Times try");
 //    			System.out.println(driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/article/div[3]/div[1]")).getText()); // 본문 내용
-    			crawlText += driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/article/div[3]/div[1]")).getText();
+    			crawlText += driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/article/div[3]/div[1]")).getText();
     			Thread.sleep(500);
-    			driver.findElement(By.xpath("/html/body//div/div/a[2]")).click(); // 다음 게시글 버튼
+    			driver.findElement(By.xpath("/html/body/div[6]/div[1]/div/div/a[2]")).click(); // 다음 게시글 버튼
 				Thread.sleep(5000);	
     		}
         } catch (Exception e) {
