@@ -53,15 +53,26 @@ public class MemdetailController {
 			return "mymenu/conhispage";
 		}
 		//노쇼
-				@RequestMapping("/noshow.do")
-				public String noshow(Model model ,HttpServletRequest request,MemberVO vo,ConHistoryVO cvo) {
-					HttpSession session = request.getSession();
+	@RequestMapping("/noshow.do")
+	public String noshow(Model model ,HttpServletRequest request,MemberVO vo,ConHistoryVO cvo) {
+		HttpSession session = request.getSession();
 					
-					String id = (String) session.getAttribute("id");
-					cvo.setMemId(id);
-					model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
-					return "mymenu/noshow";
-				}
+		String id = (String) session.getAttribute("id");
+		cvo.setMemId(id);
+		model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
+		return "mymenu/noshow";
+	}
+	@RequestMapping("/confinish.do")
+	public String confinish(Model model, ConHistoryVO cvo, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		String id = (String) session.getAttribute("id");
+		cvo.setMemId(id);
+		model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
+		return "mymenu/confinish";
+		
+	}
 	//핸드폰번호 변경
 	@RequestMapping("/hpchange.do")
 	public String hpchange(HttpServletRequest request , MemberVO vo) {
