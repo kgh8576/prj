@@ -27,4 +27,6 @@ public interface DesMypageService {
 	public List<DesVO> desScheList(ConHistoryVO vo);
 	public int desApprove(ConHistoryVO vo);
 	public int desDeny(ConHistoryVO vo);
+	public List<DesVO> selectDesSty(DesVO vo);
+
 }

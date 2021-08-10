@@ -92,5 +92,10 @@ public class DesMypageServiceImpl implements DesMypageService {
 		// TODO Auto-generated method stub
 		return desMapper.desDeny(vo);
 	}
+	@Override
+	public List<DesVO> selectDesSty(DesVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.selectDesSty(vo);
+	}
 
 }

@@ -203,10 +203,28 @@ public class DesMypageController {
 
 	// 마이페이지/스타일링 관리페이지
 	@RequestMapping("desStyle.do")
-	public String desStyle(Model model, DesVO vo) {
+	public String desStyle(Model model, DesVO vo, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
+		model.addAttribute("sty", desMyDao.selectDesSty(vo));
 		return "desmypage/desStyle";
 	}
-
+	// 마이페이지/스타일링 관리페이지 - 스타일링 등록
+	@RequestMapping("desStyleUp.do")
+	public String desStyleUp(Model model, DesVO vo, MultipartHttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String desId = (String) session.getAttribute("did");
+			vo.setId(desId);
+			fileservice.upload(request, "sty", desId);
+		return "redirect:desStyle.do";
+		}
+	// 마이페이지 /스타일링 관리페이지 - 스타일 삭제
+	@RequestMapping("desStyleDel.do")
+	public String desStyleDel(DesVO vo) {
+		desMyDao.desFileUpdate(vo);
+		return "redirect:desStyle.do";
+	}
 	// 마이페이지/스케쥴 관리페이지
 	@RequestMapping("desSchedule.do")
 	public String desSchedule( Model model, ConHistoryVO vo, HttpServletRequest request) {

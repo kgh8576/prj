@@ -8,75 +8,50 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top" id="mainNav">
-
         <div class="collapse navbar-collapse" id="navbarResponsive">
-
             <ul class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
                 <li class="nav-item">
-                    <span class="nav-title-text">Main</span>
+                    <span class="nav-title-text">디자이너 기본정보</span>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="dashboard-home.html">
-                        <i class="fas fa-fw fa-home"></i><span class="nav-link-text">Dashboard</span>
+                    <a href="desInfo.do" class="nav-link" href="dashboard-home.html">
+                        <i class="fa fa-fw fa-user-circle"></i><span class="nav-link-text">내정보관리</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My items">
-                    <a class="nav-link" href="dashboard-my-listings.html">
+                    <a href="desMajor.do" class="nav-link" href="dashboard-my-listings.html">
                 <i class="fa fa-fw fa-table"></i>
-                <span class="nav-link-text">My Listings</span>
+                <span class="nav-link-text">전문분야설정</span>
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Favorites">
-                    <a class="nav-link" href="dashboard-my-favorites.html">
-                <i class="fa fa-fw fa-heart"></i>
-                <span class="nav-link-text">My Favorites</span>
+                    <a href="desStyle.do" class="nav-link" href="dashboard-my-favorites.html">
+                <i class="fa fa-fw fa-table"></i>
+                <span class="nav-link-text">스타일링사진 관리</span>
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
                     <a class="nav-link" href="dashboard-reviews.html">
                 <i class="fa fa-fw fa-star"></i>
-                <span class="nav-link-text">Reviews</span>
+                <span class="nav-link-text">스케쥴관리</span>
               </a>
                 </li>
                 <li class="nav-item">
-                    <span class="nav-title-text">Example Pages</span>
+                    <span class="nav-title-text">상담관련</span>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-                    <a class="nav-link active" href="dashboard-bookings.html">
+                    <a href="desCourse.do?id=${my.id }" class="nav-link active" href="dashboard-bookings.html">
                         <i class="far fa-fw fa-bookmark"></i>
-                        <span class="nav-link-text">Bookings</span>
+                        <span class="nav-link-text">내상담관리</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add Listing">
-                    <a class="nav-link" href="dashboard-add-listing.html">
+                    <a href="desSchedule.do" class="nav-link" href="dashboard-add-listing.html">
                         <i class="fa fa-fw fa-plus-circle"></i>
-                        <span class="nav-link-text">Add Listing</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Packages">
-                    <a class="nav-link" href="dashboard-packages.html">
-                        <i class="far fa-fw fa-list-alt"></i>
-                        <span class="nav-link-text">Packages</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <span class="nav-title-text">User Area</span>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Profile">
-                    <a class="nav-link" href="dashboard-my-profile.html">
-                        <i class="fa fa-fw fa-user-circle"></i>
-                        <span class="nav-link-text">My Profile</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sing Out">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-sign-out-alt"></i>
-                        <span class="nav-link-text">Sing Out</span>
+                        <span class="nav-link-text">예약관리</span>
                     </a>
                 </li>
             </ul>
-
         </div>
     </nav>
 <div align="center">
@@ -102,7 +77,7 @@ ${my.id }
                                     <div class="icon margin-bottom-15px opacity-7">
                                         <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-2.png" alt="">
                                     </div>
-                                    상담내역관리
+                                    예약관리
                                 </div>
                             </a>
                         </div>
