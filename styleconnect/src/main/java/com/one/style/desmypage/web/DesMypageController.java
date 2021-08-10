@@ -204,10 +204,28 @@ public class DesMypageController {
 
 	// 마이페이지/스타일링 관리페이지
 	@RequestMapping("desStyle.do")
-	public String desStyle(Model model, DesVO vo) {
+	public String desStyle(Model model, DesVO vo, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
+		model.addAttribute("sty", desMyDao.selectDesSty(vo));
 		return "desmypage/desStyle";
 	}
-
+	// 마이페이지/스타일링 관리페이지 - 스타일링 등록
+	@RequestMapping("desStyleUp.do")
+	public String desStyleUp(Model model, DesVO vo, MultipartHttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String desId = (String) session.getAttribute("did");
+			vo.setId(desId);
+			fileservice.upload(request, "sty", desId);
+		return "redirect:desStyle.do";
+		}
+	// 마이페이지 /스타일링 관리페이지 - 스타일 삭제
+	@RequestMapping("desStyleDel.do")
+	public String desStyleDel(DesVO vo) {
+		desMyDao.desFileUpdate(vo);
+		return "redirect:desStyle.do";
+	}
 	// 마이페이지/스케쥴 관리페이지
 	@RequestMapping("desSchedule.do")
 	public String desSchedule( Model model, ConHistoryVO vo, HttpServletRequest request) {
@@ -218,8 +236,14 @@ public class DesMypageController {
 	}
 	//마이페이지/ 스케쥴 관리페이지 - 상담 승인
 	@RequestMapping("desApprove.do")
-	public String desApprove() {
-		
+	public String desApprove(ConHistoryVO vo) {
+		desMyDao.desApprove(vo);
+		return "redirect:desSchedule.do";
+	}
+	//마이페이지/ 스케쥴 관리페이지 - 상담 거부
+	@RequestMapping("desDeny.do")
+	public String desDeny(ConHistoryVO vo) {
+		desMyDao.desDeny(vo);
 		return "redirect:desSchedule.do";
 	}
 
@@ -239,8 +263,6 @@ public class DesMypageController {
 	// 마이페이지/상담목록 관리페이지/상담생성 페이지 - 상담등록
 	@RequestMapping("desCourseInsert.do")
 	public String desCourseInsert(Model model, DesVO vo, MultipartHttpServletRequest request) {
-		System.out.println(vo.getId());
-		
 		desMyDao.desCourseInsert(vo);
 		fileservice.upload(request, "thum", vo.getId(), desMyDao.desCourSeq().getCourNo());
 		

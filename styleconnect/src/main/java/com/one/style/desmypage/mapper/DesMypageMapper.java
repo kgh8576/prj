@@ -26,6 +26,9 @@ public interface DesMypageMapper {
 	
 	//상담내역관리
 	public List<DesVO> desScheList(ConHistoryVO vo);
+	public int desApprove(ConHistoryVO vo);
+	public int desDeny(ConHistoryVO vo);
+	public List<DesVO> selectDesSty(DesVO vo);
 	
 	//상담시간 설정 페이지 진입
 	public DesMypageVO desWorkOpenPage(String id);

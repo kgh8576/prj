@@ -84,6 +84,22 @@ public class DesMypageServiceImpl implements DesMypageService {
 		return desMapper.desScheList(vo);
 	}
 	@Override
+
+	public int desApprove(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.desApprove(vo);
+	}
+	@Override
+	public int desDeny(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.desDeny(vo);
+	}
+	@Override
+	public List<DesVO> selectDesSty(DesVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.selectDesSty(vo);
+	}
+	@Override	
 	public int desWorkOpenUpdate(DesMypageVO vo) {
 		return desMapper.desWorkOpenUpdate(vo);
 	}
