@@ -31,7 +31,7 @@
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="dashboard-reviews.html">
+                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }l">
                 <i class="fa fa-fw fa-star"></i>
                 <span class="nav-link-text">스케쥴관리</span>
               </a>
@@ -40,7 +40,7 @@
                     <span class="nav-title-text">상담관련</span>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-                    <a href="desCourse.do?id=${my.id }" class="nav-link active" href="dashboard-bookings.html">
+                    <a href="desCourse.do?id=${my.id }" class="nav-link" href="dashboard-bookings.html">
                         <i class="far fa-fw fa-bookmark"></i>
                         <span class="nav-link-text">내상담관리</span>
                     </a>
