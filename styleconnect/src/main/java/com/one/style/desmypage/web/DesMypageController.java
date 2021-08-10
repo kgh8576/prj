@@ -19,6 +19,7 @@ import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.service.DesService;
 import com.one.style.des.vo.DesVO;
 import com.one.style.desmypage.service.DesMypageService;
+import com.one.style.desmypage.vo.DesMypageVO;
 import com.one.style.dessearch.service.DessearchService;
 import com.one.style.dessearch.vo.DessearchVO;
 import com.one.style.files.service.FilesService;
@@ -261,5 +262,21 @@ public class DesMypageController {
 		desMyDao.desCourseUpdate(vo);
 		return "redirect:desCourseUpdate.do?courNo="+vo.getCourNo();
 	}
+
 	
+	// 마이페이지/상담시간설정 진입 / 가져오는 쿼리
+	@RequestMapping("desWorkOpen.do")
+	public String desWorkOpenPage(String id, Model model) {
+		model.addAttribute("schedules", desMyDao.desWorkOpenPage(id));
+		return "desmypage/desWorkOpen";
+	}
+	// 마이페이지/상담시간설정 (월화수목금토 Update)
+	@RequestMapping("desWorkOpenUpdate.do")
+	@ResponseBody
+	public String desWorkOpenUpdate(DesMypageVO vo) {
+		int r = desMyDao.desWorkOpenUpdate(vo);
+		return r+"건 변경";
+	}
+
 }
+

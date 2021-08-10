@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.style.reply.service.ReplyService;
 import com.one.style.review.service.ReviewService;
@@ -32,7 +30,9 @@ public class ReviewController {
 		int rate = reviewDao.reviewRating(desId);
 		model.addAttribute("total", tvo.getCount());
 		//model.addAttribute("name", name);
-		model.addAttribute("rate", rate);
+		if (rate != 0) { // 
+			model.addAttribute("rate", rate);	
+		}
 		model.addAttribute("desId", desId);
 		// 리뷰 4건씩 페이징 처리
 		ReviewVO pvo = new ReviewVO();
@@ -48,7 +48,8 @@ public class ReviewController {
 	    List<ReviewVO> reviewListPaging = reviewDao.reviewPaging(pvo);
 	    model.addAttribute("reviewListPaging", reviewListPaging);
 	    model.addAttribute("paging", paging);
-	    model.addAttribute("desName", reviewListPaging.get(0).getName());
+    	model.addAttribute("desName", reviewDao.getDesName(desId));	
+	    
 	    
 		return "review/reviewList";
 	}
@@ -71,6 +72,7 @@ public class ReviewController {
 
 	// 리뷰 작성 페이지
 	@RequestMapping("reviewRegister.do") // 리뷰 작성
+
 	public String reviewRegister(String id, int conNo, Model model) {
 		ReviewVO vo = new ReviewVO();
 		vo.setMemId(id);
@@ -83,11 +85,6 @@ public class ReviewController {
 		}
 		return "main/home";
 	}
-	@RequestMapping("reviewcheck.do")
-	@ResponseBody
-	public int reviewcheck(HttpServletRequest request) {
-		
-		return 1;
-	}
+	
 	
 }

@@ -17,5 +17,6 @@ public interface ReviewServiceMap {
 	ReviewVO getHistoryForInsert(ReviewVO vo);
 	void reviewInsert(ReviewVO vo);
 	void reviewPoint(String id);
+	String getDesName(String id);
 	
 }
