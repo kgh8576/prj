@@ -217,8 +217,14 @@ public class DesMypageController {
 	}
 	//마이페이지/ 스케쥴 관리페이지 - 상담 승인
 	@RequestMapping("desApprove.do")
-	public String desApprove() {
-		
+	public String desApprove(ConHistoryVO vo) {
+		desMyDao.desApprove(vo);
+		return "redirect:desSchedule.do";
+	}
+	//마이페이지/ 스케쥴 관리페이지 - 상담 거부
+	@RequestMapping("desDeny.do")
+	public String desDeny(ConHistoryVO vo) {
+		desMyDao.desDeny(vo);
 		return "redirect:desSchedule.do";
 	}
 
@@ -238,8 +244,6 @@ public class DesMypageController {
 	// 마이페이지/상담목록 관리페이지/상담생성 페이지 - 상담등록
 	@RequestMapping("desCourseInsert.do")
 	public String desCourseInsert(Model model, DesVO vo, MultipartHttpServletRequest request) {
-		System.out.println(vo.getId());
-		
 		desMyDao.desCourseInsert(vo);
 		fileservice.upload(request, "thum", vo.getId(), desMyDao.desCourSeq().getCourNo());
 		

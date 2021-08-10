@@ -6,6 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>디자이너마이페이지 - 스케쥴 관리</title>
+<script>
+function denyfun(conNo){
+	if(confirm("예약거절하시겠습니까?") == true){
+		location.href="desDeny.do?conNo="+conNo
+	}else{
+		confirm("ㅇㅇ") 
+		return;
+	}
+}
+
+</script>
+</head>
+
 <body>
 <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
@@ -18,7 +31,7 @@
                             <li><a href="#">Dashboard</a></li>
                             <li class="active">Bookings</li>
                         </ol>
-                        <h1 class="font-weight-300">Bookings</h1>
+                        <h1 class="font-weight-300">예약내역</h1>
                     </div>
                 </div>
                 <!-- // Page Title -->
@@ -37,10 +50,15 @@
                                     <div class="d-block padding-tb-5px">예약자  :  <a href="#" class="text-main-color">${vo.memName}</a></div>
                                      <div class="d-block padding-tb-5px">예약상태  :  <a href="#" class="text-main-color">${vo.codecontent}</a></div>
                                     <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a> ${vo.memComment }</p>
-                                    
-                                    <c:if test="${vo.state eq 'ccode001'}">dddd</c:if>
-                                    <a href="desApprove.do" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> 예약승인</a>
-                                    <a href="desDeny.do" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> 예약거부</a>
+                                    <!-- 예약중상태 -->
+                                    <c:if test="${vo.state eq 'ccode001'}">
+                                    	<a href="desApprove.do?conNo=${vo.conNo }" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> 예약승인</a>
+                                   		<a onclick="denyfun('${vo.conNo}')" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> 예약거부</a>
+                                	</c:if>
+                                	<!-- 예약확정상태 -->
+                                	<c:if test="${vo.state eq 'ccode002'}">
+                                    	${vo.codecontent }상태입니다.
+                                	</c:if>
                                 </div>
                             </div>
                         </div>

@@ -25,4 +25,6 @@ public interface DesMypageMapper {
 	
 	//상담내역관리
 	public List<DesVO> desScheList(ConHistoryVO vo);
+	public int desApprove(ConHistoryVO vo);
+	public int desDeny(ConHistoryVO vo);
 }

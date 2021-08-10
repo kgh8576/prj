@@ -102,8 +102,17 @@
 	AND d.id = #{desId}
 	</select>
 	
-	<!-- 상담상태변경  -->
-	<update id="desApprove">
-	update consulting_history set state =#{state} where con_no=#{conNo}
+	<!-- 상담상태변경(승인)  -->
+	<update id="desApprove" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+	UPDATE CONSULTING_HISTORY 
+	SET STATE ='ccode002' 
+	WHERE CON_NO=#{conNo}
+	</update>
+	
+	<!-- 상담상태변경(거부)  -->
+	<update id="desDeny" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+	UPDATE CONSULTING_HISTORY 
+	SET STATE ='ccode003' 
+	WHERE CON_NO=#{conNo}
 	</update>
 </mapper>
