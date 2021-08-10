@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.maven.shared.invoker.SystemOutHandler;
-import org.apache.velocity.runtime.directive.Foreach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +23,9 @@ public class ConHistoryController {
 	ConhistoryService conHistoryDao;
 	
 	@RequestMapping("reservation.do")
-	public String reservation(Model model , HttpServletRequest req , HttpServletResponse resp) {
-		String courNo =  req.getParameter("courNo");
-		ConHistoryVO vo = new ConHistoryVO();
-		vo.setCourNo(Integer.parseInt(courNo));
+	public String reservation(Model model , HttpServletRequest req , HttpServletResponse resp , ConHistoryVO vo)  {
 		model.addAttribute("course", conHistoryDao.desCourseDetail(vo));
+		model.addAttribute("desImg",conHistoryDao.reservationDesImg(vo));
 		return "reservation/reservation";
 	}
 	
