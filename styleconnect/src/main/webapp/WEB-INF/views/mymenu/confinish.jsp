@@ -1,7 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<script>
+function day3(conNumber,id) {
+	var conNo = conNumber;
+	var memId = id;
+	$.ajax({
+		url : 'reviewcheck.do',
+		data : {
+			conNo,
+		},
+		type : 'post',
+		success : function(data) {
+			if(data == 1) {
+				location.href = 
+			}
+			
+		},
+		error : function(err) {
+			console.log(err);
+		}
+	});
+	
+};
+</script>
 <!-- Booking item -->
 <div class="col-lg-12">
 
@@ -45,7 +67,7 @@
 							</c:if>
 							<c:if test="${conhisends.reviewexist eq 0 }">
 								<a href="reviewRegister.do?id=${id }&conNo=${conhisends.conNo}"
-									class="d-inline-block text-grey-2 text-up-small"><i
+									class="d-inline-block text-grey-2 text-up-small" onclick="day3('${conhisends.conNo}','${id }')"><i
 									class="far fa-file-alt"></i> 리뷰쓰기</a>
 							</c:if>
 							<font id="Noticemessage${conhisends.conNo }" size="2"></font>
