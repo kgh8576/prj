@@ -260,7 +260,7 @@
 							</div>
 						</div>
 						<hr class="margin-tb-40px">
-						<div class="row">
+						<div class="row" style="background-color: #e1e1e133;">
 							<div class="col-md-6">
 								<strong> 가장 가까운 예약목록 </strong>><br> <br>
 								<c:choose>
@@ -311,7 +311,7 @@
 												</div>
 												
 												<div style="text-align: center;">
-													<a href="conhispage.do" style="color: blue">더보기</a>
+													<a href="confinish.do" style="color: blue">더보기</a>
 												</div>
 											</c:if>
 											<c:if test="${conhisend.codecontent ne '상담완료'}">
