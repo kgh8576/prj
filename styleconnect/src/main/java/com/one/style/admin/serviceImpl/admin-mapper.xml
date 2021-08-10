@@ -52,7 +52,7 @@
                   				time,		
                   				TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-sysdate)*24*60) as remaining_time, 
                   				designer.id as des_id, 
-                  				name as des_name, 
+                  				mem_id, 
                   				title, 
                   				detail, 
                   				des_comment,
@@ -179,7 +179,7 @@
                   				time,		
                   				TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-sysdate)*24*60) as remaining_time, 
                   				designer.id as des_id, 
-                  				name as des_name, 
+                  				mem_id,
                   				title, 
                   				detail,
                   				mem_comment,
@@ -209,6 +209,16 @@
 		select count(*) from consulting_history, des_course where consulting_history.cour_no = des_course.cour_no and id = #{desId}
 	</select>
 	
+	<update id="designerConHistoryListUpdate"
+		parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+		update consulting_history  
+			set des_attend = #{desAttend}   
+				,mem_attend = #{memAttend}   
+		where con_no =#{conNo}
+	</update>
+	
+	
+	      
 
 	
 	

@@ -85,6 +85,11 @@ public class ReviewServiceImpl implements ReviewService{
 		}
 		return b;
 	}
+
+	@Override
+	public String getDesName(String id) {
+		return map.getDesName(id);
+	}
 	
 	
 	

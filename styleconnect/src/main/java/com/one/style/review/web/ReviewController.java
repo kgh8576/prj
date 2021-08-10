@@ -30,7 +30,9 @@ public class ReviewController {
 		int rate = reviewDao.reviewRating(desId);
 		model.addAttribute("total", tvo.getCount());
 		//model.addAttribute("name", name);
-		model.addAttribute("rate", rate);
+		if (rate != 0) { // 
+			model.addAttribute("rate", rate);	
+		}
 		model.addAttribute("desId", desId);
 		// 리뷰 4건씩 페이징 처리
 		ReviewVO pvo = new ReviewVO();
@@ -46,7 +48,8 @@ public class ReviewController {
 	    List<ReviewVO> reviewListPaging = reviewDao.reviewPaging(pvo);
 	    model.addAttribute("reviewListPaging", reviewListPaging);
 	    model.addAttribute("paging", paging);
-	    model.addAttribute("desName", reviewListPaging.get(0).getName());
+    	model.addAttribute("desName", reviewDao.getDesName(desId));	
+	    
 	    
 		return "review/reviewList";
 	}
@@ -69,9 +72,11 @@ public class ReviewController {
 
 	// 리뷰 작성 페이지
 	@RequestMapping("reviewRegister.do") // 리뷰 작성
-	public String reviewRegister(ReviewVO vo, Model model) {
-		vo.setMemId("1");
-		vo.setConNo(2107270012); // 더미 
+
+	public String reviewRegister(String id, int conNo, Model model) {
+		ReviewVO vo = new ReviewVO();
+		vo.setMemId(id);
+		vo.setConNo(conNo); // 더미 1
 		if (reviewDao.canReviewRegCheckDate(vo) && reviewDao.canReviewRegCheckExist(vo) ) {  // 컨설팅 일자 이후 3일 이내이면서, 리뷰가 존재하지 않는 경우 등록 가능
 			model.addAttribute("conNo", vo.getConNo());
 			model.addAttribute("consultInfo", reviewDao.getHistoryForInsert(vo));

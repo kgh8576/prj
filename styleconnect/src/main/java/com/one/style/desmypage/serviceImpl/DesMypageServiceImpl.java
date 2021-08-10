@@ -10,6 +10,7 @@ import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;
 import com.one.style.desmypage.mapper.DesMypageMapper;
 import com.one.style.desmypage.service.DesMypageService;
+import com.one.style.desmypage.vo.DesMypageVO;
 
 @Repository("desMyDao")
 public class DesMypageServiceImpl implements DesMypageService {
@@ -83,6 +84,7 @@ public class DesMypageServiceImpl implements DesMypageService {
 		return desMapper.desScheList(vo);
 	}
 	@Override
+
 	public int desApprove(ConHistoryVO vo) {
 		// TODO Auto-generated method stub
 		return desMapper.desApprove(vo);
@@ -96,6 +98,14 @@ public class DesMypageServiceImpl implements DesMypageService {
 	public List<DesVO> selectDesSty(DesVO vo) {
 		// TODO Auto-generated method stub
 		return desMapper.selectDesSty(vo);
+	}
+	@Override	
+	public int desWorkOpenUpdate(DesMypageVO vo) {
+		return desMapper.desWorkOpenUpdate(vo);
+	}
+	@Override
+	public DesMypageVO desWorkOpenPage(String id) {
+		return desMapper.desWorkOpenPage(id);
 	}
 
 }

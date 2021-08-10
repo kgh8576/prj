@@ -112,7 +112,7 @@ ${my.id }
                             </a>
                         </div>
                          <div class="col-md-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
-                            <a href="" class="d-block border-radius-15 hvr-float hvr-sh2">
+                            <a href="desWorkOpen.do?id=${my.id }" class="d-block border-radius-15 hvr-float hvr-sh2">
                                 <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
                                     <div class="icon margin-bottom-15px opacity-7">
                                         <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-4.png" alt="">

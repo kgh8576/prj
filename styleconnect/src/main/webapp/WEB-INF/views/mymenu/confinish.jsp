@@ -1,7 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<script>
+function day3(conNumber,id) {
+	var conNo = conNumber;
+	var memId = id;
+	$.ajax({
+		url : 'reviewcheck.do',
+		data : {
+			conNo,
+		},
+		type : 'post',
+		success : function(data) {
+			if(data == 1) {
+				location.href = 
+			}
+			
+		},
+		error : function(err) {
+			console.log(err);
+		}
+	});
+	
+};
+</script>
 <!-- Booking item -->
 <div class="col-lg-12">
 
@@ -22,23 +44,32 @@
 								예약날짜 : <a href="#" class="text-main-color">${conhisends.day }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								예약시간 : <a href="#" class="text-main-color"> ${conhisends.time }</a>
+								예약시간 : <a href="#" class="text-main-color">
+									${conhisends.time }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
 								예약신청한날짜 : <a href="#" class="text-main-color">${conhisends.reservateDate }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								디자이너 : <a href="#" class="text-main-color"> ${conhisends.desName }</a>
+								디자이너 : <a href="#" class="text-main-color">
+									${conhisends.desName }</a>
 							</div>
-							<p class="margin-top-15px text-grey-2">상세정보 : ${conhisends.detail }</p>
-							<a href="reviewList.do?desId=${conhisends.id }"
-								class="d-inline-block text-grey-2 text-up-small"><i
-								class="far fa-file-alt"></i> 리뷰보기</a>
-							<button type="button"
-								class="d-inline-block margin-lr-20px text-grey-2 text-up-small"
-								onclick="paycancle('${conhisends.conNo}')">
-								<i class="far fa-window-close"></i> 예약취소
-							</button>
+							<p class="margin-top-15px text-grey-2">상세정보 :
+								${conhisends.detail }</p>
+							<c:if test="${conhisends.reviewexist eq 1 }">
+								<a href="reviewList.do?desId=${conhisends.id }"
+									class="d-inline-block text-grey-2 text-up-small" style="margin-right: 50px"><i
+									class="far fa-file-alt"></i> 리뷰보기</a>
+								<a href="reviewModify.do?conNo=${conhisends.conNo }"
+									class="d-inline-block text-grey-2 text-up-small"><i
+									class="far fa-file-alt"></i> 리뷰수정</a>
+
+							</c:if>
+							<c:if test="${conhisends.reviewexist eq 0 }">
+								<a href="reviewRegister.do?id=${id }&conNo=${conhisends.conNo}"
+									class="d-inline-block text-grey-2 text-up-small" onclick="day3('${conhisends.conNo}','${id }')"><i
+									class="far fa-file-alt"></i> 리뷰쓰기</a>
+							</c:if>
 							<font id="Noticemessage${conhisends.conNo }" size="2"></font>
 						</div>
 					</div>
