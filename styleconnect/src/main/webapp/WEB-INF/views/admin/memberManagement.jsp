@@ -10,10 +10,12 @@ function memberConHistoryListSelect(id) {
 		type : "GET",
 		dataType: "json",
 		success : function(data) {
-			console.log(data);
-			//for(var i = 0; i < memberConHistoryList.length; i++){
-			//	console.log('conNo: ' + memberConHistoryList[i].conNo);
-			//}
+			var memberConHistoryList = data.memberConHistoryList;
+			var paging = data.paging;
+			
+			for(var i = 0; i < memberConHistoryList.length; i++){
+				console.log('conNo: ' + memberConHistoryList[i].conNo);
+			}
 		}
 	});
 }
@@ -40,7 +42,7 @@ function memberConHistoryListSelect(id) {
 		<td>${member.birth}</td>
 		<td>${member.hp}</td>
 		<td>${member.regday}</td> 
-		<td><button onclick="memberConHistoryListSelect(${member.id})">수정</button>
+		<td><button onclick="memberConHistoryListSelect('${member.id}')">수정</button>
 			<button>삭제</button>
 		</td>
 	</tr>

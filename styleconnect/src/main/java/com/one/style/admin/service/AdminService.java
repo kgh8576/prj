@@ -17,4 +17,5 @@ public interface AdminService {
 	public List<DesVO> designerListSelect(DesVO vo);
 	public int designerListTotalCountSelect();
 	public List<ConHistoryVO> designerConHistoryListSelect(ConHistoryVO vo);
+	public int designerConHistoryListTotalCountSelect(ConHistoryVO vo);
 }
