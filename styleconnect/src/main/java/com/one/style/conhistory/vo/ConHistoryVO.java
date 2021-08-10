@@ -25,6 +25,7 @@ public class ConHistoryVO {
 	private String desName; //디자이너 이름
 	private String detail; //코스 상세정보
 	private int remainingTime; //남은 상담 시간
+	private String memName;
 	
 	private String codecontent; //예약상황
 	private String major; //디자이너 전문분야
