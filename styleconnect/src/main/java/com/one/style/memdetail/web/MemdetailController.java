@@ -73,9 +73,7 @@ public class MemdetailController {
 		String id = (String) session.getAttribute("id");
 		cvo.setMemId(id);
 		model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
-		rvo.setMemId(id);
-		rvo.setConNo(cvo.getConNo());
-		model.addAttribute("review",memdetailDao.reviewyoumu(rvo));
+
 		return "mymenu/confinish";
 		
 	}

@@ -27,6 +27,7 @@ public class ConHistoryVO {
 	private int remainingTime; //남은 상담 시간
 	private String memName;
 	private String id; //디자이너 아이디
+	private int reviewexist; //리뷰 유무
 	
 	private String codecontent; //예약상황
 	private String major; //디자이너 전문분야
