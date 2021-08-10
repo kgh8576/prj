@@ -26,7 +26,7 @@
 		
 		c.title,c.detail,
 		
-		d.name AS desName,d.career,d.major
+		d.name AS desName,d.career,d.major,d.id
 		
 		FROM 
 		CONSULTING_HISTORY a, COMMCODEDETAIL b , 
@@ -51,7 +51,7 @@
 		
 		c.title,c.detail,
 		
-		d.name AS desName,d.career,d.major
+		d.name AS desName,d.career,d.major,d.id
 		
 		FROM 
 		CONSULTING_HISTORY a, COMMCODEDETAIL b , 
@@ -82,5 +82,9 @@
 	<update id="reservationcancle" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		update consulting_history set state = 'ccode003' where con_no = #{conNo}
 	</update>
+	<!-- 리뷰 유뮤확인 -->
+	<select id="reviewyoumu" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
+		 SELECT * FROM REVIEW where con_no = #{conNo} and mem_id = #{memId}
+	</select>
 	
 </mapper>

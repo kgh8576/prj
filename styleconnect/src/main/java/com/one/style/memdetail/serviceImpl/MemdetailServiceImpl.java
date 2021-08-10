@@ -9,6 +9,7 @@ import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.memdetail.mapper.MemdetailMapper;
 import com.one.style.memdetail.service.MemdetailService;
+import com.one.style.review.vo.ReviewVO;
 
 @Repository
 public class MemdetailServiceImpl implements MemdetailService {
@@ -56,6 +57,12 @@ public class MemdetailServiceImpl implements MemdetailService {
 	public void reservationcancle(ConHistoryVO vo) {
 		// TODO Auto-generated method stub
 		detailMapper.reservationcancle(vo);
+	}
+
+	@Override
+	public String reviewyoumu(ReviewVO vo) {
+		// TODO Auto-generated method stub
+		return detailMapper.reviewyoumu(vo);
 	}
 	
 
