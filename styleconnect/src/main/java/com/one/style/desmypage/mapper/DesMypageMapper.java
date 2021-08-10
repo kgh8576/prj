@@ -1,6 +1,7 @@
 package com.one.style.desmypage.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;

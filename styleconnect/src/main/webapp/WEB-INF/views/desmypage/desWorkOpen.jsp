@@ -64,7 +64,8 @@
 <script>
 	
 	var targetDay; // 1. 내가 바꿀 요일 지정, 2. 탭 기능에 사용
-	
+	var id = '${id }'; 
+		
 	$(function(){
 		show('mon');
 	});
@@ -97,6 +98,7 @@
 				init('${schedules.sun }');
 				break;
 		}
+		$("#weeked").val(exceptionLi);
 	}
 	
 	function init(times){
@@ -117,20 +119,41 @@
 		console.log(sliced);
 		for(var i = 0; i < sliced.length; i++){ // 그 맞춰진 요소 갯수로 for문. Btn 생성 과정
 			if ( sliced[i] != 'none' ){ // 요소값이 none이 아니면 셀렉티드 버튼 만들어주고
-				$('#times').append($("<input class='check' type='checkbox' style='display: none;' name='time' id="+sliced[i]+" value="+compareSliced[i]+" checked> <label style='width: 60px;' for="+sliced[i]+">"+compareSliced[i]+"</label>"));
+				$('#times').append($("<input class='check' type='checkbox' style='display: none;' name='time' id="+slicedCompareTime[i]+" value="+slicedCompareTime[i]+" checked> <label style='width: 60px;' for="+slicedCompareTime[i]+">"+slicedCompareTime[i]+"</label>"));
 			}
 			else { // 요소값이 none이면 언셀렉티드 버튼 생성
-				$('#times').append($("<input class='check' type='checkbox' style='display: none;' name='time' id="+sliced[i]+" value="+compareSliced[i]+"> <label style='width: 60px;' for="+sliced[i]+">"+compareSliced[i]+"</label>"));
+				$('#times').append($("<input class='check' type='checkbox' style='display: none;' name='time' id="+slicedCompareTime[i]+" value="+slicedCompareTime[i]+"> <label style='width: 60px;' for="+slicedCompareTime[i]+">"+slicedCompareTime[i]+"</label>"));
 			}
 		}
 	}
 	
 	function submit(){
+		var checked = $('input:checkbox[name=time]:checked');
+		var times = new Array();
+		var sliced = '';
+		checked.each(function (index, el){
+			sliced += el.value;
+			if(index){
+				sliced += ',';
+			}
+		});
+		console.log(sliced);
 		
-		//$.ajax({
-//			
-//		});
-		//targetDay
+		$.ajax({
+			url:'desWorkOpenUpdate.do',
+			data:{
+				id : id,
+				targetDay : targetDay,
+				times : sliced
+			},
+			success:function(result){
+				console.log(result);
+			},
+			error:function(err){
+				console.log(err);
+			}
+		});
+		
 	}
 	
 </script>
@@ -151,28 +174,32 @@
 					<li class="li1" id="sun" onclick="show('sun')">일</li>
 				</ul>
 			</div>
-			<div id="times" style="border: 1px solid black;">
-			
-			</div>
+			<form action="desWorkOpenUpdate.do" id="weekfrm">
+			<input type="hidden" id="weeked" name ="weeked" value="">
+				<div id="times" style="border: 1px solid black;">
+					
+				</div>
+				<button>수정</button>
+			</form>
 			<div id="ComparativeGroup" style="display:none;">
-				<input class='check' type='checkbox'  name='compareTime' id="c09:00" value="09:00"> <label style='width: 60px;' for="c09:00">09:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c09:30" value="09:30"> <label style='width: 60px;' for="c09:30">09:30</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c10:00" value="10:00"> <label style='width: 60px;' for="c10:00">10:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c10:30" value="10:30"> <label style='width: 60px;' for="c10:30">10:30</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c11:00" value="11:00"> <label style='width: 60px;' for="c11:00">11:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c11:30" value="11:30"> <label style='width: 60px;' for="c11:30">11:30</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c13:00" value="13:00"> <label style='width: 60px;' for="c13:00">13:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c13:30" value="13:30"> <label style='width: 60px;' for="c13:30">13:30</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c14:00" value="14:00"> <label style='width: 60px;' for="c14:00">14:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c14:30" value="14:30"> <label style='width: 60px;' for="c14:30">14:30</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c15:00" value="15:00"> <label style='width: 60px;' for="c15:00">15:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c15:30" value="15:30"> <label style='width: 60px;' for="c15:30">15:30</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c16:00" value="16:00"> <label style='width: 60px;' for="c16:00">16:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c16:30" value="16:30"> <label style='width: 60px;' for="c16:30">16:30</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c17:00" value="17:00"> <label style='width: 60px;' for="c17:00">17:00</label>
-				<input class='check' type='checkbox'  name='compareTime' id="c17:30" value="17:30"> <label style='width: 60px;' for="c17:30">17:30</label>
+				<input class='check' type='checkbox' name='compareTime' value="09:00">
+				<input class='check' type='checkbox' name='compareTime' value="09:30"> 
+				<input class='check' type='checkbox' name='compareTime' value="10:00"> 
+				<input class='check' type='checkbox' name='compareTime' value="10:30">
+				<input class='check' type='checkbox' name='compareTime' value="11:00">
+				<input class='check' type='checkbox' name='compareTime' value="11:30">
+				<input class='check' type='checkbox' name='compareTime' value="13:00"> 
+				<input class='check' type='checkbox' name='compareTime' value="13:30"> 
+				<input class='check' type='checkbox' name='compareTime' value="14:00"> 
+				<input class='check' type='checkbox' name='compareTime' value="14:30">
+				<input class='check' type='checkbox' name='compareTime' value="15:00">
+				<input class='check' type='checkbox' name='compareTime' value="15:30"> 
+				<input class='check' type='checkbox' name='compareTime' value="16:00">
+				<input class='check' type='checkbox' name='compareTime' value="16:30">
+				<input class='check' type='checkbox' name='compareTime' value="17:00"> 
+				<input class='check' type='checkbox' name='compareTime' value="17:30">
 			</div>
-			<button onclick="submit()">수정</button>
+			
 		</div>
 		<div class="col-md-2"></div>
 	</div>

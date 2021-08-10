@@ -38,6 +38,7 @@ public class DesMypageVO {
 	private String closeTime;
 	
 	//work_open
+	private String weeked;
 	private String mon;
 	private String tue;
 	private String wed;
@@ -45,6 +46,8 @@ public class DesMypageVO {
 	private String fri;
 	private String sat;
 	private String sun;
+	private String[] time;
+	private String times;
 	
 	// 페이징 관련
 	private int pageCnt;
