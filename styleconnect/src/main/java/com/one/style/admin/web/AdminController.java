@@ -66,7 +66,6 @@ public class AdminController {
 	public HashMap<String, Object> memberConHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
 			ConHistoryVO vo = new ConHistoryVO();
 			vo.setMemId(req.getParameter("memId"));
-			System.out.println(vo.getMajor());
 
 			String page = req.getParameter("page");
 			int pageCnt = 0;
@@ -139,10 +138,40 @@ public class AdminController {
 	}
 	
 
-	@RequestMapping("designerConsHistoryUpdateForm.do")
-	public String designerConsHistoryForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
+	@RequestMapping(value = "/designerConHistoryUpdateForm.do", method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> designerConsHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		
-		return "admin/designerConsHistoryUpdateForm";
+		ConHistoryVO vo = new ConHistoryVO();
+		vo.setDesId(req.getParameter("desId"));
+
+		System.out.println(vo.getDesId());
+		
+		String page = req.getParameter("page");
+		int pageCnt = 0;
+		if( page == null) {
+			pageCnt = 1;
+		} else {
+			pageCnt = Integer.parseInt(page);
+		}
+		
+		//10건씩 페이징 처리
+		vo.setFirstCnt((pageCnt-1)*10+1);
+		vo.setLastCnt(pageCnt*10);
+		
+	    Paging paging = new Paging();
+	    paging.setPageNo(pageCnt);
+	    paging.setPageSize(10);
+	    paging.setTotalCount(adminDao.designerConHistoryListTotalCountSelect(vo));
+		
+		List<ConHistoryVO> designerConHistoryList  = new ArrayList<ConHistoryVO>();
+		designerConHistoryList = adminDao.designerConHistoryListSelect(vo);	
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("designerConHistoryList", designerConHistoryList);
+		map.put("paging", paging);
+		
+		return map;
 	}
 
 	
