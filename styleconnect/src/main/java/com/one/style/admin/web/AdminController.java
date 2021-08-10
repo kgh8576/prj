@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -174,12 +175,36 @@ public class AdminController {
 		return map;
 	}
 
-	
-	@RequestMapping("designerConsHistoryUpdate.do")
-	public String designerConsHistoryUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {
+	//디자이너 회원 상태 업데이트
+	@RequestMapping(value = "/designerConHistoryUpdate.do", method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> designerConsHistoryUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		//ConHistoryVO vo = new ConHistoryVO();
+		System.out.println("=======================값 체크: " + req.getParameter("conNo"));
+		System.out.println("=======================값 체크: " + req.getParameter("memAttend"));
+		System.out.println("=======================값 체크: " + req.getParameter("desAttend"));
+
+		//둘 다 널값 아닐 때 실행
 		
-		return "admin/designerConsHistoryUpdateForm";
+		//vo.setConNo(Integer.parseInt(req.getParameter("conNo")));
+		
+//		int resultN = 0;
+//		resultN = adminDao.designerConHistoryListUpdate(vo);
+//		
+//		//System.out.println("================체크: " + resultN);
+//		
+//		if(resultN != 0) {
+//			map.put("resultMessage", "처리 완료되었습니다.");			
+//		} else {
+//			map.put("resultMessage", "처리 실패하였습니다.");
+//		}
+		
+		
+		return map;
 	}
 	
-	//디자이너 회원 상태 업데이트
+
+	
+	
 }

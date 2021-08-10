@@ -54,4 +54,9 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.designerConHistoryListTotalCountSelect(vo);
 	}
 
+	@Override
+	public int designerConHistoryListUpdate(ConHistoryVO vo) {
+		return adminMapper.designerConHistoryListUpdate(vo);
+	}
+
 }
