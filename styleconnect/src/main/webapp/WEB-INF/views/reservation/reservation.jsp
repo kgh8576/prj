@@ -130,45 +130,16 @@
 										<p>${course.detail}</p>
 										<div class="add_bottom_25"></div>
 										<h2>디자이너가 했던 사진들</h2>
+										
 										<div class="pictures magnific-gallery clearfix">
-											<figure>
-												<a href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_1.jpg" title="Photo title" data-effect="mfp-zoom-in">
-													<img src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg" data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_1.jpg" class="lazy" alt="">
-												</a>
-											</figure>
-											<figure>
-												<a
-													href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_2.jpg"
-													title="Photo title" data-effect="mfp-zoom-in"><img
-													src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg"
-													data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_2.jpg"
-													class="lazy" alt=""></a>
-											</figure>
-											<figure>
-												<a
-													href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_3.jpg"
-													title="Photo title" data-effect="mfp-zoom-in"><img
-													src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg"
-													data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_3.jpg"
-													class="lazy" alt=""></a>
-											</figure>
-											<figure>
-												<a
-													href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_4.jpg"
-													title="Photo title" data-effect="mfp-zoom-in"><img
-													src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg"
-													data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_4.jpg"
-													class="lazy" alt=""></a>
-											</figure>
-											<figure>
-												<a
-													href="${pageContext.request.contextPath}/resources/reservationreso/img/detail_gallery/detail_5.jpg"
-													title="Photo title" data-effect="mfp-zoom-in"><span
-													class="d-flex align-items-center justify-content-center">+더보기</span><img
-													src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_placeholder.jpg"
-													data-src="${pageContext.request.contextPath}/resources/reservationreso/img/thumb_detail_5.jpg"
-													class="lazy" alt=""></a>
-											</figure>
+											<c:forEach items="${desImg}" var="vo">
+												<figure>
+													<a href="${pageContext.request.contextPath}/resources/img/${vo.fileUuid}" title="Photo title" data-effect="mfp-zoom-in">
+														<img src="${pageContext.request.contextPath}/resources/img/${vo.fileUuid}"
+														data-src="${pageContext.request.contextPath}/resources/img/${vo.fileUuid}" class="lazy" alt="">
+													</a>
+												</figure>
+											</c:forEach>
 										</div>
 									</div>
 								</div>

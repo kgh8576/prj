@@ -10,6 +10,7 @@ import com.one.style.conhistory.mapper.ConhistoryMapper;
 import com.one.style.conhistory.service.ConhistoryService;
 import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;
+import com.one.style.files.vo.FilesVO;
 
 @Service
 public class ConhistoryServiceImple implements ConhistoryService {
@@ -36,6 +37,10 @@ public class ConhistoryServiceImple implements ConhistoryService {
 	public int conHistoryAttendUpdate(ConHistoryVO vo) {
 		
 		return conHistoryMapper.conHistoryAttendUpdate(vo);
+	}
+	@Override
+	public List<FilesVO> reservationDesImg(ConHistoryVO vo) {
+		return conHistoryMapper.reservationDesImg(vo);
 	}
 
 }
