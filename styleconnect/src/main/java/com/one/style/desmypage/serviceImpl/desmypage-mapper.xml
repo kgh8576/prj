@@ -99,4 +99,34 @@
 	AND d.id = c.id
 	AND d.id = #{desId}
 	</select>
+	
+	<select id="desWorkOpenPage" parameterType="String" resultType="com.one.style.desmypage.vo.DesMypageVO">
+		select * from work_open where id = #{id}
+	</select>
+	<update id="desWorkOpenUpdate" parameterType="com.one.style.desmypage.vo.DesMypageVO">
+		update work_open set
+		<if test='mon != null'>
+		mon = #{mon}
+		</if>
+		<if test='tue != null'>
+		tue = #{tue}
+		</if>
+		<if test='wed != null'>
+		wed = #{wed}
+		</if>
+		<if test='thu != null'>
+		thu = #{thu}
+		</if>
+		<if test='fri != null'>
+		fri = #{fri}
+		</if>
+		<if test='sat != null'>
+		sat = #{sat}
+		</if>
+		<if test='sun != null'>
+		sun = #{sun}
+		</if>
+		where id = #{id}
+	</update>
+	
 </mapper>

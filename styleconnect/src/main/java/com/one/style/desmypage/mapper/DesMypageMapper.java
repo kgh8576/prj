@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;
+import com.one.style.desmypage.vo.DesMypageVO;
 
 public interface DesMypageMapper {
 	//디자이너 마이페이지
@@ -25,4 +26,10 @@ public interface DesMypageMapper {
 	
 	//상담내역관리
 	public List<DesVO> desScheList(ConHistoryVO vo);
+	
+	//상담시간 설정 페이지 진입
+	public DesMypageVO desWorkOpenPage(String id);
+	//상담시간설정 (월화수목금토 Update)
+	public int desWorkOpenUpdate(DesMypageVO vo);
+	
 }

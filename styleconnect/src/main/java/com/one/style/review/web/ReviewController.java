@@ -30,7 +30,9 @@ public class ReviewController {
 		int rate = reviewDao.reviewRating(desId);
 		model.addAttribute("total", tvo.getCount());
 		//model.addAttribute("name", name);
-		model.addAttribute("rate", rate);
+		if (rate != 0) { // 
+			model.addAttribute("rate", rate);	
+		}
 		model.addAttribute("desId", desId);
 		// 리뷰 4건씩 페이징 처리
 		ReviewVO pvo = new ReviewVO();
@@ -46,7 +48,8 @@ public class ReviewController {
 	    List<ReviewVO> reviewListPaging = reviewDao.reviewPaging(pvo);
 	    model.addAttribute("reviewListPaging", reviewListPaging);
 	    model.addAttribute("paging", paging);
-	    model.addAttribute("desName", reviewListPaging.get(0).getName());
+    	model.addAttribute("desName", reviewDao.getDesName(desId));	
+	    
 	    
 		return "review/reviewList";
 	}
