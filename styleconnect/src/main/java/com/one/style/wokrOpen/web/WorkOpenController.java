@@ -33,6 +33,7 @@ public class WorkOpenController {
 
 	@RequestMapping("fileUploadTest.do")
 	public String uploadView(Model model) {
+		model.addAttribute("date", workOpenDao.dateTest()); 
 		FilesVO vo = new FilesVO();
 		vo.setDes_id("des05");
 		return "test/FileTest";

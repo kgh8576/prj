@@ -10,4 +10,5 @@ public interface WorkOpenService {
 	
 	public String[] getRealWorkOpenTime(WorkOpenVO vo);
 	public FilesVO getFileUuidTest(FilesVO vo);
+	public String dateTest();
 }

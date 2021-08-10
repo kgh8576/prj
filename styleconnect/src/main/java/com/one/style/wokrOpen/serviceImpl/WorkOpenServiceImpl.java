@@ -51,5 +51,9 @@ public class WorkOpenServiceImpl implements WorkOpenService{
 		return workOpenMapper.getFileUuidTest(vo);
 	}
 	
+	public String dateTest(){
+		return workOpenMapper.dateTest();
+	}
+	
 	
 }
