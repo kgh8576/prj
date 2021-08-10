@@ -205,7 +205,6 @@ public class DesMypageController {
 	// 마이페이지/스타일링 관리페이지
 	@RequestMapping("desStyle.do")
 	public String desStyle(Model model, DesVO vo) {
-
 		return "desmypage/desStyle";
 	}
 
@@ -215,8 +214,13 @@ public class DesMypageController {
 		HttpSession session = request.getSession();
 		vo.setDesId((String) session.getAttribute("did"));
 		model.addAttribute("sche",desMyDao.desScheList(vo));
-			
 		return "desmypage/desSchedule";
+	}
+	//마이페이지/ 스케쥴 관리페이지 - 상담 승인
+	@RequestMapping("desApprove.do")
+	public String desApprove() {
+		
+		return "redirect:desSchedule.do";
 	}
 
 	// 마이페이지/상담목록 관리페이지

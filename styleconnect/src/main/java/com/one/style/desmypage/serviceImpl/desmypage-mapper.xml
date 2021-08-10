@@ -82,24 +82,27 @@
 	 select COUR_NO_SEQ.currval as cour_no from dual
 	</select>
 	
-	<!-- 스케쥴 -->
+	<!-- 상담내역 -->
 	<select id="desScheList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO" >
-	SELECT 
+	  SELECT 
     a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date, a.time,a.state,a.price,
 		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
-		a.con_no,a.mem_comment,
+		a.con_no,a.mem_comment, a.mem_id,
 		b.code,b.CODECONTENT,
 		c.title,c.detail,
-		d.name AS desName,d.career,d.major,d.id as des_id
+		d.name AS desName,d.career,d.major,d.id as des_id,
+		e.name as memName,e.id as mem_id
 	FROM 
 		CONSULTING_HISTORY a, COMMCODEDETAIL b , 
-		DES_COURSE c, DESIGNER d
+		DES_COURSE c, DESIGNER d, member e
 	WHERE a.state = b.code
 	AND c.cour_no = a.cour_no
 	AND d.id = c.id
+	and a.mem_id = e.id
 	AND d.id = #{desId}
 	</select>
 	
+
 	<select id="desWorkOpenPage" parameterType="String" resultType="com.one.style.desmypage.vo.DesMypageVO">
 		select * from work_open where id = #{id}
 	</select>
@@ -128,5 +131,10 @@
 		</if>
 		where id = #{id}
 	</update>
-	
+
+	<!-- 상담상태변경  -->
+	<update id="desApprove">
+	update consulting_history set state =#{state} where con_no=#{conNo}
+	</update>
+
 </mapper>

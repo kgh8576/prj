@@ -31,7 +31,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/colors/main.css">
     <!-- elegant icon -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/elegant_icon.css">
-
+	
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/sb-admin.css">
     <!-- jquery library  -->
     <script  src="${pageContext.request.contextPath}/resources/assets/js/jquery-3.2.1.min.js"></script>
     <!-- fontawesome  -->
