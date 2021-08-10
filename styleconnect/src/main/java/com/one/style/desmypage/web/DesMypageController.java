@@ -261,10 +261,10 @@ public class DesMypageController {
 
 	
 	// 마이페이지/상담시간설정 진입 / 가져오는 쿼리
-	@RequestMapping("desWorkOpenPage.do")
+	@RequestMapping("desWorkOpen.do")
 	public String desWorkOpenPage(String id, Model model) {
 		model.addAttribute("schedules", desMyDao.desWorkOpenPage(id));
-		return "mymenu/desWorkOpen";
+		return "desmypage/desWorkOpen";
 	}
 	// 마이페이지/상담시간설정 (월화수목금토 Update)
 	@RequestMapping("desWorkOpenUpdate.do")
