@@ -180,25 +180,21 @@ public class AdminController {
 	@ResponseBody
 	public HashMap<String, Object> designerConsHistoryUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		//ConHistoryVO vo = new ConHistoryVO();
-		System.out.println("=======================값 체크: " + req.getParameter("conNo"));
-		System.out.println("=======================값 체크: " + req.getParameter("memAttend"));
-		System.out.println("=======================값 체크: " + req.getParameter("desAttend"));
-
-		//둘 다 널값 아닐 때 실행
+		int resultN = 0;
+		ConHistoryVO vo = new ConHistoryVO();
 		
-		//vo.setConNo(Integer.parseInt(req.getParameter("conNo")));
+		vo.setConNo(Integer.parseInt(req.getParameter("conNo")));
+		vo.setMemAttend(req.getParameter("memAttend"));
+		vo.setDesAttend(req.getParameter("desAttend"));
 		
-//		int resultN = 0;
-//		resultN = adminDao.designerConHistoryListUpdate(vo);
-//		
-//		//System.out.println("================체크: " + resultN);
-//		
-//		if(resultN != 0) {
-//			map.put("resultMessage", "처리 완료되었습니다.");			
-//		} else {
-//			map.put("resultMessage", "처리 실패하였습니다.");
-//		}
+		resultN = adminDao.designerConHistoryListUpdate(vo);
+		System.out.println(resultN);
+		
+		if(resultN != 0) {
+			map.put("message", "처리 완료되었습니다.");			
+		} else {
+			map.put("message", "처리 실패하였습니다.");
+		}
 		
 		
 		return map;

@@ -39,38 +39,45 @@ font-size: 24px;
 }    
 </style>
 
+ 
+
 <script>
 function designerConHistoryUpdate(index) {
+	console.log('실행 체크');
 	
-	var form = document.getElementById("designer-conHistory-update-form" + index);
-	var formData = new FormData(form);
+	var formDataQueryString = $('#designer-conHistory-update-form' + index).serialize();
+	//console.log(formDataQueryString);
+	//var formData = new FormData(form);
 	
-	//formData.append("test", "test");
-	
-	for (var value of formData.values()) {
-		   console.log("value 확인: " + value);
-		}
+	//formData 확인
+	//for (var value of formData.values()) {
+	//	   console.log(value);
+	//	}
 	
 	$.ajax({
 		url : "designerConHistoryUpdate.do",
 		type : "POST",
-		data : formData,
+		data : formDataQueryString,
 		success : function(message) {
-			console.log(message);
+			console.log(message.message);
 		}
-	});	
+	});
 }
+</script> 
 
+<script>
 function getSelectedDesignerAttendValue(index){
-	$('#designer-attend' + index).attr('value',$('#designer-attend-select-box option:selected').val());
-	console.log($('#designer-attend').val());
+	$('#designer-attend' + index).attr('value',$('#designer-attend-select-box' + index + ' option:selected').val());
+	console.log($('#designer-attend' + index).val());
 }
 
 function getSelectedMemberAttendValue(index){
-	$('#member-attend' + index).attr('value', $('#member-attend-select-box option:selected').val());
-	console.log($('#member-attend').val());
+	$('#member-attend' + index).attr('value', $('#member-attend-select-box' + index + ' option:selected').val());
+	console.log($('#member-attend' + index).val());
 }
+</script>
 
+<script>
 function designerConHistoryListSelect(id) {
 
 	$.ajax({
@@ -84,6 +91,15 @@ function designerConHistoryListSelect(id) {
 			//모달 바디 안에 태그 삽입
 				//1. 태그 생성
 			var designerConHistoryUpdateFormCode ='';
+
+			for(var i = 0; i < designerConHistoryList.length; i++){
+				designerConHistoryUpdateFormCode += '<form id="designer-conHistory-update-form' + i + '"' + 'method="POST">'
+													+ '<input type="hidden" id="consulting-no" name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
+													+ '<input type="hidden" id="designer-attend' + i + '"' + 'name="desAttend" value="' + designerConHistoryList[i].desAttend + '">'//desAttend 히든
+													+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend" value="' + designerConHistoryList[i].memAttend + '">'//memAttend 히든
+													+ '</form>';
+			}
+			
 			designerConHistoryUpdateFormCode += '<table>';//
 			designerConHistoryUpdateFormCode += '<tr>'//
 													+'<td>상담번호</td>'//
@@ -102,10 +118,8 @@ function designerConHistoryListSelect(id) {
 												+'</tr>'//
 			
 			for(var i = 0; i < designerConHistoryList.length; i++){
-				designerConHistoryUpdateFormCode += '<form id="designer-conHistory-update-form' + i + '">' + 'method="POST">' + '<tr>'
-													+ '<td>' + designerConHistoryList[i].conNo 
-													+ '<input type="hidden" id="consulting_no" name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
-													+ '</td>'//
+				designerConHistoryUpdateFormCode += '<tr>'
+													+ '<td>' + designerConHistoryList[i].conNo + '</td>'//
 													+ '<td>' + designerConHistoryList[i].desId + '</td>'//
 													+ '<td>' + designerConHistoryList[i].memId + '</td>'//
 													+ '<td>' + designerConHistoryList[i].day + '</td>'//
@@ -117,44 +131,39 @@ function designerConHistoryListSelect(id) {
 				//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
 				if (designerConHistoryList[i].desAttend == "Y") {
 					designerConHistoryUpdateFormCode += '<td>'//
-														+ '<select id="designer-attend-select-box' + i + '"' + 'onChange="getSelectedDesignerAttendValue();">'//
+														+ '<select id="designer-attend-select-box' + i + '"' + 'onChange="getSelectedDesignerAttendValue('+ i + ');">'//
 														+ '<option value="Y" selected="selected">Y</option>'//
 														+ '<option value="N">N</option>'//
 														+ '</select>'// 
-														+ '<input type="hidden" id="designer-attend' + i + '"' + 'name="desAttend">'//desAttend 히든
 														+ '</td>';//
 				} else if (designerConHistoryList[i].desAttend == "N") {//
 					designerConHistoryUpdateFormCode += '<td>'// 
-														+ '<select id="designer-attend-select-box' + i + '"' + 'onChange="getSelectedDesignerAttendValue();">'// 
-														+ '<option value="Y" selected="selected">Y</option>'//
+														+ '<select id="designer-attend-select-box' + i + '"' + 'onChange="getSelectedDesignerAttendValue('+ i + ');">'// 
+														+ '<option value="Y">Y</option>'//
 														+ '<option value="N" selected="selected">N</option>'//
-														+ '<input type="hidden" id="designer-attend' + i + '"' + 'name="desAttend">'//desAttend 히든
 														+ '</select>'// 
 														+ '</td>';//
 				}
 				//조건에 따라 일반회원 참여 여부 셀렉트 박스 코드 추가
-				if (designerConHistoryList[i].desAttend == "Y") {
+				if (designerConHistoryList[i].memAttend == "Y") {
 					designerConHistoryUpdateFormCode += '<td>'// 
-														+ '<select id="member-attend-select-box' + i + '"' + 'onChange="getSelectedMemberAttendValue();">'// 
+														+ '<select id="member-attend-select-box' + i + '"' + ' onChange="getSelectedMemberAttendValue('+ i + ');">'// 
 														+ '<option value="Y" selected="selected">Y</option>'//
 														+ '<option value="N">N</option>'//
 														+ '</select>'//
-														+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend">'//memAttend 히든
 														+ '</td>';//
 				} else if (designerConHistoryList[i].memAttend == "N") {//
 					designerConHistoryUpdateFormCode += '<td>'// 
-														+ '<select id="member-attend-select-box' + i + '"' + 'onChange="getSelectedMemberAttendValue();">'// 
+														+ '<select id="member-attend-select-box' + i + '"' + ' onChange="getSelectedMemberAttendValue('+ i + ');">'// 
 														+ '<option value="Y" selected="selected">Y</option>'//
 														+ '<option value="N" selected="selected">N</option>'//
 														+ '</select>'//
-														+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend">'//memAttend 히든
 														+ '</td>';//
 				}
 
-				designerConHistoryUpdateFormCode += '</td>'//
-													+ '<td>' + designerConHistoryList[i].state + '</td>'//
+				designerConHistoryUpdateFormCode += '<td>' + designerConHistoryList[i].state + '</td>'//
 													+ '<td>' + '<button type="button" onclick="designerConHistoryUpdate('+ i + ');">수정</button>' + '</td>'//
-													+ '</form>' + '</tr>';//
+													+ '</tr>';//
 			}
 												
 			designerConHistoryUpdateFormCode += '</table>';
@@ -176,7 +185,7 @@ function designerConHistoryListSelect(id) {
 
 </script>
 
-<!-- 삭제 함수 -->
+
 
 
 <br><br><br><br><br><br><br><br><br><br>
@@ -255,3 +264,6 @@ function designerConHistoryListSelect(id) {
 마지막 페이지 번호: ${paging.finalPageNo}
 게시 글 전체 수: ${paging.totalCount}
 </pre>
+
+
+
