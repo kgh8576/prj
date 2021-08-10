@@ -23,6 +23,23 @@
 	float: right;
 	color: #110202;
 }
+.looksNotBtn{
+	padding: 0;
+	border: none;
+	background: none;
+	outline:none;
+}
+.looksNotBtn:focus{
+	padding: 0;
+	border: none;
+	background: none;
+    outline:none;
+    
+}
+.looksNotBtn:hover{
+	color: #FB522D;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -227,7 +244,19 @@
 									href="pwchangepage.do">비밀번호 변경하기</a>
 							</div>
 							<div class="col-md-6 margin-bottom-20px">
-								<label><i></i></label><a href="noshow.do">Noshow</a>
+								♥&nbsp;&nbsp;&nbsp;<button type="button" class="looksNotBtn" data-toggle="modal" data-target="#preferenceFrmModal">관심 분야 변경</button>
+							</div>
+							<div class="col-md-6"></div>
+							
+							
+							
+							
+							
+							
+							<div class="col-md-6 margin-bottom-20px">
+								<label><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-expressionless-fill" viewBox="0 0 16 16">
+								  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM4.5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm5 0h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm-5 4h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+								</svg></label>&nbsp;&nbsp;&nbsp;<a href="noshow.do">Noshow</a>
 							</div>
 						</div>
 						<hr class="margin-tb-40px">
@@ -303,6 +332,37 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
+							
+					<!-- Modal -->
+					<div class="modal fade" id="preferenceFrmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+					  <div class="modal-dialog modal-lg">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      	<form id="preferenceFrm" action="memDetailInsert.do" method="post">
+						      	<h5>내가 필요한 서비스는...</h5>
+						      	<h6 align="right" style="color: grey;">다중 선택 가능</h6>
+								<div class="select" style="text-align: center;" id="needService">
+									<input class="check" type="checkbox" name="YesorNo" id="makeupyn1" value="Y"><label style="width: 60px;" for="makeupyn1"> 메이크업 </label> <input class="finalcheck" type="hidden" id="makeupyn" name="makeupyn">
+									<input class="check" type="checkbox" name="YesorNo" id="cutyn1" value="Y"><label style="width: 60px;" for="cutyn1"> 커트 </label> <input class="finalcheck" type="hidden" id="cutyn" name="cutyn">
+									<input class="check" type="checkbox" name="YesorNo" id="permyn1" value="Y"><label style="width: 60px;" for="permyn1"> 펌 </label> <input class="finalcheck" type="hidden" id="permyn" name="permyn">
+									<input class="check" type="checkbox" name="YesorNo" id="dyeyn1" value="Y"> <label style="width: 60px;" for="dyeyn1"> 염색 </label> <input class="finalcheck" type="hidden" id="dyeyn" name="dyeyn">
+								</div>
+							</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-primary" onclick="preFrmSubmit()">제출</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+							
+							
 						</div>
 						<div style="text-align: left; margin-top: 200px">
 							<p>
