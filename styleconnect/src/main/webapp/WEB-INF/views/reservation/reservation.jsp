@@ -41,53 +41,77 @@
 <script>
 	$(function() {
 		$("#check_module").click(function() {
-			
+			var mem_id = "${id}";
+			if (mem_id == ""){
+				alert('로그인이 필요한 서비스 입니다. 로그인을 해주세요');
+				location.href='loginpage.do';
+			}
 			var selectTime = $("#selected_time").text();
+			var selectday = frm.day.value;
 			if (selectTime == "") {
 				alert('요일과 시간을 선택해주세요');
 			} else {
-				var IMP = window.IMP; // 생략가능
-				var cour_name = "${course.title}";
-				var price = ${course.price};
-				var mem_id = "${id}";
-				IMP.init('imp17015271');
-				IMP.request_pay({
-					pg : 'kakao',
-					pay_method : 'card',
-					merchant_uid : new Date().getTime(),
-					name : '주문명:' + cour_name,
-					amount : price,
-				}, function(rsp) {
-					if (rsp.success) {
-						var msg = '결제가 완료되었습니다.\n';
-						msg += '결제 금액 : ' + rsp.paid_amount;
-						msg += '\n' + rsp.name;
-						var desData = {
-							PayNo : rsp.merchant_uid * 1,
-							id : mem_id,
-							payment : rsp.paid_amount
+				var memTimeCheck = {
+						memId : mem_id,
+						time : selectTime,
+						day : selectday
+				}
+				$.ajax({
+					url : "memResrTimeCheck.do",
+					type : "post",
+					data : memTimeCheck,
+					success : function(count) {
+						if(count == 0){
+							var IMP = window.IMP; // 생략가능
+							var cour_name = "${course.title}";
+							var price = ${course.price};
+							IMP.init('imp17015271');
+							IMP.request_pay({
+								pg : 'kakao',
+								pay_method : 'card',
+								merchant_uid : new Date().getTime(),
+								name : '주문명:' + cour_name,
+								amount : price,
+							}, function(rsp) {
+								if (rsp.success) {
+									var msg = '결제가 완료되었습니다.\n';
+									msg += '결제 금액 : ' + rsp.paid_amount;
+									msg += '\n' + rsp.name;
+									var desData = {
+										PayNo : rsp.merchant_uid * 1,
+										id : mem_id,
+										payment : rsp.paid_amount
+									}
+									$.ajax({
+										url : "paymentInsert.do",
+										type : "get",
+										data : desData,
+										success : function(data) {
+											frm.time.value = selectTime;
+											frm.price.value = price;
+											frm.memId.value = mem_id;
+											frm.payNo.value = rsp.merchant_uid * 1;
+											frm.submit();
+										},
+										error : function(err) {
+											console.log(err);
+										}
+									})
+								} else {
+									var msg = '결제에 실패하였습니다.';
+									msg += '에러내용 : ' + rsp.error_msg;
+								}
+								alert(msg);
+							});
 						}
-						$.ajax({
-							url : "paymentInsert.do",
-							type : "get",
-							data : desData,
-							success : function(data) {
-								frm.time.value = selectTime;
-								frm.price.value = price;
-								frm.memId.value = mem_id;
-								frm.payNo.value = rsp.merchant_uid * 1;
-								frm.submit();
-							},
-							error : function(err) {
-								console.log(err);
-							}
-						})
-					} else {
-						var msg = '결제에 실패하였습니다.';
-						msg += '에러내용 : ' + rsp.error_msg;
+						else{
+							alert("회원님의 다른 예약이 있는 날짜입니다.\n확인후 예약해주세요");			
+						}
+					},
+					error : function (err) {
+						console.log(err);
 					}
-					alert(msg);
-				});
+				})
 			}
 		});
 

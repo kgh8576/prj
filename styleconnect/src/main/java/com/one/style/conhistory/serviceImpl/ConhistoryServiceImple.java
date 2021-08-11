@@ -42,5 +42,10 @@ public class ConhistoryServiceImple implements ConhistoryService {
 	public List<FilesVO> reservationDesImg(ConHistoryVO vo) {
 		return conHistoryMapper.reservationDesImg(vo);
 	}
+	@Override
+	public List<ConHistoryVO> memResrTimeCheck(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		return conHistoryMapper.memResrTimeCheck(vo);
+	}
 
 }

@@ -3,7 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-
+<head>
+	<style type="text/css">
+		.background-white{
+			height: 100%;
+		}
+	</style>
+</head>
 <body>
 	<div id="page-title" class="padding-tb-30px gradient-white">
 		<div class="container">

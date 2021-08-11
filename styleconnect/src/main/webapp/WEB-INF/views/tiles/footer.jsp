@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" %>
-<footer class="padding-tb-50px background-main-color wow fadeInUp">
+<footer class="padding-tb-50px background-main-color wow fadeInUp" style="visibility: visible;animation-name: fadeInUp;top: 0px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -11,4 +11,4 @@ pageEncoding="UTF-8" %>
                 </div>
             </div>
         </div>
-    </footer>
+</footer>

@@ -14,4 +14,5 @@ public interface ConhistoryService {
 	//상담하기 페이지: 상담 참여 시 DB의 consulting_history 테이블의 mem_attend 또는 des_attend 값을 N에서 Y로 변경
 	public int conHistoryAttendUpdate(ConHistoryVO vo);
 	public List<FilesVO> reservationDesImg(ConHistoryVO vo);
+	public List<ConHistoryVO> memResrTimeCheck(ConHistoryVO vo);
 }

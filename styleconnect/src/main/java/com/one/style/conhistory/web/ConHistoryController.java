@@ -78,6 +78,13 @@ public class ConHistoryController {
 		
 		return map;
 	}
+	
+	@RequestMapping("memResrTimeCheck.do")
+	@ResponseBody
+	public int memResrTimeCheck(ConHistoryVO vo) {
+		return conHistoryDao.memResrTimeCheck(vo).size();
+	}
+	
 
 	
 }

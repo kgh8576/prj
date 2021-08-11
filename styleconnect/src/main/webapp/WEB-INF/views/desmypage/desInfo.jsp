@@ -362,14 +362,6 @@ function hpchange() {
         </div>
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->
-        <footer class="sticky-footer">
-            <div class="container">
-                <div class="text-center">
-                    <span>© 2018 tabib Health Directory | All Right Reserved <a class="text-grey-2 margin-left-15px" href="https://themeforest.net/user/nile-theme/portfolio" target="_blank">Powered by : Nile Theme</a></span>
-                </div>
-            </div>
-        </footer>
-        <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
           <i class="fa fa-angle-up"></i>
         </a>

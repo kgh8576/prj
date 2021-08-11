@@ -73,6 +73,14 @@
 						)
 		and file_state = 'thum'
 	</select>
+	<select id="memResrTimeCheck" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
+		select *
+		from CONSULTING_HISTORY
+		where mem_id = #{memId}
+		and day = #{day}
+		and time = #{time}
+	</select>
+
 
 
 </mapper>
