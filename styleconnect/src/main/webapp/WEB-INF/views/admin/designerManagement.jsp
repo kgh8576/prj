@@ -79,6 +79,26 @@ function getSelectedMemberAttendValue(index){
 </script>
 
 
+<!-- 
+			designerConHistoryUpdateFormCode += '<div class="pagination">'
+		    									+ '<a href="javascript:goPageForModal1(' + ${paging.firstPageNo} + ')" class="first">first</a>
+		    									+ '<a href="javascript:goPageForModal1(' + ${paging.prevPageNo}) + '" class="prev">prev</a>
+		    									+ '<span>';
+		    												
+		    for(var i=${paging.startPageNo}; i<=${paging.endPageNo}; i++){
+				if(i == ${paging.pageNo}){
+					designerConHistoryUpdateFormCode += '<a href="javascript:goPageForModal1(' + i + ')" class="active">${i}</a>'
+				} else {
+					designerConHistoryUpdateFormCode += '<a href="javascript:goPageForModal1(' + i + '">${i}</a>'
+				}
+			}
+
+		    designerConHistoryUpdateFormCode += '</span>'
+		    									+ '<a href="javascript:goPageForModal1(' + ${paging.nextPageNo} + ')" class="next">next</a>'
+		    									+ '<a href="javascript:goPageForModal1(' + ${paging.finalPageNo} + ')" class="last">last</a>'
+												+ '</div>';
+ -->
+
 <!-- 디자이너 상담내역 수정 모달 태그 생성 함수 -->
 <script>
 function designerConHistoryUpdateForm(id) {
@@ -103,7 +123,7 @@ function designerConHistoryUpdateForm(id) {
 			//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
 			for(var i = 0; i < designerConHistoryList.length; i++){
 				designerConHistoryUpdateFormCode += '<form id="designer-conHistory-update-form' + i + '"' + 'method="POST">'
-													+ '<input type="hidden" id="consulting-no" name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
+													+ '<input type="hidden" id="consulting-no' + i + '"' + 'name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
 													+ '<input type="hidden" id="designer-attend' + i + '"' + 'name="desAttend" value="' + designerConHistoryList[i].desAttend + '">'//desAttend 히든
 													+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend" value="' + designerConHistoryList[i].memAttend + '">'//memAttend 히든
 													+ '</form>';
@@ -176,13 +196,18 @@ function designerConHistoryUpdateForm(id) {
 			}
 												
 			designerConHistoryUpdateFormCode += '</table>';
-				//1. 태그 생성 끝
+					
+
+			//페이지 네비게이션
+
+					
 				
 				//2. 태그 삽입
 			$('#designer-conHistory-update-form-target').html(designerConHistoryUpdateFormCode);
 				//2. 태그 삽입 끝
 				
 			//!!!!!페이징 추가!!!!!
+			
 		}
 	});
 }
@@ -192,7 +217,7 @@ function designerConHistoryUpdateForm(id) {
 function designerStateUpdateForm(id) {
 	
 	$.ajax({
-		url : "designerStateUpdateForm.do?&desId="+ id,
+		url : "designerStateUpdateForm.do?desId="+ id,
 		type : "GET",
 		dataType: "json",
 		success : function(data) {
@@ -247,7 +272,7 @@ function designerStateUpdateForm(id) {
 			
 			for(var i = 0; i < designerCertificationFileList.length; i++){
 				designerStateUpdateFormCode += '<tr>';
-				designerStateUpdateFormCode += '<td>' + '<img src="${pageContext.request.contextPath}/resources/assets/img/' + designerCertificationFileList[i].fileUuid + '">' + designerCertificationFileList[i].fileName + '</td>';
+				designerStateUpdateFormCode += '<td>' + '<img src="${pageContext.request.contextPath}/resources/img/' + designerCertificationFileList[i].fileUuid + '">' + designerCertificationFileList[i].fileName + '</td>';
 				designerStateUpdateFormCode += '</tr>';
 			}
 			designerStateUpdateFormCode += '<tr>';
@@ -313,7 +338,8 @@ function designerStateUpdateForm(id) {
 			designerStateUpdateFormCode += '</tr>';
 			
 			designerStateUpdateFormCode += '</table>';
-			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>'
+			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>';
+			
 				//1. 태그 생성 끝
 				
 				//2. 태그 삽입
@@ -350,6 +376,17 @@ function designerStateUpdate(id) {
 }
 </script>
 
+<!-- 페이지 이동 함수 -->
+<script>
+function goPageForEntirePage(page) {
+	location.href = "designerManagement.do?page=" + page;
+}
+
+function goPageForModal1(page) {
+	console.log('테스트: ' + page);
+	//designerConHistoryUpdateForm(id, page);
+}
+</script>
 
 
 
@@ -358,13 +395,12 @@ function designerStateUpdate(id) {
 <!-- 셀렉트 박스로 상태 구분하여 보여줌, 검색창 -->
 <table>
 	<tr>
-		<td>회원ID</td>
+		<td>ID</td>
 		<td>이름</td>
 		<td>성별</td>
 		<td>생년월일</td>
 		<td>휴대폰 번호</td>
 		<td>근무처</td>
-		<td>경력</td>
 		<td>분야</td>
 		<td>전문</td>
 		<td>상태</td>
@@ -380,7 +416,6 @@ function designerStateUpdate(id) {
 		<td>${designer.birth}</td>
 		<td>${designer.hp}</td>
 		<td>${designer.location}</td>
-		<td>${designer.career}</td>
 		<td>메이크업: ${designer.makeupyn}<br>
 			컷: ${designer.cutyn}<br>
 			펌: ${designer.permyn}<br>
@@ -388,13 +423,26 @@ function designerStateUpdate(id) {
 		<td>${designer.major}</td>
 		<td>${designer.state}</td>
 		<td>${designer.regday}</td>
-		<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">수정</button>
-			<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">승인</button>
+		<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">상담내역 수정</button>
+			<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">회원상태 수정 </button>
 		</td>
 	</tr>
 	</c:forEach>
 	
 </table>
+
+<!-- 페이징 -->
+<div align="center">
+	<jsp:include page="pagingForEntirePage.jsp" flush="true">
+		<jsp:param name="firstPageNo" value="${paging.firstPageNo}" />
+		<jsp:param name="prevPageNo" value="${paging.prevPageNo}" />
+		<jsp:param name="startPageNo" value="${paging.startPageNo}" />
+		<jsp:param name="pageNo" value="${paging.pageNo}" />
+		<jsp:param name="endPageNo" value="${paging.endPageNo}" />
+		<jsp:param name="nextPageNo" value="${paging.nextPageNo}" />
+		<jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
+	</jsp:include>
+</div>
 
 <!-- 상담내역 수정 모달 -->
 <div class="modal fade" id="designer-conHistory-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
@@ -445,6 +493,8 @@ function designerStateUpdate(id) {
 마지막 페이지 번호: ${paging.finalPageNo}
 게시 글 전체 수: ${paging.totalCount}
 </pre>
+
+
 
 
 
