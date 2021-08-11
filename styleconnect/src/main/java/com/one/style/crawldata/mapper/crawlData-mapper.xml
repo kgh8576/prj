@@ -2,12 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.style.crawldata.mapper.CrawlDataServiceMap">
 
-	<select id="getCrawlList" resultType="com.one.style.crawldata.vo.CrawlDataVO" >
-		select * from crawl_data where rownum = 1 order by 1 desc 
+	<select id="getCrawlList" resultType="com.one.style.crawldata.vo.CrawlDataVO" parameterType="String" >
+		select *
+		from
+		(select * from crawl_data where gender = #{gender} order by 1 desc)
+		where rownum = 1
 	</select>
 
 	<insert id="insertCrawl" parameterType="com.one.style.crawldata.vo.CrawlDataVO">
-		insert into crawl_data values(sysdate, #{first}, #{two}, #{three}, #{four}, #{five})
+		insert into crawl_data values(sysdate, #{first}, #{two}, #{three}, #{four}, #{five}, #{gender})
 	</insert>
 
 </mapper>

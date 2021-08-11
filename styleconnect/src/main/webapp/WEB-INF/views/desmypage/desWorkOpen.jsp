@@ -159,7 +159,6 @@
 </script>
 </head>
 <body><br><br><br><br><br><br>
-	<button onclick="test()">테스트</button>
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
