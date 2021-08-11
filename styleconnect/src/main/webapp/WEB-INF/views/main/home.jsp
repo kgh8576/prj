@@ -134,6 +134,10 @@ section .container img{
 								$('#target' + targetKeyword + 'Star' + (i + 1))
 										.append('<li class="active"></li>');
 							}
+							for (var j = 1; j <= 5-result[i].rate; j++){
+								$('#target' + targetKeyword + 'Star' + (i + 1))
+								.append('<li></li>');
+							}
 							$('#target' + targetKeyword + 'Image' + (i + 1))
 									.attr(
 											'src',
