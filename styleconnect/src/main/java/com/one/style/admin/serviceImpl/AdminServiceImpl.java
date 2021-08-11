@@ -9,6 +9,7 @@ import com.one.style.admin.mapper.AdminMapper;
 import com.one.style.admin.service.AdminService;
 import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;
+import com.one.style.files.vo.FilesVO;
 import com.one.style.mem.vo.MemberVO;
 
 @Service
@@ -57,6 +58,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int designerConHistoryListUpdate(ConHistoryVO vo) {
 		return adminMapper.designerConHistoryListUpdate(vo);
+	}
+
+	@Override
+	public DesVO designerStateOneSelect(DesVO vo) {
+		return adminMapper.designerStateOneSelect(vo);
+	}
+
+	@Override
+	public List<FilesVO> designerCertificationFileListSelect(FilesVO vo) {
+		return adminMapper.designerCertificationFileListSelect(vo);
 	}
 
 }
