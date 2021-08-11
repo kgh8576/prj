@@ -40,7 +40,7 @@ font-size: 24px;
 </style>
 
  
-
+<!-- 디자이너 상담 내역 수정 함수 -->
 <script>
 function designerConHistoryUpdate(index) {
 	console.log('실행 체크');
@@ -58,13 +58,14 @@ function designerConHistoryUpdate(index) {
 		url : "designerConHistoryUpdate.do",
 		type : "POST",
 		data : formDataQueryString,
-		success : function(message) {
-			console.log(message.message);
+		success : function(result) {
+			console.log(result.message);
 		}
 	});
 }
 </script> 
 
+<!-- 디자이너 상태 수정 모달 태그 생성을 위해 요구되는 value값을 hidden input에 삽입하는 함수 -->
 <script>
 function getSelectedDesignerAttendValue(index){
 	$('#designer-attend' + index).attr('value',$('#designer-attend-select-box' + index + ' option:selected').val());
@@ -77,8 +78,11 @@ function getSelectedMemberAttendValue(index){
 }
 </script>
 
+
+<!-- 디자이너 상담내역 수정 모달 태그 생성 함수 -->
 <script>
-function designerConHistoryListSelect(id) {
+function designerConHistoryUpdateForm(id) {
+	console.log('실행 체크');
 
 	$.ajax({
 		url : "designerConHistoryUpdateForm.do?&desId="+ id,
@@ -92,6 +96,11 @@ function designerConHistoryListSelect(id) {
 				//1. 태그 생성
 			var designerConHistoryUpdateFormCode ='';
 
+			//코드 비효율적임. 추후 수정 시: 
+			//form을 list size만큼 생성하지 않고 
+			//1. 버튼 눌렀을 때 매개변수로 인덱스 값을 넘기고
+			//2. 넘긴 인덱스로 3개의 value값(conNo, desAttend, memAttend) 찾아서
+			//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
 			for(var i = 0; i < designerConHistoryList.length; i++){
 				designerConHistoryUpdateFormCode += '<form id="designer-conHistory-update-form' + i + '"' + 'method="POST">'
 													+ '<input type="hidden" id="consulting-no" name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
@@ -177,12 +186,168 @@ function designerConHistoryListSelect(id) {
 		}
 	});
 }
+</script>
 
-//추후 수정
+<script>
+function designerStateUpdateForm(id) {
+	
+	$.ajax({
+		url : "designerStateUpdateForm.do?&desId="+ id,
+		type : "GET",
+		dataType: "json",
+		success : function(data) {
+			var designerStateOne = data.designerStateOne;
+			var designerCertificationFileList = data.designerCertificationFileList;
+			console.log('스테이트 데이터 반환 확인: ' + designerStateOne);
+			console.log('파일 리스트 데이터 반환 확인: ' + designerCertificationFileList);
+			
+			//모달 바디 안에 태그 삽입
+				//1. 태그 생성
+			var designerStateUpdateFormCode ='';
+			designerStateUpdateFormCode += '<table>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>ID</td>'
+											+ '<td>' + designerStateOne.id + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>이름</td>'
+											+ '<td>' + designerStateOne.name + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>성별</td>'
+											+ '<td>' + designerStateOne.gender + '</td>';;
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>생년월일</td>'
+											+ '<td>' + designerStateOne.birth + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<td>휴대폰 번호</td>'
+											+ '<td>' + designerStateOne.hp + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<td>근무처</td>'
+											+ '<td>' + designerStateOne.location + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>경력</td>'
+											+ '<td>' + designerStateOne.career + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>분야</td>'
+											+ '<td>' + '메이크업: ' + designerStateOne.makeupyn
+													+ '컷: ' + designerStateOne.cutyn 
+													+ '펌: ' + designerStateOne.permyn 
+													+ '염색: ' + designerStateOne.dyeyn + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>전문</td>'
+											+ '<td>' + designerStateOne.major + '</td>';
+			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td rowspan="' + (designerCertificationFileList.length + 1) +'">증명 자료</td>';
+			
+			for(var i = 0; i < designerCertificationFileList.length; i++){
+				designerStateUpdateFormCode += '<tr>';
+				designerStateUpdateFormCode += '<td>' + '<img src="${pageContext.request.contextPath}/resources/assets/img/' + designerCertificationFileList[i].fileUuid + '">' + designerCertificationFileList[i].fileName + '</td>';
+				designerStateUpdateFormCode += '</tr>';
+			}
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>상태</td>'
+				
+			//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
+			if (designerStateOne.state == "신청") {
+				designerStateUpdateFormCode += '<td>'//
+												+ '<select id="designer-state-select-box">'//
+												+ '<option value="신청" selected="selected">신청</option>'//
+												+ '<option value="반려">반려</option>'//
+												+ '<option value="승인">승인</option>'//
+												+ '<option value="탈퇴">탈퇴</option>'//
+												+ '<option value="휴면">휴면</option>'//
+												+ '</select>'// 
+												+ '</td>';//
+			} else if (designerStateOne.state == "반려") {
+				designerStateUpdateFormCode += '<td>'//
+												+ '<select id="designer-state-select-box">'//
+												+ '<option value="신청">신청</option>'//
+												+ '<option value="반려" selected="selected">반려</option>'//
+												+ '<option value="승인">승인</option>'//
+												+ '<option value="탈퇴">탈퇴</option>'//
+												+ '<option value="휴면">휴면</option>'//
+												+ '</select>'// 
+												+ '</td>';//
+			} else if (designerStateOne.state == "승인") {
+				designerStateUpdateFormCode += '<td>'//
+												+ '<select id="designer-state-select-box">'//
+												+ '<option value="신청" >신청</option>'//
+												+ '<option value="반려">반려</option>'//
+												+ '<option value="승인" selected="selected">승인</option>'//
+												+ '<option value="탈퇴">탈퇴</option>'//
+												+ '<option value="휴면">휴면</option>'//
+												+ '</select>'// 
+												+ '</td>';//
+			} else if (designerStateOne.state == "탈퇴") {
+				designerStateUpdateFormCode += '<td>'//
+												+ '<select id="designer-state-select-box">'//
+												+ '<option value="신청" >신청</option>'//
+												+ '<option value="반려">반려</option>'//
+												+ '<option value="승인">승인</option>'//
+												+ '<option value="탈퇴" selected="selected">탈퇴</option>'//
+												+ '<option value="휴면">휴면</option>'//
+												+ '</select>'// 
+												+ '</td>';//
+			} else if (designerStateOne.state == "휴면") {
+				designerStateUpdateFormCode += '<td>'//
+												+ '<select id="designer-state-select-box">'//
+												+ '<option value="신청" >신청</option>'//
+												+ '<option value="반려">반려</option>'//
+												+ '<option value="승인">승인</option>'//
+												+ '<option value="탈퇴" >탈퇴</option>'//
+												+ '<option value="휴면" selected="selected">휴면</option>'//
+												+ '</select>'// 
+												+ '</td>';//
+			}
+			designerStateUpdateFormCode += '</tr>';
+											
+			designerStateUpdateFormCode += '<tr>';
+			designerStateUpdateFormCode += '<td>관리자 코멘트</td>';
+			designerStateUpdateFormCode += '<td><textarea id="designer-comments-textarea" name="comments">' + designerStateOne.comments + '</textarea></td>';
+			designerStateUpdateFormCode += '</tr>';
+			
+			designerStateUpdateFormCode += '</table>';
+			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>'
+				//1. 태그 생성 끝
+				
+				//2. 태그 삽입
+			$('#designer-state-update-form-target').html(designerStateUpdateFormCode);
+				//2. 태그 삽입 끝
+			
+		}
+	});
+	
+}
 
+</script>
 
-
-
+<script>
+function designerStateUpdate(id) {
+	var id = id;
+	var state = $('#designer-state-select-box option:selected').val();
+	var comments = $('#designer-comments-textarea').val();
+	console.log("상태: " + state);
+	console.log("코멘트: " + comments);
+	
+	$.ajax({
+		url : "designerStateUpdate.do",
+		type : "POST",
+		data : {
+			"id" : id,
+			"state" : state,
+			"comments" : comments
+		},
+		success : function(result) {
+			console.log(result.message);
+		}
+	});
+}
 </script>
 
 
@@ -200,11 +365,10 @@ function designerConHistoryListSelect(id) {
 		<td>휴대폰 번호</td>
 		<td>근무처</td>
 		<td>경력</td>
-		<td>전문분야</td>
-		<td>major</td>
-		<td>진행상황</td>
+		<td>분야</td>
+		<td>전문</td>
+		<td>상태</td>
 		<td>가입일</td>
-		<td>코멘트</td>
 		<!-- 수정 버튼 클릭 시 수정 폼페이지로 이동 -->
 		<td>처리</td>
 	</tr>
@@ -221,21 +385,19 @@ function designerConHistoryListSelect(id) {
 			컷: ${designer.cutyn}<br>
 			펌: ${designer.permyn}<br>
 			염색: ${designer.dyeyn}</td>
-		<td>${designer.regday}</td>
 		<td>${designer.major}</td>
 		<td>${designer.state}</td>
 		<td>${designer.regday}</td>
-		<td>${designer.comments}</td>
-		<td><button data-toggle="modal" data-target="#preferenceFrmModal" onclick="designerConHistoryListSelect('${designer.id}')">수정</button>
-			<button>승인</button>
+		<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">수정</button>
+			<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">승인</button>
 		</td>
 	</tr>
 	</c:forEach>
 	
 </table>
 
-<!-- Modal -->
-<div class="modal fade" id="preferenceFrmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<!-- 상담내역 수정 모달 -->
+<div class="modal fade" id="designer-conHistory-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -245,6 +407,25 @@ function designerConHistoryListSelect(id) {
 				</button>
 			</div>
 			<div class="modal-body" id="designer-conHistory-update-form-target">
+			<!-- ajax로 태그 삽입 -->
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 회원 상태 수정 모달 -->
+<div class="modal fade" id="designer-state-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" id="designer-state-update-form-target">
 			<!-- ajax로 태그 삽입 -->
 			</div>
 			<div class="modal-footer">
