@@ -29,7 +29,7 @@
                                         <ul class="float-right">
                                           <c:forEach begin="1" end="${designer.rate }">
 												<li class="active"></li>
-										</c:forEach>  평점 ${designer.rate }
+										</c:forEach>  평점 ${designer.rate } 
                                         </ul>
                                     </div>
                                 </div>
