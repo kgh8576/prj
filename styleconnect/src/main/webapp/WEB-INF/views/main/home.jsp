@@ -7,14 +7,13 @@
 
 <head>
 <title>Tabib HTML5 Health Directory Template</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap"
-	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
+
 <style>
 body {
-	font-family: 'Lato', sans-serif;
+	font-family: 'Gothic A1', sans-serif;
 }
 
 .wrapper {
@@ -51,7 +50,7 @@ section .container img{
     height: 255px;
 }
 .padding-30px{
-	height: 156px
+	height: 156px;
 }
 	.li1{
 	 display: inline-block;
@@ -85,6 +84,10 @@ section .container img{
     transform: translate(0, -50%);
     top: 30%;
     margin: 0 auto;
+}
+
+.card-title, .card-titleH5 {
+	display:inline;
 }
 
 
@@ -235,11 +238,11 @@ section .container img{
 			},
 			success:function(result){
 				console.log(result);
-				$('#hashTagOne').text(result.one);
-				$('#hashTagTwo').text(result.two);
-				$('#hashTagThree').text(result.three);
-				$('#hashTagFour').text(result.four);
-				$('#hashTagFive').text(result.five);
+				$('#hashTagOne').text('#'+result.one);
+				$('#hashTagTwo').text('#'+result.two);
+				$('#hashTagThree').text('#'+result.three);
+				$('#hashTagFour').text('#'+result.four);
+				$('#hashTagFive').text('#'+result.five);
 			},
 			error:function(err){
 				console.log(err)
@@ -268,12 +271,12 @@ section .container img{
 			<!-- 검색창 -->
 			<div class="row justify-content-center margin-tb-60px">
 				<div class="col-lg-2"></div>
-				<div class="col-lg-8">
+				<div class="col-lg-7" style="padding-top: 50px;">
 					<div class="listing-search">
 						<form id="frm" action="searchList.do" method="post">
 							<div class="margin-bottom-30px">
 								<div class="padding-30px background-white border-radius-10"
-									id="searchBox">
+									id="searchBox" style="height:180px;">
 									<h4>
 										<i class="fas fa-search margin-right-10px text-main-color"></i>
 										Search
@@ -289,19 +292,23 @@ section .container img{
 												type="submit">Search</button>
 										</div>
 									</div>
+										<div align="center">
+											<a href="searchList.do?search=#호일펌" class="text-primary">#호일펌</a> <a href="searchList.do?search=구자혁"
+												class="text-primary">#구자혁</a> <a href="searchList.do?search=병지컷" class="text-primary">#병지컷</a>
+											<!-- 
+											<button onclick="crawl('MALE')">남자 헤어 크롤링</button>
+											<button onclick="crawl('FEMALE')">여자 헤어 크롤링</button>
+											 -->
+										</div>
+									
 								</div>
 							</div>
 						</form>
 
-						<div>
-							<a href="searchList.do?search=#호일펌" class="text-primary">#호일펌</a> <a href="searchList.do?search=구자혁"
-								class="text-primary">#구자혁</a> <a href="searchList.do?search=병지컷" class="text-primary">#병지컷</a>
-							<button onclick="crawl('MALE')">남자 헤어 크롤링</button>
-							<button onclick="crawl('FEMALE')">여자 헤어 크롤링</button>
-						</div>
+						
 					</div>
 				</div>
-				<div class="col-lg-2">
+				<div class="col-lg-3">
 					<div class="hashTagList"
 						style="display: inline-block; width: 200px; overflow: auto;">
 						<ul id="checkBar" class="ul1" style="padding-left: 0px;">
@@ -310,11 +317,11 @@ section .container img{
 						</ul>
 						<h6 style="text-align:center"><strong>인스타그램 인기 헤어 태그</strong></h6>
 						<div class="list-group">
-							<a class="list-group-item list-group-item-action" id="hashTagOne">${hashTag.one }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagTwo">${hashTag.two }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagThree">${hashTag.three }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagFour">${hashTag.four }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagFive">${hashTag.five }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagOne">#${hashTag.one }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagTwo">#${hashTag.two }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagThree">#${hashTag.three }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagFour">#${hashTag.four }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagFive">#${hashTag.five }</a>
 						</div>
 					</div>
 				</div>
@@ -402,12 +409,11 @@ section .container img{
 				<div class="container">
 					<h2
 						class="text-title-large text-main-color font-weight-200 margin-bottom-15px"
-						align="center">당신을 위한 맞춤 디자이너</h2>
+						align="center">당신에게 딱 맞춤 디자이너</h2>
 					<br>
 					<br>
 					<div class="row">
 						<div class="col-md-6 col-lg-4">
-							<h3 align="center">가장 핫한 디자이너</h3>
 							<a href="desListSelect.do?id=${rcmdDesByConHis.id}">
 								<div class="card mx-30">
 									<img
@@ -415,7 +421,7 @@ section .container img{
 										onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"
 										class="card-img-top" />
 									<div class="card-body">
-										<h5 class="card-title">${rcmdDesByConHis.name }디자이너</h5>
+										<h5 class="card-titleH5">전화기 불나는&nbsp;&nbsp;</h5><h4 class="card-title">${rcmdDesByConHis.name }</h4>
 										<h6>
 											<c:set var="majors"
 												value="${fn:split(rcmdDesByConHis.major,',')}"></c:set>
@@ -429,7 +435,7 @@ section .container img{
 										</h6>
 										<p class="card-text">
 											<div class="rating clearfix">
-												<strong class="float-center text-grey-2"
+												<strong class="float-center"
 													id="rcmdDesByConHisReviewCnt"> 총 진행 건수
 													${rcmdDesByConHis.count } 건 </strong>
 											</div>
@@ -439,14 +445,13 @@ section .container img{
 							</a>
 						</div>
 						<div class="col-md-6 col-lg-4">
-							<h3 align="center">호평일색 디자이너</h3>
 							<a href="desListSelect.do?id=${rcmdDesByRate.id}">
 								<div class="card mx-30">
 									<img src="${pageContext.request.contextPath}/resources/img/${rcmdDesByRate.fileUuid }"
 									onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"
 										class="card-img-top" />
 									<div class="card-body">
-										<h5 class="card-title">${rcmdDesByRate.name }디자이너</h5>
+										<h5 class="card-titleH5">고객 평가 1위&nbsp;&nbsp;</h5><h4 class="card-title">${rcmdDesByRate.name }</h4>
 										<h6>
 											<c:set var="majors2"
 												value="${fn:split(rcmdDesByRate.major,',')}"></c:set>
@@ -488,7 +493,7 @@ section .container img{
 				<div class="col-lg-10">
 					<div class="row">
 						<div class="col-md-4 wow fadeInUp">
-							<h1	class="text-second-color font-weight-300 text-sm-center text-lg-left margin-tb-15px">헤어 디자이너</h1>
+							<h1	class="text-second-color font-weight-300 text-sm-center text-lg-left margin-tb-15px">분야별 헤어 디자이너</h1>
 							<h1	class="text-second-color font-weight-300 text-sm-center text-lg-left margin-tb-15px">TOP3</h1>
 							<button type="button" class="btn btn-info"
 								onclick="topDesChange('cut')">컷</button>
@@ -518,14 +523,11 @@ section .container img{
 							<a href="#" id="targetHairATag1"><img id="targetHairImage1"
 								src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
-						<div class="padding-30px">
+						<div class="padding-30px" align="center">
 							<h5 class="margin-tb-15px">
 								<a class="text-dark" href="#" id="targetHairName1">이름 자리</a>
 							</h5>
 							<div id="targetHairHashTag1"></div>
-
-
-
 							<div class="rating clearfix">
 								<ul class="float-left" id="targetHairStar1">
 								</ul>
@@ -542,7 +544,7 @@ section .container img{
 							<a href="#" id="targetHairATag2"><img id="targetHairImage2"
 								src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
-						<div class="padding-30px">
+						<div class="padding-30px" align="center">
 							<h5 class="margin-tb-15px">
 								<a class="text-dark" href="#" id="targetHairName2">이름 자리</a>
 							</h5>
@@ -563,7 +565,7 @@ section .container img{
 							<a href="#" id="targetHairATag3"><img id="targetHairImage3"
 								src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';" ></a>
 						</div>
-						<div class="padding-30px">
+						<div class="padding-30px" align="center">
 							<h5 class="margin-tb-15px">
 								<a class="text-dark" href="#" id="targetHairName3">이름 자리</a>
 							</h5>
@@ -613,8 +615,8 @@ section .container img{
 							<a href="#" id="targetMakeUpATag1"><img
 								id="targetMakeUpImage1" src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
-						<div class="padding-30px">
-							<h5 class="margin-tb-15px">x
+						<div class="padding-30px" align="center">
+							<h5 class="margin-tb-15px">
 								<a class="text-dark" href="#" id="targetMakeUpName1">이름 자리</a>
 							</h5>
 							<div id="targetMakeUpHashTag1"></div>
@@ -635,7 +637,7 @@ section .container img{
 							<a href="#" id="targetMakeUpATag2"><img
 								id="targetMakeUpImage2" src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
-						<div class="padding-30px">
+						<div class="padding-30px" align="center">
 							<h5 class="margin-tb-15px">
 								<a class="text-dark" href="#" id="targetMakeUpName2">이름 자리</a>
 							</h5>
@@ -657,7 +659,7 @@ section .container img{
 							<a href="#" id="targetMakeUpATag3"><img
 								id="targetMakeUpImage3" src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
-						<div class="padding-30px">
+						<div class="padding-30px" align="center">
 							<h5 class="margin-tb-15px">
 								<a class="text-dark" href="#" id="targetMakeUpName3">이름 자리</a>
 							</h5>
@@ -674,10 +676,5 @@ section .container img{
 			</div>
 		</div>
 	</section>
-
-
-
-
-
 </body>
 </html>
