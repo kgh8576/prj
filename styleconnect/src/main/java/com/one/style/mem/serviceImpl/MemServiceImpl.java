@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.mapper.MemMapper;
 import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemberVO;
@@ -89,6 +90,21 @@ public class MemServiceImpl implements MemService {
 	@Override
 	public int updateUserPwByHpName(Map<String, String> map) {
 		return memMapper.updateUserPwByHpName(map);
+	}
+
+	@Override
+	public boolean checkSchedule(ConHistoryVO vo) {
+		boolean YorN = false;
+		
+		ConHistoryVO cvo = memMapper.checkSchedule(vo);
+		
+		if (cvo != null) {
+			YorN = true;
+		} else {
+			YorN = false;
+		}
+		
+		return YorN;
 	}
 
 }

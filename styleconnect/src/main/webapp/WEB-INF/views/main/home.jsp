@@ -12,6 +12,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap"
 	rel="stylesheet">
+	 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <style>
 body {
 	font-family: 'Lato', sans-serif;
@@ -52,16 +53,66 @@ section .container img{
 }
 .padding-30px{
 	height: 156px
+	
 }
+ /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */                          
+        }
     
 </style>
 <script>
+$(document).ready(function(){
+	//상담시작 알람
+	<c:if test="${not empty id}">
+	var memId = "${id}";
+	$.ajax({
+		url : 'checkSchedule.do',
+		data : {
+			memId : memId
+		},
+		type : 'post',
+		success : function(data) {
+			console.log(data);
+			if(data == 1) {
+				document.getElementById("altercheck").style.display = 'block';
+			}	
+		},
+		error : function(err) {
+			console.log(err);
+			console.log("스케줄러 불러오기오류");
+		}
+		
+	})
+	
+	</c:if>
+	
+});
+	
 	// 페이지 로드 시 cut 디자이너(디폴트값) 데이터 뿌리기
 	$(function() {
 		topDesChange('cut');
 		topDesChange('makeUp');
 	});
-
+	
 	function crawl() {
 		$.ajax({
 			url : 'crawl.do',
@@ -211,6 +262,10 @@ section .container img{
 		style="background-image: url('http://placehold.it/1600x830');">
 		<div class="container z-index-2 position-relative">
 			<div class="title text-center">
+				<div id="altercheck"class="alert alert-success alert-dismissible" style="display: none;">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
+</div>
 				<h1
 					class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Style
 					Connect</h1>
@@ -623,10 +678,6 @@ section .container img{
 			</div>
 		</div>
 	</section>
-
-
-
-
 
 </body>
 </html>

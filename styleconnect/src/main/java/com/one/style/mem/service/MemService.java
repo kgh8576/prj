@@ -3,6 +3,7 @@ package com.one.style.mem.service;
 import java.util.List;
 import java.util.Map;
 
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.vo.MemberVO;
 
 public interface MemService {
@@ -16,4 +17,5 @@ public interface MemService {
 	public boolean insertcheck(MemberVO vo);
 	public String getUserIdByHpName(Map<String, String> map);
 	public int updateUserPwByHpName(Map<String, String> map);
+	public boolean checkSchedule(ConHistoryVO vo);
 }
