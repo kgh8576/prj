@@ -9,7 +9,7 @@ public class CrawlDataVO {
 
 	//크롤링 데이터
 	private Date crawlDate;
-	private String first;
+	private String one;
 	private String two;
 	private String three;
 	private String four;

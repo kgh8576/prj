@@ -49,7 +49,7 @@
 
 	<c:forEach var="conhis" items="${conhis }">
 
-		<c:if test="${conhis.codecontent eq '예약중' }">
+		<c:if test="${conhis.codecontent eq '예약중'|| conhis.codecontent eq '예약확정'}">
 			<div style="margin: auto; width: 100%"
 				class="col-lg-6 margin-bottom-45px full-width">
 				<div class="background-white thum-hover box-shadow  hvr-float">

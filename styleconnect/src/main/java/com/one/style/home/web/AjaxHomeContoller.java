@@ -22,21 +22,13 @@ public class AjaxHomeContoller {
 	@Autowired HomeService homeDao;
 	
 
-	// 카테고리별 top3 디자이너 이름, 평점, 파일경로 가져오는 쿼리
+	// 카테고리별 top3 디자이너 이름, 총 리뷰수, 평점, 파일경로 가져오는 쿼리
 	@RequestMapping("ajaxTopDesChange.do")
 	public List<HomeVO> getDesTop(@RequestParam("keyword") String keyword) {
 		List<HomeVO> list = homeDao.ajaxTopDesInfo(keyword);
 		return list;
 	}
-	
-	// 카테고리별 top3 디자이너 총 리뷰 수 카운트 쿼리
-	@RequestMapping("ajaxTopDesCount.do")
-	public List<HomeVO> getDesTopCount(@RequestParam("keyword") String keyword) {
-		List<HomeVO> list = homeDao.ajaxTopDesCount(keyword);
-		return list;
-	}
-	
-	
+
 	@RequestMapping("memDetailInsert.do")
 	public String memDetailInsert(MemDetailVO vo, HttpServletRequest req) {
 		HttpSession session = req.getSession();

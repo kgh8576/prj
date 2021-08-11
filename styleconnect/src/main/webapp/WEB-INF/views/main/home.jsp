@@ -12,6 +12,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap"
 	rel="stylesheet">
+	 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <style>
 body {
 	font-family: 'Lato', sans-serif;
@@ -52,55 +53,45 @@ section .container img{
 }
 .padding-30px{
 	height: 156px
-}
-	.li1{
-	 display: inline-block;
-	 border: 1px solid white;
-	width: 49%;
-    text-align: center;
-    height: 50px;
-    padding-top: 10px;
-    margin: 0px;
-    font-size: 18px;
-	
 	}
-	.lit{
-	 display: inline-block;
-	 border: 1px solid white;
-	width: 49%;
-    text-align: center;
-    height: 50px;
-    background-color: #d8d8d8;
-    padding-top: 10px;
-    margin: 0px;
-    font-size: 18px;
-	
-	}
-	.ul1{
-	display: block;
-    list-style-type: disc;
-	}
-
-.modal-dialog {
-    transform: translate(0, -50%);
-    top: 30%;
-    margin: 0 auto;
-}
-
-
-    
 </style>
 <script>
+$(document).ready(function(){
+	//상담시작 알람
+	<c:if test="${not empty id}">
+	var memId = "${id}";
+	$.ajax({
+		url : 'checkSchedule.do',
+		data : {
+			memId : memId
+		},
+		type : 'post',
+		success : function(data) {
+			console.log(data);
+			if(data == 1) {
+				document.getElementById("altercheck").style.display = 'block';
+			}	
+		},
+		error : function(err) {
+			console.log(err);
+			console.log("스케줄러 불러오기오류");
+		}
+		
+	})
+	
+	</c:if>
+	
+});
+	
 	// 페이지 로드 시 cut 디자이너(디폴트값) 데이터 뿌리기
 	$(function() {
 		topDesChange('cut');
 		topDesChange('makeUp');
 	});
-
-	function crawl(gender) {
+	
+	function crawl() {
 		$.ajax({
 			url : 'crawl.do',
-			data : {gender : gender},
 			success : function(result) {
 				console.log(result);
 			},
@@ -112,7 +103,8 @@ section .container img{
 
 	// 버튼 클릭 시 디자이너 top3 이름, 평점, 이미지 경로 가져오는 ajax    		
 	function topDesChange(keyword) {
-		$.ajax({
+		$
+				.ajax({
 					url : 'ajaxTopDesChange.do',
 					data : {
 						keyword : keyword
@@ -233,30 +225,6 @@ section .container img{
 
 		});
 	}
-	
-	// 탭 넘어가는 기능
-	function show(exceptionLi) {
-		$('ul#checkBar li').attr('class', 'li1');
-		$('#'+exceptionLi).attr('class', 'lit');
-		var gender = $('ul#checkBar .lit').attr('id');
-		$.ajax({
-			url:'getCrawlData.do',
-			data:{
-				gender:gender
-			},
-			success:function(result){
-				console.log(result);
-				$('#hashTagFirst').text(result.first);
-				$('#hashTagTwo').text(result.two);
-				$('#hashTagThree').text(result.three);
-				$('#hashTagFour').text(result.four);
-				$('#hashTagFive').text(result.five);
-			},
-			error:function(err){
-				console.log(err)
-			}
-		});
-	}
 </script>
 </head>
 
@@ -270,6 +238,10 @@ section .container img{
 		style="background-image: url('http://placehold.it/1600x830');">
 		<div class="container z-index-2 position-relative">
 			<div class="title text-center">
+				<div id="altercheck"class="alert alert-success alert-dismissible" style="display: none;">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
+</div>
 				<h1
 					class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Style
 					Connect</h1>
@@ -279,7 +251,7 @@ section .container img{
 			<!-- 검색창 -->
 			<div class="row justify-content-center margin-tb-60px">
 				<div class="col-lg-2"></div>
-				<div class="col-lg-8">
+				<div class="col-lg-7">
 					<div class="listing-search">
 						<form id="frm" action="searchList.do" method="post">
 							<div class="margin-bottom-30px">
@@ -305,27 +277,23 @@ section .container img{
 						</form>
 
 						<div>
-							<a href="searchList.do?search=#호일펌" class="text-primary">#호일펌</a> <a href="searchList.do?search=구자혁"
-								class="text-primary">#구자혁</a> <a href="searchList.do?search=병지컷" class="text-primary">#병지컷</a>
-							<button onclick="crawl('MALE')">남자 헤어 크롤링</button>
-							<button onclick="crawl('FEMALE')">여자 헤어 크롤링</button>
+							<a href="#" class="text-primary">#호일펌</a> <a href="#"
+								class="text-primary">#구자혁</a> <a href="#" class="text-primary">#병지컷</a>
+							<a href="reviewList.do?desId=des04">테스트테스트</a>
+							<button onclick="crawl()">크롤링테스트</button>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-2">
 					<div class="hashTagList"
 						style="display: inline-block; width: 200px; overflow: auto;">
-						<ul id="checkBar" class="ul1" style="padding-left: 0px;">
-							<li class="lit" id="MALE" onclick="show('MALE')">남자</li>
-							<li class="li1" id="FEMALE" onclick="show('FEMALE')">여자</li>
-						</ul>
-						<p id="">인스타그램 남자 헤어 검색 태그</p>
+						인스타그램 인기 검색 태그
 						<div class="list-group">
-							<a class="list-group-item list-group-item-action" id="hashTagFirst">${hashTag.first }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagTwo">${hashTag.two }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagThree">${hashTag.three }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagFour">${hashTag.four }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagFive">${hashTag.five }</a>
+							<a href="#" class="list-group-item list-group-item-action">${hashTag.first }</a>
+							<a href="#" class="list-group-item list-group-item-action">${hashTag.two }</a>
+							<a href="#" class="list-group-item list-group-item-action">${hashTag.three }</a>
+							<a href="#" class="list-group-item list-group-item-action">${hashTag.four }</a>
+							<a href="#" class="list-group-item list-group-item-action">${hashTag.five }</a>
 						</div>
 					</div>
 				</div>
@@ -348,10 +316,10 @@ section .container img{
 			<!-- Modal -->
 			<div class="modal fade" id="preferenceFrmModal" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg">
+				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel"></h5>
+							<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -374,9 +342,9 @@ section .container img{
 								</div>
 
 								<h5>내 거주지는...</h5>
-								<div class="input-group mb-3">
-									<select class="custom-select" id="location" name="location" style="margin: auto;">
-										<option disabled="disabled" selected="selected" value="false">거주지 선택</option>
+								<div class="input-group mb-3" align="center">
+									<select class="custom-select" id="location" name="location">
+										<option disabled="disabled" selected="selected" value="false">거주지	선택</option>
 										<optgroup label="시">
 											<option value="서울">서울</option>
 											<option value="부산">부산</option>
@@ -513,7 +481,7 @@ section .container img{
 							<p class="text-grey-2"></p>
 						</div>
 						<div class="col-md-2 wow fadeInUp" data-wow-delay="0.4s">
-							<a href="category.do" class="text-main-color margin-tb-15px d-inline-block"><span
+							<a href="#" class="text-main-color margin-tb-15px d-inline-block"><span
 								class="d-block float-left margin-right-10px margin-top-5px">모두	보기</span> <i
 								class="far fa-arrow-alt-circle-right text-large margin-top-7px"></i></a>
 						</div>
@@ -607,7 +575,7 @@ section .container img{
 							<p class="text-grey-2"></p>
 						</div>
 						<div class="col-md-2 wow fadeInUp" data-wow-delay="0.4s">
-							<a href="makeupList.do" class="text-main-color margin-tb-15px d-inline-block"><span
+							<a href="#" class="text-main-color margin-tb-15px d-inline-block"><span
 								class="d-block float-left margin-right-10px margin-top-5px">모두
 									보기</span> <i
 								class="far fa-arrow-alt-circle-right text-large margin-top-7px"></i></a>
@@ -686,10 +654,6 @@ section .container img{
 			</div>
 		</div>
 	</section>
-
-
-
-
 
 </body>
 </html>
