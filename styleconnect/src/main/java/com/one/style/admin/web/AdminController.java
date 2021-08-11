@@ -19,6 +19,7 @@ import com.one.style.admin.service.AdminService;
 import com.one.style.conhistory.service.ConhistoryService;
 import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.des.vo.DesVO;
+import com.one.style.files.vo.FilesVO;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.review.vo.ReviewVO;
 import com.one.style.review.web.Paging;
@@ -29,12 +30,13 @@ public class AdminController {
 	@Autowired
 	AdminService adminDao;	
 	
+	//어드민 메인 페이지 이동
 	@RequestMapping("admin.do")
 	public String admin(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		return "admin/admin";
 	}
 
-		
+	//일반회원 관리 페이지 이동
 	@RequestMapping("memberManagement.do")
 	public String memberManagement(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		
@@ -62,6 +64,8 @@ public class AdminController {
 		
 		return "admin/memberManagement";
 	}
+	
+	//일반회원 상담내역 수정 폼 정보 생성
 	@RequestMapping(value = "/memberConHistoryUpdateForm.do", method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> memberConHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
@@ -95,20 +99,7 @@ public class AdminController {
 			return map;
 	}
 	
-	
-	//아이디 파라미터로 다시 받을 것
-	@RequestMapping("memberConsHistoryUpdate.do")
-	public String memberConsHistoryUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {		
-		
-		MemberVO vo = new MemberVO();
-		
-		vo.setId(req.getParameter("id"));
-		
-		//model.addAttribute("member",adminDao.;
-		return "admin/memberConsHistoryUpdateForm";
-	}
-	
-	
+	//디자이너 관리 페이지 정보 생성 및 이동
 	@RequestMapping("designerManagement.do")
 	public String designerManagement(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		
@@ -138,7 +129,7 @@ public class AdminController {
 		return "admin/designerManagement";
 	}
 	
-
+	//디자이너 상담내역 수정 폼 정보 생성
 	@RequestMapping(value = "/designerConHistoryUpdateForm.do", method=RequestMethod.GET)
 	@ResponseBody
 	public HashMap<String, Object> designerConsHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
@@ -175,7 +166,7 @@ public class AdminController {
 		return map;
 	}
 
-	//디자이너 회원 상태 업데이트
+	//디자이너 회원 상담내역 업데이트
 	@RequestMapping(value = "/designerConHistoryUpdate.do", method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> designerConsHistoryUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {
@@ -200,7 +191,52 @@ public class AdminController {
 		return map;
 	}
 	
+	//디자이너 상담내역 수정 폼 정보 생성
+	@RequestMapping(value = "/designerStateUpdateForm.do", method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> designerStateUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
+		DesVO dvo = new DesVO();
+		dvo.setId(req.getParameter("desId"));
+		
+		FilesVO fvo = new FilesVO();
+		fvo.setDes_id(req.getParameter("desId"));
 
+		DesVO designerStateOne  = new DesVO();
+		List<FilesVO> designerCertificationFileList = new ArrayList<FilesVO>();
+		designerStateOne = adminDao.designerStateOneSelect(dvo);
+		designerCertificationFileList = adminDao.designerCertificationFileListSelect(fvo);	
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("designerStateOne", designerStateOne);
+		map.put("designerCertificationFileList", designerCertificationFileList);
+		
+		
+		return map;
+	}
 	
+	
+	//디자이너 회원 상담내역 업데이트
+	@RequestMapping(value = "/designerStateUpdate.do", method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> designerStateUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		DesVO vo = new DesVO();
+		vo.setId(req.getParameter("id"));
+		vo.setState(req.getParameter("state"));
+		vo.setState(req.getParameter("comments"));
+		
+		int resultN = 0;
+		
+		//adminDao.designerStateUpdate(vo);
+		
+		if(resultN != 0) {
+			map.put("message", "처리 완료되었습니다.");			
+		} else {
+			map.put("message", "처리 실패하였습니다.");
+		}
+		
+		
+		return map;
+	}
 	
 }
