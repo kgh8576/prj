@@ -77,17 +77,20 @@
 
                         </div>
                     </div>
+                    <!-- 사이드 디자이너 이미지 -->
                     <div class="widget widget_categories">
                         <div class="margin-bottom-30px">
                             <div class="padding-30px background-white border-radius-10">
-                                <h4><i class="fab fa-instagram margin-right-10px text-main-color"></i> 디자이너 이미지들</h4>
+                                <h4><i class="fab fa-instagram margin-right-10px text-main-color"></i> 디자이너 이미지 </h4>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
-                                    <div class="col-6 margin-bottom-20px"><a href="#"><img class="border-radius-10" src="http://placehold.it/400x400" alt=""></a></div>
-                                </div>
+                                <c:forEach items="${img2 }" var="vo" begin="1" end="4">
+                                	<c:if test="${vo.fileState eq 'sty' }">
+                                    	<div class="col-6 margin-bottom-20px"><a href="#">
+                                   		<img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></a></div>
+                               		</c:if>
+                               	</c:forEach>
+                               	</div>
                             </div>
                         </div>
                     </div>

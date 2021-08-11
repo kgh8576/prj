@@ -18,15 +18,14 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
-                       	<c:forEach items="${img}" var="img1"> 
-                                		<c:if test="${img1.fileState eq 'thum' }">
-                                		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
-                                	</c:if></c:forEach>  
+                       	<c:forEach items="${img}" var="img1" begin="3" end="3"> 
+                             <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
+                        </c:forEach>  
                         <div class="padding-30px background-white">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="rating clearfix">
-                                        <span class="float-left text-grey-2"><i class="far fa-map"></i>  California</span>
+                                        <span class="float-left text-grey-2"><i class="far fa-map"></i>  DCalifornia</span>
                                         <ul class="float-right">
                                           <c:forEach begin="1" end="${designer.rate }">
 												<li class="active"></li>
@@ -74,7 +73,7 @@
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
                                 <div class="row">
-                                 	<c:forEach items="${img}" var="img1"> 
+                                 	<c:forEach items="${img2}" var="img1"> 
                                 		<c:if test="${img1.fileState eq 'sty' }">
                                 		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
                                 	</c:if></c:forEach>  

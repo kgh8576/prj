@@ -6,19 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>디자이너마이페이지 - 스케쥴 관리</title>
+<style type="text/css">
+.statestyl{
+	font-weight: bolder;;
+}
+</style>
 <script>
 function denyfun(conNo){
 	if(confirm("예약거절하시겠습니까?") == true){
 		//디자이너 거절 코멘트
 		let deny = prompt('고객에서 전할 코맨트를 입력하세요','');
-		document.getElementyByid('result').innerText = deny;
+		if(deny != ""){
+			$(comment).text(deny);
+		}else{
+			$().text("코맨트를 입력하세요")
+		}
 		//예약상태취소로 변경
 		//location.href="desDeny.do?conNo="+conNo
+	
 	}else{
 		confirm("취소되었습니다.") 
-		return;
+		
 	}
-}
+};
 
 </script>
 </head>
@@ -105,7 +115,7 @@ function denyfun(conNo){
                                 	</c:if>
                                 	<!-- 예약확정상태 -->
                                 	<c:if test="${vo.state eq 'ccode002'}">
-                                    	${vo.codecontent }상태입니다.
+                                    	<div id="statestyl">${vo.codecontent }</div>상태입니다.
                                 	</c:if>
                                 </div>
                             </div>

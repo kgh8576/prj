@@ -148,7 +148,7 @@
 	
 	<!-- 디자이너 프로필 사진 -->
 	<select id="desProImg" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
-	select d.id,nvl2(f.file_state,f.file_state,0)as filestate, nvl2(f.file_uuid,f.file_uuid,'0.png')as file_uuid
+	select d.id,nvl2(f.file_state,f.file_state,0)as file_state, nvl2(f.file_uuid,f.file_uuid,'0.png')as file_uuid
 	from designer d 
   	left join files f
 	on d.id = f.des_id 
@@ -195,4 +195,11 @@
  	or major like'%'||#{search}||'%' or name like'%'||#{search}||'%'
 	</select>
 	
+	<!-- 디자이너 선택 - 썸네일-->
+	<select id="dessearchDesThum" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
+		SELECT FILE_UUID, FILE_NAME, COUR_NO
+		FROM FILES 
+		WHERE  FILE_STATE= 'thum'
+		AND des_ID= #{id}
+	</select>
 </mapper>
