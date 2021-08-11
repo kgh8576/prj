@@ -9,9 +9,13 @@
 <script>
 function denyfun(conNo){
 	if(confirm("예약거절하시겠습니까?") == true){
-		location.href="desDeny.do?conNo="+conNo
+		//디자이너 거절 코멘트
+		let deny = prompt('고객에서 전할 코맨트를 입력하세요','');
+		document.getElementyByid('result').innerText = deny;
+		//예약상태취소로 변경
+		//location.href="desDeny.do?conNo="+conNo
 	}else{
-		confirm("ㅇㅇ") 
+		confirm("취소되었습니다.") 
 		return;
 	}
 }
@@ -43,7 +47,7 @@ function denyfun(conNo){
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }l">
+                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }">
                 <i class="fa fa-fw fa-star"></i>
                 <span class="nav-link-text">스케쥴관리</span>
               </a>
@@ -93,7 +97,7 @@ function denyfun(conNo){
                                     <div class="d-block padding-tb-5px">예약시간 :  <a href="#" class="text-main-color">${vo.time }</a></div>
                                     <div class="d-block padding-tb-5px">예약자  :  <a href="#" class="text-main-color">${vo.memName}</a></div>
                                      <div class="d-block padding-tb-5px">예약상태  :  <a href="#" class="text-main-color">${vo.codecontent}</a></div>
-                                    <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a> ${vo.memComment }</p>
+                                    <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a><br/> ${vo.memComment }</p>
                                     <!-- 예약중상태 -->
                                     <c:if test="${vo.state eq 'ccode001'}">
                                     	<a href="desApprove.do?conNo=${vo.conNo }" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> 예약승인</a>

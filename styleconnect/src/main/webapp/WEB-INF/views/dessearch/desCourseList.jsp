@@ -32,10 +32,8 @@
 				<c:forEach items="${course }" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">
                         <div class="row no-gutters">
-                       <%--  <c:if test="${not empty course.fileUuid  }">
                             <div class="img-in col-lg-5"><a href="#">
-                            <img src="resources/img/${course.fileUuid }" alt=""></a></div>
-                         </c:if> --%>
+                            <img src="resources/img/${vo.fileUuid }" alt=""></a></div>
                             <div class="col-lg-7">
                                 <div class="padding-25px">
                                     <a class="d-block h4  text-capitalize margin-bottom-8px" href="#">${vo.title} </a>
