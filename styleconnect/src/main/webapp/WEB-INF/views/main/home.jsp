@@ -100,6 +100,7 @@ section .container img{
 	function crawl(gender) {
 		$.ajax({
 			url : 'crawl.do',
+			method:'post',
 			data : {gender : gender},
 			success : function(result) {
 				console.log(result);
@@ -110,7 +111,7 @@ section .container img{
 		});
 	}
 
-	// 버튼 클릭 시 디자이너 top3 이름, 평점, 이미지 경로 가져오는 ajax    		
+	// 버튼 클릭 시 디자이너 top3 아이디, 이름, 메이저, 총 리뷰 수, 평점, 이미지 경로 가져오는 ajax    		
 	function topDesChange(keyword) {
 		$.ajax({
 					url : 'ajaxTopDesChange.do',
@@ -159,35 +160,18 @@ section .container img{
 							}
 							$('#target' + targetKeyword + 'HashTag' + (i + 1))
 									.append('');
+							for (var j = 0; j < result.length; j++) { // 총 리뷰 건수 달기
+								$('#target' + targetKeyword + 'ReviewCnt' + (i + 1)).text(
+										'총 리뷰 수 ' + result[i].count + '건');
+							}
+							console.log(i)
 						}
+						
 					},
 					error : function(err) {
 						console.log(err);
 					}
 				});
-		// 총 리뷰 수 가져오는 ajax
-		$.ajax({
-			url : 'ajaxTopDesCount.do',
-			data : {
-				keyword : keyword
-			},
-			success : function(ratingResult) {
-				if (keyword != 'makeUp') {
-					var targetKeyword = 'Hair';
-				} else {
-					var targetKeyword = 'MakeUp';
-				}
-
-				for (var i = 0; i < ratingResult.length; i++) {
-					$('#target' + targetKeyword + 'ReviewCnt' + (i + 1)).text(
-							'총 리뷰 수 ' + ratingResult[i].count + '건');
-				}
-
-			},
-			error : function(err) {
-				console.log(err);
-			}
-		});
 	}
 	function preFrmSubmit() {
 		if ($("input:checkbox[name=YesorNo]:checked").length == 0) {
@@ -234,19 +218,20 @@ section .container img{
 		});
 	}
 	
-	// 탭 넘어가는 기능
+	// 해시태그 탭 넘기는 기능
 	function show(exceptionLi) {
 		$('ul#checkBar li').attr('class', 'li1');
 		$('#'+exceptionLi).attr('class', 'lit');
 		var gender = $('ul#checkBar .lit').attr('id');
 		$.ajax({
 			url:'getCrawlData.do',
+			method:'post',
 			data:{
 				gender:gender
 			},
 			success:function(result){
 				console.log(result);
-				$('#hashTagFirst').text(result.first);
+				$('#hashTagOne').text(result.one);
 				$('#hashTagTwo').text(result.two);
 				$('#hashTagThree').text(result.three);
 				$('#hashTagFour').text(result.four);
@@ -319,9 +304,9 @@ section .container img{
 							<li class="lit" id="MALE" onclick="show('MALE')">남자</li>
 							<li class="li1" id="FEMALE" onclick="show('FEMALE')">여자</li>
 						</ul>
-						<p id="">인스타그램 남자 헤어 검색 태그</p>
+						<h6 style="text-align:center"><strong>인스타그램 인기 헤어 태그</strong></h6>
 						<div class="list-group">
-							<a class="list-group-item list-group-item-action" id="hashTagFirst">${hashTag.first }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagOne">${hashTag.one }</a>
 							<a class="list-group-item list-group-item-action" id="hashTagTwo">${hashTag.two }</a>
 							<a class="list-group-item list-group-item-action" id="hashTagThree">${hashTag.three }</a>
 							<a class="list-group-item list-group-item-action" id="hashTagFour">${hashTag.four }</a>
@@ -423,7 +408,8 @@ section .container img{
 								<div class="card mx-30">
 									<img
 										src="${pageContext.request.contextPath}/resources/img/${rcmdDesByConHis.fileUuid }"
-										class="card-img-top" alt="...">
+										onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"
+										class="card-img-top" />
 									<div class="card-body">
 										<h5 class="card-title">${rcmdDesByConHis.name }디자이너</h5>
 										<h6>
@@ -438,11 +424,11 @@ section .container img{
 
 										</h6>
 										<p class="card-text">
-										<div class="rating clearfix">
-											<strong class="float-center text-grey-2"
-												id="rcmdDesByConHisReviewCnt"> 총 진행 건수
-												${rcmdDesByConHis.count } 건 </strong>
-										</div>
+											<div class="rating clearfix">
+												<strong class="float-center text-grey-2"
+													id="rcmdDesByConHisReviewCnt"> 총 진행 건수
+													${rcmdDesByConHis.count } 건 </strong>
+											</div>
 										</p>
 									</div>
 								</div>
@@ -452,9 +438,9 @@ section .container img{
 							<h3 align="center">호평일색 디자이너</h3>
 							<a href="desListSelect.do?id=${rcmdDesByRate.id}">
 								<div class="card mx-30">
-									<img
-										src="${pageContext.request.contextPath}/resources/img/${rcmdDesByRate.fileUuid }"
-										class="card-img-top" alt="...">
+									<img src="${pageContext.request.contextPath}/resources/img/${rcmdDesByRate.fileUuid }"
+									onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"
+										class="card-img-top" />
 									<div class="card-body">
 										<h5 class="card-title">${rcmdDesByRate.name }디자이너</h5>
 										<h6>
@@ -479,8 +465,6 @@ section .container img{
 											<small class="float-right text-grey-2"
 												id="rcmdDesByRateReviewCnt"></small>
 										</div>
-
-										</p>
 									</div>
 								</div>
 							</a>
@@ -528,7 +512,7 @@ section .container img{
 						data-wow-delay="0.2s">
 						<div class="thum">
 							<a href="#" id="targetHairATag1"><img id="targetHairImage1"
-								src="http://placehold.it/400x400" alt=""></a>
+								src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
 						<div class="padding-30px">
 							<h5 class="margin-tb-15px">
@@ -552,7 +536,7 @@ section .container img{
 						data-wow-delay="0.2s">
 						<div class="thum">
 							<a href="#" id="targetHairATag2"><img id="targetHairImage2"
-								src="http://placehold.it/400x400" alt=""></a>
+								src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
 						<div class="padding-30px">
 							<h5 class="margin-tb-15px">
@@ -573,7 +557,7 @@ section .container img{
 						data-wow-delay="0.2s">
 						<div class="thum">
 							<a href="#" id="targetHairATag3"><img id="targetHairImage3"
-								src="http://placehold.it/400x400" alt=""></a>
+								src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';" ></a>
 						</div>
 						<div class="padding-30px">
 							<h5 class="margin-tb-15px">
@@ -623,10 +607,10 @@ section .container img{
 						data-wow-delay="0.2s">
 						<div class="thum">
 							<a href="#" id="targetMakeUpATag1"><img
-								id="targetMakeUpImage1" src="http://placehold.it/400x400" alt=""></a>
+								id="targetMakeUpImage1" src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
 						<div class="padding-30px">
-							<h5 class="margin-tb-15px">
+							<h5 class="margin-tb-15px">x
 								<a class="text-dark" href="#" id="targetMakeUpName1">이름 자리</a>
 							</h5>
 							<div id="targetMakeUpHashTag1"></div>
@@ -645,7 +629,7 @@ section .container img{
 						data-wow-delay="0.2s">
 						<div class="thum">
 							<a href="#" id="targetMakeUpATag2"><img
-								id="targetMakeUpImage2" src="http://placehold.it/400x400" alt=""></a>
+								id="targetMakeUpImage2" src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
 						<div class="padding-30px">
 							<h5 class="margin-tb-15px">
@@ -667,7 +651,7 @@ section .container img{
 						data-wow-delay="0.2s">
 						<div class="thum">
 							<a href="#" id="targetMakeUpATag3"><img
-								id="targetMakeUpImage3" src="http://placehold.it/400x400" alt=""></a>
+								id="targetMakeUpImage3" src="http://placehold.it/400x400" onerror="this.src='${pageContext.request.contextPath}/resources/img/0.png';"></a>
 						</div>
 						<div class="padding-30px">
 							<h5 class="margin-tb-15px">

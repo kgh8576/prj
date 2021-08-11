@@ -23,11 +23,6 @@ public class HomeServiceImpl implements HomeService{
 	}
 
 	@Override
-	public List<HomeVO> ajaxTopDesCount(String keyword) {
-		return map.ajaxTopDesCount(keyword);
-	}
-
-	@Override
 	public MemDetailVO memDetail(String id) {
 		return map.memDetail(id);
 	}

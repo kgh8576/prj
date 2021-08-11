@@ -73,6 +73,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
         		driver.get("https://www.instagram.com/explore/tags/%EC%97%AC%EC%9E%90%EB%A8%B8%EB%A6%AC/"); // tag/여자머리/ 로 이동
         		vo.setGender(gender);
         	}
+        	System.out.println(vo.getGender());
         	Thread.sleep(10000);
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,7 +114,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 		String[] sliced2 = sliced.split(" ");
 		List<String> hashTags = new ArrayList<String>();
 		for(String s : sliced2) {
-			if(s.contains("#") && !s.contains("#남자") && !s.contains("#여자") && s.length() < 11){
+			if(s.startsWith("#") && s.length() < 11 && !s.contains("#펌") && !s.contains("남자") && !s.contains("여자") && !s.contains("탈색") && !s.contains("염색")){
 				if(s.endsWith("펌") || s.endsWith("컷")) {
 					hashTags.add(s);
 				}
@@ -140,19 +141,17 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 		});
 
 		System.out.println("내림 차순 정렬");
-		CrawlDataVO vo = new CrawlDataVO();
 		for(int i = 0; i <= 4; i++) {
 			System.out.println(list_entries.get(i).getKey() + " : " + list_entries.get(i).getValue());
-			if (i == 0) vo.setFirst(list_entries.get(i).getKey());
+			if (i == 0) vo.setOne(list_entries.get(i).getKey());
 			if (i == 1) vo.setTwo(list_entries.get(i).getKey());
 			if (i == 2) vo.setThree(list_entries.get(i).getKey());
 			if (i == 3) vo.setFour(list_entries.get(i).getKey());
 			if (i == 4) vo.setFive(list_entries.get(i).getKey());
 		}
-		System.out.println(vo.getFirst());
+		System.out.println(vo.getOne());
 		System.out.println(vo.getFive());
 		insertCrawl(vo);
-		
 	}
 
 	@Override

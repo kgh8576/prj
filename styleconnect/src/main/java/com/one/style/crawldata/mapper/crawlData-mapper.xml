@@ -10,7 +10,7 @@
 	</select>
 
 	<insert id="insertCrawl" parameterType="com.one.style.crawldata.vo.CrawlDataVO">
-		insert into crawl_data values(sysdate, #{first}, #{two}, #{three}, #{four}, #{five}, #{gender})
+		insert into crawl_data values(sysdate, #{one}, #{two}, #{three}, #{four}, #{five}, #{gender})
 	</insert>
 
 </mapper>
