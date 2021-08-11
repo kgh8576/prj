@@ -6,19 +6,32 @@
 <head>
 <meta charset="UTF-8">
 <title>디자이너마이페이지 - 스케쥴 관리</title>
+<style type="text/css">
+.statestyl{
+	font-weight: bolder;;
+}
+</style>
 <script>
 function denyfun(conNo){
 	if(confirm("예약거절하시겠습니까?") == true){
-		location.href="desDeny.do?conNo="+conNo
+		//디자이너 거절 코멘트
+		let deny = prompt('고객에서 전할 코맨트를 입력하세요','');
+		if(deny != ""){
+			$(comment).text(deny);
+		}else{
+			$().text("코맨트를 입력하세요")
+		}
+		//예약상태취소로 변경
+		//location.href="desDeny.do?conNo="+conNo
+	
 	}else{
-		confirm("ㅇㅇ") 
-		return;
+		confirm("취소되었습니다.") 
+		
 	}
-}
+};
 
 </script>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top" id="mainNav">
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -38,13 +51,13 @@ function denyfun(conNo){
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Favorites">
-                    <a href="desStyle.do" class="nav-link active" href="dashboard-my-favorites.html">
+                    <a href="desStyle.do" class="nav-link" href="dashboard-my-favorites.html">
                 <i class="fa fa-fw fa-table"></i>
                 <span class="nav-link-text">스타일링사진 관리</span>
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }l">
+                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }">
                 <i class="fa fa-fw fa-star"></i>
                 <span class="nav-link-text">스케쥴관리</span>
               </a>
@@ -59,7 +72,7 @@ function denyfun(conNo){
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add Listing">
-                    <a href="desSchedule.do" class="nav-link" href="dashboard-add-listing.html">
+                    <a href="desSchedule.do" class="nav-link active" href="dashboard-add-listing.html">
                         <i class="fa fa-fw fa-plus-circle"></i>
                         <span class="nav-link-text">예약관리</span>
                     </a>
@@ -74,9 +87,7 @@ function denyfun(conNo){
                 <div id="page-title" class="padding-30px background-white full-width">
                     <div class="container">
                         <ol class="breadcrumb opacity-5">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li class="active">Bookings</li>
+                         
                         </ol>
                         <h1 class="font-weight-300">예약내역</h1>
                     </div>
@@ -90,13 +101,13 @@ function denyfun(conNo){
                             <div class="padding-30px full-width">
                                 <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                 <div class="margin-left-85px">
-                                    <a class="d-block text-dark text-medium margin-bottom-5px" href="#">${vo.title }  </a>
+                                	<a class="d-block text-dark text-medium margin-bottom-5px" href="#">No. ${vo.conNo }  </a>
+                                    <a class="d-block text-dark text-medium margin-bottom-5px" href="#">상담명: ${vo.title }  </a>
                                     <div class="d-block padding-tb-5px">예약날짜 :  <a href="#" class="text-main-color">${vo.day } </a></div>
                                     <div class="d-block padding-tb-5px">예약시간 :  <a href="#" class="text-main-color">${vo.time }</a></div>
-                                    <div class="d-block padding-tb-5px">신청날짜 :  <a href="#" class="text-main-color">${vo.laststDate }</a></div>
                                     <div class="d-block padding-tb-5px">예약자  :  <a href="#" class="text-main-color">${vo.memName}</a></div>
                                      <div class="d-block padding-tb-5px">예약상태  :  <a href="#" class="text-main-color">${vo.codecontent}</a></div>
-                                    <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a> ${vo.memComment }</p>
+                                    <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a><br/> ${vo.memComment }</p>
                                     <!-- 예약중상태 -->
                                     <c:if test="${vo.state eq 'ccode001'}">
                                     	<a href="desApprove.do?conNo=${vo.conNo }" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> 예약승인</a>
@@ -104,7 +115,7 @@ function denyfun(conNo){
                                 	</c:if>
                                 	<!-- 예약확정상태 -->
                                 	<c:if test="${vo.state eq 'ccode002'}">
-                                    	${vo.codecontent }상태입니다.
+                                    	<div id="statestyl">${vo.codecontent }</div>상태입니다.
                                 	</c:if>
                                 </div>
                             </div>

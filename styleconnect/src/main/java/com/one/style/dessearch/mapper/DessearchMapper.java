@@ -6,16 +6,17 @@ import com.one.style.dessearch.vo.DessearchVO;
 
 public interface DessearchMapper {
 	
-		List<DessearchVO> dessearchSelectList();
-		DessearchVO dessearchSelect(DessearchVO vo);
-		List<DessearchVO> dessearchSelectReview(DessearchVO vo);
-		List<DessearchVO> cutList();
-		List<DessearchVO> permList();
-		List<DessearchVO> dyeList();
-		List<DessearchVO> makeupList();
-		List<DessearchVO> courseList();
-		List<DessearchVO> searchList(DessearchVO vo);
-		int permCnt();
-		List<DessearchVO> desPaging();
-		List<DessearchVO> desProImg(DessearchVO vo);
+	public List<DessearchVO> dessearchSelectList();
+	public DessearchVO dessearchSelect(DessearchVO vo);
+	public List<DessearchVO> dessearchSelectReview(DessearchVO vo);
+	public List<DessearchVO> cutList();
+	public List<DessearchVO> permList();
+	public List<DessearchVO> dyeList();
+	public List<DessearchVO> makeupList();
+	public List<DessearchVO> courseList();
+	public List<DessearchVO> searchList(DessearchVO vo);
+	 int permCnt();
+	public List<DessearchVO> desPaging();
+	public List<DessearchVO> desProImg(DessearchVO vo);
+	public List<DessearchVO> dessearchDesThum(DessearchVO vo);
 }

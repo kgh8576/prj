@@ -108,5 +108,10 @@ public class DesMypageServiceImpl implements DesMypageService {
 	public DesMypageVO desWorkOpenPage(String id) {
 		return desMapper.desWorkOpenPage(id);
 	}
+	@Override
+	public int desDenyComment(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.desDenyComment(vo);
+	}
 
 }
