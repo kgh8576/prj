@@ -298,8 +298,7 @@
 								<br>
 								<c:choose>
 									<c:when test="${!empty conhisends}">
-										<c:forEach var="conhisend" begin="1" end="1"
-											items="${conhisends }">
+										<c:forEach var="conhisend" begin="0" end="0" items="${conhisends }">
 											<c:if test="${conhisend.codecontent eq '상담완료'}">
 												<div>
 													<h3>${conhisend.title }</h3>
