@@ -21,7 +21,7 @@
 	<select id="checkSchedule" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
    	  <![CDATA[
    	 select a.* from 
-      (select con_no,to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,state FROM CONSULTING_HISTORY where mem_id = 'hotakshin' and state='ccode002' ORDER BY 2 ASC) a
+      (select con_no,to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,state FROM CONSULTING_HISTORY where mem_id = #{memId} and state='ccode002' ORDER BY 2 ASC) a
     where rownum = 1
     and (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60 < 10
     ]]>

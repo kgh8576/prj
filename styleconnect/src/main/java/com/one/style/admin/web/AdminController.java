@@ -99,6 +99,33 @@ public class AdminController {
 			return map;
 	}
 	
+	
+	//일반회원 회원 상담내역 업데이트
+	@RequestMapping(value = "/memberConHistoryUpdate.do", method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> memberConsHistoryUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int resultN = 0;
+		ConHistoryVO vo = new ConHistoryVO();
+		
+		vo.setConNo(Integer.parseInt(req.getParameter("conNo")));
+		vo.setMemAttend(req.getParameter("memAttend"));
+		vo.setDesAttend(req.getParameter("desAttend"));
+		
+		resultN = adminDao.memberConHistoryUpdate(vo);
+		System.out.println(resultN);
+		
+		if(resultN != 0) {
+			map.put("message", "처리 완료되었습니다.");			
+		} else {
+			map.put("message", "처리 실패하였습니다.");
+		}
+		
+		
+		return map;
+	}
+	
+	
 	//디자이너 관리 페이지 정보 생성 및 이동
 	@RequestMapping("designerManagement.do")
 	public String designerManagement(Model model , HttpServletRequest req , HttpServletResponse resp) {
@@ -178,7 +205,7 @@ public class AdminController {
 		vo.setMemAttend(req.getParameter("memAttend"));
 		vo.setDesAttend(req.getParameter("desAttend"));
 		
-		resultN = adminDao.designerConHistoryListUpdate(vo);
+		resultN = adminDao.designerConHistoryUpdate(vo);
 		System.out.println(resultN);
 		
 		if(resultN != 0) {
@@ -215,19 +242,19 @@ public class AdminController {
 	}
 	
 	
-	//디자이너 회원 상담내역 업데이트
+	//디자이너 회원 상태 수정
 	@RequestMapping(value = "/designerStateUpdate.do", method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> designerStateUpdate(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		DesVO vo = new DesVO();
-		vo.setId(req.getParameter("id"));
-		vo.setState(req.getParameter("state"));
-		vo.setState(req.getParameter("comments"));
-		
 		int resultN = 0;
 		
-		//adminDao.designerStateUpdate(vo);
+		vo.setId(req.getParameter("id"));
+		vo.setState(req.getParameter("state"));
+		vo.setComments(req.getParameter("comments"));
+		
+		resultN = adminDao.designerStateUpdate(vo);
 		
 		if(resultN != 0) {
 			map.put("message", "처리 완료되었습니다.");			

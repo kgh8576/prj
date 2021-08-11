@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.one.style.reply.service.ReplyService;
 import com.one.style.review.service.ReviewService;
 import com.one.style.review.vo.ReviewVO;
@@ -85,7 +86,7 @@ public class ReviewController {
 	public String reviewRegister(String id, int conNo, Model model,HttpServletResponse response) throws IOException {
 		ReviewVO vo = new ReviewVO();
 		vo.setMemId(id);
-		vo.setConNo(conNo); // 더미 1
+		vo.setConNo(conNo);
 		if (reviewDao.canReviewRegCheckDate(vo) && reviewDao.canReviewRegCheckExist(vo) ) {  // 컨설팅 일자 이후 3일 이내이면서, 리뷰가 존재하지 않는 경우 등록 가능
 			model.addAttribute("conNo", vo.getConNo());
 			model.addAttribute("consultInfo", reviewDao.getHistoryForInsert(vo));
@@ -101,8 +102,6 @@ public class ReviewController {
 
 		return null;
 	}
-	
-	
 	
 	@RequestMapping("upload.do")
 	@ResponseBody
@@ -120,7 +119,7 @@ public class ReviewController {
 		
 		try { 
 			// 업로드 경로 
-			String path = req.getServletContext().getRealPath("/resources/upload/"); //filename alias name으로저장
+			String path = req.getServletContext().getRealPath("/resources/img/"); //filename alias name으로저장
 			upload.transferTo(new File(path, fileUUID));
 		
 		} catch (IOException e) { 
@@ -134,8 +133,12 @@ public class ReviewController {
 				} catch(IOException e) { 
 					e.printStackTrace(); } 
 		} 
+		JsonObject json = new JsonObject();
+		json.addProperty("uploaded", 1);
+		json.addProperty("fileName", fileUUID);
+		json.addProperty("url", req.getContextPath() + "/resources/img/" + fileUUID);
+		resp.getWriter().print(json);
 	}
-	
 	
 	
 }

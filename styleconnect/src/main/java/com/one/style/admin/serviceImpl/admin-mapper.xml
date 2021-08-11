@@ -52,10 +52,10 @@
                   				time,		
                   				TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-sysdate)*24*60) as remaining_time, 
                   				designer.id as des_id, 
-                  				mem_id, 
+                  				mem_id,
                   				title, 
-                  				detail, 
-                  				des_comment,
+                  				detail,
+                  				mem_comment,
                   				des_comment,            		
                         		mem_attend,
                         		des_attend, 
@@ -72,8 +72,7 @@
              		)a 
           		) b
   			where b.rn between #{firstCnt} and #{lastCnt}
-	
-	
+
 	</select>
 	
 	<!-- 관리자 일반회원 상담내역 수정 모달: 페이징 처리를 위한 컨설팅 히스토리 테이블의 총 행수 반환-->
@@ -82,6 +81,13 @@
 		resultType="Integer">
 		select count(*) from consulting_history where mem_id=#{memId}
 	</select>
+	
+	<update id="memberConHistoryUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+		update consulting_history set
+			 	des_attend = #{desAttend}, 
+				mem_attend = #{memAttend}   
+		where con_no =#{conNo}
+	</update>
 	
 	
 	<!-- 디자이너 관리 -->
@@ -209,7 +215,7 @@
 		select count(*) from consulting_history, des_course where consulting_history.cour_no = des_course.cour_no and id = #{desId}
 	</select>
 	
-	<update id="designerConHistoryListUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
+	<update id="designerConHistoryUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		update consulting_history set
 			 	des_attend = #{desAttend}, 
 				mem_attend = #{memAttend}   
@@ -239,6 +245,7 @@
             where designer.state = commcodedetail.code
             	and id=#{id}
 	</select>
+	
 	<select id="designerCertificationFileListSelect" parameterType="com.one.style.files.vo.FilesVO" resultType="com.one.style.files.vo.FilesVO">
 		select file_name, 
         		file_uuid,
@@ -247,5 +254,14 @@
   			where files.des_id = #{des_id}
     			and file_state = 'cer'
 	</select>
+	
+	<update id="designerStateUpdate" parameterType="com.one.style.des.vo.DesVO">
+		update designer set state = (
+                            select code 
+                              from commcodedetail 
+                              where codecontent = #{state}),
+                    comments = #{comments}
+          where id = #{id}
+	</update>
 	
 </mapper>
