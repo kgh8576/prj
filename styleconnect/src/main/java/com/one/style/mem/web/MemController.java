@@ -38,7 +38,7 @@ public class MemController {
 	@ResponseBody
 	public Map logincheck(HttpServletRequest request,HttpServletResponse response, MemberVO vo) throws IOException {
 		HttpSession session = request.getSession();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 		int cnt = 0;
 		//1.id로 단건조회
 		MemberVO mvo = memberDao.login(vo);
@@ -97,7 +97,7 @@ public class MemController {
 	public String memberInsert(MemberVO vo,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 		String encoderPW = encoder.encode(vo.getPw());
 		vo.setPw(encoderPW);
 		

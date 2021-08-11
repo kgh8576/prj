@@ -1,8 +1,11 @@
 package com.one.style.review.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,7 +76,7 @@ public class ReviewController {
 	// 리뷰 작성 페이지
 	@RequestMapping("reviewRegister.do") // 리뷰 작성
 
-	public String reviewRegister(String id, int conNo, Model model) {
+	public String reviewRegister(String id, int conNo, Model model,HttpServletResponse response) throws IOException {
 		ReviewVO vo = new ReviewVO();
 		vo.setMemId(id);
 		vo.setConNo(conNo); // 더미 1
@@ -83,7 +86,15 @@ public class ReviewController {
 			reviewDao.reviewPoint(vo.getMemId()); // 포인트 적립
 			return "review/reviewRegister";	
 		}
-		return "main/home";
+		response.setContentType("text/html; charset=UTF-8");
+		 
+		PrintWriter out = response.getWriter();
+		 
+		out.println("<script>alert('3일이 지나 리뷰를 등록할수 없습니다.'); location.href='confinish.do';</script>");
+		 
+		out.flush();
+
+		return null;
 	}
 	
 	

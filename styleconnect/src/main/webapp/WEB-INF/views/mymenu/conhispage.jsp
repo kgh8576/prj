@@ -73,7 +73,7 @@
 								디자이너 : <a href="#" class="text-main-color"> ${conhis.desName }</a>
 							</div>
 							<p class="margin-top-15px text-grey-2">상세정보 : ${conhis.detail }</p>
-							<a href="reviewList.do?${conhis.desId }"
+							<a href="reviewList.do?desId=${conhis.desId }"
 								class="d-inline-block text-grey-2 text-up-small"><i
 								class="far fa-file-alt"></i> 리뷰보기</a>
 							<button type="button"
