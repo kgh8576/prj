@@ -87,7 +87,7 @@ ${my.id }
                                     <div class="icon margin-bottom-15px">
                                         <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-3.png" alt="">
                                     </div>
-                                    스타일링 관리
+                                    스타일링사진 관리
                                 </div>
                             </a>
                         </div>
@@ -107,7 +107,7 @@ ${my.id }
                                     <div class="icon margin-bottom-15px opacity-7">
                                         <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-4.png" alt="">
                                     </div>
-                                    상담목록
+                                    내상담관리
                                 </div>
                             </a>
                         </div>

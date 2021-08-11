@@ -90,6 +90,16 @@ function delfunc(fileUuid){
         </div>
     </nav>
 <main>
+<div class="content-wrapper">
+        <div class="container-fluid overflow-hidden">
+            <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">    
+     <div id="page-title" class="padding-30px background-white full-width">
+                    <div class="container">
+                        <ol class="breadcrumb opacity-5">
+                        </ol>
+                        <h1 class="font-weight-300">내 스타일링 사진 관리</h1>
+                    </div>
+                </div>
 		<div class="container margin_detail">
 			<div class="row">
 				<div class="col-lg-8">
@@ -134,6 +144,9 @@ function delfunc(fileUuid){
 			<!-- /row -->
 		</div>
 		<!-- /container -->
+		</div>
+	</div>
+	</div>
 	</main>
 	<div align="center">
 		<form method="post" action="desStyleUp.do" enctype="multipart/form-data">
@@ -142,6 +155,7 @@ function delfunc(fileUuid){
 		<input type="submit">
 	</form>
 	</div>
+	
 	<!-- COMMON SCRIPTS -->
 	<script
 		src="${pageContext.request.contextPath}/resources/reservationreso/js/common_scripts.min.js"></script>

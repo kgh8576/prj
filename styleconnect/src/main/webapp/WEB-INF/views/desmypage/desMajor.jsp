@@ -218,6 +218,17 @@ img{
             </ul>
         </div>
     </nav>
+    <!-- 네비 끝// -->
+<div class="content-wrapper">
+        <div class="container-fluid overflow-hidden">
+            <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">    
+     <div id="page-title" class="padding-30px background-white full-width">
+                    <div class="container">
+                        <ol class="breadcrumb opacity-5">
+                        </ol>
+                        <h1 class="font-weight-300">전문분야 설정</h1>
+                    </div>
+                </div>
 				<form name="frm" id="frm" action="majorUpdate.do" method="post">
 				<input type="hidden" name="id" id="id" value="${des.id }"> 
 					<div align="center">
@@ -261,7 +272,11 @@ img{
 			</form>
 			<div align="center">
 			<button onclick="updateMajor()">수정하기</button>
-			</div>	
+			</div>
+		</div>
+	</div>
+</div>
+			
 
 </body>
 </html>
