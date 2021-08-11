@@ -49,7 +49,7 @@
 
 	<c:forEach var="conhis" items="${conhis }">
 
-		<c:if test="${conhis.codecontent eq '예약중' }">
+		<c:if test="${conhis.codecontent eq '예약중'|| conhis.codecontent eq '예약확정'}">
 			<div style="margin: auto; width: 100%"
 				class="col-lg-6 margin-bottom-45px full-width">
 				<div class="background-white thum-hover box-shadow  hvr-float">
@@ -73,7 +73,7 @@
 								디자이너 : <a href="#" class="text-main-color"> ${conhis.desName }</a>
 							</div>
 							<p class="margin-top-15px text-grey-2">상세정보 : ${conhis.detail }</p>
-							<a href="reviewList.do?${conhis.desId }"
+							<a href="reviewList.do?desId=${conhis.desId }"
 								class="d-inline-block text-grey-2 text-up-small"><i
 								class="far fa-file-alt"></i> 리뷰보기</a>
 							<button type="button"

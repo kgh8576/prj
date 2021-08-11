@@ -64,7 +64,7 @@ function readURL(input) {
                                      <input type="text" class="form-control form-control-sm" value="${course.price }" id="price" name="price">
                                   </div>
                                 </div>
-                    <button type="submit" class="btn btn-lg border-2  btn-primary btn-block border-radius-15 padding-15px box-shadow">상담수정</button>>
+                   				 <button type="submit" class="btn btn-lg border-2  btn-primary btn-block border-radius-15 padding-15px box-shadow">상담수정</button>>
                           </form>
                         </div>
                     </div>

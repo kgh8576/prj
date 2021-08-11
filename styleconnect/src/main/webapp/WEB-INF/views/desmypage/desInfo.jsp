@@ -173,7 +173,7 @@ function hpchange() {
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }l">
+                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }">
                 <i class="fa fa-fw fa-star"></i>
                 <span class="nav-link-text">스케쥴관리</span>
               </a>
@@ -182,7 +182,7 @@ function hpchange() {
                     <span class="nav-title-text">상담관련</span>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-                    <a href="desCourse.do?id=${my.id }" class="nav-link" href="dashboard-bookings.html">
+                    <a href="desCourse.do" class="nav-link" href="dashboard-bookings.html">
                         <i class="far fa-fw fa-bookmark"></i>
                         <span class="nav-link-text">내상담관리</span>
                     </a>
@@ -203,9 +203,6 @@ function hpchange() {
                 <div id="page-title" class="padding-30px background-white full-width">
                     <div class="container">
                         <ol class="breadcrumb opacity-5">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li class="active">My Profile</li>
                         </ol>
                         <h1 class="font-weight-300">My Profile</h1>
                     </div>

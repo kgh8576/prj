@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.one.style.des.vo.DesVO;
+import com.one.style.desmypage.service.DesMypageService;
 import com.one.style.dessearch.service.DessearchService;
 import com.one.style.dessearch.vo.DessearchVO;
 import com.one.style.review.web.Paging;
@@ -27,6 +29,7 @@ public class DessearchController {
 	@RequestMapping("courseList.do")
 	public String courseList(Model model,DessearchVO vo) {
 		model.addAttribute("course",dao.courseList(vo));
+		model.addAttribute("img2", dao.desProImg(vo));
 		return ("dessearch/desCourseList");
 	}
 	//디자이너상세페이지
@@ -38,8 +41,8 @@ public class DessearchController {
 		
 		model.addAttribute("designer",dao.dessearchSelect(vo));
 		model.addAttribute("review",dao.dessearchSelectReview(vo));
-		
-		model.addAttribute("img",dao.desProImg(vo));
+		model.addAttribute("img",dao.dessearchDesThum(vo));
+		model.addAttribute("img2", dao.desProImg(vo));
 	return("dessearch/desListSelect");
 	}
 	

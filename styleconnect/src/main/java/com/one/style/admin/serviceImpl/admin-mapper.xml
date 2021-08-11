@@ -216,4 +216,36 @@
 		where con_no =#{conNo}
 	</update>
 	
+	<select id="designerStateOneSelect" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
+		select id,
+               pw,
+               name,
+               gender,
+               to_char(birth, 'YYYY-MM-DD') as birth,
+               REGEXP_REPLACE(hp, '(.{3})(.+)(.{4})', '\1-\2-\3') as hp,
+               location, 
+               career,
+               major_gender,
+               makeup_yn,
+               cut_yn,
+               perm_yn,
+               dye_yn,
+               major,
+               point,
+               codecontent as state, 
+               to_char(regday,'YYYY-MM-DD') as regday,
+               comments
+        	from designer, commcodedetail
+            where designer.state = commcodedetail.code
+            	and id=#{id}
+	</select>
+	<select id="designerCertificationFileListSelect" parameterType="com.one.style.files.vo.FilesVO" resultType="com.one.style.files.vo.FilesVO">
+		select file_name, 
+        		file_uuid,
+        		file_state
+  			from files 
+  			where files.des_id = #{des_id}
+    			and file_state = 'cer'
+	</select>
+	
 </mapper>

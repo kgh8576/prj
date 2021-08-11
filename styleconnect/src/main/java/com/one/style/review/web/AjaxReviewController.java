@@ -27,6 +27,7 @@ public class AjaxReviewController {
 	@RequestMapping("reviewInsert.do")
 	public String reviewInsert(ReviewVO vo) {
 		reviewDao.reviewInsert(vo);
+		reviewDao.reviewPoint(vo.getMemId()); // 포인트 적립
 		return null;
 	}
 	

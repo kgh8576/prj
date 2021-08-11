@@ -59,7 +59,7 @@ public class DesController {
 	@ResponseBody
 	public Map desloginCheck(HttpServletRequest request, HttpServletResponse response, DesVO vo) throws IOException {
 		HttpSession session = request.getSession();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 		int cnt = 0;
 		//1.id로 단건조회
 		DesVO dvo = desDao.designerlogin(vo);
@@ -121,7 +121,7 @@ public class DesController {
 	public String desinerinsert(DesVO vo, MultipartHttpServletRequest request) {
 		System.out.println(vo.getBirth());
 		HttpSession session = request.getSession();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 		String postcode = request.getParameter("postcode");
 		String roadAddress = request.getParameter("roadAddress");
 		String extraAddress = request.getParameter("extraAddress");

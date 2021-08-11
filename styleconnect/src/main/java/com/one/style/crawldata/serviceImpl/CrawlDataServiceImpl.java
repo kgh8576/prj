@@ -38,14 +38,16 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
-	
-    public void start() {
-        initCrawl();
+    CrawlDataVO vo;
+    
+    
+    public void start(String gender) {
+        initCrawl(gender);
         runCrawl();
     }
  
     @Override
-    public void initCrawl() {
+    public void initCrawl(String gender) {
         //System Property SetUp
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         //Driver SetUp
@@ -63,7 +65,15 @@ public class CrawlDataServiceImpl implements CrawlDataService{
         	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(2) > div > label > input")).sendKeys("crawlcrawl"); // 로그인 비밀번호
         	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(3) > button")).click();
         	Thread.sleep(8000);
-        	driver.get("https://www.instagram.com/explore/tags/%EB%82%A8%EC%9E%90%EB%A8%B8%EB%A6%AC/"); // tag/남자태그/ 로 이동
+        	vo = new CrawlDataVO();
+        	if(gender.equals("MALE")) {
+        		driver.get("https://www.instagram.com/explore/tags/%EB%82%A8%EC%9E%90%EB%A8%B8%EB%A6%AC/"); // tag/남자머리/ 로 이동
+        		vo.setGender(gender);
+        	} else if(gender.equals("FEMALE")) {
+        		driver.get("https://www.instagram.com/explore/tags/%EC%97%AC%EC%9E%90%EB%A8%B8%EB%A6%AC/"); // tag/여자머리/ 로 이동
+        		vo.setGender(gender);
+        	}
+        	System.out.println(vo.getGender());
         	Thread.sleep(10000);
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +114,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 		String[] sliced2 = sliced.split(" ");
 		List<String> hashTags = new ArrayList<String>();
 		for(String s : sliced2) {
-			if(s.contains("#") && !s.contains("#남자") && !s.contains("#여자") && s.length() < 11){
+			if(s.startsWith("#") && s.length() < 11 && !s.contains("#펌") && !s.contains("남자") && !s.contains("여자") && !s.contains("탈색") && !s.contains("염색")){
 				if(s.endsWith("펌") || s.endsWith("컷")) {
 					hashTags.add(s);
 				}
@@ -131,19 +141,17 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 		});
 
 		System.out.println("내림 차순 정렬");
-		CrawlDataVO vo = new CrawlDataVO();
 		for(int i = 0; i <= 4; i++) {
 			System.out.println(list_entries.get(i).getKey() + " : " + list_entries.get(i).getValue());
-			if (i == 0) vo.setFirst(list_entries.get(i).getKey());
+			if (i == 0) vo.setOne(list_entries.get(i).getKey());
 			if (i == 1) vo.setTwo(list_entries.get(i).getKey());
 			if (i == 2) vo.setThree(list_entries.get(i).getKey());
 			if (i == 3) vo.setFour(list_entries.get(i).getKey());
 			if (i == 4) vo.setFive(list_entries.get(i).getKey());
 		}
-		System.out.println(vo.getFirst());
+		System.out.println(vo.getOne());
 		System.out.println(vo.getFive());
 		insertCrawl(vo);
-		
 	}
 
 	@Override
@@ -152,8 +160,8 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 	}
     
 	@Override
-	public CrawlDataVO getCrawlList() {
-		return map.getCrawlList();
+	public CrawlDataVO getCrawlList(String gender) {
+		return map.getCrawlList(gender);
 	}
 	
     

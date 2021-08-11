@@ -40,7 +40,7 @@ public class HomeController {
 				model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(memDetail));
 			}
 		}
-		model.addAttribute("hashTag", crawlDao.getCrawlList());
+		model.addAttribute("hashTag", crawlDao.getCrawlList("MALE"));
 		return "main/home";
 	}
 	

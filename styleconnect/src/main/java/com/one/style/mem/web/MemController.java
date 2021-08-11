@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemberVO;
 
@@ -38,7 +39,7 @@ public class MemController {
 	@ResponseBody
 	public Map logincheck(HttpServletRequest request,HttpServletResponse response, MemberVO vo) throws IOException {
 		HttpSession session = request.getSession();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 		int cnt = 0;
 		//1.id로 단건조회
 		MemberVO mvo = memberDao.login(vo);
@@ -97,7 +98,7 @@ public class MemController {
 	public String memberInsert(MemberVO vo,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 		String encoderPW = encoder.encode(vo.getPw());
 		vo.setPw(encoderPW);
 		
@@ -110,6 +111,17 @@ public class MemController {
 	@RequestMapping("/Insertchoice.do")
 	public String insertchoice() {
 		return "member/insertchoicepage";
+	}
+	//로그인시 스케줄확인
+	@RequestMapping("/checkSchedule.do")
+	@ResponseBody
+	public int checkSchedule (ConHistoryVO vo) {
+		int count = 0;
+		boolean a = memberDao.checkSchedule(vo);
+		if(a) {
+			count = 1;
+		}
+		return  count;
 	}
 	
 	
@@ -140,7 +152,7 @@ public class MemController {
 	@RequestMapping("updateUserPwByHpName.do")
 	@ResponseBody
 	public String updateUserPwByHpName(String hp, String name, String searchTable, String pw) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16); // 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4); // 비밀번호 암호화
 		String encoderPW = encoder.encode(pw);
 		
 		Map<String, String> map = new HashMap<String, String>();

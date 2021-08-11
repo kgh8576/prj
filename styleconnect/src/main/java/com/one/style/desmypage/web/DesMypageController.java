@@ -230,7 +230,7 @@ public class DesMypageController {
 		desMyDao.desFileUpdate(vo);
 		return "redirect:desStyle.do";
 	}
-	// 마이페이지/스케쥴 관리페이지
+	// 마이페이지/예약 관리페이지
 	@RequestMapping("desSchedule.do")
 	public String desSchedule( Model model, ConHistoryVO vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -238,24 +238,28 @@ public class DesMypageController {
 		model.addAttribute("sche",desMyDao.desScheList(vo));
 		return "desmypage/desSchedule";
 	}
-	//마이페이지/ 스케쥴 관리페이지 - 상담 승인
+	//마이페이지/예약 관리페이지 - 상담 승인
 	@RequestMapping("desApprove.do")
 	public String desApprove(ConHistoryVO vo) {
 		desMyDao.desApprove(vo);
 		return "redirect:desSchedule.do";
 	}
-	//마이페이지/ 스케쥴 관리페이지 - 상담 거부
+	//마이페이지/예약 관리페이지 - 상담 거부
 	@RequestMapping("desDeny.do")
 	public String desDeny(ConHistoryVO vo) {
+		desMyDao.desDenyComment(vo);
 		desMyDao.desDeny(vo);
 		return "redirect:desSchedule.do";
 	}
 
 	// 마이페이지/상담목록 관리페이지
 	@RequestMapping("desCourse.do")
-	public String desCourse(Model model, DesVO vo) {
+	public String desCourse(Model model, DesVO vo, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String desId = (String) session.getAttribute("did");
+		vo.setId(desId);
 		model.addAttribute("course", desMyDao.desCourseList(vo));
-		return "desmypage/desCourse";
+		return "desmypage/desCourse"; 
 	}
 
 	// 마이페이지/상담목록 관리페이지/상담생성 페이지
