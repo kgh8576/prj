@@ -82,7 +82,7 @@
 	 select COUR_NO_SEQ.currval as cour_no from dual
 	</select>
 	
-	<!-- 상담내역 -->
+	<!-- 예약내역 -->
 	<select id="desScheList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO" >
 	  SELECT 
     a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date, a.time,a.state,a.price,
@@ -102,12 +102,13 @@
 	AND d.id = #{desId}
 	</select>
 	
-	<!-- 상담상태변경(승인)  -->
+	<!-- 예약내역 - 예약상태변경(승인)  -->
 	<update id="desApprove" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 	UPDATE CONSULTING_HISTORY 
 	SET STATE ='ccode002' 
 	WHERE CON_NO=#{conNo}
 	</update>
+	
 	<select id="desWorkOpenPage" parameterType="String" resultType="com.one.style.desmypage.vo.DesMypageVO">
 		select * from work_open where id = #{id}
 	</select>
@@ -118,7 +119,7 @@
 
 
 	
-	<!-- 상담상태변경(거부)  -->
+	<!-- 예약내역 - 예약상태변경(거부)  -->
 	<update id="desDeny" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 	UPDATE CONSULTING_HISTORY 
 	SET STATE ='ccode003' 

@@ -18,7 +18,6 @@ function denyfun(conNo){
 
 </script>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top" id="mainNav">
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -38,7 +37,7 @@ function denyfun(conNo){
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Favorites">
-                    <a href="desStyle.do" class="nav-link active" href="dashboard-my-favorites.html">
+                    <a href="desStyle.do" class="nav-link" href="dashboard-my-favorites.html">
                 <i class="fa fa-fw fa-table"></i>
                 <span class="nav-link-text">스타일링사진 관리</span>
               </a>
@@ -59,7 +58,7 @@ function denyfun(conNo){
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add Listing">
-                    <a href="desSchedule.do" class="nav-link" href="dashboard-add-listing.html">
+                    <a href="desSchedule.do" class="nav-link active" href="dashboard-add-listing.html">
                         <i class="fa fa-fw fa-plus-circle"></i>
                         <span class="nav-link-text">예약관리</span>
                     </a>
@@ -74,9 +73,7 @@ function denyfun(conNo){
                 <div id="page-title" class="padding-30px background-white full-width">
                     <div class="container">
                         <ol class="breadcrumb opacity-5">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Dashboard</a></li>
-                            <li class="active">Bookings</li>
+                         
                         </ol>
                         <h1 class="font-weight-300">예약내역</h1>
                     </div>
@@ -90,10 +87,10 @@ function denyfun(conNo){
                             <div class="padding-30px full-width">
                                 <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                 <div class="margin-left-85px">
-                                    <a class="d-block text-dark text-medium margin-bottom-5px" href="#">${vo.title }  </a>
+                                	<a class="d-block text-dark text-medium margin-bottom-5px" href="#">No. ${vo.conNo }  </a>
+                                    <a class="d-block text-dark text-medium margin-bottom-5px" href="#">상담명: ${vo.title }  </a>
                                     <div class="d-block padding-tb-5px">예약날짜 :  <a href="#" class="text-main-color">${vo.day } </a></div>
                                     <div class="d-block padding-tb-5px">예약시간 :  <a href="#" class="text-main-color">${vo.time }</a></div>
-                                    <div class="d-block padding-tb-5px">신청날짜 :  <a href="#" class="text-main-color">${vo.laststDate }</a></div>
                                     <div class="d-block padding-tb-5px">예약자  :  <a href="#" class="text-main-color">${vo.memName}</a></div>
                                      <div class="d-block padding-tb-5px">예약상태  :  <a href="#" class="text-main-color">${vo.codecontent}</a></div>
                                     <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a> ${vo.memComment }</p>

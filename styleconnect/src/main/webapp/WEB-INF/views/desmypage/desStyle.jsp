@@ -49,7 +49,7 @@ function delfunc(fileUuid){
                     <span class="nav-title-text">디자이너 기본정보</span>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a href="desInfo.do" class="nav-link " href="dashboard-home.html">
+                    <a href="desInfo.do" class="nav-link" href="dashboard-home.html">
                         <i class="fa fa-fw fa-user-circle"></i><span class="nav-link-text">내정보관리</span>
                     </a>
                 </li>
@@ -66,7 +66,7 @@ function delfunc(fileUuid){
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }l">
+                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }">
                 <i class="fa fa-fw fa-star"></i>
                 <span class="nav-link-text">스케쥴관리</span>
               </a>
@@ -75,7 +75,7 @@ function delfunc(fileUuid){
                     <span class="nav-title-text">상담관련</span>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-                    <a href="desCourse.do?id=${my.id }" class="nav-link" href="dashboard-bookings.html">
+                    <a href="desCourse.do" class="nav-link" href="dashboard-bookings.html">
                         <i class="far fa-fw fa-bookmark"></i>
                         <span class="nav-link-text">내상담관리</span>
                     </a>
@@ -94,13 +94,6 @@ function delfunc(fileUuid){
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="tabs_detail">
-						<ul class="nav nav-tabs" role="tablist">
-							<li class="nav-item"><a id="tab-A" href="#pane-A"
-								class="nav-link active" data-toggle="tab" role="tab">d상담 정보</a></li>
-							<li class="nav-item"><a id="tab-B" href="#pane-B"
-								class="nav-link" data-toggle="tab" role="tab">전문가 정보</a></li>
-						</ul>
-
 						<div class="tab-content" role="tablist">
 							<div id="pane-A" class="card tab-pane fade show active"
 								role="tabpanel" aria-labelledby="tab-A">
@@ -112,11 +105,8 @@ function delfunc(fileUuid){
 								<div id="collapse-A" class="collapse" role="tabpanel"
 									aria-labelledby="heading-A">
 									<div class="card-body info_content">
-										<h2></h2>
-										<h2 align="left">상담 상세 정보</h2>
-										<p>${course.detail}</p>
 										<div class="add_bottom_25"></div>
-										<h2>디자이너가 했던 사진들</h2>
+										<h2>스타일링 사진</h2>
 										<div class="pictures magnific-gallery clearfix">
 											<c:forEach items="${sty }" var="vo">
 											<figure>
@@ -145,12 +135,13 @@ function delfunc(fileUuid){
 		</div>
 		<!-- /container -->
 	</main>
+	<div align="center">
 		<form method="post" action="desStyleUp.do" enctype="multipart/form-data">
 		<input type="hidden" name="did" value="${did }">
 		<input type="file" id="file" name="file" class="multi" />
-		<br> 
 		<input type="submit">
 	</form>
+	</div>
 	<!-- COMMON SCRIPTS -->
 	<script
 		src="${pageContext.request.contextPath}/resources/reservationreso/js/common_scripts.min.js"></script>
