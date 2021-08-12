@@ -17,19 +17,22 @@ function denyfun(conNo){
 		//디자이너 거절 코멘트
 		let deny = prompt('고객에서 전할 코맨트를 입력하세요','');
 		if(deny != ""){
-			$(comment).text(deny);
-		}else{
+			alert(deny);
+		    location.href="desDeny.do?conNo="+conNo+"&desComment="+deny
+			
+		}else{	
 			$().text("코맨트를 입력하세요")
 		}
-		//예약상태취소로 변경
-		//location.href="desDeny.do?conNo="+conNo
-	
 	}else{
 		confirm("취소되었습니다.") 
 		
 	}
 };
 
+function selectList(){
+	var state = $('#state option:selected').val();
+	location.href = 'desSchedule.do?state='+state;
+}
 </script>
 </head>
 <body>
@@ -57,7 +60,7 @@ function denyfun(conNo){
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }">
+                    <a class="nav-link" href="desWorkOpen.do">
                 <i class="fa fa-fw fa-star"></i>
                 <span class="nav-link-text">스케쥴관리</span>
               </a>
@@ -90,6 +93,17 @@ function denyfun(conNo){
                          
                         </ol>
                         <h1 class="font-weight-300">예약내역</h1>
+                <div align="right">
+                <input type="hidden" name="state" value="${state }">
+                <select name="state" id="state" onchange="selectList()">
+                
+                	<option value="ccode001" <c:if test="${state eq 'ccode001'}">selected</c:if> >예약중</option>
+                	<option value="ccode002" <c:if test="${state eq 'ccode002'}">selected</c:if> >예약확정</option>
+                	<option value="ccode007" <c:if test="${state eq 'ccode007'}">selected</c:if> >예약거절</option>
+                	<option value="ccode005" <c:if test="${state eq 'ccode005'}">selected</c:if>>상담완료</option>
+                	<option value="ccode006" <c:if test="${state eq 'ccode006'}">selected</c:if>>상담불참</option>
+                </select>
+                </div>
                     </div>
                 </div>
                 <!-- // Page Title -->

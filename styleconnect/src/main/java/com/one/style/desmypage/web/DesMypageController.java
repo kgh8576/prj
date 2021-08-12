@@ -28,6 +28,7 @@ import com.one.style.desmypage.vo.DesMypageVO;
 import com.one.style.dessearch.service.DessearchService;
 import com.one.style.dessearch.vo.DessearchVO;
 import com.one.style.files.service.FilesService;
+import com.one.style.mem.vo.MemberVO;
 
 @Controller
 public class DesMypageController {
@@ -236,6 +237,7 @@ public class DesMypageController {
 	public String desSchedule( Model model, ConHistoryVO vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		vo.setDesId((String) session.getAttribute("did"));
+		model.addAttribute("state", vo.getState());
 		model.addAttribute("sche",desMyDao.desScheList(vo));
 		return "desmypage/desSchedule";
 	}
@@ -248,7 +250,6 @@ public class DesMypageController {
 	//마이페이지/예약 관리페이지 - 상담 거부
 	@RequestMapping("desDeny.do")
 	public String desDeny(ConHistoryVO vo) {
-		desMyDao.desDenyComment(vo);
 		desMyDao.desDeny(vo);
 		return "redirect:desSchedule.do";
 	}
@@ -330,5 +331,40 @@ public class DesMypageController {
 		return "redirect:desWorkOpen.do";
 	}
 
+	//회원탈퇴페이지이동
+		@RequestMapping("desexitpage.do")
+		public String exitpage () {
+			return "desmypage/desexit";
+		}
+		//회원탈퇴
+		@RequestMapping("desexit.do")
+		@ResponseBody
+		public int desexit (DesVO vo, HttpServletRequest request) {
+			//세션에있는 ID값호출
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("did");
+			//아이디값 vo객체에 담아줌
+			vo.setId(id);
+			//암호화
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
+			//ID와 PASSWORD MVO에 담아줌
+			DesVO mvo = desDao.designerlogin(vo);
+			//VO(입력받은 비밀번호값)과 MVO(DB에 저장된 비밀번호값)매칭확인
+			boolean b = encoder.matches(vo.getPw(), mvo.getPw());
+			int YorN = 0;
+			//매칭해서 TRUE가 나온다면
+			if(b) {
+				//회원정보삭제 실행
+				desMyDao.desexit(mvo);
+				YorN = 1;
+				//세션끊기
+				session.invalidate();
+				
+			}
+			//1OR2를 리턴해줌
+			System.out.println(YorN);
+			return YorN;
+		}
+		
 }
 

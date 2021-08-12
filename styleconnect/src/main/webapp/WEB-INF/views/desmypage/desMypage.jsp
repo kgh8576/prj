@@ -51,6 +51,12 @@
                         <span class="nav-link-text">예약관리</span>
                     </a>
                 </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add Listing">
+                    <a href="desexitpage.do" class="nav-link" href="dashboard-add-listing.html">
+                        <i class="fa fa-fw fa-plus-circle"></i>
+                        <span class="nav-link-text">회원탈퇴하기</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
