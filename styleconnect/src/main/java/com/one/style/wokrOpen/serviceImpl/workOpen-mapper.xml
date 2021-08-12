@@ -15,7 +15,11 @@
 		select time
 		from consulting_history
 		where day = to_date(#{searchDate},'YY/MM/DD')
-		and cour_no = #{courNo}
+		and cour_no in (
+					    select cour_no
+					    from des_course
+					    where id = #{desId}
+					   )
 	</select>
 	<select id="getWorkCloseTime" parameterType="com.one.style.wokrOpen.vo.WorkOpenVO" resultType="string">
 		select close_time
