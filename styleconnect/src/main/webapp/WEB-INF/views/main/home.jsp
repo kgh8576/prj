@@ -118,23 +118,25 @@ $(document).ready(function(){
 	
 });
 	
-	// 페이지 로드 시 cut 디자이너(디폴트값) 데이터 뿌리기
-	$(function() {
-		topDesChange('cut');
-		topDesChange('makeUp');
+// 페이지 로드 시 cut 디자이너(디폴트값) 데이터 뿌리기
+$(function() {
+	topDesChange('cut');
+	topDesChange('makeUp');
+});
+
+function crawl(gender) {
+	$.ajax({
+		url : 'crawl.do',
+		method:'post',
+		data : {gender : gender},
+		success : function(result) {
+			console.log(result);
+		},
+		error : function(err) {
+			console.log(err);
+		}
 	});
-	
-	function crawl() {
-		$.ajax({
-			url : 'crawl.do',
-			success : function(result) {
-				console.log(result);
-			},
-			error : function(err) {
-				console.log(err);
-			}
-		});
-	}
+}
 
 	// 버튼 클릭 시 디자이너 top3 아이디, 이름, 메이저, 총 리뷰 수, 평점, 이미지 경로 가져오는 ajax    		
 	function topDesChange(keyword) {

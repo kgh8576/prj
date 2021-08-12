@@ -78,17 +78,15 @@ public class MemController {
 	
 		String id = request.getParameter("id");
 		vo.setId(id);
-		MemberVO mvo = new MemberVO();
 		
-		System.out.println("컨트롤럴 id값" + id);
-		boolean b = memberDao.insertcheck(vo);
+		int b = memberDao.insertcheck(vo);
 		int cnt = 1;
 		
-		if(b) {
-			cnt = 1;
+		if(b == 1) {
+			cnt = 0;
 			response.getWriter().print(cnt);
 		} else {
-			cnt = 0;
+			cnt = 1;
 			response.getWriter().print(cnt);
 		}
 		return null;

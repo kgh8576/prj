@@ -17,6 +17,8 @@ public interface DesMypageMapper {
 	public DesVO selectDesCer(DesVO vo);
 	public List<DesVO> selectDesThum();
 	public void pwchange(DesVO vo);
+	public void desexit(DesVO vo);
+	
 	//상담관리
 	public void desCourseInsert(DesVO vo);
 	public int desCourseUpdate(DesVO vo);
@@ -30,6 +32,7 @@ public interface DesMypageMapper {
 	public int desDeny(ConHistoryVO vo);
 	public List<DesVO> selectDesSty(DesVO vo);
 	public int desDenyComment(ConHistoryVO vo);
+	public String selectCourThum(DesVO vo);
 	
 	//상담시간 설정 페이지 진입
 	public DesMypageVO desWorkOpenPage(String id);

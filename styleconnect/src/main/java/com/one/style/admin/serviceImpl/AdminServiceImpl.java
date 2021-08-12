@@ -36,6 +36,11 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.memberConHistoryListTotalCountSelect(vo);
 	}
 	
+	@Override
+	public int memberConHistoryUpdate(ConHistoryVO vo) {
+		return adminMapper.memberConHistoryUpdate(vo);
+	}
+	
 	public List<DesVO> designerListSelect(DesVO vo){
 		return adminMapper.designerListSelect(vo);
 	}
@@ -56,8 +61,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int designerConHistoryListUpdate(ConHistoryVO vo) {
-		return adminMapper.designerConHistoryListUpdate(vo);
+	public int designerConHistoryUpdate(ConHistoryVO vo) {
+		return adminMapper.designerConHistoryUpdate(vo);
 	}
 
 	@Override
@@ -69,5 +74,11 @@ public class AdminServiceImpl implements AdminService{
 	public List<FilesVO> designerCertificationFileListSelect(FilesVO vo) {
 		return adminMapper.designerCertificationFileListSelect(vo);
 	}
+
+	@Override
+	public int designerStateUpdate(DesVO vo) {
+		return adminMapper.designerStateUpdate(vo);
+	}
+
 
 }

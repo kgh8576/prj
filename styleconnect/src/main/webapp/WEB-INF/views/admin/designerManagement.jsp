@@ -39,34 +39,40 @@ font-size: 24px;
 }    
 </style>
 
- 
-<!-- 디자이너 상담 내역 수정 함수 -->
-<script>
-function designerConHistoryUpdate(index) {
-	console.log('실행 체크');
-	
-	var formDataQueryString = $('#designer-conHistory-update-form' + index).serialize();
-	//console.log(formDataQueryString);
-	//var formData = new FormData(form);
-	
-	//formData 확인
-	//for (var value of formData.values()) {
-	//	   console.log(value);
-	//	}
-	
-	$.ajax({
-		url : "designerConHistoryUpdate.do",
-		type : "POST",
-		data : formDataQueryString,
-		success : function(result) {
-			console.log(result.message);
-		}
-	});
-}
-</script> 
 
-<!-- 디자이너 상태 수정 모달 태그 생성을 위해 요구되는 value값을 hidden input에 삽입하는 함수 -->
+<!-- 전체 페이지에서 사용하는 함수 -->
 <script>
+//전체 페이지 이동 함수
+function goPageForEntirePage(page) {
+	location.href = "designerManagement.do?page=" + page;
+}
+
+//전체 페이지에서 디자이너 ID로 검색하여 디자이너 목록 조회
+function designerIDSearch(){
+	var searchedID = $('#designer-id-search-box').val();
+	location.href= "designerManagement.do?searchedID=" + searchedID;
+}
+
+</script>
+
+
+<!-- 모달1에서 사용하는 함수-->
+<script>
+//모달 페이지 이동 함수 
+function goPageForModal1(id, page) {
+	console.log("페이지: " + page);
+	designerConHistoryUpdateForm(id, page);
+}
+
+//모달 페이지에서 상담번호로 검색하여 상담 내역조회
+function conHistoryNoSearch(id){
+	var page;
+	var searchedConNo = $('#consulting-history-number-search-box').val();
+	
+	designerConHistoryUpdateForm(id, page, searchedConNo);
+}
+
+//상담내역 수정을 위해 요구되는 value값을 각 폼의 hidden input에 삽입하는 함수
 function getSelectedDesignerAttendValue(index){
 	$('#designer-attend' + index).attr('value',$('#designer-attend-select-box' + index + ' option:selected').val());
 	console.log($('#designer-attend' + index).val());
@@ -76,16 +82,20 @@ function getSelectedMemberAttendValue(index){
 	$('#member-attend' + index).attr('value', $('#member-attend-select-box' + index + ' option:selected').val());
 	console.log($('#member-attend' + index).val());
 }
-</script>
 
-
-<!-- 디자이너 상담내역 수정 모달 태그 생성 함수 -->
-<script>
-function designerConHistoryUpdateForm(id) {
-	console.log('실행 체크');
+//모달 안 폼 태그 생성 함수
+function designerConHistoryUpdateForm(id, page, searchedConNo) {
+	//designerConHistoryUpdateForm(id)로 실행할 경우 page와 searchedConHistoryNo는 null이 아닌 undefined가 되면서 실행 오류 발생
+	if(page == undefined) {
+		page = '';
+	}
+	
+	if(searchedConNo == undefined) {
+		searchedConNo = '';
+	}
 
 	$.ajax({
-		url : "designerConHistoryUpdateForm.do?&desId="+ id,
+		url : "designerConHistoryUpdateForm.do?desId="+ id + "&page=" + page + "&searchedConNo=" + searchedConNo,
 		type : "GET",
 		dataType: "json",
 		success : function(data) {
@@ -96,19 +106,28 @@ function designerConHistoryUpdateForm(id) {
 				//1. 태그 생성
 			var designerConHistoryUpdateFormCode ='';
 
-			//코드 비효율적임. 추후 수정 시: 
-			//form을 list size만큼 생성하지 않고 
-			//1. 버튼 눌렀을 때 매개변수로 인덱스 값을 넘기고
-			//2. 넘긴 인덱스로 3개의 value값(conNo, desAttend, memAttend) 찾아서
-			//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
+					//코드 비효율적임. 추후 수정 시: 
+					//form을 list size만큼 생성하지 않고 
+					//1. 버튼 눌렀을 때 매개변수로 인덱스 값을 넘기고
+					//2. 넘긴 인덱스로 3개의 value값(conNo, desAttend, memAttend) 찾아서
+					//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
+					
+					//폼 데이터를 만들기 위한 폼
 			for(var i = 0; i < designerConHistoryList.length; i++){
 				designerConHistoryUpdateFormCode += '<form id="designer-conHistory-update-form' + i + '"' + 'method="POST">'
-													+ '<input type="hidden" id="consulting-no" name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
+													+ '<input type="hidden" id="consulting-no' + i + '"' + 'name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
 													+ '<input type="hidden" id="designer-attend' + i + '"' + 'name="desAttend" value="' + designerConHistoryList[i].desAttend + '">'//desAttend 히든
 													+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend" value="' + designerConHistoryList[i].memAttend + '">'//memAttend 히든
 													+ '</form>';
 			}
+					//폼 데이터를 만들기 위한 폼 끝
 			
+					//검색창
+			designerConHistoryUpdateFormCode += '<input type="text" id="consulting-history-number-search-box" placeholder="상담번호 검색"></input>';
+			designerConHistoryUpdateFormCode += '<button type="button" onclick="conHistoryNoSearch(' + "'" + id + "'" + ')">검색</button>';
+					//검색창 끝
+			
+					//테이블
 			designerConHistoryUpdateFormCode += '<table>';//
 			designerConHistoryUpdateFormCode += '<tr>'//
 													+'<td>상담번호</td>'//
@@ -137,7 +156,7 @@ function designerConHistoryUpdateForm(id) {
 													+ '<td>' + designerConHistoryList[i].detail + '</td>'//
 													+ '<td>' + designerConHistoryList[i].desComment + '</td>'//
 													+ '<td>' + designerConHistoryList[i].memComment + '</td>';//
-				//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
+						//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
 				if (designerConHistoryList[i].desAttend == "Y") {
 					designerConHistoryUpdateFormCode += '<td>'//
 														+ '<select id="designer-attend-select-box' + i + '"' + 'onChange="getSelectedDesignerAttendValue('+ i + ');">'//
@@ -153,7 +172,7 @@ function designerConHistoryUpdateForm(id) {
 														+ '</select>'// 
 														+ '</td>';//
 				}
-				//조건에 따라 일반회원 참여 여부 셀렉트 박스 코드 추가
+						//조건에 따라 일반회원 참여 여부 셀렉트 박스 코드 추가
 				if (designerConHistoryList[i].memAttend == "Y") {
 					designerConHistoryUpdateFormCode += '<td>'// 
 														+ '<select id="member-attend-select-box' + i + '"' + ' onChange="getSelectedMemberAttendValue('+ i + ');">'// 
@@ -176,23 +195,69 @@ function designerConHistoryUpdateForm(id) {
 			}
 												
 			designerConHistoryUpdateFormCode += '</table>';
-				//1. 태그 생성 끝
-				
+					//테이블 끝
+			
+					//페이지 네비게이션
+			designerConHistoryUpdateFormCode += '<div class="pagination">'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'//
+												+ '<span>';//
+												
+							
+			for(var i=paging.startPageNo; i<=paging.endPageNo; i++){
+				if(i == paging.pageNo){
+					designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</p>';//
+				} else {
+					designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</p>';//
+				}
+			}
+
+			designerConHistoryUpdateFormCode += '</span>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'//
+												+ '</div>';//
+					//페이지 네비게이션 끝
+							
+				//1. 태그 생성 끝			
 				//2. 태그 삽입
 			$('#designer-conHistory-update-form-target').html(designerConHistoryUpdateFormCode);
 				//2. 태그 삽입 끝
-				
-			//!!!!!페이징 추가!!!!!
+
+			
+		}
+	});
+}
+
+// 디자이너 상담 내역 수정 함수
+function designerConHistoryUpdate(index) {
+	console.log('실행 체크');
+	
+	var formDataQueryString = $('#designer-conHistory-update-form' + index).serialize();
+	//console.log(formDataQueryString);
+	//var formData = new FormData(form);
+	
+	//formData 확인
+	//for (var value of formData.values()) {
+	//	   console.log(value);
+	//	}
+	
+	$.ajax({
+		url : "designerConHistoryUpdate.do",
+		type : "POST",
+		data : formDataQueryString,
+		success : function(result) {
+			window.alert(result.message);
 		}
 	});
 }
 </script>
 
+<!-- 모달2에서 사용하는 함수 -->
 <script>
 function designerStateUpdateForm(id) {
 	
 	$.ajax({
-		url : "designerStateUpdateForm.do?&desId="+ id,
+		url : "designerStateUpdateForm.do?desId="+ id,
 		type : "GET",
 		dataType: "json",
 		success : function(data) {
@@ -203,55 +268,57 @@ function designerStateUpdateForm(id) {
 			
 			//모달 바디 안에 태그 삽입
 				//1. 태그 생성
-			var designerStateUpdateFormCode ='';
-			designerStateUpdateFormCode += '<table>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>ID</td>'
-											+ '<td>' + designerStateOne.id + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>이름</td>'
-											+ '<td>' + designerStateOne.name + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>성별</td>'
-											+ '<td>' + designerStateOne.gender + '</td>';;
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>생년월일</td>'
-											+ '<td>' + designerStateOne.birth + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<td>휴대폰 번호</td>'
-											+ '<td>' + designerStateOne.hp + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<td>근무처</td>'
-											+ '<td>' + designerStateOne.location + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>경력</td>'
-											+ '<td>' + designerStateOne.career + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>분야</td>'
-											+ '<td>' + '메이크업: ' + designerStateOne.makeupyn
-													+ '컷: ' + designerStateOne.cutyn 
-													+ '펌: ' + designerStateOne.permyn 
-													+ '염색: ' + designerStateOne.dyeyn + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>전문</td>'
-											+ '<td>' + designerStateOne.major + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td rowspan="' + (designerCertificationFileList.length + 1) +'">증명 자료</td>';
+			var designerStateUpdateFormCode ='';//
+			designerStateUpdateFormCode += '<table>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>ID</td>'//
+											+ '<td>' + designerStateOne.id + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>이름</td>'//
+											+ '<td>' + designerStateOne.name + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>성별</td>'//
+											+ '<td>' + designerStateOne.gender + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>생년월일</td>'//
+											+ '<td>' + designerStateOne.birth + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<td>휴대폰 번호</td>'//
+											+ '<td>' + designerStateOne.hp + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<td>근무처</td>'//
+											+ '<td>' + designerStateOne.location + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>경력</td>'//
+											+ '<td>' + designerStateOne.career + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>분야</td>'//
+											+ '<td>' + '메이크업: ' + designerStateOne.makeupyn//
+													+ '컷: ' + designerStateOne.cutyn// 
+													+ '펌: ' + designerStateOne.permyn//
+													+ '염색: ' + designerStateOne.dyeyn + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>전문</td>'//
+											+ '<td>' + designerStateOne.major + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td rowspan="' + (designerCertificationFileList.length + 1) +'">증명 자료</td>';//
 			
 			for(var i = 0; i < designerCertificationFileList.length; i++){
-				designerStateUpdateFormCode += '<tr>';
-				designerStateUpdateFormCode += '<td>' + '<img src="${pageContext.request.contextPath}/resources/assets/img/' + designerCertificationFileList[i].fileUuid + '">' + designerCertificationFileList[i].fileName + '</td>';
-				designerStateUpdateFormCode += '</tr>';
+				designerStateUpdateFormCode += '<tr>';//
+				designerStateUpdateFormCode += '<td>'// 
+												+ '<img src="${pageContext.request.contextPath}/resources/img/' + designerCertificationFileList[i].fileUuid + '">' + designerCertificationFileList[i].fileName// 
+												+ '</td>';//
+				designerStateUpdateFormCode += '</tr>';//
 			}
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>상태</td>'
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>상태</td>'//
 				
 			//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
 			if (designerStateOne.state == "신청") {
@@ -305,15 +372,16 @@ function designerStateUpdateForm(id) {
 												+ '</select>'// 
 												+ '</td>';//
 			}
-			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '</tr>';//
 											
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>관리자 코멘트</td>';
-			designerStateUpdateFormCode += '<td><textarea id="designer-comments-textarea" name="comments">' + designerStateOne.comments + '</textarea></td>';
-			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>관리자 코멘트</td>';//
+			designerStateUpdateFormCode += '<td><textarea id="designer-comments-textarea" name="comments">' + designerStateOne.comments + '</textarea></td>';//
+			designerStateUpdateFormCode += '</tr>';//
 			
-			designerStateUpdateFormCode += '</table>';
-			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>'
+			designerStateUpdateFormCode += '</table>';//
+			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>';//
+			
 				//1. 태그 생성 끝
 				
 				//2. 태그 삽입
@@ -325,9 +393,6 @@ function designerStateUpdateForm(id) {
 	
 }
 
-</script>
-
-<script>
 function designerStateUpdate(id) {
 	var id = id;
 	var state = $('#designer-state-select-box option:selected').val();
@@ -344,27 +409,38 @@ function designerStateUpdate(id) {
 			"comments" : comments
 		},
 		success : function(result) {
-			console.log(result.message);
+			window.alert(result.message);
 		}
 	});
 }
+
 </script>
+
+
+
 
 
 
 
 <br><br><br><br><br><br><br><br><br><br>
 <h1>디자이너 관리 페이지</h1>
-<!-- 셀렉트 박스로 상태 구분하여 보여줌, 검색창 -->
+<!-- 셀렉트 박스로 상태 구분하여 보여줌 -->
+<!-- 하지말자 -->
+
+<!-- 검색창 -->
+<input type="text" id="designer-id-search-box" placeholder="디자이너 ID 검색"></input>
+<button type="button" onclick="designerIDSearch()">검색</button>
+<!-- 할까말까 -->
+
+<!-- 디자이너 리스트 -->
 <table>
 	<tr>
-		<td>회원ID</td>
+		<td>ID</td>
 		<td>이름</td>
 		<td>성별</td>
 		<td>생년월일</td>
 		<td>휴대폰 번호</td>
 		<td>근무처</td>
-		<td>경력</td>
 		<td>분야</td>
 		<td>전문</td>
 		<td>상태</td>
@@ -380,7 +456,6 @@ function designerStateUpdate(id) {
 		<td>${designer.birth}</td>
 		<td>${designer.hp}</td>
 		<td>${designer.location}</td>
-		<td>${designer.career}</td>
 		<td>메이크업: ${designer.makeupyn}<br>
 			컷: ${designer.cutyn}<br>
 			펌: ${designer.permyn}<br>
@@ -388,15 +463,28 @@ function designerStateUpdate(id) {
 		<td>${designer.major}</td>
 		<td>${designer.state}</td>
 		<td>${designer.regday}</td>
-		<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">수정</button>
-			<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">승인</button>
+		<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">상담내역 변경</button>
+			<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">회원상태 변경</button>
 		</td>
 	</tr>
 	</c:forEach>
 	
 </table>
 
-<!-- 상담내역 수정 모달 -->
+<!-- 전체 페이지의 페이지 네비게이션 -->
+<div align="center">
+	<jsp:include page="pagingForEntirePage.jsp" flush="true">
+		<jsp:param name="firstPageNo" value="${paging.firstPageNo}" />
+		<jsp:param name="prevPageNo" value="${paging.prevPageNo}" />
+		<jsp:param name="startPageNo" value="${paging.startPageNo}" />
+		<jsp:param name="pageNo" value="${paging.pageNo}" />
+		<jsp:param name="endPageNo" value="${paging.endPageNo}" />
+		<jsp:param name="nextPageNo" value="${paging.nextPageNo}" />
+		<jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
+	</jsp:include>
+</div>
+
+<!-- 모달1: 상담내역 수정 모달 -->
 <div class="modal fade" id="designer-conHistory-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -415,7 +503,7 @@ function designerStateUpdate(id) {
 	</div>
 </div>
 
-<!-- 회원 상태 수정 모달 -->
+<!-- 모달2: 회원 상태 수정 모달 -->
 <div class="modal fade" id="designer-state-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -434,6 +522,8 @@ function designerStateUpdate(id) {
 	</div>
 </div>
 
+
+
 <pre>
 게시 글 수: ${paging.pageSize}
 첫 번째 페이지 번호: ${paging.firstPageNo}
@@ -445,6 +535,8 @@ function designerStateUpdate(id) {
 마지막 페이지 번호: ${paging.finalPageNo}
 게시 글 전체 수: ${paging.totalCount}
 </pre>
+
+
 
 
 

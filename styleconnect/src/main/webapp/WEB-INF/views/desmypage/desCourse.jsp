@@ -68,15 +68,15 @@ h1{
             </ul>
         </div>
     </nav>
- <div id="page-title" class="padding-tb-30px gradient-white">
-        <div class="container">
-            <ol class="breadcrumb opacity-5">
-            </ol>
-          <c:forEach items="${course }" var="vo" begin="1" end="1">
-            <h1 class="font-weight-300">${vo.name } 디자이너 상담 목록</h1>
-        </c:forEach>
-        </div>
-    </div>
+			 <div id="page-title" class="padding-tb-30px gradient-white">
+			        <div class="container">
+			            <ol class="breadcrumb opacity-5">
+			            </ol>
+			          <c:forEach items="${course }" var="vo" begin="1" end="1">
+			            <h1 class="font-weight-300">${vo.name } 디자이너의 상담 목록</h1>
+			        </c:forEach>
+			        </div>
+			    </div>
     <div class="margin-tb-30px">
         <div class="container">
             <div class="row">
@@ -93,14 +93,16 @@ h1{
 				<c:forEach items="${course}" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">
                         <div class="row no-gutters">
-                            <div class="img-in col-lg-5"><a href="#"><img src="resources/img/${vo.fileUuid }" alt=""></a></div>
+                            <div class="img-in col-lg-5">
+                            <a href="#"><img src="resources/img/${vo.fileUuid }" alt=""></a>
+                            </div>
                             <div class="col-lg-7">
                                 <div class="padding-25px">
                                     <a class="d-block h4  text-capitalize margin-bottom-8px" href="#">${vo.title} </a>
                                     <div class="meta">
                         			상담번호:${vo.courNo }
                         			 <hr>
-                                        <span> ${vo.detail }  </span>
+                                        <span> ${vo.detail } </span>
                                         <div align="right">
                                         <a href="desCourseUpdate.do?courNo=${vo.courNo }" >>수정하기</a>
                                         <input type="hidden" id="courNo" name="courNo" value="${vo.courNo }">
@@ -123,12 +125,8 @@ h1{
                     </ul>
                 </div>
                 <div class="col-lg-4">
-
-                 
-
                 </div>
             </div>
-
         </div>
     </div>
 
