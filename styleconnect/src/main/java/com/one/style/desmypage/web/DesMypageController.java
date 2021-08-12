@@ -287,12 +287,14 @@ public class DesMypageController {
 	// 마이페이지/상담목록 관리페이지/상담수정페이지 - 상담 수정
 	@RequestMapping("desCourseUp.do")
 	public String desCourseUpdate(Model model,DesVO vo, MultipartHttpServletRequest request) {
-		System.out.println(request.getFiles("file").size());
-//		if() {
-//			System.out.println("111111111111");
-//			desMyDao.desFileUpdate(vo);
-//			fileservice.upload(request, "thum", vo.getId(),vo.getCourNo());
-//		}
+		List<MultipartFile> files = request.getFiles("file");
+		for (MultipartFile file : files) {
+			if(file.getOriginalFilename() != null && file.getOriginalFilename().length() != 0) {
+				System.out.println("111111111111");
+				desMyDao.desFileUpdate(vo);
+				fileservice.upload(request, "thum", vo.getId(),vo.getCourNo());
+			}
+		}
 		desMyDao.desCourseUpdate(vo);
 		return "redirect:desCourseUpdate.do?courNo="+vo.getCourNo();
 	}
