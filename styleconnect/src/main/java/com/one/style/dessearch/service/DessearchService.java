@@ -6,7 +6,7 @@ import com.one.style.dessearch.vo.DessearchVO;
 
 public interface DessearchService {
 	//전체디자이너 리스트  
-	List<DessearchVO> dessearchSelectList();
+	List<DessearchVO> dessearchList();
 	//디자이너 한명
 	DessearchVO dessearchSelect(DessearchVO vo);
 	List<DessearchVO> dessearchSelectReview(DessearchVO vo);

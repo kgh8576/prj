@@ -108,6 +108,9 @@ function selectList(){
                 </div>
                 <!-- // Page Title -->
                 <div class="row margin-top-45px">
+                <c:if test="${empty sche }">
+                	<h1>예약이 없습니다.</h1>
+                </c:if>
                  <c:forEach items="${sche }" var="vo">
                     <!-- Booking item -->
                     <div class="col-lg-6 margin-bottom-45px full-width">

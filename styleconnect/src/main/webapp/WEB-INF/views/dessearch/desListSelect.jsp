@@ -113,7 +113,8 @@
                           </ul>
 							</c:forEach>
                                 <div align="right">
-                                <a href="reviewList.do?desId=${review1.id }">>리뷰 더 보기 </a>
+                                <a href="reviewList.do?desId=${designer.id }"> > 리뷰 더 보기 </a>
+                                <input type="hidden" name="id" value="${designer.id }">
                                     </div>
                         </div>
                     </div>

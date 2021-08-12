@@ -160,12 +160,12 @@ function delfunc(fileUuid){
 	</main>
 	<div align="center">
 		<form method="post" action="desStyleUp.do" enctype="multipart/form-data">
-		<input type="hidden" name="did" value="${did }">
-		<input type="file" id="file" name="file" class="multi" />
-		<input type="submit">
-	</form>
+			<input type="hidden" name="did" value="${did }">
+			<input type="file" id="file" name="file" class="multi" multiple="multiple" />
+			<button type="submit">등록</button>
+		</form>
 	</div>
-	
+	<br/><br/><br/><br/><br/><br/>
 	<!-- COMMON SCRIPTS -->
 	<script
 		src="${pageContext.request.contextPath}/resources/reservationreso/js/common_scripts.min.js"></script>

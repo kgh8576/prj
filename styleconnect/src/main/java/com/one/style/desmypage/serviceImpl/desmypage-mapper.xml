@@ -10,10 +10,11 @@
 	</select>
 	<!-- 디자이너 선택 - 증명서파일 -->
 	<select id="selectDesCer" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
-		SELECT   F.FILE_UUID, F.FILE_NAME
-		FROM FILES F
-		WHERE  F.FILE_STATE= 'cer'
-		 	AND des_ID= #{id}
+		SELECT   F.FILE_UUID, F.FILE_NAME, d.id,  d.comments, f.file_state
+		FROM FILES F, designer d
+		WHERE  f.des_id = d.id
+     	and F.FILE_STATE= 'cer'
+		 	AND d.id= #{id}
 	</select>
 	<!-- 디자이너 선택 - 썸네일-->
 	<select id="selectDesThum" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
