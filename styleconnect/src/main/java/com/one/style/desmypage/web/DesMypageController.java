@@ -273,9 +273,13 @@ public class DesMypageController {
 	// 마이페이지/상담목록 관리페이지/상담생성 페이지 - 상담등록
 	@RequestMapping("desCourseInsert.do")
 	public String desCourseInsert(Model model, DesVO vo, MultipartHttpServletRequest request) {
+		List<MultipartFile> files = request.getFiles("file");
+		for (MultipartFile file : files) {
+			if(file.getOriginalFilename() != null && file.getOriginalFilename().length() != 0) {
+				fileservice.upload(request, "thum", vo.getId(), desMyDao.desCourSeq().getCourNo());
+			}
+		}
 		desMyDao.desCourseInsert(vo);
-		fileservice.upload(request, "thum", vo.getId(), desMyDao.desCourSeq().getCourNo());
-		
 		return "redirect:desCourse.do?id="+vo.getId();
 	}
 
