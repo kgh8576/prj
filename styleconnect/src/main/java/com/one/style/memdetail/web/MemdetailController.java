@@ -77,6 +77,15 @@ public class MemdetailController {
 		return "mymenu/confinish";
 		
 	}
+	//모든 상담 신청내역
+	@RequestMapping("/conallList.do")
+	public String conallList(Model model,ConHistoryVO cvo,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		cvo.setMemId(id);
+		model.addAttribute("conList",memdetailDao.conallList(cvo));
+		return "mymenu/allList";
+	}
 	//핸드폰번호 변경
 	@RequestMapping("/hpchange.do")
 	public String hpchange(HttpServletRequest request , MemberVO vo) {

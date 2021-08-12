@@ -12,6 +12,7 @@ public interface MemdetailService {
 	public void pwchange(MemberVO vo);
 	public List<ConHistoryVO> conhisList(ConHistoryVO vo);
 	public List<ConHistoryVO> conhisListend(ConHistoryVO vo);
+	public List<ConHistoryVO> conallList(ConHistoryVO vo);
 	public void memexit(MemberVO vo);
 	public String getCancleDate(ConHistoryVO vo);
 	public void reservationcancle(ConHistoryVO vo);

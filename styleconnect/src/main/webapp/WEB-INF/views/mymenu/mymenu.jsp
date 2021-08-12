@@ -246,13 +246,11 @@
 							<div class="col-md-6 margin-bottom-20px">
 								♥&nbsp;&nbsp;&nbsp;<button type="button" class="looksNotBtn" data-toggle="modal" data-target="#preferenceFrmModal">관심 분야 변경</button>
 							</div>
-							<div class="col-md-6"></div>
-							
-							
-							
-							
-							
-							
+							<div class="col-md-6 margin-bottom-20px">
+								<label><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-expressionless-fill" viewBox="0 0 16 16">
+								  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM4.5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm5 0h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm-5 4h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+								</svg></label>&nbsp;&nbsp;&nbsp;<a href="conallList.do">모든신청내역</a>
+							</div>							
 							<div class="col-md-6 margin-bottom-20px">
 								<label><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-expressionless-fill" viewBox="0 0 16 16">
 								  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM4.5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm5 0h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm-5 4h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>

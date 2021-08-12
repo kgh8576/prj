@@ -23,19 +23,21 @@
                           point, <!-- 적립금 -->
                           to_char(regday, 'YYYY-mm-dd') as regday<!-- 형식변경한 가입일 -->
 						from member
+						<if test="id != null and id != ''"> 
+						where member.id = #{id} <!-- 일반회원 ID로 서치할 시 추가 검색-->
+						</if>
   					)a ) b 
   			where b.rn between #{firstCnt} and #{lastCnt} <!-- 페이징 정보 -->
 		
 	</select>
 	
-	<!-- 일반 회원관리 페이지: 페이징 처리를 위한 멤버 테이블의 총 행수 반환-->
-	<select id="memberListTotalCountSelect" 
-			parameterType="com.one.style.mem.vo.MemberVO"
-			resultType="Integer">
-			
-		select count(*) from member 
 	
+	<!-- 일반회원 관리 페이지: 페이징 처리를 위한 디자이너 테이블의 총 행수 반환-->
+	<select id="memberListTotalCountSelect" 
+		resultType="Integer">
+		select count(*) from member
 	</select>
+	
 	
 	<!-- 일반회원 상담내역 수정 폼 모달: 한 명의 멤버의 상담내역을 반환. 1 페이지당 10건으로 페이징 처리함-->
 	<select id="memberConHistoryListSelect"
@@ -64,8 +66,11 @@
                       			and des_course.id = designer.id 
                       			and consulting_history.state = commcodedetail.code 
                       			<if test="state != null and state != ''"> 
-								and commcodedetail.codecontent = #{state} <!-- select 박스 선택시 추가 검색-->
-								</if>																																				
+								and commcodedetail.codecontent = #{state} <!-- select 박스로 상태 선택시 추가 검색-->
+								</if>
+								<if test="conNo != null and conNo != ''"> 
+								and consulting_history.con_no = #{conNo} <!-- 상담번호로 서치할 시 추가 검색-->
+								</if>																																					
                       			and consulting_history.mem_id=#{memId}
                     		order by con_no desc
              		)a 
@@ -74,12 +79,18 @@
 
 	</select>
 	
+	
 	<!-- 일반회원 상담내역 수정 폼 모달: 페이징 처리를 위한 컨설팅 히스토리 테이블의 총 행수 반환-->
 	<select id="memberConHistoryListTotalCountSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="Integer">
-		select count(*) from consulting_history where mem_id=#{memId}
+		select count(*) from consulting_history 
+			where mem_id=#{memId}
+		<if test="conNo != null and conNo != ''"> 
+			and consulting_history.con_no = #{conNo} <!-- 상담번호로 서치할 시 추가 검색-->
+		</if>
 	</select>
+	
 	
 	<!-- 일반회원 상담내역 수정 폼 모달: 입력값에 따른 업데이트-->
 	<update id="memberConHistoryUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
@@ -125,19 +136,19 @@
                   				comments
             			from designer, commcodedetail
             			where designer.state = commcodedetail.code
+            			<if test="id != null and id != ''"> 
+						and designer.id = #{id} <!-- 디자이너 ID로 서치할 시 추가 검색-->
+						</if>	
             			)a ) b
       		where b.rn between #{firstCnt} and #{lastCnt}
       		
 	</select>
 	
 	
-	<!-- 디자이너 관리 페이지: 페이징 처리를 위한 멤버 테이블의 총 행수 반환-->
+	<!-- 디자이너 관리 페이지: 페이징 처리를 위한 디자이너 테이블의 총 행수 반환-->
 	<select id="designerListTotalCountSelect" 
-			parameterType="com.one.style.des.vo.DesVO"
-			resultType="Integer">
-			
+		resultType="Integer">
 		select count(*) from designer
-	
 	</select>
 	
 	
@@ -169,7 +180,10 @@
                       			and consulting_history.state = commcodedetail.code 
                       			<if test="state != null and state != ''"> 
 								and commcodedetail.codecontent = #{state} <!-- select 박스 선택시 추가 검색-->
-								</if>																																				
+								</if>
+								<if test="conNo != null and conNo != ''"> 
+								and consulting_history.con_no = #{conNo} <!-- 상담번호로 서치할 시 추가 검색-->
+								</if>																																	
                       			and des_course.id=#{desId}
                     		order by con_no desc
              		)a 
@@ -183,7 +197,12 @@
 	<select id="designerConHistoryListTotalCountSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="Integer">
-		select count(*) from consulting_history, des_course where consulting_history.cour_no = des_course.cour_no and id = #{desId}
+		select count(*) from consulting_history, des_course 
+			where consulting_history.cour_no = des_course.cour_no 
+			and id = #{desId}
+		<if test="conNo != null and conNo != ''"> 
+			and consulting_history.con_no = #{conNo} <!-- 상담번호로 서치할 시 추가 검색-->
+		</if>
 	</select>
 	
 	
