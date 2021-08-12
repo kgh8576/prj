@@ -16,5 +16,6 @@ public interface MemdetailMapper {
 	public String getCancleDate(ConHistoryVO vo); 
 	public void reservationcancle(ConHistoryVO vo);
 	public String reviewyoumu(ReviewVO vo);
+	public List<ConHistoryVO> conallList(ConHistoryVO vo);
 	
 }

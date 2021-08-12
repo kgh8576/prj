@@ -19,7 +19,7 @@ public interface AdminService {
 	public List<DesVO> designerListSelect(DesVO vo);
 	public int designerListTotalCountSelect();
 	public List<ConHistoryVO> designerConHistoryListSelect(ConHistoryVO vo);
-	public int designerConHistoryListTotalCountSelect(ConHistoryVO vo);
+	public int designerConHistoryListTotalCountSelect(ConHistoryVO vo); 
 	public int designerConHistoryUpdate(ConHistoryVO vo);
 	public DesVO designerStateOneSelect(DesVO vo);
 	public List<FilesVO> designerCertificationFileListSelect(FilesVO vo);

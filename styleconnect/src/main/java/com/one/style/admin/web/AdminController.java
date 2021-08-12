@@ -44,6 +44,10 @@ public class AdminController {
 		
 		MemberVO vo = new MemberVO();
 		
+		//검색된 아이디가 있다면 사용
+		String searchedID = req.getParameter("searchedID");
+		vo.setId(searchedID);
+		
 		String page = req.getParameter("page");
 		int pageCnt = 0;
 		if( page == null || page == "") {
@@ -73,13 +77,16 @@ public class AdminController {
 	public HashMap<String, Object> memberConHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
 			ConHistoryVO vo = new ConHistoryVO();
 			vo.setMemId(req.getParameter("memId"));
-
-			String page = req.getParameter("page");
+			
+			if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
+				vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));	
+			}
+					
 			int pageCnt = 0;
-			if(page == null || page == "") {
-				pageCnt = 1;
+			if(req.getParameter("page") != null && req.getParameter("page") != "") {
+				pageCnt = Integer.parseInt(req.getParameter("page"));
 			} else {
-				pageCnt = Integer.parseInt(page);
+				pageCnt = 1;
 			}
 			
 			//5건씩 페이징 처리
@@ -90,12 +97,10 @@ public class AdminController {
 		    paging.setPageNo(pageCnt);
 		    paging.setPageSize(5);
 		    paging.setTotalCount(adminDao.memberConHistoryListTotalCountSelect(vo));
-			
-			List<ConHistoryVO> memberConHistoryList  = new ArrayList<ConHistoryVO>();
-			memberConHistoryList = adminDao.memberConHistoryListSelect(vo);	
+
 			
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("memberConHistoryList", memberConHistoryList);
+			map.put("memberConHistoryList", adminDao.memberConHistoryListSelect(vo));
 			map.put("paging", paging);
 			
 			return map;
@@ -139,8 +144,9 @@ public class AdminController {
 		
 		DesVO vo = new DesVO();
 		
-		String id = req.getParameter("id");
-		vo.setId(id);
+		//검색된 아이디가 있다면 사용
+		String searchedID = req.getParameter("searchedID");
+		vo.setId(searchedID);
 		
 		String page = req.getParameter("page");
 		
@@ -175,19 +181,16 @@ public class AdminController {
 		ConHistoryVO vo = new ConHistoryVO();
 		vo.setDesId(req.getParameter("desId"));
 
-		System.out.println(vo.getDesId());
-		
-		String page = req.getParameter("page");
-		
-		int pageCnt = 0;
-		
-		if( page == null || page == "") {
-			pageCnt = 1;
-		} else {
-			pageCnt = Integer.parseInt(page);
+		if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
+			vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));	
 		}
-		
-		System.out.println("pageCnt: " + pageCnt);
+				
+		int pageCnt = 0;
+		if(req.getParameter("page") != null && req.getParameter("page") != "") {
+			pageCnt = Integer.parseInt(req.getParameter("page"));
+		} else {
+			pageCnt = 1;
+		}
 		
 		//5건씩 페이징 처리
 		vo.setFirstCnt((pageCnt-1)*5+1);
