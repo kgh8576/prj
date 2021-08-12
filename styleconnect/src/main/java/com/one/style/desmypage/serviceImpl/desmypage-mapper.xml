@@ -58,12 +58,17 @@
 	
 	<!-- 상담한건선택 -->
 	<select id="desCourseSelect" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
-	SELECT DC.COUR_NO, DC.TITLE, DC.DETAIL, DC.PRICE, DC.ID, f.file_uuid, f.cour_no
+	SELECT  dc.cour_no , DC.TITLE, DC.DETAIL, DC.PRICE, DC.ID, f.file_uuid
 	FROM DES_COURSE DC
-	join files f
+	left join (
+           select cour_no , file_uuid
+           from files
+           where COUR_NO = #{courNo}
+           and file_state = 'thum'
+           )f
 	ON dc.COUR_NO = f.COUR_NO
-	WHERE dc.cour_no = #{courNo}
-	and f.file_state='thum'
+	WHERE dc.COUR_NO = #{courNo}
+	order by dc.cour_no
 	</select>
 	
 	<!-- 상담리스트 -->

@@ -17,8 +17,9 @@ function denyfun(conNo){
 		//디자이너 거절 코멘트
 		let deny = prompt('고객에서 전할 코맨트를 입력하세요','');
 		if(deny != ""){
-			$(comment).text(deny);
-		}else{
+			alert(deny);
+			
+		}else{	
 			$().text("코맨트를 입력하세요")
 		}
 		//예약상태취소로 변경
@@ -57,7 +58,7 @@ function denyfun(conNo){
               </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-                    <a class="nav-link" href="desWorkOpen.do?id=${my.id }">
+                    <a class="nav-link" href="desWorkOpen.do">
                 <i class="fa fa-fw fa-star"></i>
                 <span class="nav-link-text">스케쥴관리</span>
               </a>
