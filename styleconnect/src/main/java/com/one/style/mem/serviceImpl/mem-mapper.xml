@@ -49,4 +49,5 @@
 			set pw = #{pw}
 			where name = #{name} and hp = #{hp}
 	</update>
+	
 </mapper>

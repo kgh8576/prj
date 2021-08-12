@@ -17,6 +17,6 @@ public interface MemMapper {
 	public List<MemberVO> getUserIdByHpName(Map<String, String> map);
 	public int updateUserPwByHpName(Map<String, String> map);
 	public ConHistoryVO checkSchedule(ConHistoryVO vo);
-	
+	public MemberVO checkExistUserByIdHp(Map<String, String> map);
 	
 }

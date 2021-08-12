@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.one.style.crawldata.service.CrawlDataService;
 import com.one.style.crawldata.vo.CrawlDataVO;
 
-@RestController
+@Controller
 public class CrawlDataController {
 
 	@Autowired CrawlDataService crawlDao;
@@ -20,7 +20,7 @@ public class CrawlDataController {
 	@RequestMapping("crawl.do")
 	public String crawl(String gender){
 		crawlDao.start(gender);
-		return null;
+		return "크롤링 시작됨";
 	}
 	
 	@RequestMapping("getCrawlData.do")
@@ -29,5 +29,22 @@ public class CrawlDataController {
 		return crawlDao.getCrawlList(gender); 
 	}
 	
+	// 크롤링 중인지 검사
+	@RequestMapping("isCrawlRunning.do")
+	@ResponseBody
+	public boolean isCrawlRunning() {
+		return crawlDao.getRunning();
+	}
 	
+	// 크롤링 진행률 가져오기
+	@RequestMapping("getCrawlProgress.do")
+	@ResponseBody
+	public int getCrawlProgress() {
+		return crawlDao.getProgress();
+	}
+	
+	@RequestMapping("goCrawlTest.do")
+	public String goCrawlTest() {
+		return "main/crawlTest";
+	}
 }

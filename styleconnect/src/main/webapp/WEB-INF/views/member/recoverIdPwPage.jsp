@@ -55,6 +55,7 @@
 	var pw;
 	var searchTable;
 	var name;
+	var idCheck = false;
 	
 	function realhpcheck(){
 
@@ -80,6 +81,24 @@
 			error : function(err) {
 				console.log(err);
 				console.log("핸드폰번호 정규식 에러");
+			}
+		})
+	}
+	
+	function checkExistUserByIdHp(){
+		idCheck = false;
+		$.ajax({
+			url : 'checkExistUserByIdHp.do',
+			data : {	
+				hp : $('#hp').val(),
+				name : $('#name').val(),
+				searchTable : searchTable
+			},
+			success:function(result){
+				console.log(result);
+				if(result == 1){
+					idCheck = true;
+				}
 			}
 		})
 	}
@@ -113,39 +132,51 @@
 	}
 	
 	function hpcheckbtn() {
-		var button_joinus = $('#hpcheckbtn');
-		if ( $('#hp').val() == "" ) {
-			alert("핸드폰번호를 입력해주세요.");
-		} else {
-			$.ajax({
-				url : 'sendSMS.do',
-				data : {
-					hp : $('#hp').val()
-				},
-				type : 'post',
-				success : function(data) {
-					$('#hpcheck').focus();
-					button_joinus.disabled = true;
-					$('#chkNotice').html('인증번호가 전송되었습니다.').attr('color',
-							'#f82a2aa3');
-				},
-				error : function(err) {
-					console.log(err);
-					console.log("휴대폰 인증에러");
-				}
-			})
+		if(idCheck == true){
+			var button_joinus = $('#hpcheckbtn');
+			if ( $('#hp').val() == "" ) {
+				alert("핸드폰번호를 입력해주세요.");
+			} else {
+				$.ajax({
+					url : 'sendSMS.do',
+					data : {
+						hp : $('#hp').val()
+					},
+					type : 'post',
+					success : function(data) {
+						$('#hpcheck').focus();
+						button_joinus.disabled = true;
+						$('#chkNotice').html('인증번호가 전송되었습니다.').attr('color',
+								'#f82a2aa3');
+					},
+					error : function(err) {
+						console.log(err);
+						console.log("휴대폰 인증에러");
+					}
+				})
+			}
+		}else{
+			alert('존재하지 않는 사용자입니다. \n혹은 일반/디자이너 구분을 확인해주세요.');
+			$('#chkNotice').html('');
 		}
-	};
+	}
 	
 	function membershow() {
 		document.getElementById("memCheckedBar").style.display = 'block';
 		document.getElementById("desCheckedBar").style.display = 'none';
+		searchTable = 'member';
 	}
 	function desshow() {
 		document.getElementById("desCheckedBar").style.display = 'block';
 		document.getElementById("memCheckedBar").style.display = 'none';
+		searchTable = 'designer';
 	}
 	function getId(){
+		if (idCheck == false){
+			alert("핸드폰번호 인증을 해주세요.")
+			$('#chkNotice').html('');
+			return false;
+		}
 		if ( $('#hppass').value == "unChecked" ) {
 			alert("핸드폰번호 인증을 해주세요.");
 			$('#hp').focus();
@@ -155,12 +186,6 @@
 			alert("이름을 기재하세요.");
 			$('#name').focus();
 			return false;
-		}
-		
-		if ( document.getElementById("memCheckedBar").style.display == 'none' ){
-			searchTable = 'designer'; 
-		} else {
-			searchTable = 'member';
 		}
 		
 		$.ajax({
@@ -191,8 +216,6 @@
 		document.getElementById("updatePwDiv").style.display = 'block';
 	}
 	
-		
-	
 	//비밀번호 정규화
 	function sendpassword(){
 		$.ajax({
@@ -220,8 +243,15 @@
 		});
 	}
 	
-	//비밀번호 실시간체크
+	//document.ready 1. 비밀번호 실시간체크, 2. 타고 넘어온 url
 	$(function() {
+		var beforeLocation = document.location.href;
+		if(beforeLocation.includes('MEM')){
+			membershow();
+		}else if(beforeLocation.includes('DES')){
+			desshow();
+		}
+		
 		var password = $('input[type=password]');
 		var chkNotice = $('#chkNoticeP2');
 		var pswd = $('#pw');
@@ -289,7 +319,7 @@
 <body>
 
 
-<div class="container margin-bottom-200px" id="member" style="display: block;">
+<div class="container margin-bottom-200px" id="member" style="display: block; padding:7%;">
 	<!--======= log_in_page =======-->
 
 	<div id="log-in" class="site-form log-in-form box-shadow border-radius-10">
@@ -309,7 +339,7 @@
 				<div class="form-group label-floating">
 					<form action="" id="m_frm">
 					<label class="control-label">핸드폰 번호</label>
-					<input class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp" id="hp" min="11" maxlength="11" onblur="realhpcheck()">
+					<input class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp" id="hp" min="11" maxlength="11" onblur="realhpcheck()" onchange="checkExistUserByIdHp()">
 					<input style="width: 80%; display: flex; float: left;" class="form-control" placeholder="인증번호" type="text" name="hpcheck" id="hpcheck"
 						onchange="smsCheck()">
 					<input type="hidden" id="mhppass" name="hppass" value="unChecked">
@@ -320,49 +350,43 @@
 				<button type="button" onclick="getId()" class="btn btn-md btn-primary full-width">아이디 찾기</button>
 		</div>
 	</div>
+</div>
 	
-	
-	<div id="getIdDiv" class="site-form log-in-form box-shadow border-radius-10" style="display: none;">
-		<div class="form-output">
-				<div class="form-group label-floating">
-					<label class="control-label">조회된 아이디는</label><getId id="getId"></getId>
-				</div>
-				<button type="button" onclick="nextpage()" class="btn btn-md btn-primary full-width">비밀번호 찾기</button>
+<div id="getIdDiv" class="site-form log-in-form box-shadow border-radius-10" style="display: none;">
+	<div class="form-output">
+		<div class="form-group label-floating">
+			<strong>고객님의 아이디는 <b><getId id="getId"></getId></b></strong>	
 		</div>
+		<button type="button" onclick="nextpage()" class="btn btn-md btn-primary full-width">비밀번호 찾기</button>
 	</div>
+</div>
 	
 
-	<div id="updatePwDiv" class="site-form log-in-form box-shadow border-radius-10" style="display: none;">
-		<div class="form-output">
-				<div class="form-group label-floating">
-					<label class="control-label">Password</label> <input
-						class="form-control" placeholder="비밀번호 입력" type="password" id="pw" onchange="sendpassword()" name="pw">
-						<input type="hidden" id="passwordpass" name="passwordpass" value="unChecked">
-						<p>'숫자', '문자' 무조건 1개 이상, '최소 8자에서 최대 20자' 허용 <br>(특수문자는 정의된 특수문자만 사용 가능)</p>
-						<div style="text-align: left">
-					<font id="chkNoticeP" size="2"></font>
-					
-				</div>
-				</div>
-				<div class="form-group label-floating">
-					<label class="control-label">Password Check</label> <input
-						class="form-control" placeholder="비밀번호 확인" type="password"
-						id="pw2" name="pw2">
-						<input type="hidden" id="passwordCheck" name="passwordCheck" value="unChecked">
-				</div>
-				<div style="text-align: left">
-					<font id="chkNoticeP2" size="2"></font>
-				<button type="button" onclick="updatePw()" class="btn btn-md btn-primary full-width">비밀번호 변경</button>
-		</div>
+<div id="updatePwDiv" class="site-form log-in-form box-shadow border-radius-10" style="display: none;margin-bottom: 200px;">
+	<div class="form-output">
+			<div class="form-group label-floating">
+				<label class="control-label">Password</label> <input class="form-control" placeholder="비밀번호 입력" type="password" id="pw" onchange="sendpassword()" name="pw">
+					<input type="hidden" id="passwordpass" name="passwordpass" value="unChecked">
+					<p>'숫자', '문자' 무조건 1개 이상, '최소 8자에서 최대 20자' 허용 <br>(특수문자는 정의된 특수문자만 사용 가능)</p>
+					<div style="text-align: left">
+				<font id="chkNoticeP" size="2"></font>
+				
+			</div>
+			</div>
+			<div class="form-group label-floating">
+				<label class="control-label">Password Check</label> <input class="form-control" placeholder="비밀번호 확인" type="password" id="pw2" name="pw2">
+					<input type="hidden" id="passwordCheck" name="passwordCheck" value="unChecked">
+			</div>
+			<div style="text-align: left">
+				<font id="chkNoticeP2" size="2"></font>
+			<button type="button" onclick="updatePw()" class="btn btn-md btn-primary full-width">비밀번호 변경</button>
 	</div>
+</div>
 
 	
 
 			
 </div>
-
-
-
 
 </body>
 </html>

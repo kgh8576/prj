@@ -29,6 +29,9 @@ import java.util.Set;
 @Repository("crawlDao")
 public class CrawlDataServiceImpl implements CrawlDataService{
 	
+	private int progress;
+	private boolean running;
+
 	@Autowired CrawlDataServiceMap map;
 
     //WebDriver
@@ -52,7 +55,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         //Driver SetUp
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-gpu","-no-sandbox");
+        chromeOptions.addArguments("--disable-gpu","-no-sandbox","--headless");
         chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
         chromeOptions.addArguments("lang=ko_KR");
         driver = new ChromeDriver(chromeOptions);
@@ -84,6 +87,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     public void runCrawl() {
     	String crawlText = "";
     	try {
+    		setRunning(true);
         	WebElement mainDiv = driver.findElement(By.xpath("/html/body/div[1]/div/div/section/main/article/div[2]/div/div[1]/div[1]/a/div")); // 페이지에서 클릭해줄 div를 가져오는 과정
         	Thread.sleep(500);
     		mainDiv.click();
@@ -94,13 +98,16 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     			crawlText += driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/article/div[3]/div[1]")).getText();
     			Thread.sleep(500);
     			driver.findElement(By.xpath("/html/body/div[6]/div[1]/div/div/a[2]")).click(); // 다음 게시글 버튼
-				Thread.sleep(5000);	
+				Thread.sleep(5000);
+				setProgress(i*2);
     		}
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
         	driver.close();
         	splitTest(crawlText); // 데이터 자르고 DB insert 하는 함수
+        	setProgress(0);
+        	setRunning(false);
         }
     	
     }
@@ -149,8 +156,6 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 			if (i == 3) vo.setFour(list_entries.get(i).getKey());
 			if (i == 4) vo.setFive(list_entries.get(i).getKey());
 		}
-		System.out.println(vo.getOne());
-		System.out.println(vo.getFive());
 		insertCrawl(vo);
 	}
 
@@ -163,6 +168,28 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 	public CrawlDataVO getCrawlList(String gender) {
 		return map.getCrawlList(gender);
 	}
+
+	@Override
+	public int getProgress() {
+		return progress;
+	}
+
+	@Override
+	public void setProgress(int progress) {
+		this.progress = progress;
+	}
+
+	@Override
+	public boolean getRunning() {
+		return running;
+	}
+
+	@Override
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
+	
 	
     
 }
