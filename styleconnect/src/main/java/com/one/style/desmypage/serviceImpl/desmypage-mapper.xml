@@ -68,13 +68,17 @@
 	
 	<!-- 상담리스트 -->
 	<select id="desCourseList" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
-	SELECT DC.COUR_NO, DC.TITLE, DC.DETAIL, DC.PRICE, DC.ID, f.file_uuid, f.cour_no
+	SELECT  dc.cour_no , DC.TITLE, DC.DETAIL, DC.PRICE, DC.ID, f.file_uuid
 	FROM DES_COURSE DC
-	join files f
+	left join (
+           select cour_no , file_uuid
+           from files
+           where des_id = #{id}
+           and file_state = 'thum'
+           )f
 	ON dc.COUR_NO = f.COUR_NO
 	WHERE dc.id = #{id}
-	and f.file_state='thum'
-	order by f.cour_no
+	order by dc.cour_no
 	</select>
 	
 	<!-- 현재상담 -->
@@ -148,5 +152,8 @@
 		WHERE  FILE_STATE= 'thum'
 		AND COUR_NO= #{courNo}
 	</select>
-
+	<!-- 회원탈퇴 -->
+	<delete id="desexit" parameterType="com.one.style.des.vo.DesVO">
+		DELETE FROM DESIGNER WHERE ID = #{id}
+	</delete>
 </mapper>

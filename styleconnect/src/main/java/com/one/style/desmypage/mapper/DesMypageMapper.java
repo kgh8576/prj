@@ -17,6 +17,8 @@ public interface DesMypageMapper {
 	public DesVO selectDesCer(DesVO vo);
 	public List<DesVO> selectDesThum();
 	public void pwchange(DesVO vo);
+	public void desexit(DesVO vo);
+	
 	//상담관리
 	public void desCourseInsert(DesVO vo);
 	public int desCourseUpdate(DesVO vo);
