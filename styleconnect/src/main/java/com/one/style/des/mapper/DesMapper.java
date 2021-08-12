@@ -14,6 +14,6 @@ public interface DesMapper {
 	public void designerInsert(DesVO vo);
 	public DesVO designerUpdate(DesVO vo);
 	public DesVO designerDelete(DesVO vo);
-	public DesVO designerinsertcheck(DesVO vo);
+	public int designerinsertcheck(DesVO vo);
 	
 }

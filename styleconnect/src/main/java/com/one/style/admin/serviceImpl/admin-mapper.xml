@@ -3,9 +3,9 @@
 <mapper
 	namespace="com.one.style.admin.mapper.AdminMapper">
 
-	 <!-- 일반회원 관리 -->
+<!-- 일반회원 관리 -->
 	 
-	 <!-- 관리자 일반 회원관리 페이지: 멤버 리스트를 반환. 1 페이지당 10건으로 페이징 처리함-->
+	 <!-- 일반 회원관리 페이지: 멤버 리스트를 반환. 1 페이지당 10건으로 페이징 처리함-->
 	<select id="memberListSelect"
 		parameterType="com.one.style.mem.vo.MemberVO"
 		resultType="com.one.style.mem.vo.MemberVO">
@@ -28,7 +28,7 @@
 		
 	</select>
 	
-	<!-- 관리자 일반 회원관리 페이지: 페이징 처리를 위한 멤버 테이블의 총 행수 반환-->
+	<!-- 일반 회원관리 페이지: 페이징 처리를 위한 멤버 테이블의 총 행수 반환-->
 	<select id="memberListTotalCountSelect" 
 			parameterType="com.one.style.mem.vo.MemberVO"
 			resultType="Integer">
@@ -37,8 +37,7 @@
 	
 	</select>
 	
-	
-	<!-- 관리자 일반회원 상담내역 수정 모달: 한 명의 멤버의 상담내역을 반환. 1 페이지당 10건으로 페이징 처리함-->
+	<!-- 일반회원 상담내역 수정 폼 모달: 한 명의 멤버의 상담내역을 반환. 1 페이지당 10건으로 페이징 처리함-->
 	<select id="memberConHistoryListSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
@@ -75,24 +74,29 @@
 
 	</select>
 	
-	<!-- 관리자 일반회원 상담내역 수정 모달: 페이징 처리를 위한 컨설팅 히스토리 테이블의 총 행수 반환-->
+	<!-- 일반회원 상담내역 수정 폼 모달: 페이징 처리를 위한 컨설팅 히스토리 테이블의 총 행수 반환-->
 	<select id="memberConHistoryListTotalCountSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="Integer">
 		select count(*) from consulting_history where mem_id=#{memId}
 	</select>
 	
+	<!-- 일반회원 상담내역 수정 폼 모달: 입력값에 따른 업데이트-->
 	<update id="memberConHistoryUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		update consulting_history set
 			 	des_attend = #{desAttend}, 
 				mem_attend = #{memAttend}   
 		where con_no =#{conNo}
 	</update>
+<!-- 일반회원 관리 끝-->	
 	
 	
-	<!-- 디자이너 관리 -->
 	
-	<!-- 관리자 디자이너 회원관리 페이지: 디자이너 리스트를 반환. 1 페이지당 10건으로 페이징 처리함-->
+	
+	
+<!-- 디자이너 관리 -->
+	
+	<!-- 디자이너 회원 관리 페이지: 디자이너 리스트를 반환. 1 페이지당 10건으로 페이징 처리함-->
 	<select id="designerListSelect"
 		parameterType="com.one.style.des.vo.DesVO"
 		resultType="com.one.style.des.vo.DesVO">
@@ -124,44 +128,10 @@
             			)a ) b
       		where b.rn between #{firstCnt} and #{lastCnt}
       		
-     <!-- 
-     수정해서 재사용 
-     		select b.* 
-  			from( 
-       			select rownum rn, a.* 
-        			from(
-          				select id,
-                  				pw,
-                  				name,
-                  				gender,
-                  				to_char(birth, 'YYYY-MM-DD') as birth,
-                  				REGEXP_REPLACE(hp, '(.{3})(.+)(.{4})', '\1-\2-\3') as hp,
-                  				location, 
-                  				career,
-                  				major_gender,
-                  				makeup_yn,
-                  				cut_yn,
-                  				perm_yn,
-                  				dye_yn,
-                  				major,
-                  				point,
-                  				codecontent as state, 
-                  				to_char(regday,'YYYY-MM-DD') as regday,
-                  				comments,
-                      			file_no,
-                      			file_name,
-                      			file_uuid,
-                      			file_state,
-                      			file_regdate
-            			from designer, commcodedetail, files
-            			where designer.state = commcodedetail.code
-                			and designer.id = files.des_id(+)
-            			)a ) b
-      		where b.rn between #{firstCnt} and #{lastCnt}
-     -->
 	</select>
 	
-	<!-- 관리자 디자이너 관리 페이지: 페이징 처리를 위한 멤버 테이블의 총 행수 반환-->
+	
+	<!-- 디자이너 관리 페이지: 페이징 처리를 위한 멤버 테이블의 총 행수 반환-->
 	<select id="designerListTotalCountSelect" 
 			parameterType="com.one.style.des.vo.DesVO"
 			resultType="Integer">
@@ -171,7 +141,7 @@
 	</select>
 	
 	
-	<!-- 관리자 디자이너 회원 상담내역 수정 모달: 한 명의 디자이너의 상담 내역 리스트 반환, 1 페이지당 10건으로 페이징 처리함-->
+	<!-- 디자이너 회원 상담내역 수정 폼 모달: 한 명의 디자이너의 상담 내역 리스트 반환, 1 페이지당 10건으로 페이징 처리함-->
 	<select id="designerConHistoryListSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
@@ -206,15 +176,18 @@
           		) b
   			where b.rn between #{firstCnt} and #{lastCnt}
 		
-
 	</select>
 	
+	
+	<!-- 디자이너 상담내역 수정 폼 모달: 페이징 처리를 위한 컨설팅 히스토리 테이블의 총 행수 반환-->
 	<select id="designerConHistoryListTotalCountSelect"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="Integer">
 		select count(*) from consulting_history, des_course where consulting_history.cour_no = des_course.cour_no and id = #{desId}
 	</select>
 	
+	
+	<!-- 디자이너 상담내역 수정 폼 모달: 입력 값에 따른 업데이트-->
 	<update id="designerConHistoryUpdate" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 		update consulting_history set
 			 	des_attend = #{desAttend}, 
@@ -222,6 +195,7 @@
 		where con_no =#{conNo}
 	</update>
 	
+	<!-- 디자이너 상태 수정을 위한 폼 모달: 한명의 디자이너에 대해 상태를 포함한 정보 반환 -->
 	<select id="designerStateOneSelect" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
 		select id,
                pw,
@@ -246,6 +220,8 @@
             	and id=#{id}
 	</select>
 	
+	
+	<!-- 디자이너 상태 수정을 위한 폼 모달: 한명의 디자이너에 대한 파일 정보 반환-->
 	<select id="designerCertificationFileListSelect" parameterType="com.one.style.files.vo.FilesVO" resultType="com.one.style.files.vo.FilesVO">
 		select file_name, 
         		file_uuid,
@@ -255,6 +231,8 @@
     			and file_state = 'cer'
 	</select>
 	
+	
+	<!-- 디자이너 상태 수정을 위한 폼 모달: 입력값에 따른 업데이트-->
 	<update id="designerStateUpdate" parameterType="com.one.style.des.vo.DesVO">
 		update designer set state = (
                             select code 
@@ -263,5 +241,6 @@
                     comments = #{comments}
           where id = #{id}
 	</update>
+<!-- 디자이너 관리 끝-->
 	
 </mapper>
