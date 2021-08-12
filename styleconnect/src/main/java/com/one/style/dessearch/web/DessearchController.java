@@ -56,8 +56,12 @@ public class DessearchController {
 		session.setAttribute("searchkeyword", vo.getSearch());
 	return("dessearch/searchResult");
 	}
-	
-	
+	//전체 디자이너 목록
+	@RequestMapping("dessearchList.do")
+	public String dessearchSelectList(Model model) {
+		model.addAttribute("designer",dao.dessearchList());
+		return("dessearch/desList");
+	}
 	//컷 디자이너 목록
 	@RequestMapping("cutList.do")
 	public String cutList(Model model, HttpServletRequest request) {		

@@ -14,7 +14,7 @@ public interface MemService {
 	public void memberInsert(MemberVO vo);
 	public MemberVO memberUpdate(MemberVO vo);
 	public MemberVO memberDelete(MemberVO vo);
-	public boolean insertcheck(MemberVO vo);
+	public int insertcheck(MemberVO vo);
 	public String getUserIdByHpName(Map<String, String> map);
 	public int updateUserPwByHpName(Map<String, String> map);
 	public boolean checkSchedule(ConHistoryVO vo);

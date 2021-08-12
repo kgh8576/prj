@@ -63,18 +63,18 @@
 							<div class="col-6 wow fadeInUp" data-wow-delay="0.4s">
 								<a href="makeupList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
 								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
-									<div class="icon margin-bottom-15px">
-										<img src="assets/img/icon/categorie-3.png" alt="">
+									<div class="icon margin-bottom-15px opacity-7">
+										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/makeup.png" alt="">
 									</div>
 										메이크업 전문
 									</div>
 								</a>
 							</div>
 							<div class="col-6 wow fadeInUp" data-wow-delay="0.6s">
-								<a href="allList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
+								<a href="dessearchList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
 								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
-									<div class="icon margin-bottom-15px opacity-7">
-										<img src="assets/img/icon/categorie-4.png" alt="">
+										<div class="icon margin-bottom-15px opacity-7">
+										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/allList.png" alt="">
 									</div>
 										전체보기
 									</div>

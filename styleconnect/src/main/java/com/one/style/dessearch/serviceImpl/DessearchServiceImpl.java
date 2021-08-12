@@ -17,9 +17,9 @@ public class DessearchServiceImpl implements DessearchService {
 	SqlSession sqlSession;
 
 	@Override
-	public List<DessearchVO> dessearchSelectList() {
+	public List<DessearchVO> dessearchList() {
 		// 전체디자이너 리스트
-		return sqlSession.selectList("dessearchSelectList");
+		return sqlSession.selectList("dessearchList");
 	}
 
 	@Override

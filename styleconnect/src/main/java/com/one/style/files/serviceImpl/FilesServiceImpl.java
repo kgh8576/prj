@@ -34,7 +34,7 @@ public class FilesServiceImpl implements FilesService {
 			dir.mkdirs();
 		}
 		List<MultipartFile> files = request.getFiles("file"); // 업로드된 파일정보 수집(2개 - file1,file2)
-		
+		System.out.println(files.size());
 		int fileLoop = 0;
 		String uploadFileName;
 		MultipartFile mFile = null;
@@ -45,11 +45,10 @@ public class FilesServiceImpl implements FilesService {
 		ArrayList<String> list = new ArrayList<String>();
 		for (MultipartFile file : files)  {
 			fileLoop++;
-
-
 			orgFileName = file.getOriginalFilename();
-			String extension = orgFileName.substring(orgFileName.lastIndexOf("."),orgFileName.length());
+			
 			if (orgFileName != null && orgFileName.length() != 0) { // sysFileName 생성
+				String extension = orgFileName.substring(orgFileName.lastIndexOf("."),orgFileName.length());
 				System.out.println("if문 진입");
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
 				Calendar calendar = Calendar.getInstance();

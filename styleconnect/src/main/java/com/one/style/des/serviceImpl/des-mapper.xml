@@ -7,8 +7,14 @@
 		SELECT * FROM DESIGNER WHERE ID = #{id}
 	</select>
 	<!-- 회원가입 아이디 중복체크 -->
-	<select id="designerinsertcheck" parameterType="com.one.style.des.vo.DesVO" resultType="com.one.style.des.vo.DesVO">
-		SELECT * FROM DESIGNER WHERE ID = #{id}
+	<select id="designerinsertcheck" parameterType="com.one.style.des.vo.DesVO" resultType="int">
+		 <![CDATA[
+	   	 select count(rownum) as count
+			from designer d, member m
+				where m.id <> d.id
+				and m.id = #{id} 
+				or d.id = #{id}
+  ]]>
 	</select>
 	<insert id="designerInsert"><!-- #{cergroupno} -->
 		INSERT INTO DESIGNER VALUES

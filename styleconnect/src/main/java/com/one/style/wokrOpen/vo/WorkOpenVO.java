@@ -20,6 +20,7 @@ public class WorkOpenVO {
 	private String searchDate;
 	private String closeTime;
 	private String time;
+	private String desId;
 	
 	
 	

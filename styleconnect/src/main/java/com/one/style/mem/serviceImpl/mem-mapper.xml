@@ -5,20 +5,32 @@
 	<select id="memList" resultType="com.one.style.mem.vo.MemberVO">
 		select * from member
 	</select>
-	<select id="login" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
+	<select id="login" parameterType="com.one.style.mem.vo.MemberVO"
+		resultType="com.one.style.mem.vo.MemberVO">
 		SELECT * FROM MEMBER WHERE ID = #{id}
 	</select>
-	
-	<select id="insertCheck" parameterType="com.one.style.mem.vo.MemberVO" resultType="com.one.style.mem.vo.MemberVO">
-		SELECT ID FROM MEMBER WHERE ID = #{id}
+
+	<select id="insertCheck"
+		parameterType="com.one.style.mem.vo.MemberVO" resultType="int">
+	   	  <![CDATA[
+	   	 select count(rownum) as count
+			from designer d, member m
+				where m.id <> d.id
+				and m.id = #{id} 
+				or d.id = #{id}
+  ]]>
 	</select>
-	
-	<insert id="memberInsert" parameterType="com.one.style.mem.vo.MemberVO">
-		INSERT INTO MEMBER VALUES(#{id},#{pw},#{name},#{hp},#{gender},to_date(#{birth},'YYYY/MM/DD'),0,sysdate)
+
+	<insert id="memberInsert"
+		parameterType="com.one.style.mem.vo.MemberVO">
+		INSERT INTO MEMBER
+		VALUES(#{id},#{pw},#{name},#{hp},#{gender},to_date(#{birth},'YYYY/MM/DD'),0,sysdate)
 	</insert>
-	
+
 	<!-- 로그인시 스케쥴러 알림 -->
-	<select id="checkSchedule" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
+	<select id="checkSchedule"
+		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
+		resultType="com.one.style.conhistory.vo.ConHistoryVO">
    	  <![CDATA[
    	 select a.* from 
       (select con_no,to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,state FROM CONSULTING_HISTORY where mem_id = #{memId} and state='ccode002' ORDER BY 2 ASC) a
@@ -26,19 +38,21 @@
     and (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60 < 10
     ]]>
 	</select>
-	
-	<!-- rownum = 1 주어서 한 행만 리턴될텐데도 여러행이 리턴되었다면서 단일 VO로 받아지지가 않음... 잘 모르지만 List<MemberVO>로 해결 -->
-	<select id="getUserIdByHpName" parameterType="hashMap" resultType="com.one.style.mem.vo.MemberVO">
+
+	<!-- rownum = 1 주어서 한 행만 리턴될텐데도 여러행이 리턴되었다면서 단일 VO로 받아지지가 않음... 잘 모르지만 List<MemberVO>로 
+		해결 -->
+	<select id="getUserIdByHpName" parameterType="hashMap"
+		resultType="com.one.style.mem.vo.MemberVO">
 		<if test='searchTable == "designer"'>
 			select * from designer
 		</if>
 		<if test='searchTable == "member"'>
 			select * from member
 		</if>
-			where hp = #{hp} and name = #{name}
-			and rownum = 1
+		where hp = #{hp} and name = #{name}
+		and rownum = 1
 	</select>
-	
+
 	<update id="updateUserPwByHpName" parameterType="hashMap">
 		<if test='searchTable == "designer"'>
 			update designer
@@ -46,8 +60,8 @@
 		<if test='searchTable == "member"'>
 			update member
 		</if>
-			set pw = #{pw}
-			where name = #{name} and hp = #{hp}
+		set pw = #{pw}
+		where name = #{name} and hp = #{hp}
 	</update>
 	
 </mapper>
