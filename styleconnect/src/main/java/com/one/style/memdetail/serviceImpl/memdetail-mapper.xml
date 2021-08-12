@@ -12,6 +12,33 @@
 		parameterType="com.one.style.mem.vo.MemberVO">
 		UPDATE MEMBER SET PW = #{pw} WHERE ID = #{id}
 	</update>
+	<!-- 모든상담내역 -->
+	<select id="conallList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
+	SELECT
+
+		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
+		a.time,a.state,a.price,
+		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
+		a.con_no,
+
+		b.code,b.CODECONTENT,
+
+		c.title,c.detail,
+
+		d.name AS desName,d.career,d.major,d.id
+
+		FROM
+		CONSULTING_HISTORY a, COMMCODEDETAIL b ,
+		DES_COURSE c, DESIGNER d
+
+		WHERE a.state = b.code
+		AND c.cour_no =
+		a.cour_no
+		AND d.id = c.id
+		AND MEM_ID = #{memId}
+
+		ORDER BY LASTST_DATE desc
+	</select>
 	<!-- 가장가까운예약목록 출력 -->
 	<select id="conhisList"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
