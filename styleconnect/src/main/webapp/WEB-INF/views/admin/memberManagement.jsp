@@ -106,11 +106,11 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 				//1. 태그 생성
 			var memberConHistoryUpdateFormCode ='';
 
-			//코드 추후 수정 한다면: 
-			//form을 list size만큼 생성하지 않고 
-			//1. td와 select box에 인덱스 이용한 아이디를 주고 버튼 눌렀을 때 매개변수로 인덱스 값을 넘김
-			//2. 아이디로 3개의 value값(conNo, desAttend, memAttend) 찾아서
-			//3. ajax로 value값을 data로 생성해서 POST로 넘김
+					//코드 추후 수정 한다면: 
+					//form을 list size만큼 생성하지 않고 
+					//1. td와 select box에 인덱스 이용한 아이디를 주고 버튼 눌렀을 때 매개변수로 인덱스 값을 넘김
+					//2. 아이디로 3개의 value값(conNo, desAttend, memAttend) 찾아서
+					//3. ajax로 value값을 data로 생성해서 POST로 넘김
 			for(var i = 0; i < memberConHistoryList.length; i++){
 				memberConHistoryUpdateFormCode += '<form id="member-conHistory-update-form' + i + '"' + 'method="POST">'
 													+ '<input type="hidden" id="consulting-no' + i + '"' + 'name="conNo" value="' + memberConHistoryList[i].conNo + '">'//conNo 히든
@@ -119,11 +119,12 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 													+ '</form>';
 			}
 			
-			<!-- 검색창 -->
+					//검색창
 			memberConHistoryUpdateFormCode += '<input type="text" id="consulting-history-number-search-box" placeholder="상담번호 검색"></input>';
 			memberConHistoryUpdateFormCode += '<button type="button" onclick="conHistoryNoSearch(' + "'" + id + "'" + ')">검색</button>';
-			<!-- 검색창 -->
+					//검색창 끝
 			
+					//테이블
 			memberConHistoryUpdateFormCode += '<table>';//
 			memberConHistoryUpdateFormCode += '<tr>'//
 													+'<td>상담번호</td>'//
@@ -191,8 +192,8 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 			}
 												
 			memberConHistoryUpdateFormCode += '</table>';//
-				
-			//페이지 네비게이션
+					//테이블 끝
+					//페이지 네비게이션
 			memberConHistoryUpdateFormCode += '<div class="pagination">'//
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'//
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'//
@@ -211,13 +212,13 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'//
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'//
 												+ '</div>';//
+				//페이지 네비게이션 끝
 			//1. 태그 생성 끝
 				
 				//2. 태그 삽입
 			$('#member-conHistory-update-form-target').html(memberConHistoryUpdateFormCode);
 				//2. 태그 삽입 끝
 				
-			//!!!!!페이징 추가!!!!!
 		}
 	});
 }
@@ -239,7 +240,7 @@ function memberConHistoryUpdate(index) {
 		type : "POST",
 		data : formDataQueryString,
 		success : function(result) {
-			console.log(result.message);
+			window.alert(result.message);
 		}
 	});
 }

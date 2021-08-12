@@ -106,11 +106,13 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 				//1. 태그 생성
 			var designerConHistoryUpdateFormCode ='';
 
-			//코드 비효율적임. 추후 수정 시: 
-			//form을 list size만큼 생성하지 않고 
-			//1. 버튼 눌렀을 때 매개변수로 인덱스 값을 넘기고
-			//2. 넘긴 인덱스로 3개의 value값(conNo, desAttend, memAttend) 찾아서
-			//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
+					//코드 비효율적임. 추후 수정 시: 
+					//form을 list size만큼 생성하지 않고 
+					//1. 버튼 눌렀을 때 매개변수로 인덱스 값을 넘기고
+					//2. 넘긴 인덱스로 3개의 value값(conNo, desAttend, memAttend) 찾아서
+					//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
+					
+					//폼 데이터를 만들기 위한 폼
 			for(var i = 0; i < designerConHistoryList.length; i++){
 				designerConHistoryUpdateFormCode += '<form id="designer-conHistory-update-form' + i + '"' + 'method="POST">'
 													+ '<input type="hidden" id="consulting-no' + i + '"' + 'name="conNo" value="' + designerConHistoryList[i].conNo + '">'//conNo 히든
@@ -118,13 +120,14 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 													+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend" value="' + designerConHistoryList[i].memAttend + '">'//memAttend 히든
 													+ '</form>';
 			}
+					//폼 데이터를 만들기 위한 폼 끝
 			
-			<!-- 검색창 -->
+					//검색창
 			designerConHistoryUpdateFormCode += '<input type="text" id="consulting-history-number-search-box" placeholder="상담번호 검색"></input>';
 			designerConHistoryUpdateFormCode += '<button type="button" onclick="conHistoryNoSearch(' + "'" + id + "'" + ')">검색</button>';
-			<!-- 검색창 -->
+					//검색창 끝
 			
-			
+					//테이블
 			designerConHistoryUpdateFormCode += '<table>';//
 			designerConHistoryUpdateFormCode += '<tr>'//
 													+'<td>상담번호</td>'//
@@ -153,7 +156,7 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 													+ '<td>' + designerConHistoryList[i].detail + '</td>'//
 													+ '<td>' + designerConHistoryList[i].desComment + '</td>'//
 													+ '<td>' + designerConHistoryList[i].memComment + '</td>';//
-				//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
+						//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
 				if (designerConHistoryList[i].desAttend == "Y") {
 					designerConHistoryUpdateFormCode += '<td>'//
 														+ '<select id="designer-attend-select-box' + i + '"' + 'onChange="getSelectedDesignerAttendValue('+ i + ');">'//
@@ -169,7 +172,7 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 														+ '</select>'// 
 														+ '</td>';//
 				}
-				//조건에 따라 일반회원 참여 여부 셀렉트 박스 코드 추가
+						//조건에 따라 일반회원 참여 여부 셀렉트 박스 코드 추가
 				if (designerConHistoryList[i].memAttend == "Y") {
 					designerConHistoryUpdateFormCode += '<td>'// 
 														+ '<select id="member-attend-select-box' + i + '"' + ' onChange="getSelectedMemberAttendValue('+ i + ');">'// 
@@ -192,9 +195,9 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 			}
 												
 			designerConHistoryUpdateFormCode += '</table>';
-					
+					//테이블 끝
 			
-			//모달의 페이지 네비게이션
+					//페이지 네비게이션
 			designerConHistoryUpdateFormCode += '<div class="pagination">'//
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'//
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'//
@@ -212,7 +215,8 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 			designerConHistoryUpdateFormCode += '</span>'//
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'//
 												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'//
-												+ '</div>';//		
+												+ '</div>';//
+					//페이지 네비게이션 끝
 							
 				//1. 태그 생성 끝			
 				//2. 태그 삽입
@@ -242,7 +246,7 @@ function designerConHistoryUpdate(index) {
 		type : "POST",
 		data : formDataQueryString,
 		success : function(result) {
-			console.log(result.message);
+			window.alert(result.message);
 		}
 	});
 }
@@ -405,7 +409,7 @@ function designerStateUpdate(id) {
 			"comments" : comments
 		},
 		success : function(result) {
-			console.log(result.message);
+			window.alert(result.message);
 		}
 	});
 }
