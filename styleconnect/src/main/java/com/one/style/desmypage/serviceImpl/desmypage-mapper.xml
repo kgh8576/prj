@@ -52,7 +52,7 @@
 	
 	<!-- 상담수정 -->
 	<update id="desCourseUpdate">
-	UPDATE DES_COURSE SET title=#{title},detail=#{detail},price=#{price}
+	UPDATE DES_COURSE SET title=#{title},detail=#{detail},price=#{price} 
 	WHERE cour_no=#{courNo}
 	</update>
 	
@@ -141,5 +141,12 @@
 	AND des_ID= #{id}
 	</select>
 
+	<!-- 디자이너 선택 - 썸네일-->
+	<select id="selectCourThum" parameterType="com.one.style.des.vo.DesVO" resultType="String">
+		SELECT FILE_UUID
+		FROM FILES 
+		WHERE  FILE_STATE= 'thum'
+		AND COUR_NO= #{courNo}
+	</select>
 
 </mapper>
