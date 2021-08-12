@@ -93,7 +93,7 @@
 	
 	<!-- 예약내역 -->
 	<select id="desScheList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO" >
-	  SELECT 
+	SELECT 
     a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date, a.time,a.state,a.price,
 		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
 		a.con_no,a.mem_comment, a.mem_id,
@@ -105,6 +105,9 @@
 		CONSULTING_HISTORY a, COMMCODEDETAIL b , 
 		DES_COURSE c, DESIGNER d, member e
 	WHERE a.state = b.code
+	<if test="state != '' ">
+	AND a.state = #{state}
+	</if>
 	AND c.cour_no = a.cour_no
 	AND d.id = c.id
 	and a.mem_id = e.id
@@ -129,7 +132,7 @@
 	<!-- 예약내역 - 예약상태변경(거부)  -->
 	<update id="desDeny" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 	UPDATE CONSULTING_HISTORY 
-	SET STATE ='ccode003' , des_comment = #{desComment}
+	SET STATE ='ccode007' , des_comment = #{desComment}
 	WHERE CON_NO=#{conNo}
 	</update>
 	

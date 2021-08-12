@@ -237,6 +237,7 @@ public class DesMypageController {
 	public String desSchedule( Model model, ConHistoryVO vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		vo.setDesId((String) session.getAttribute("did"));
+		model.addAttribute("state", vo.getState());
 		model.addAttribute("sche",desMyDao.desScheList(vo));
 		return "desmypage/desSchedule";
 	}

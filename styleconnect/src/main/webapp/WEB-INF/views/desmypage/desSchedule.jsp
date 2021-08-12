@@ -29,6 +29,10 @@ function denyfun(conNo){
 	}
 };
 
+function selectList(){
+	var state = $('#state option:selected').val();
+	location.href = 'desSchedule.do?state='+state;
+}
 </script>
 </head>
 <body>
@@ -89,6 +93,17 @@ function denyfun(conNo){
                          
                         </ol>
                         <h1 class="font-weight-300">예약내역</h1>
+                <div align="right">
+                <input type="hidden" name="state" value="${state }">
+                <select name="state" id="state" onchange="selectList()">
+                
+                	<option value="ccode001" <c:if test="${state eq 'ccode001'}">selected</c:if> >예약중</option>
+                	<option value="ccode002" <c:if test="${state eq 'ccode002'}">selected</c:if> >예약확정</option>
+                	<option value="ccode007" <c:if test="${state eq 'ccode007'}">selected</c:if> >예약거절</option>
+                	<option value="ccode005" <c:if test="${state eq 'ccode005'}">selected</c:if>>상담완료</option>
+                	<option value="ccode006" <c:if test="${state eq 'ccode006'}">selected</c:if>>상담불참</option>
+                </select>
+                </div>
                     </div>
                 </div>
                 <!-- // Page Title -->
