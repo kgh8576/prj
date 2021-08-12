@@ -118,5 +118,10 @@ public class DesMypageServiceImpl implements DesMypageService {
 		// TODO Auto-generated method stub
 		return desMapper.selectCourThum(vo);
 	}
+	@Override
+	public void desexit(DesVO vo) {
+		// TODO Auto-generated method stub
+		desMapper.desexit(vo);
+	}
 
 }
