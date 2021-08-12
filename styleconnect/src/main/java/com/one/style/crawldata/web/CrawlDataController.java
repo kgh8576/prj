@@ -18,9 +18,10 @@ public class CrawlDataController {
 	@Autowired CrawlDataService crawlDao;
 	
 	@RequestMapping("crawl.do")
+	@ResponseBody
 	public String crawl(String gender){
 		crawlDao.start(gender);
-		return "크롤링 시작됨";
+		return "크롤링 완료됨";
 	}
 	
 	@RequestMapping("getCrawlData.do")
@@ -40,7 +41,7 @@ public class CrawlDataController {
 	@RequestMapping("getCrawlProgress.do")
 	@ResponseBody
 	public int getCrawlProgress() {
-		return crawlDao.getProgress();
+		return crawlDao.getProgress();	
 	}
 	
 	@RequestMapping("goCrawlTest.do")

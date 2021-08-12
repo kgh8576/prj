@@ -38,7 +38,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
+    public static final String WEB_DRIVER_PATH = "C:\\chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
     CrawlDataVO vo;
@@ -47,6 +47,8 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     public void start(String gender) {
         initCrawl(gender);
         runCrawl();
+    	setProgress(0);
+    	setRunning(false);
     }
  
     @Override
@@ -92,22 +94,21 @@ public class CrawlDataServiceImpl implements CrawlDataService{
         	Thread.sleep(500);
     		mainDiv.click();
     		Thread.sleep(7000);
-    		for(int i=1; i <= 50; i++) {
+    		for(int i=1; i <= 10; i++) {
     			System.out.println(i + " Times try");
 //    			System.out.println(driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/article/div[3]/div[1]")).getText()); // 본문 내용
     			crawlText += driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/article/div[3]/div[1]")).getText();
     			Thread.sleep(500);
     			driver.findElement(By.xpath("/html/body/div[6]/div[1]/div/div/a[2]")).click(); // 다음 게시글 버튼
 				Thread.sleep(5000);
-				setProgress(i*2);
+				setProgress(i*10);
     		}
+    		Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
         	driver.close();
         	splitTest(crawlText); // 데이터 자르고 DB insert 하는 함수
-        	setProgress(0);
-        	setRunning(false);
         }
     	
     }
@@ -121,7 +122,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 		String[] sliced2 = sliced.split(" ");
 		List<String> hashTags = new ArrayList<String>();
 		for(String s : sliced2) {
-			if(s.startsWith("#") && s.length() < 11 && !s.contains("#펌") && !s.contains("남자") && !s.contains("여자") && !s.contains("탈색") && !s.contains("염색")){
+			if(s.startsWith("#") && s.length() < 11 && !s.contains("#펌") && !s.contains("남자") && !s.contains("여자") && !s.contains("탈색") && !s.contains("염색") && s.length() > 2){
 				if(s.endsWith("펌") || s.endsWith("컷")) {
 					hashTags.add(s);
 				}
@@ -146,7 +147,6 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 				return obj2.getValue().compareTo(obj1.getValue());
 			}
 		});
-
 		System.out.println("내림 차순 정렬");
 		for(int i = 0; i <= 4; i++) {
 			System.out.println(list_entries.get(i).getKey() + " : " + list_entries.get(i).getValue());
