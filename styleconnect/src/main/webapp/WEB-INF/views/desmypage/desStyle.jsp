@@ -34,11 +34,21 @@ function delfunc(fileUuid){
 <link
 	href="${pageContext.request.contextPath}/resources/reservationreso/css/custom.css"
 	rel="stylesheet">
+<!-- 파일 다중 업로드 JQUERY -->	
+<script	src="${pageContext.request.contextPath}/resources/assets/js/jquery.MultiFile.js" type="text/javascript" language="javascript"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style type="text/css">
-#btnmargin{
-	margin: 80px;
-}
+	#btnmargin{
+		margin: 80px;
+	}
+	.multi{
+    width: 78px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-left: 20px;
+	}
 </style>
 </head>
 <body>

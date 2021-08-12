@@ -34,53 +34,25 @@ font-size: 24px;
 	margin-right: 0px;
 }    
 </style>
-<!--  
-<script>
-function memberConHistoryListSelect(id) {
 
-	$.ajax({
-		url : "memberConHistoryUpdateForm.do?&memId="+ id,
-		type : "GET",
-		dataType: "json",
-		success : function(data) {
-			var memberConHistoryList = data.memberConHistoryList;
-			var paging = data.paging;
-			
-			for(var i = 0; i < memberConHistoryList.length; i++){
-				console.log('conNo: ' + memberConHistoryList[i].conNo);
-			}
-		}
-	});
-}
-</script>
--->
 
-<!-- 일반회원 상담 내역 수정 함수 -->
+<!-- 전체 페이지에서 사용하는 함수 -->
 <script>
-function memberConHistoryUpdate(index) {
-	
-	var formDataQueryString = $('#member-conHistory-update-form' + index).serialize();
-	//console.log(formDataQueryString);
-	//var formData = new FormData(form);
-	
-	//formData 확인
-	//for (var value of formData.values()) {
-	//	   console.log(value);
-	//	}
-	
-	$.ajax({
-		url : "memberConHistoryUpdate.do",
-		type : "POST",
-		data : formDataQueryString,
-		success : function(result) {
-			console.log(result.message);
-		}
-	});
+function goPageForEntirePage(page) {
+	location.href = "memberManagement.do?page=" + page;
 }
 </script> 
- 
-<!-- 디자이너 상태 수정 모달 태그 생성을 위해 요구되는 value값을 hidden input에 삽입하는 함수 -->
+
+ <!-- 모달1에서 사용하는 함수-->
 <script>
+//모달 페이지 이동 함수 
+function goPageForModal1(id, page) {
+	console.log("ID: " + id);	
+	console.log("페이지: " + page);
+	memberConHistoryUpdateForm(id, page);
+}
+
+//상담내역 수정을 위해 요구되는 value값을 각 폼의 hidden input에 삽입하는 함수
 function getSelectedDesignerAttendValue(index){
 	$('#designer-attend' + index).attr('value',$('#designer-attend-select-box' + index + ' option:selected').val());
 	console.log($('#designer-attend' + index).val());
@@ -90,16 +62,16 @@ function getSelectedMemberAttendValue(index){
 	$('#member-attend' + index).attr('value', $('#member-attend-select-box' + index + ' option:selected').val());
 	console.log($('#member-attend' + index).val());
 }
-</script>
 
-
-<!-- 디자이너 상담내역 수정 모달 태그 생성 함수 -->
-<script>
-function memberConHistoryUpdateForm(id) {
-	console.log('실행 체크');
+//모달 안 일반회원 상담 내역 수정 폼 태그 생성 함수
+function memberConHistoryUpdateForm(id, page) {
+	//memberConHistoryUpdateForm(id)로 실행할 경우 page는 null이 아닌 undefined가 되면서 실행 오류 발생
+	if(page == undefined) {
+		page = '';
+	}
 
 	$.ajax({
-		url : "memberConHistoryUpdateForm.do?&memId="+ id,
+		url : "memberConHistoryUpdateForm.do?&memId="+ id + "&page=" + page,
 		type : "GET",
 		dataType: "json",
 		success : function(data) {
@@ -191,7 +163,27 @@ function memberConHistoryUpdateForm(id) {
 			}
 												
 			memberConHistoryUpdateFormCode += '</table>';
-				//1. 태그 생성 끝
+				
+			//페이지 네비게이션
+			memberConHistoryUpdateFormCode += '<div class="pagination">'
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'
+												+ '<span>';
+												
+							
+			for(var i=paging.startPageNo; i<=paging.endPageNo; i++){
+				if(i == paging.pageNo){
+					memberConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</p>';
+				} else {
+					memberConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</p>';
+				}
+			}
+
+			memberConHistoryUpdateFormCode += '</span>'
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'
+												+ '</div>';		
+			//1. 태그 생성 끝
 				
 				//2. 태그 삽입
 			$('#member-conHistory-update-form-target').html(memberConHistoryUpdateFormCode);
@@ -201,14 +193,31 @@ function memberConHistoryUpdateForm(id) {
 		}
 	});
 }
-</script>
 
-<!-- 페이징 관련 함수 -->
-<script>
-function goPageForEntirePage(page) {
-	location.href = "memberManagement.do?page=" + page;
+// 일반회원 상담 내역 수정 함수
+function memberConHistoryUpdate(index) {
+	
+	var formDataQueryString = $('#member-conHistory-update-form' + index).serialize();
+	//console.log(formDataQueryString);
+	//var formData = new FormData(form);
+	
+	//formData 확인
+	//for (var value of formData.values()) {
+	//	   console.log(value);
+	//	}
+	
+	$.ajax({
+		url : "memberConHistoryUpdate.do",
+		type : "POST",
+		data : formDataQueryString,
+		success : function(result) {
+			console.log(result.message);
+		}
+	});
 }
 </script>
+
+
 
 <br><br><br><br><br><br><br><br><br><br>
 <h1>일반회원 관리 페이지</h1>
@@ -231,11 +240,24 @@ function goPageForEntirePage(page) {
 		<td>${member.birth}</td>
 		<td>${member.hp}</td>
 		<td>${member.regday}</td> 
-		<td><button data-toggle="modal" data-target="#member-conHistory-update-modal" onclick="memberConHistoryUpdateForm('${member.id}')">수정</button></td>
+		<td><button data-toggle="modal" data-target="#member-conHistory-update-modal" onclick="memberConHistoryUpdateForm('${member.id}')">상담내역 변경</button></td>
 	</tr>
 	</c:forEach>
 	
 </table>
+
+<!-- 페이징 -->
+<div align="center">
+	<jsp:include page="pagingForEntirePage.jsp" flush="true">
+		<jsp:param name="firstPageNo" value="${paging.firstPageNo}" />
+		<jsp:param name="prevPageNo" value="${paging.prevPageNo}" />
+		<jsp:param name="startPageNo" value="${paging.startPageNo}" />
+		<jsp:param name="pageNo" value="${paging.pageNo}" />
+		<jsp:param name="endPageNo" value="${paging.endPageNo}" />
+		<jsp:param name="nextPageNo" value="${paging.nextPageNo}" />
+		<jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
+	</jsp:include>
+</div>
 
 <!-- 상담내역 수정 모달 -->
 <div class="modal fade" id="member-conHistory-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
@@ -256,18 +278,7 @@ function goPageForEntirePage(page) {
 	</div>
 </div>
 
-<!-- 페이징 -->
-<div align="center">
-	<jsp:include page="pagingForEntirePage.jsp" flush="true">
-		<jsp:param name="firstPageNo" value="${paging.firstPageNo}" />
-		<jsp:param name="prevPageNo" value="${paging.prevPageNo}" />
-		<jsp:param name="startPageNo" value="${paging.startPageNo}" />
-		<jsp:param name="pageNo" value="${paging.pageNo}" />
-		<jsp:param name="endPageNo" value="${paging.endPageNo}" />
-		<jsp:param name="nextPageNo" value="${paging.nextPageNo}" />
-		<jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
-	</jsp:include>
-</div>
+
 
 <pre>
 게시 글 수: ${paging.pageSize}
