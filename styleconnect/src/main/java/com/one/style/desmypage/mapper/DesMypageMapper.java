@@ -30,6 +30,7 @@ public interface DesMypageMapper {
 	public int desDeny(ConHistoryVO vo);
 	public List<DesVO> selectDesSty(DesVO vo);
 	public int desDenyComment(ConHistoryVO vo);
+	public String selectCourThum(DesVO vo);
 	
 	//상담시간 설정 페이지 진입
 	public DesMypageVO desWorkOpenPage(String id);

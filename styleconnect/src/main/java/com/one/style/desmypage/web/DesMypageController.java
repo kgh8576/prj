@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.one.style.conhistory.vo.ConHistoryVO;
@@ -286,9 +287,12 @@ public class DesMypageController {
 	// 마이페이지/상담목록 관리페이지/상담수정페이지 - 상담 수정
 	@RequestMapping("desCourseUp.do")
 	public String desCourseUpdate(Model model,DesVO vo, MultipartHttpServletRequest request) {
-		
-		desMyDao.desFileUpdate(vo);
-		fileservice.upload(request, "thum", vo.getId(),vo.getCourNo());
+		System.out.println(request.getFiles("file").size());
+//		if() {
+//			System.out.println("111111111111");
+//			desMyDao.desFileUpdate(vo);
+//			fileservice.upload(request, "thum", vo.getId(),vo.getCourNo());
+//		}
 		desMyDao.desCourseUpdate(vo);
 		return "redirect:desCourseUpdate.do?courNo="+vo.getCourNo();
 	}

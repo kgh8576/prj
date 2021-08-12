@@ -113,5 +113,10 @@ public class DesMypageServiceImpl implements DesMypageService {
 		// TODO Auto-generated method stub
 		return desMapper.desDenyComment(vo);
 	}
+	@Override
+	public String selectCourThum(DesVO vo) {
+		// TODO Auto-generated method stub
+		return desMapper.selectCourThum(vo);
+	}
 
 }
