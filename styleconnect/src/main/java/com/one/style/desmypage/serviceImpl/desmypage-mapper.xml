@@ -125,21 +125,12 @@
 		update work_open set ${weeked} = #{times}
 		where id = #{id}
 	</update>
-
-
 	
 	<!-- 예약내역 - 예약상태변경(거부)  -->
 	<update id="desDeny" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
 	UPDATE CONSULTING_HISTORY 
-	SET STATE ='ccode003' 
+	SET STATE ='ccode003' , des_comment = #{desComment}
 	WHERE CON_NO=#{conNo}
-	</update>
-	
-	<!-- 예약내역 - 예약거부(디자이너 코맨트) -->
-	<update id="desDenyComment" parameterType="com.one.style.conhistory.vo.ConHistoryVO">
-	update consulting_history
-	set des_comment = #{desComment}
-	where con_no= #{conNo}
 	</update>
 	
 	<!-- 스타일링파일 리스트 -->

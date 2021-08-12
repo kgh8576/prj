@@ -249,7 +249,6 @@ public class DesMypageController {
 	//마이페이지/예약 관리페이지 - 상담 거부
 	@RequestMapping("desDeny.do")
 	public String desDeny(ConHistoryVO vo) {
-		desMyDao.desDenyComment(vo);
 		desMyDao.desDeny(vo);
 		return "redirect:desSchedule.do";
 	}

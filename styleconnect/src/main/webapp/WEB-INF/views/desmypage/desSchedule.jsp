@@ -18,13 +18,11 @@ function denyfun(conNo){
 		let deny = prompt('고객에서 전할 코맨트를 입력하세요','');
 		if(deny != ""){
 			alert(deny);
+		    location.href="desDeny.do?conNo="+conNo+"&desComment="+deny
 			
 		}else{	
 			$().text("코맨트를 입력하세요")
 		}
-		//예약상태취소로 변경
-		//location.href="desDeny.do?conNo="+conNo
-	
 	}else{
 		confirm("취소되었습니다.") 
 		
