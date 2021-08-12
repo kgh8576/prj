@@ -54,16 +54,15 @@ public class DesServiceImpl implements DesService {
 	}
 
 	@Override
-	public boolean designerinsertcheck(DesVO vo) {
-		boolean N = false; 
-		DesVO dvo = desMapper.designerinsertcheck(vo);
+	public int designerinsertcheck(DesVO vo) {
+		int N = 0; 
+		int dvo = desMapper.designerinsertcheck(vo);
 		
-		if(dvo != null) {
-			N = true;
+		if(dvo == 0) {
+			N = 1;
 		} else {
-			N = false;
+			N = 0;
 		}
-		
 		return N;
 	}
 	@Override
