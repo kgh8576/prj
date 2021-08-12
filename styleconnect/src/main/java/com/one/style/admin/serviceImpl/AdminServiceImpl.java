@@ -21,6 +21,7 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.memberListSelect(vo);	
 	}
 	
+	//사용x
 	@Override
 	public int memberListTotalCountSelect() {
 		return adminMapper.memberListTotalCountSelect();
@@ -45,6 +46,7 @@ public class AdminServiceImpl implements AdminService{
 		return adminMapper.designerListSelect(vo);
 	}
 	
+	//사용x
 	@Override
 	public int designerListTotalCountSelect() {
 		return adminMapper.designerListTotalCountSelect();

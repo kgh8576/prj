@@ -49,7 +49,8 @@ function goPageForEntirePage(page) {
 
 //전체 페이지에서 디자이너 ID로 검색하여 디자이너 목록 조회
 function designerIDSearch(){
-	$('#designer-id-search-box').val();
+	var searchedID = $('#designer-id-search-box').val();
+	location.href= "designerManagement.do?searchedID=" + searchedID;
 }
 
 </script>
@@ -61,6 +62,14 @@ function designerIDSearch(){
 function goPageForModal1(id, page) {
 	console.log("페이지: " + page);
 	designerConHistoryUpdateForm(id, page);
+}
+
+//모달 페이지에서 상담번호로 검색하여 상담 내역조회
+function conHistoryNoSearch(id){
+	var page;
+	var searchedConNo = $('#consulting-history-number-search-box').val();
+	
+	designerConHistoryUpdateForm(id, page, searchedConNo);
 }
 
 //상담내역 수정을 위해 요구되는 value값을 각 폼의 hidden input에 삽입하는 함수
@@ -75,14 +84,18 @@ function getSelectedMemberAttendValue(index){
 }
 
 //모달 안 폼 태그 생성 함수
-function designerConHistoryUpdateForm(id, page) {
-	//designerConHistoryUpdateForm(id)로 실행할 경우 page는 null이 아닌 undefined가 되면서 실행 오류 발생
+function designerConHistoryUpdateForm(id, page, searchedConNo) {
+	//designerConHistoryUpdateForm(id)로 실행할 경우 page와 searchedConHistoryNo는 null이 아닌 undefined가 되면서 실행 오류 발생
 	if(page == undefined) {
 		page = '';
 	}
+	
+	if(searchedConNo == undefined) {
+		searchedConNo = '';
+	}
 
 	$.ajax({
-		url : "designerConHistoryUpdateForm.do?desId="+ id + "&page=" + page,
+		url : "designerConHistoryUpdateForm.do?desId="+ id + "&page=" + page + "&searchedConNo=" + searchedConNo,
 		type : "GET",
 		dataType: "json",
 		success : function(data) {
@@ -105,6 +118,12 @@ function designerConHistoryUpdateForm(id, page) {
 													+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend" value="' + designerConHistoryList[i].memAttend + '">'//memAttend 히든
 													+ '</form>';
 			}
+			
+			<!-- 검색창 -->
+			designerConHistoryUpdateFormCode += '<input type="text" id="consulting-history-number-search-box" placeholder="상담번호 검색"></input>';
+			designerConHistoryUpdateFormCode += '<button type="button" onclick="conHistoryNoSearch(' + "'" + id + "'" + ')">검색</button>';
+			<!-- 검색창 -->
+			
 			
 			designerConHistoryUpdateFormCode += '<table>';//
 			designerConHistoryUpdateFormCode += '<tr>'//
@@ -176,24 +195,24 @@ function designerConHistoryUpdateForm(id, page) {
 					
 			
 			//모달의 페이지 네비게이션
-			designerConHistoryUpdateFormCode += '<div class="pagination">'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'
-												+ '<span>';
+			designerConHistoryUpdateFormCode += '<div class="pagination">'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'//
+												+ '<span>';//
 												
 							
 			for(var i=paging.startPageNo; i<=paging.endPageNo; i++){
 				if(i == paging.pageNo){
-					designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</p>';
+					designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</p>';//
 				} else {
-					designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</p>';
+					designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</p>';//
 				}
 			}
 
-			designerConHistoryUpdateFormCode += '</span>'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'
-												+ '</div>';		
+			designerConHistoryUpdateFormCode += '</span>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'//
+												+ '</div>';//		
 							
 				//1. 태그 생성 끝			
 				//2. 태그 삽입
@@ -245,55 +264,57 @@ function designerStateUpdateForm(id) {
 			
 			//모달 바디 안에 태그 삽입
 				//1. 태그 생성
-			var designerStateUpdateFormCode ='';
-			designerStateUpdateFormCode += '<table>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>ID</td>'
-											+ '<td>' + designerStateOne.id + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>이름</td>'
-											+ '<td>' + designerStateOne.name + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>성별</td>'
-											+ '<td>' + designerStateOne.gender + '</td>';;
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>생년월일</td>'
-											+ '<td>' + designerStateOne.birth + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<td>휴대폰 번호</td>'
-											+ '<td>' + designerStateOne.hp + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<td>근무처</td>'
-											+ '<td>' + designerStateOne.location + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>경력</td>'
-											+ '<td>' + designerStateOne.career + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>분야</td>'
-											+ '<td>' + '메이크업: ' + designerStateOne.makeupyn
-													+ '컷: ' + designerStateOne.cutyn 
-													+ '펌: ' + designerStateOne.permyn 
-													+ '염색: ' + designerStateOne.dyeyn + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>전문</td>'
-											+ '<td>' + designerStateOne.major + '</td>';
-			designerStateUpdateFormCode += '</tr>';
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td rowspan="' + (designerCertificationFileList.length + 1) +'">증명 자료</td>';
+			var designerStateUpdateFormCode ='';//
+			designerStateUpdateFormCode += '<table>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>ID</td>'//
+											+ '<td>' + designerStateOne.id + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>이름</td>'//
+											+ '<td>' + designerStateOne.name + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>성별</td>'//
+											+ '<td>' + designerStateOne.gender + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>생년월일</td>'//
+											+ '<td>' + designerStateOne.birth + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<td>휴대폰 번호</td>'//
+											+ '<td>' + designerStateOne.hp + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<td>근무처</td>'//
+											+ '<td>' + designerStateOne.location + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>경력</td>'//
+											+ '<td>' + designerStateOne.career + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>분야</td>'//
+											+ '<td>' + '메이크업: ' + designerStateOne.makeupyn//
+													+ '컷: ' + designerStateOne.cutyn// 
+													+ '펌: ' + designerStateOne.permyn//
+													+ '염색: ' + designerStateOne.dyeyn + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>전문</td>'//
+											+ '<td>' + designerStateOne.major + '</td>';//
+			designerStateUpdateFormCode += '</tr>';//
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td rowspan="' + (designerCertificationFileList.length + 1) +'">증명 자료</td>';//
 			
 			for(var i = 0; i < designerCertificationFileList.length; i++){
-				designerStateUpdateFormCode += '<tr>';
-				designerStateUpdateFormCode += '<td>' + '<img src="${pageContext.request.contextPath}/resources/img/' + designerCertificationFileList[i].fileUuid + '">' + designerCertificationFileList[i].fileName + '</td>';
-				designerStateUpdateFormCode += '</tr>';
+				designerStateUpdateFormCode += '<tr>';//
+				designerStateUpdateFormCode += '<td>'// 
+												+ '<img src="${pageContext.request.contextPath}/resources/img/' + designerCertificationFileList[i].fileUuid + '">' + designerCertificationFileList[i].fileName// 
+												+ '</td>';//
+				designerStateUpdateFormCode += '</tr>';//
 			}
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>상태</td>'
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>상태</td>'//
 				
 			//조건에 따라 디자이너 참여 여부 셀렉트 박스 코드 추가
 			if (designerStateOne.state == "신청") {
@@ -347,15 +368,15 @@ function designerStateUpdateForm(id) {
 												+ '</select>'// 
 												+ '</td>';//
 			}
-			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '</tr>';//
 											
-			designerStateUpdateFormCode += '<tr>';
-			designerStateUpdateFormCode += '<td>관리자 코멘트</td>';
-			designerStateUpdateFormCode += '<td><textarea id="designer-comments-textarea" name="comments">' + designerStateOne.comments + '</textarea></td>';
-			designerStateUpdateFormCode += '</tr>';
+			designerStateUpdateFormCode += '<tr>';//
+			designerStateUpdateFormCode += '<td>관리자 코멘트</td>';//
+			designerStateUpdateFormCode += '<td><textarea id="designer-comments-textarea" name="comments">' + designerStateOne.comments + '</textarea></td>';//
+			designerStateUpdateFormCode += '</tr>';//
 			
-			designerStateUpdateFormCode += '</table>';
-			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>';
+			designerStateUpdateFormCode += '</table>';//
+			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>';//
 			
 				//1. 태그 생성 끝
 				
@@ -403,11 +424,11 @@ function designerStateUpdate(id) {
 <!-- 하지말자 -->
 
 <!-- 검색창 -->
-<input type="text" id="designer-id-search-box" placeholder="ID 검색"></input>
-<button type="button" onclick="designerIDSearch()">검색 버튼</button>
+<input type="text" id="designer-id-search-box" placeholder="디자이너 ID 검색"></input>
+<button type="button" onclick="designerIDSearch()">검색</button>
 <!-- 할까말까 -->
 
-<!-- 디자이너 회원 리스트 -->
+<!-- 디자이너 리스트 -->
 <table>
 	<tr>
 		<td>ID</td>

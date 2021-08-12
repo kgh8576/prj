@@ -41,6 +41,12 @@ font-size: 24px;
 function goPageForEntirePage(page) {
 	location.href = "memberManagement.do?page=" + page;
 }
+
+//전체 페이지에서 일반회원 ID로 검색하여 디자이너 목록 조회
+function memberIDSearch(){
+	var searchedID = $('#member-id-search-box').val();
+	location.href= "memberManagement.do?searchedID=" + searchedID;
+}
 </script> 
 
  <!-- 모달1에서 사용하는 함수-->
@@ -52,26 +58,43 @@ function goPageForModal1(id, page) {
 	memberConHistoryUpdateForm(id, page);
 }
 
+//모달 페이지에서 상담번호로 검색하여 상담 내역조회
+function conHistoryNoSearch(id){
+	var page;
+	var searchedConNo = $('#consulting-history-number-search-box').val();
+	
+	memberConHistoryUpdateForm(id, page, searchedConNo);
+}
+
 //상담내역 수정을 위해 요구되는 value값을 각 폼의 hidden input에 삽입하는 함수
+	//1.
 function getSelectedDesignerAttendValue(index){
 	$('#designer-attend' + index).attr('value',$('#designer-attend-select-box' + index + ' option:selected').val());
 	console.log($('#designer-attend' + index).val());
 }
-
+	//2.
 function getSelectedMemberAttendValue(index){
 	$('#member-attend' + index).attr('value', $('#member-attend-select-box' + index + ' option:selected').val());
 	console.log($('#member-attend' + index).val());
 }
 
 //모달 안 일반회원 상담 내역 수정 폼 태그 생성 함수
-function memberConHistoryUpdateForm(id, page) {
-	//memberConHistoryUpdateForm(id)로 실행할 경우 page는 null이 아닌 undefined가 되면서 실행 오류 발생
+function memberConHistoryUpdateForm(id, page, searchedConNo) {
+	//memberConHistoryUpdateForm(id)로 실행할 경우 page와 searchedConHistoryNo는 null이 아닌 undefined가 되면서 실행 오류 발생
 	if(page == undefined) {
 		page = '';
 	}
+	
+	if(searchedConNo == undefined) {
+		searchedConNo = '';
+	}
+	
+	console.log("아이디: " + id);
+	console.log("페이지: " + page);
+	console.log("상담번호: " + searchedConNo);
 
 	$.ajax({
-		url : "memberConHistoryUpdateForm.do?&memId="+ id + "&page=" + page,
+		url : "memberConHistoryUpdateForm.do?&memId="+ id + "&page=" + page + "&searchedConNo=" + searchedConNo,
 		type : "GET",
 		dataType: "json",
 		success : function(data) {
@@ -95,6 +118,11 @@ function memberConHistoryUpdateForm(id, page) {
 													+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend" value="' + memberConHistoryList[i].memAttend + '">'//memAttend 히든
 													+ '</form>';
 			}
+			
+			<!-- 검색창 -->
+			memberConHistoryUpdateFormCode += '<input type="text" id="consulting-history-number-search-box" placeholder="상담번호 검색"></input>';
+			memberConHistoryUpdateFormCode += '<button type="button" onclick="conHistoryNoSearch(' + "'" + id + "'" + ')">검색</button>';
+			<!-- 검색창 -->
 			
 			memberConHistoryUpdateFormCode += '<table>';//
 			memberConHistoryUpdateFormCode += '<tr>'//
@@ -162,27 +190,27 @@ function memberConHistoryUpdateForm(id, page) {
 													+ '</tr>';//
 			}
 												
-			memberConHistoryUpdateFormCode += '</table>';
+			memberConHistoryUpdateFormCode += '</table>';//
 				
 			//페이지 네비게이션
-			memberConHistoryUpdateFormCode += '<div class="pagination">'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'
-												+ '<span>';
+			memberConHistoryUpdateFormCode += '<div class="pagination">'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'//
+												+ '<span>';//
 												
 							
 			for(var i=paging.startPageNo; i<=paging.endPageNo; i++){
 				if(i == paging.pageNo){
-					memberConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</p>';
+					memberConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</p>';//
 				} else {
-					memberConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</p>';
+					memberConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</p>';//
 				}
 			}
 
-			memberConHistoryUpdateFormCode += '</span>'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'
-												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'
-												+ '</div>';		
+			memberConHistoryUpdateFormCode += '</span>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'//
+												+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'//
+												+ '</div>';//
 			//1. 태그 생성 끝
 				
 				//2. 태그 삽입
@@ -222,6 +250,11 @@ function memberConHistoryUpdate(index) {
 <br><br><br><br><br><br><br><br><br><br>
 <h1>일반회원 관리 페이지</h1>
 <!-- 검색창 추가 -->
+<input type="text" id="member-id-search-box" placeholder="일반회원 ID 검색"></input>
+<button type="button" onclick="memberIDSearch()">검색</button>
+<!-- 할까말까 -->
+
+<!-- 일반회원 리스트 -->
 <table>
 	<tr>
 		<td>회원ID</td>
