@@ -273,8 +273,8 @@
 								<c:choose>
 									<c:when test="${!empty conhis}">
 										<c:forEach var="conhis" begin="0" end="0" items="${conhis }">
-											<c:if
-												test="${conhis.codecontent eq '예약중' || conhis.codecontent eq '예약확정' }">
+											<c:if 
+												test="${conhis.codecontent eq '예약중' || conhis.codecontent eq '예약확정' || conhis.codecontent eq '상담중'}">
 												<div>
 													<h3>${conhis.title }</h3>
 													<p>예약날짜 : ${conhis.day }</p>
@@ -290,7 +290,7 @@
 												</div>
 											</c:if>
 											<c:if
-												test="${conhis.codecontent ne '예약중' || conhis.codecontent ne '예약확정' }">
+												test="${conhis.codecontent ne '예약중' || conhis.codecontent ne '예약확정' || conhis.codecontent ne '상담중' }">
 												<div>
 													<p>아직까지 예약된 내역이없습니다!</p>
 													<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
@@ -328,13 +328,13 @@
 													<a href="confinish.do" style="color: blue">더보기</a>
 												</div>
 											</c:if>
-											<c:if test="${conccode005.codecontent ne '상담완료'}">
+											<%-- <c:if test="${conccode005.codecontent ne '상담완료'}">
 												<div>
 													<p>아직까지 컨설팅 받은 내역이없습니다!</p>
 													<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
 													<a href="category.do" style="color: blue">찾으러가기!</a>
 												</div>
-											</c:if>
+											</c:if> --%>
 										</c:forEach>
 									</c:when>
 									<c:otherwise>
