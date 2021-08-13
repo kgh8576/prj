@@ -18,6 +18,9 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
+                    <c:if test="${empty img }">
+                     <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/logo.jpg" alt=""></div>
+                    </c:if>
                        	<c:forEach items="${img}" var="img1" begin="3" end="3"> 
                              <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
                         </c:forEach>  
@@ -25,7 +28,6 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="rating clearfix">
-                                        <span class="float-left text-grey-2"><i class="far fa-map"></i>  DCalifornia</span>
                                         <ul class="float-right">
                                           <c:forEach begin="1" end="${designer.rate }">
 												<li class="active"></li>
@@ -68,16 +70,23 @@
                     	<!-- 디자이너 이미지 -->
                     <div class="margin-bottom-30px box-shadow">
                         <div class="padding-30px background-white">
-                            <h3><i class="far fa-hospital margin-right-10px text-main-color"></i> 디자이너 이미지 </h3>
+                            <h3><i class="far fa-hospital margin-right-10px text-main-color"></i> 디자이너 스타일링 이미지 </h3>
                             <hr>
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
                                 <div class="row">
+                                <c:if test="${not empty img2 }">
+                                 	<c:forEach items="${img2}" var="img1"> 
+                                		<c:if test="${img1.fileState eq '0' }">
+                                		등록된 스타일이 없습니다.
+                                	</c:if></c:forEach>  
+                                  </c:if>
+                                <c:if test="${not empty img2 }">
                                  	<c:forEach items="${img2}" var="img1"> 
                                 		<c:if test="${img1.fileState eq 'sty' }">
                                 		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
                                 	</c:if></c:forEach>  
-                                  
+                                  </c:if>
                                 </div>
                             </div>
                         </div>

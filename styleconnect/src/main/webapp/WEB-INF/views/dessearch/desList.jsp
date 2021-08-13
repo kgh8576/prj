@@ -27,6 +27,11 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="row">
+					<c:if test="${empty designer }">
+					<div align="center">
+					<h2>등록된 디자이너가 없습니다.</h2>
+					</div>
+					</c:if>
 						<!-- Designer -->
 								<c:forEach items="${designer}" var="vo">
 								<input type="hidden" id="id" name="id" value="${vo.id }">
@@ -71,16 +76,6 @@
 			</div>
 		</div>
 	</div>
-	<ul class="pagination pagination-md ">
-		<li class="page-item disabled"><a class="page-link rounded-0"
-			href="#" tabindex="-1">Previous</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link rounded-0" href="#">Next</a></li>
-	</ul>
-	<!-- 페이징처리 -->
-								
 	<script src="assets/js/sticky-sidebar.js"></script>
 	<script src="assets/js/YouTubePopUp.jquery.js"></script>
 	<script src="assets/js/owl.carousel.min.js"></script>
