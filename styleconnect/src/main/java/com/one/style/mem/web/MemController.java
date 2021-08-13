@@ -78,17 +78,15 @@ public class MemController {
 	
 		String id = request.getParameter("id");
 		vo.setId(id);
-		MemberVO mvo = new MemberVO();
 		
-		System.out.println("컨트롤럴 id값" + id);
-		boolean b = memberDao.insertcheck(vo);
+		int b = memberDao.insertcheck(vo);
 		int cnt = 1;
 		
-		if(b) {
-			cnt = 1;
+		if(b == 1) {
+			cnt = 0;
 			response.getWriter().print(cnt);
 		} else {
-			cnt = 0;
+			cnt = 1;
 			response.getWriter().print(cnt);
 		}
 		return null;
@@ -131,7 +129,7 @@ public class MemController {
 		return "member/recoverIdPwPage";
 	}
 	
-	//ID 찾기
+	//통합 ID 찾기
 	@RequestMapping("getUserIdByHpName.do")
 	@ResponseBody
 	public String getUserIdByHpName(String hp, String name, String searchTable) {
@@ -148,7 +146,7 @@ public class MemController {
 			return "해당 유저 없음";
 		}
 	}
-	
+	//통합 비밀번호 변경
 	@RequestMapping("updateUserPwByHpName.do")
 	@ResponseBody
 	public String updateUserPwByHpName(String hp, String name, String searchTable, String pw) {
@@ -162,5 +160,15 @@ public class MemController {
 		map.put("searchTable", searchTable); // 디자이너와 멤버 테이블 어디에 update 할지 분기하는 파라미터
 		int r = memberDao.updateUserPwByHpName(map);
 		return r + "건 업데이트";
+	}
+	//통합 ID 존재 체크 ( 없는 번호로 sms인증 날리면 돈아까움 )
+	@RequestMapping("checkExistUserByIdHp.do")
+	@ResponseBody
+	public boolean checkExistUserByIdHp(String hp, String name, String searchTable) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchTable", searchTable);
+		map.put("hp", hp);
+		map.put("name", name);
+		return memberDao.checkExistUserByIdHp(map);
 	}
 }

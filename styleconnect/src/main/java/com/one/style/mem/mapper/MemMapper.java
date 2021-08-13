@@ -13,10 +13,10 @@ public interface MemMapper {
 	public void memberInsert(MemberVO vo);
 	public void memberUpdate(MemberVO vo);
 	public MemberVO memberDelete(MemberVO vo);
-	public MemberVO insertCheck(MemberVO vo);
+	public int insertCheck(MemberVO vo);
 	public List<MemberVO> getUserIdByHpName(Map<String, String> map);
 	public int updateUserPwByHpName(Map<String, String> map);
 	public ConHistoryVO checkSchedule(ConHistoryVO vo);
-	
+	public MemberVO checkExistUserByIdHp(Map<String, String> map);
 	
 }

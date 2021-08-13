@@ -45,17 +45,15 @@ public class MemServiceImpl implements MemService {
 		return memMapper.login(vo);
 	}
 	//회원가입 아이디 중복확인
-	public boolean insertcheck(MemberVO vo)  {
-		boolean N = false;
-		MemberVO mvo = memMapper.insertCheck(vo);
-		System.out.println("mvo 결과 "  + mvo);
+	public int insertcheck(MemberVO vo)  {
+		int N = 0;
+		int mvo = memMapper.insertCheck(vo);
 		
-		if(mvo != null) {
-			N = true;
+		if(mvo == 0) {
+			N = 1;
 		} else {
-			N = false;
+			N = 0;
 		}
-		System.out.println("불린타입 "+N);
 		return N;
 	}
 
@@ -105,6 +103,15 @@ public class MemServiceImpl implements MemService {
 		}
 		
 		return YorN;
+	}
+
+	@Override
+	public boolean checkExistUserByIdHp(Map<String, String> map) {
+		boolean b = false;
+		if (!memMapper.getUserIdByHpName(map).isEmpty()) {
+			b = true;
+		}
+		return b;
 	}
 
 }

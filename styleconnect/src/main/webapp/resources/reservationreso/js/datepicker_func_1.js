@@ -34,10 +34,12 @@ $('#DatePicker').datepicker({
 		var date = new Date(dateString);
 		var weekLabel = week[date.getDay()];
 		var courno = $("#courNo").val();
+		var desId = $("#desId").val();
 		var desData = {
 				courNo : courno,
 				week : weekLabel,
-				searchDate : dateString
+				searchDate : dateString,
+				desId : desId
 		}
 		$.ajax({
 			url:"workTime.do",
@@ -54,14 +56,10 @@ $('#DatePicker').datepicker({
 					today.setSeconds(0);
 					today.setMilliseconds(0);
 					date.setHours(0);
-					console.log(today);
-					console.log(date);
 					if (today.getTime() == date.getTime()){
 						var today = new Date();
 						date.setHours(time.split(':')[0]);
 						date.setMinutes(time.split(':')[1]);
-						console.log(date);
-						console.log(today);
 						if(date > today){
 							$(".can_reservation_time").append("<li><input type='radio' id='time_"+i+"' onclick='selectTime(\""+time+"\")' name='time' value='"+time+"'><label for='time_"+i+"'>"+time+"</label></li>");		
 						}
