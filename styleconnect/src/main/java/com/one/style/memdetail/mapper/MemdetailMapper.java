@@ -17,5 +17,6 @@ public interface MemdetailMapper {
 	public void reservationcancle(ConHistoryVO vo);
 	public String reviewyoumu(ReviewVO vo);
 	public List<ConHistoryVO> conallList(ConHistoryVO vo);
+	public List<ConHistoryVO> conccode005(ConHistoryVO vo);
 	
 }

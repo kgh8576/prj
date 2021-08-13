@@ -279,7 +279,7 @@ function hpcheckbtn() {
 				<div class="form-group label-floating">
 					<label class="control-label">생년월일</label> <input
 						class="form-control" placeholder="우측 달력을 눌러주세요" type="date"
-						id="birth" name="birth" max="9999-12-31">
+						id="birth" name="birth" min="1900-01-01" max="2100-12-31">
 				</div>
 
 				<div class="form-group label-floating is-select">
