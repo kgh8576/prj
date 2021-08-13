@@ -6,6 +6,37 @@ pageEncoding="UTF-8" %>
 
 <head>
 	<title>StyleConnect에 방문해주셔서 감사합니다.</title>
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		//상담시작 알람
+		<c:if test="${not empty id}">
+		var memId = "${id}";
+		$.ajax({
+			url : 'startSchedule.do',
+			data : {
+				memId : memId
+			},
+			type : 'post',
+			success : function(data) {
+				console.log(data);
+				if(data == 1) {
+					document.getElementById("altercheck").style.display = 'block';
+				}	
+			},
+			error : function(err) {
+				console.log(err);
+				console.log("스케줄러 불러오기오류");
+			}
+			
+		})
+		
+		</c:if>
+		
+	});
+		
+	
+	</script>
 </head>
 
 <body>
@@ -36,6 +67,7 @@ pageEncoding="UTF-8" %>
                              -->
                         </ul>
                     </div>
+                   
                     <div class="col-lg-3 col-md-12">
                         <hr class="margin-bottom-0px d-block d-sm-none">
                         	<c:if test="${empty id && empty did }">
@@ -66,8 +98,15 @@ pageEncoding="UTF-8" %>
                         <!-- 디자이너 마이페이지 -->
                     </div>
                 </div>
+                
             </div>
+            <br>
+             <div id="altercheck"class="alert alert-success alert-dismissible" style="display: none; width: 800px; text-align: center; margin: auto;">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>상담시간입니다!</strong> <a href="consulting.do">　　　여기를 누르면 상담페이지로 이동합니다 !　　</a>
+</div>
         </div>
+        
     </header>
     <!-- // Header  -->
 

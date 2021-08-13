@@ -121,6 +121,16 @@ public class MemController {
 		}
 		return  count;
 	}
+	@RequestMapping("/startSchedule.do")
+	@ResponseBody
+	public int startSchedule (ConHistoryVO vo) {
+		int count = 0;
+		boolean a = memberDao.startSchedule(vo);
+		if(a) {
+			count = 1;
+		}
+		return  count;
+	}
 	
 	
 	//ID/PW 찾기 페이지이동

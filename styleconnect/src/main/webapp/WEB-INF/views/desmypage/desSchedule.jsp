@@ -15,18 +15,20 @@
 function denyfun(conNo){
 	if(confirm("예약거절하시겠습니까?") == true){
 		//디자이너 거절 코멘트
-		let deny = prompt('고객에서 전할 코맨트를 입력하세요','');
-		if(deny != ""){
+		//구자혁이 수정한거임~~~~~~~~~~~~~~~~~~~~~~
+		let deny = prompt('고객에서 전할 코맨트를 입력하세요',"");
+		if(deny != null){
 			alert(deny);
 		    location.href="desDeny.do?conNo="+conNo+"&desComment="+deny
-			
-		}else{	
-			$().text("코맨트를 입력하세요")
+		}else{
+			alert("취소되었습니다.");
 		}
 	}else{
-		confirm("취소되었습니다.") 
+		alert("취소되었습니다.") 
 		
 	}
+	//~~~~~~~~~~~~~~~~~~여기까지 수정한거임
+	
 };
 
 function selectList(){
