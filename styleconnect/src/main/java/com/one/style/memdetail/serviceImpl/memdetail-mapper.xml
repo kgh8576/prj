@@ -67,7 +67,9 @@
 		to_char(sysdate-1/24/60*30,'YY/MM/DD hh24:mi')
 		AND c.cour_no =
 		a.cour_no
-		AND a.state <> 'ccode003'
+		AND (a.state = 'ccode002' 
+    or a.state ='ccode001' 
+    or a.state ='ccode004')
 		AND d.id = c.id
 		AND MEM_ID = #{memId}
 
