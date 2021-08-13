@@ -322,10 +322,10 @@ function crawl(gender) {
 										</div>
 									</div>
 										<div align="center">
-											<a href="searchList.do?search=#호일펌" class="text-primary">#호일펌</a> <a href="searchList.do?search=구자혁"
+											<a href="searchList.do?search=호일펌" class="text-primary">#호일펌</a> <a href="searchList.do?search=구자혁"
 												class="text-primary">#구자혁</a> <a href="searchList.do?search=병지컷" class="text-primary">#병지컷</a>
-											<!-- 
 											<button onclick="crawl('MALE')">남자 헤어 크롤링</button>
+											<!-- 
 											<button onclick="crawl('FEMALE')">여자 헤어 크롤링</button>
 											 -->
 										</div>

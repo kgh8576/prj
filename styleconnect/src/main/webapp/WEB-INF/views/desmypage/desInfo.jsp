@@ -118,7 +118,9 @@ body {margin: 10px;}
   background-color: #337ab7;
   border-color: #2e6da4;
 }
-
+#adcomments{
+	color: red;
+}
 </style>
 <script>
 function readURL(input) {
@@ -337,6 +339,12 @@ function hpchange() {
             		<c:if test="${not empty descer.fileUuid }">
                           <div class="col-md-6 margin-bottom-20px">
                           <label><i class="far fa-folder-open margin-right-10px"></i> 재직증명서나 미용자격증 등 재첨부 <br/> (*재첨부시 기존 파일은 전부 삭제됩니다.) </label>
+            				<c:if test="${not empty descer.comments }"><br/>
+            				<div>
+            				<p id="adcomments">*증명서를 다시 제출해주세요</p>
+            				${descer.comments }<br/>
+            				</div>
+            				</c:if>
                       		<button type="button" onclick="hpchange()">증명서 제출하기</button><br/>${descer.fileName }
                       		<div id="phoneNochange" style="display: none;">
                       		<form method="post" action="desCerUpdate.do" enctype="multipart/form-data">
