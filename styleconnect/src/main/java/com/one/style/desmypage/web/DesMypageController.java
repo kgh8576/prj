@@ -233,14 +233,19 @@ public class DesMypageController {
 		return "redirect:desStyle.do";
 	}
 	// 마이페이지/예약 관리페이지
+	//구자혁이 수정한거임~~~~~~~~~~~~~~~~~~~~~~~~~~
 	@RequestMapping("desSchedule.do")
 	public String desSchedule( Model model, ConHistoryVO vo, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		vo.setDesId((String) session.getAttribute("did"));
+		if (vo.getState() == null) {
+			vo.setState("ccode001");
+		}
 		model.addAttribute("state", vo.getState());
 		model.addAttribute("sche",desMyDao.desScheList(vo));
 		return "desmypage/desSchedule";
 	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~여기까지 수정한거임
 	//마이페이지/예약 관리페이지 - 상담 승인
 	@RequestMapping("desApprove.do")
 	public String desApprove(ConHistoryVO vo) {

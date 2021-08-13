@@ -46,7 +46,9 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add Listing">
+                	<!-- 구자혁이 수정한거임~~~~~~~~~~~~~~~~~~~~ -->
                     <a href="desSchedule.do" class="nav-link" href="dashboard-add-listing.html">
+                    <!-- ~~~~~~~~~~~~~~~~~~~~여기까지 수정한거임 -->
                         <i class="fa fa-fw fa-plus-circle"></i>
                         <span class="nav-link-text">예약관리</span>
                     </a>
@@ -78,7 +80,7 @@ ${my.id }
                             </a>
                         </div>
                         <div class="col-md-3 col-6 sm-mb-30px wow fadeInUp" data-wow-delay="0.2s">
-                            <a href="desSchedule.do" class="d-block border-radius-15 hvr-float hvr-sh2">
+                            <a href="desSchedule.do?state=ccode001" class="d-block border-radius-15 hvr-float hvr-sh2">
                                 <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
                                     <div class="icon margin-bottom-15px opacity-7">
                                         <img src="${pageContext.request.contextPath}/resources/assets/img/icon/categorie-2.png" alt="">
