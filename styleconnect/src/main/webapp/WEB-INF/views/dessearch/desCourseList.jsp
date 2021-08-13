@@ -27,7 +27,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-
+                <!-- 상담목록 없을 경우 -->
+				<c:if test="${empty course }">
+				<div align="center">
+				<h3>등록된 상담이 없습니다.</h3>
+				</div>
+				</c:if>
 			<!-- 상담목록 -->
 				<c:forEach items="${course }" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">

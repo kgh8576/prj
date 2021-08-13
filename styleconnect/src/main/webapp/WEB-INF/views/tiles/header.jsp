@@ -44,15 +44,24 @@ pageEncoding="UTF-8" %>
                         	</c:if>
                    	 <hr class="margin-bottom-0px d-block d-sm-none">
                     	<c:if test="${not empty id }">
-                    		<a href="membermypage.do"class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>마이페이지</a>
-							<a href="logout.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그아웃</a>
+                    		<c:choose>
+    							<c:when test="${id eq 'admin'}">
+									<a href="logout.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그아웃</a>      							
+    								<a href="admin.do"class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>관리자 홈</a>
+    							</c:when>
+    							<c:when test="${id ne 'admin'}">
+    								<a href="logout.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그아웃</a>  
+                    				<a href="membermypage.do"class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>마이페이지</a>
+   							 	</c:when>
+							</c:choose>
+  
                         </c:if> 
                         <!-- 디자이너 마이페이지 -->
                          <hr class="margin-bottom-0px d-block d-sm-none">
                         <c:if test="${not empty did }">
 							<input type="hidden" id="did" name="did" value="${did }">
-							<a href="mypage.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>마이페이지</a>
 							<a href="logout.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>로그아웃</a>
+							<a href="mypage.do" class="margin-tb-20px d-inline-block text-up-small float-left float-lg-right"><i class="far fa-user"></i>마이페이지</a>
                         </c:if>
                         <!-- 디자이너 마이페이지 -->
                     </div>
