@@ -380,7 +380,7 @@ function designerStateUpdateForm(id) {
 			designerStateUpdateFormCode += '</tr>';//
 			
 			designerStateUpdateFormCode += '</table>';//
-			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ designerStateOne.id +');">수정</button>';//
+			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ "'" + designerStateOne.id + "'" +');">수정</button>';//
 			
 				//1. 태그 생성 끝
 				

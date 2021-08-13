@@ -179,7 +179,7 @@
                       			and des_course.id = designer.id 
                       			and consulting_history.state = commcodedetail.code 
                       			<if test="state != null and state != ''"> 
-								and commcodedetail.codecontent = #{state} <!-- select 박스 선택시 추가 검색-->
+								and commcodedetail.codecontent = #{state} <!-- select 박스로 상태 선택시 추가 검색-->
 								</if>
 								<if test="conNo != null and conNo != ''"> 
 								and consulting_history.con_no = #{conNo} <!-- 상담번호로 서치할 시 추가 검색-->
