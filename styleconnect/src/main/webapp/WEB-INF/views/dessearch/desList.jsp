@@ -11,6 +11,7 @@
 	</style>
 </head>
 <body>
+
 	<div id="page-title" class="padding-tb-30px gradient-white">
 		<div class="container">
 			<ol class="breadcrumb opacity-5">
@@ -21,7 +22,22 @@
 			<h1 class="font-weight-300">Designer List</h1>
 		</div>
 	</div>
-	
+	<!-- 검색창 -->
+<form id="frm" action="searchList.do" method="post">
+	<div class="margin-bottom-30px">
+    	<div class="padding-30px background-white border-radius-10">
+        	<h4><i class="fas fa-search margin-right-10px text-main-color"></i> Search</h4>
+			<hr>
+			<div class="input-group mb-3">
+				<input type="text" name="search" placeholder="키워드를 입력하세요" class="form-control border-radius-0">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary text-white background-main-color border-radius-0" type="submit">Search</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<!-- 검색창 끝 -->
 	<div class="margin-tb-30px">
 		<div class="container">
 			<div class="row">
