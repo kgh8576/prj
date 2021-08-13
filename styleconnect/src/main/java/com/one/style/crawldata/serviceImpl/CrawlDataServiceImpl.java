@@ -38,13 +38,15 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static final String WEB_DRIVER_PATH = "C:\\chromedriver.exe";
+    public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
     CrawlDataVO vo;
     
     
     public void start(String gender) {
+    	setRunning(true);
+    	setProgress(0);
         initCrawl(gender);
         runCrawl();
     	setProgress(0);
@@ -89,21 +91,20 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     public void runCrawl() {
     	String crawlText = "";
     	try {
-    		setRunning(true);
         	WebElement mainDiv = driver.findElement(By.xpath("/html/body/div[1]/div/div/section/main/article/div[2]/div/div[1]/div[1]/a/div")); // 페이지에서 클릭해줄 div를 가져오는 과정
         	Thread.sleep(500);
     		mainDiv.click();
     		Thread.sleep(7000);
-    		for(int i=1; i <= 10; i++) {
+    		for(int i=1; i <= 50; i++) {
     			System.out.println(i + " Times try");
 //    			System.out.println(driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/article/div[3]/div[1]")).getText()); // 본문 내용
     			crawlText += driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/article/div[3]/div[1]")).getText();
     			Thread.sleep(500);
     			driver.findElement(By.xpath("/html/body/div[6]/div[1]/div/div/a[2]")).click(); // 다음 게시글 버튼
 				Thread.sleep(5000);
-				setProgress(i*10);
+				setProgress(i*2);
     		}
-    		Thread.sleep(5000);
+    		Thread.sleep(8000);
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
@@ -188,8 +189,11 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
-	
-	
+
+	@Override
+	public List<CrawlDataVO> getCrawlData1Row() {
+		return map.getCrawlData1Row();
+	}
 	
     
 }

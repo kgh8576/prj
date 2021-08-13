@@ -11,4 +11,5 @@ public interface CrawlDataServiceMap {
 	 public void start(String gender);
 	 void insertCrawl(CrawlDataVO vo);
 	 CrawlDataVO getCrawlList(String gender);
+	 List<CrawlDataVO> getCrawlData1Row();
 }

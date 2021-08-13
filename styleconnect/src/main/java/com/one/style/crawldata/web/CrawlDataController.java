@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +22,7 @@ public class CrawlDataController {
 	@ResponseBody
 	public String crawl(String gender){
 		crawlDao.start(gender);
-		return "크롤링 완료됨";
+		return "done!";
 	}
 	
 	@RequestMapping("getCrawlData.do")
@@ -44,8 +45,14 @@ public class CrawlDataController {
 		return crawlDao.getProgress();	
 	}
 	
-	@RequestMapping("goCrawlTest.do")
-	public String goCrawlTest() {
-		return "main/crawlTest";
+	@RequestMapping("crawlManagement.do")
+	public String crawlManagement(Model model) {
+		model.addAttribute("crawlDatas", crawlDao.getCrawlData1Row());
+		return "admin/crawlManagement";
+	}
+	@RequestMapping("resetCrawlData.do")
+	@ResponseBody
+	public List<CrawlDataVO> resetCrawlData() {
+		return crawlDao.getCrawlData1Row();
 	}
 }

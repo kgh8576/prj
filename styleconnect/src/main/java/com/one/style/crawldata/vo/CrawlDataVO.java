@@ -16,4 +16,5 @@ public class CrawlDataVO {
 	private String five;
 	private String gender;
 	
+	private String stringDate;
 }

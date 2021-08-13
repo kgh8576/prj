@@ -13,4 +13,18 @@
 		insert into crawl_data values(sysdate, #{one}, #{two}, #{three}, #{four}, #{five}, #{gender})
 	</insert>
 
+	<select id="getCrawlData1Row" resultType="com.one.style.crawldata.vo.CrawlDataVO">
+		select * from
+		  (
+		    select to_char(CRAWL_DATE, 'yyyy-mm-dd hh24:mi') as stringDate, one, two, three, four, five, gender from
+		      (select * from crawl_data where gender = 'FEMALE' order by crawl_date desc)
+		    where rownum = 1
+		    union 
+		    select to_char(CRAWL_DATE, 'yyyy-mm-dd hh24:mi') as stringDate, one, two, three, four, five, gender from
+		      (select * from crawl_data where gender = 'MALE' order by crawl_date desc)
+		    where rownum = 1
+		  )
+		order by (case when gender = 'MALE' then 1 else 2 end)
+	</select>
+
 </mapper>

@@ -12,10 +12,12 @@ public interface CrawlDataService {
 	 public void start(String gender);
 	 void insertCrawl(CrawlDataVO vo);
 	 CrawlDataVO getCrawlList(String gender);
+	 List<CrawlDataVO> getCrawlData1Row();
 	 
 	 public int getProgress();
 	 public void setProgress(int progress);
 	 public boolean getRunning();
 	 public void setRunning(boolean running);
+
 	 
 }
