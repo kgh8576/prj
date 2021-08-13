@@ -26,5 +26,6 @@ public interface DessearchService {
 	//디자이너 프로필 이미지
 	List<DessearchVO> desProImg(DessearchVO vo);
 	public List<DessearchVO> dessearchDesThum(DessearchVO vo);
+	public List<DessearchVO> dessearchDesSty(DessearchVO vo);
 	
 }

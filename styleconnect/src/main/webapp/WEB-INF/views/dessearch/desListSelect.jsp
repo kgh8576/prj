@@ -77,17 +77,13 @@
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
                                 <div class="row">
-                                <c:if test="${not empty img2 }">
-                                 	<c:forEach items="${img2}" var="img1"> 
-                                		<c:if test="${img1.fileState eq '0' }">
-                                		등록된 스타일이 없습니다.
-                                	</c:if></c:forEach>  
+                                <c:if test="${empty img2 }">
+                                		<h3>등록된 스타일이 없습니다.</h3>
                                   </c:if>
                                 <c:if test="${not empty img2 }">
                                  	<c:forEach items="${img2}" var="vo"> 
-                                		<c:if test="${vo.fileState eq 'sty' }">
                                 		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></div>
-                                	</c:if></c:forEach>  
+                                	</c:forEach>  
                                   </c:if>
                                 </div>
                             </div>
@@ -101,6 +97,11 @@
                         <div class="padding-30px background-white">
                             <h3><i class="far fa-star margin-right-10px text-main-color"></i> 리뷰 </h3>
                             <hr>
+                            <c:if test="${empty review }">
+                            <div align="center">
+                            <h3>등록된 후기가 없습니다.</h3>                            
+                            </div>                            
+                            </c:if>
 							<c:forEach items="${review}" var="vo">
                             <ul class="commentlist padding-0px margin-0px list-unstyled text-grey-3">
                                 <li class="border-bottom-1 border-grey-1 margin-bottom-20px">

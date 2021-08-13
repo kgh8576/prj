@@ -19,4 +19,5 @@ public interface DessearchMapper {
 	public List<DessearchVO> desPaging();
 	public List<DessearchVO> desProImg(DessearchVO vo);
 	public List<DessearchVO> dessearchDesThum(DessearchVO vo);
+	public List<DessearchVO> dessearchDesSty(DessearchVO vo);
 }
