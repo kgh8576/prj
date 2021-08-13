@@ -40,7 +40,6 @@ public class MemdetailController {
 		cvo.setMemId(id);
 		model.addAttribute("user",memDao.login(vo));
 		model.addAttribute("conhis",memdetailDao.conhisList(cvo));
-		model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
 		model.addAttribute("conccode005",memdetailDao.conccode005(cvo));
 		return "mymenu/mymenu";
 	}

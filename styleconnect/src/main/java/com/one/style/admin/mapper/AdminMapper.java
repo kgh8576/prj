@@ -11,14 +11,14 @@ public interface AdminMapper {
 	
 	//일반회원 관리
 	public List<MemberVO> memberListSelect(MemberVO vo);
-	public int memberListTotalCountSelect();
+	public int memberListTotalCountSelect(MemberVO vo);
 	public List<ConHistoryVO> memberConHistoryListSelect(ConHistoryVO vo);
 	public int memberConHistoryListTotalCountSelect(ConHistoryVO vo); 
 	public int memberConHistoryUpdate(ConHistoryVO vo);
 	
 	//디자이너 관리
 	public List<DesVO> designerListSelect(DesVO vo);
-	public int designerListTotalCountSelect();
+	public int designerListTotalCountSelect(DesVO vo);
 	public List<ConHistoryVO> designerConHistoryListSelect(ConHistoryVO vo);
 	public int designerConHistoryListTotalCountSelect(ConHistoryVO vo); 
 	public int designerConHistoryUpdate(ConHistoryVO vo);
