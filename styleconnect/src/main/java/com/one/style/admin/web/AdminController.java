@@ -44,6 +44,7 @@ public class AdminController {
 		
 		MemberVO vo = new MemberVO();
 		
+		
 		//검색된 아이디가 있다면 사용
 		String searchedID = req.getParameter("searchedID");
 		vo.setId(searchedID);
@@ -62,7 +63,7 @@ public class AdminController {
 	    Paging paging = new Paging();
 	    paging.setPageNo(pageCnt);
 	    paging.setPageSize(10);
-	    paging.setTotalCount(adminDao.memberListTotalCountSelect());
+	    paging.setTotalCount(adminDao.memberListTotalCountSelect(vo));
 		
 	    model.addAttribute("memberList",adminDao.memberListSelect(vo));
 		model.addAttribute("paging",paging);
@@ -76,12 +77,33 @@ public class AdminController {
 	@ResponseBody
 	public HashMap<String, Object> memberConHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
 			ConHistoryVO vo = new ConHistoryVO();
-			vo.setMemId(req.getParameter("memId"));
+			HashMap<String, Object> map = new HashMap<String, Object>();
 			
 			if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
 				vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));	
 			}
-					
+				
+//주석 코드: Integer.parseInt 예외처리 하지 말고 jsp 페이지에서 숫자만 입력되게 하므로 사용하지 않음			
+			//검색된 상담번호가 있는 경우
+//			if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
+//			
+//				//상담번호는 int 형식이므로 Integer.parseInt()를 사용하고 예외처리
+//				  try {
+//					  vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));
+//					  memberConHistoryList = adminDao.memberConHistoryListSelect(vo);
+//					  map.put("memberConHistoryList", memberConHistoryList);
+//					  
+//					  } catch (NumberFormatException e) {
+//						  System.err.println("invalid searchedConNo");
+//						  map.put("memberConHistoryList", memberConHistoryList);
+//						  
+//						  return map;
+//					  }
+//			}
+//주석 코드
+			
+			vo.setMemId(req.getParameter("memId"));
+			
 			int pageCnt = 0;
 			if(req.getParameter("page") != null && req.getParameter("page") != "") {
 				pageCnt = Integer.parseInt(req.getParameter("page"));
@@ -99,7 +121,6 @@ public class AdminController {
 		    paging.setTotalCount(adminDao.memberConHistoryListTotalCountSelect(vo));
 
 			
-			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("memberConHistoryList", adminDao.memberConHistoryListSelect(vo));
 			map.put("paging", paging);
 			
@@ -164,7 +185,7 @@ public class AdminController {
 	    Paging paging = new Paging();
 	    paging.setPageNo(pageCnt);
 	    paging.setPageSize(10);
-	    paging.setTotalCount(adminDao.designerListTotalCountSelect());
+	    paging.setTotalCount(adminDao.designerListTotalCountSelect(vo));
 		
 	    model.addAttribute("designerList",adminDao.designerListSelect(vo));
 		model.addAttribute("paging",paging);
@@ -179,6 +200,7 @@ public class AdminController {
 	public HashMap<String, Object> designerConsHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		
 		ConHistoryVO vo = new ConHistoryVO();
+
 		vo.setDesId(req.getParameter("desId"));
 
 		if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
