@@ -34,6 +34,7 @@
 		WHERE a.state = b.code
 		AND c.cour_no =
 		a.cour_no
+		
 		AND d.id = c.id
 		AND MEM_ID = #{memId}
 
@@ -43,6 +44,7 @@
 	<select id="conhisList"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
+		 <![CDATA[
 		SELECT
 
 		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
@@ -65,10 +67,12 @@
 		to_char(sysdate-1/24/60*30,'YY/MM/DD hh24:mi')
 		AND c.cour_no =
 		a.cour_no
+		AND a.state <> 'ccode003'
 		AND d.id = c.id
 		AND MEM_ID = #{memId}
 
 		ORDER BY LASTST_DATE asc
+			 ]]>
 	</select>
 	<select id="conhisListend"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
@@ -111,6 +115,47 @@ AND a.MEM_ID = #{memId}
 ORDER BY LASTST_DATE desc
   		 ]]>
 	</select>
+	<!-- 상담완료 목록'만'출력 -->
+	<select id="conccode005" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
+	    		 <![CDATA[
+	    		SELECT 
+a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
+a.time,
+a.state,
+a.price,
+a.reservate_date,
+a.cour_no,
+a.mem_attend,
+a.des_attend,
+a.con_no,
+b.code,
+b.CODECONTENT,
+c.title,
+c.detail,
+d.name AS desName,
+d.career,
+d.major,
+d.id,
+r.reviewexist
+FROM CONSULTING_HISTORY a, COMMCODEDETAIL b , 
+         DES_COURSE c, DESIGNER d, (select c.con_no , c.mem_id, nvl2(r.title,1,0) as reviewexist from
+                                                consulting_history c
+                                                join commcodedetail cc
+                                                on c.state = cc.code
+                                                left join review r
+                                                on c.con_no = r.con_no
+                                                where c.mem_id =#{memId}
+                                                ) r
+WHERE a.state = b.code
+AND to_char(day,'YY/MM/DD')||' '||time < to_char(sysdate,'YY/MM/DD hh24:mi')
+AND c.cour_no = a.cour_no
+AND d.id = c.id
+AND r.con_no = a.con_no
+AND a.MEM_ID = #{memId}
+AND a.state = 'ccode005'
+ORDER BY LASTST_DATE desc
+]]>
+</select>
 	<!-- 회원탈퇴 -->
 	<delete id="memexit"
 		parameterType="com.one.style.mem.vo.MemberVO">
