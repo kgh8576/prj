@@ -268,7 +268,7 @@ function hpchange() {
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
                               <label><i class="fas fa-mobile-alt margin-right-10px"></i> Phone</label>
-                              <input id="hp" name="hp"  type="text" class="form-control form-control-sm" value="${des.hp }">
+                              <input id="hp" name="hp"  type="number" class="form-control form-control-sm" value="${des.hp }">
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
                               <label><i class="far fa-map margin-right-10px"></i> Address</label>

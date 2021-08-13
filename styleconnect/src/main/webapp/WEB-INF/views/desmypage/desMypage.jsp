@@ -60,12 +60,13 @@
             </ul>
         </div>
     </nav>
-<div align="center">
-${my.id }
-</div>
 <input type="hidden" id="did" name="did" value="${did }">
 <div class="row justify-content-center">
 	              <div class="col-lg-7">
+	              <br/><br/><br/><br/><br/><br/><br/><br/>
+					<div align="center">
+					${my.name }님의 마이페이지<br/>
+					</div>
                     <div class="row">
                         <div class="col-md-3 col-6 sm-mb-30px wow fadeInUp">
                             <a href="desInfo.do" class="d-block border-radius-15 hvr-float hvr-sh2">
