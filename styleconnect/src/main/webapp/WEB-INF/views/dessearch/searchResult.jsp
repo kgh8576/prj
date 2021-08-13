@@ -36,6 +36,11 @@
                     </div>
 </form>
 <!-- 검색창 끝 -->
+<c:if test="${empty search }">
+<div align="center">
+<h1>검색 결과가 없습니다.</h1>
+</div>
+</c:if>
 	<div class="margin-tb-30px">
 		<div class="container">
 		<div class="row">
