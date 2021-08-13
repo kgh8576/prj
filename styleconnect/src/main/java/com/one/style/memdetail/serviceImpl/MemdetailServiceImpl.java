@@ -70,6 +70,12 @@ public class MemdetailServiceImpl implements MemdetailService {
 		// TODO Auto-generated method stub
 		return detailMapper.conallList(vo);
 	}
+
+	@Override
+	public List<ConHistoryVO> conccode005(ConHistoryVO vo) {
+		// TODO Auto-generated method stub
+		return detailMapper.conccode005(vo);
+	}
 	
 
 	

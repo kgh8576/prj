@@ -65,7 +65,7 @@
 								console.log(data.result);
 								location.href = "main.do";
 							} else {
-								$('#chkNotice').html('비밀번호 일치하지 않음<br><br>')
+								$('#chkNotice').html('아이디나 비밀번호가 일치하지 않음<br>개인회원과 디자이너 회원의 구분을 확인해보세요.<br>')
 										.attr('color', '#f82a2aa3');
 							}
 						},
@@ -104,7 +104,7 @@
 								console.log(data.result);
 								location.href = "main.do";
 							} else {
-								$('#chkNotice2').html('비밀번호 일치하지 않음<br><br>')
+								$('#chkNotice2').html('아이디나 비밀번호가 일치하지 않음<br>개인회원과 디자이너 회원의 구분을 확인해보세요.<br>')
 										.attr('color', '#f82a2aa3');
 							}
 						},

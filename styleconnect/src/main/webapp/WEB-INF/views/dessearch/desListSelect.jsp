@@ -18,12 +18,14 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
-                    <c:if test="${empty img }">
-                     <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/logo.jpg" alt=""></div>
-                    </c:if>
+                    	<c:if test="${empty img }">
+                    		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/logo.jpg" alt=""></div>
+                    	</c:if>
+                    	<c:if test="${not empty img }">
                        	<c:forEach items="${img}" var="img1" begin="3" end="3"> 
                              <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
                         </c:forEach>  
+                        </c:if>
                         <div class="padding-30px background-white">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -82,9 +84,9 @@
                                 	</c:if></c:forEach>  
                                   </c:if>
                                 <c:if test="${not empty img2 }">
-                                 	<c:forEach items="${img2}" var="img1"> 
-                                		<c:if test="${img1.fileState eq 'sty' }">
-                                		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
+                                 	<c:forEach items="${img2}" var="vo"> 
+                                		<c:if test="${vo.fileState eq 'sty' }">
+                                		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></div>
                                 	</c:if></c:forEach>  
                                   </c:if>
                                 </div>
@@ -99,24 +101,24 @@
                         <div class="padding-30px background-white">
                             <h3><i class="far fa-star margin-right-10px text-main-color"></i> 리뷰 </h3>
                             <hr>
-							<c:forEach items="${review}" var="review1">
+							<c:forEach items="${review}" var="vo">
                             <ul class="commentlist padding-0px margin-0px list-unstyled text-grey-3">
                                 <li class="border-bottom-1 border-grey-1 margin-bottom-20px">
                                     <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                     <div class="margin-left-85px">
-                                        <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 작성자 : ${review1.MName} </a>
+                                        <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 작성자 : ${vo.MName} </a>
                                        <%--  <span class="text-extra-small">상담명 :  <a href="#" class="text-main-color">${review1.title }</a></span> --%>
                                         <!-- 별점 -->
                                          <div class="rating clearfix">
                                         	<ul class="float-left">
-                                        	<c:forEach begin="1" end="${review1.rate }">
+                                        	<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
 											</c:forEach> 
-										 	평점 ${review1.rate }
+										 	평점 ${vo.rate }
                                         	</ul>
                                     	</div>
                                         <!-- 별점 끝-->
-                                        <p class="margin-top-15px text-grey-2">${review1.title } </p>
+                                        <p class="margin-top-15px text-grey-2">${vo.title } </p>
                                		</div>
                               	</li>
                           </ul>
