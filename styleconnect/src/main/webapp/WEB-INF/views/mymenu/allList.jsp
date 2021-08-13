@@ -45,15 +45,13 @@
 			</div>
 	</c:forEach>
 	<div style="text-align: center;">
-	<c:forEach var="conList" items="${conList }">
-	 <c:if test="${conList.state ne 'ccode006' }">
+	 <c:if test="${empty conList}">
            <div>
-				<p>불참한 내역이 없습니다!</p>
-				<p>소중한 시간약속 계속해서 잘 지켜주세요!</p>
-				<a href="membermypage.do" style="color: blue">마이페이지로!</a>
+				<p>아직 한번도 이용안해보신거같아요!</p>
+				<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
+				<a href="category.do" style="color: blue">찾으러가기!</a>
 			</div>
       </c:if>
-      	</c:forEach>
       	</div>
 
 </div>

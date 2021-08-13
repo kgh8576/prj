@@ -23,23 +23,24 @@
 	float: right;
 	color: #110202;
 }
-.looksNotBtn{
+
+.looksNotBtn {
 	padding: 0;
 	border: none;
 	background: none;
-	outline:none;
-}
-.looksNotBtn:focus{
-	padding: 0;
-	border: none;
-	background: none;
-    outline:none;
-    
-}
-.looksNotBtn:hover{
-	color: #FB522D;
+	outline: none;
 }
 
+.looksNotBtn:focus {
+	padding: 0;
+	border: none;
+	background: none;
+	outline: none;
+}
+
+.looksNotBtn:hover {
+	color: #FB522D;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -244,16 +245,24 @@
 									href="pwchangepage.do">비밀번호 변경하기</a>
 							</div>
 							<div class="col-md-6 margin-bottom-20px">
-								♥&nbsp;&nbsp;&nbsp;<button type="button" class="looksNotBtn" data-toggle="modal" data-target="#preferenceFrmModal">관심 분야 변경</button>
+								♥&nbsp;&nbsp;&nbsp;
+								<button type="button" class="looksNotBtn" data-toggle="modal"
+									data-target="#preferenceFrmModal">관심 분야 변경</button>
 							</div>
 							<div class="col-md-6 margin-bottom-20px">
-								<label><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-expressionless-fill" viewBox="0 0 16 16">
-								  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM4.5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm5 0h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm-5 4h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+								<label><svg xmlns="http://www.w3.org/2000/svg"
+										width="16" height="16" fill="currentColor"
+										class="bi bi-emoji-expressionless-fill" viewBox="0 0 16 16">
+								  <path
+											d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM4.5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm5 0h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm-5 4h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z" />
 								</svg></label>&nbsp;&nbsp;&nbsp;<a href="conallList.do">모든신청내역</a>
-							</div>							
+							</div>
 							<div class="col-md-6 margin-bottom-20px">
-								<label><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-expressionless-fill" viewBox="0 0 16 16">
-								  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM4.5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm5 0h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm-5 4h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+								<label><svg xmlns="http://www.w3.org/2000/svg"
+										width="16" height="16" fill="currentColor"
+										class="bi bi-emoji-expressionless-fill" viewBox="0 0 16 16">
+								  <path
+											d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM4.5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm5 0h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm-5 4h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z" />
 								</svg></label>&nbsp;&nbsp;&nbsp;<a href="noshow.do">Noshow</a>
 							</div>
 						</div>
@@ -263,9 +272,9 @@
 								<strong> 가장 가까운 예약목록 </strong>><br> <br>
 								<c:choose>
 									<c:when test="${!empty conhis}">
-										<c:forEach var="conhis" begin="0" end="0"
-											items="${conhis }">
-											<c:if test="${conhis.codecontent eq '예약중' || conhis.codecontent eq '예약확정' }">
+										<c:forEach var="conhis" begin="0" end="0" items="${conhis }">
+											<c:if
+												test="${conhis.codecontent eq '예약중' || conhis.codecontent eq '예약확정' }">
 												<div>
 													<h3>${conhis.title }</h3>
 													<p>예약날짜 : ${conhis.day }</p>
@@ -275,11 +284,20 @@
 													<p>상세정보 : ${conhis.detail }</p>
 												</div>
 												<div style="text-align: center;">
-													<a href="consulting.do" style="color: blue">상담하러가기</a>
-
-													<a style="margin-left: 100px;" href="conhispage.do" style="color: blue">더보기</a>
+													<a href="consulting.do" style="color: blue">상담하러가기</a> <a
+														style="margin-left: 100px;" href="conhispage.do"
+														style="color: blue">더보기</a>
 												</div>
 											</c:if>
+											<c:if
+												test="${conhis.codecontent ne '예약중' || conhis.codecontent ne '예약확정' }">
+												<div>
+													<p>아직까지 예약된 내역이없습니다!</p>
+													<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
+													<a href="category.do" style="color: blue">찾으러가기!</a>
+												</div>
+											</c:if>
+
 										</c:forEach>
 									</c:when>
 									<c:otherwise>
@@ -292,11 +310,11 @@
 								</c:choose>
 							</div>
 							<div class="col-md-6">
-								<strong> 상담이 끝난 목록</strong>><br>
-								<br>
+								<strong> 상담이 끝난 목록</strong>><br> <br>
 								<c:choose>
 									<c:when test="${!empty conccode005}">
-										<c:forEach var="conccode005" begin="0" end="0" items="${conccode005 }">
+										<c:forEach var="conccode005" begin="0" end="0"
+											items="${conccode005 }">
 											<c:if test="${conccode005.codecontent eq '상담완료'}">
 												<div>
 													<h3>${conccode005.title }</h3>
@@ -328,37 +346,55 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
-							
-					<!-- Modal -->
-					<div class="modal fade" id="preferenceFrmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-					  <div class="modal-dialog modal-lg">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					      	<form id="preferenceFrm" action="memDetailInsert.do" method="post">
-						      	<h5>내가 필요한 서비스는...</h5>
-						      	<h6 align="right" style="color: grey;">다중 선택 가능</h6>
-								<div class="select" style="text-align: center;" id="needService">
-									<input class="check" type="checkbox" name="YesorNo" id="makeupyn1" value="Y"><label style="width: 60px;" for="makeupyn1"> 메이크업 </label> <input class="finalcheck" type="hidden" id="makeupyn" name="makeupyn">
-									<input class="check" type="checkbox" name="YesorNo" id="cutyn1" value="Y"><label style="width: 60px;" for="cutyn1"> 커트 </label> <input class="finalcheck" type="hidden" id="cutyn" name="cutyn">
-									<input class="check" type="checkbox" name="YesorNo" id="permyn1" value="Y"><label style="width: 60px;" for="permyn1"> 펌 </label> <input class="finalcheck" type="hidden" id="permyn" name="permyn">
-									<input class="check" type="checkbox" name="YesorNo" id="dyeyn1" value="Y"> <label style="width: 60px;" for="dyeyn1"> 염색 </label> <input class="finalcheck" type="hidden" id="dyeyn" name="dyeyn">
+
+							<!-- Modal -->
+							<div class="modal fade" id="preferenceFrmModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Modal
+												title</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<form id="preferenceFrm" action="memDetailInsert.do"
+												method="post">
+												<h5>내가 필요한 서비스는...</h5>
+												<h6 align="right" style="color: grey;">다중 선택 가능</h6>
+												<div class="select" style="text-align: center;"
+													id="needService">
+													<input class="check" type="checkbox" name="YesorNo"
+														id="makeupyn1" value="Y"><label
+														style="width: 60px;" for="makeupyn1"> 메이크업 </label> <input
+														class="finalcheck" type="hidden" id="makeupyn"
+														name="makeupyn"> <input class="check"
+														type="checkbox" name="YesorNo" id="cutyn1" value="Y"><label
+														style="width: 60px;" for="cutyn1"> 커트 </label> <input
+														class="finalcheck" type="hidden" id="cutyn" name="cutyn">
+													<input class="check" type="checkbox" name="YesorNo"
+														id="permyn1" value="Y"><label style="width: 60px;"
+														for="permyn1"> 펌 </label> <input class="finalcheck"
+														type="hidden" id="permyn" name="permyn"> <input
+														class="check" type="checkbox" name="YesorNo" id="dyeyn1"
+														value="Y"> <label style="width: 60px;"
+														for="dyeyn1"> 염색 </label> <input class="finalcheck"
+														type="hidden" id="dyeyn" name="dyeyn">
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-primary"
+												onclick="preFrmSubmit()">제출</button>
+										</div>
+									</div>
 								</div>
-							</form>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-primary" onclick="preFrmSubmit()">제출</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-							
-							
+							</div>
+
+
 						</div>
 						<div style="text-align: left; margin-top: 200px">
 							<p>
