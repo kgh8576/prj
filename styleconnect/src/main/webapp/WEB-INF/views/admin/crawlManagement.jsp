@@ -29,7 +29,7 @@
 	    					success : function(progress) {
 	    						if ( progress == 100 ) { // 0에서 시작한 진행률이 100이면
 	    							clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
-	    							//afterCrawl();
+	    							afterCrawl();
 	    						} else { // 진행률이 0~98이면
 	    							$('#progressBar').text(progress+'% 완료됨');
 	    						}
@@ -71,7 +71,7 @@
 					success : function(progress) {
 						if ( progress == 100 ) {
 							clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
-							//afterCrawl();
+							afterCrawl();
 						} else {
 							$('#progressBar').text(progress+'% 완료됨');
 						}
@@ -89,7 +89,7 @@
 		btnToggle('able'); // 버튼 잠금 해제
 		$('#progressBar').text('완료!');
 	}
-/* setInterval 끝난 다음에 먹어야 하는데 추후 개선 필요... 귀찮으면 새로고침 하라 하면 됨
+	//setInterval 끝난 다음에 먹어야 하는데 추후 개선 필요... 귀찮으면 새로고침 하라 하면 됨
 	function resetCrawlData(){ // 크롤링 내역 다시 가져오는 fnc
 		$.ajax({
 			method:'post',
@@ -102,7 +102,6 @@
 			}
 		});
 	}
-*/
 	function btnToggle(state){ // 버튼 잠그는 fnc
 		if (state == 'able'){
 			$('#crawlBtnMale').attr('disabled', false);
@@ -127,12 +126,12 @@
 		</div>
 		<div class="col-md-6" style="margin:auto;">
 			<div class="btnGroup" align="center">
-				<button class="btn btn-info" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
-				<button class="btn btn-info" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
+				<button class="btn btn-primary" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
+				<button class="btn btn-primary" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
 				<button class="btn btn-waring">둘다 하기</button>
 			</div>
 			<br>
-				<div class="alert alert-warning alert-dismissible fade show" role="alert" style="display:inline-block; width:100%;">
+				<div class="alert alert-primary alert-dismissible fade show" role="alert" style="display:inline-block; width:100%;">
 				  완료까지는 <strong>약 7~8분의 시간이 소요</strong>됩니다. <br> 다른 작업을 하시다 오시는 것을 추천합니다
 				</div>
 			<div class="progress" id="progressDiv" style="height:25px; width:100%; display:none;">
@@ -140,7 +139,7 @@
 			</div>
 			<div>
 				<br>
-				가장 마지막 크롤링 내역
+				가장 마지막으로 크롤링 한 시점
 				<div id="crawlData">
 					남자 : ${crawlDatas[0].stringDate } <br> 여자 : ${crawlDatas[1].stringDate } 
 				</div>
