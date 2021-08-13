@@ -89,7 +89,7 @@
 		btnToggle('able'); // 버튼 잠금 해제
 		$('#progressBar').text('완료!');
 	}
-/* setInterval 끝난 다음에 먹어야 하는데 추후 개선 필요
+/* setInterval 끝난 다음에 먹어야 하는데 추후 개선 필요... 귀찮으면 새로고침 하라 하면 됨
 	function resetCrawlData(){ // 크롤링 내역 다시 가져오는 fnc
 		$.ajax({
 			method:'post',
@@ -114,27 +114,46 @@
 	}
 
 	
+
+	
 </script>
 </head>
 <body>
-	<br><br><br><br><br><br><br><br><br><br><br>
-	<button class="btn btn-info" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
-	<button class="btn btn-info" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
-	<button class="btn btn-waring">둘다 하기</button>
-	<br>
-		<div class="alert alert-warning alert-dismissible fade show" role="alert" style="display:inline-block; width:500px;">
-		  크롤링 완료까지는 <strong>약 7~8분의 시간이 소요</strong>됩니다. <br> 진행한 뒤 다른 작업을 하시다 오시는 것을 추천합니다
+
+
+<div class="container margin-tb-200px">
+	<div class="row">
+		<div class="col-md-3">
 		</div>
-	<div class="progress" id="progressDiv" style="height:25px; width:500px; display:none;">
-		<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" id="progressBar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">준비됨!</div>
-	</div>
-	<div>
-		<br>
-		마지막 크롤링 내역
-		<div id="crawlData">
-			남자 : ${crawlDatas[0].stringDate } <br> 여자 : ${crawlDatas[1].stringDate } 
+		<div class="col-md-6" style="margin:auto;">
+			<div class="btnGroup" align="center">
+				<button class="btn btn-info" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
+				<button class="btn btn-info" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
+				<button class="btn btn-waring">둘다 하기</button>
+			</div>
+			<br>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert" style="display:inline-block; width:100%;">
+				  완료까지는 <strong>약 7~8분의 시간이 소요</strong>됩니다. <br> 다른 작업을 하시다 오시는 것을 추천합니다
+				</div>
+			<div class="progress" id="progressDiv" style="height:25px; width:100%; display:none;">
+				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="progressBar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">준비됨!</div>
+			</div>
+			<div>
+				<br>
+				가장 마지막 크롤링 내역
+				<div id="crawlData">
+					남자 : ${crawlDatas[0].stringDate } <br> 여자 : ${crawlDatas[1].stringDate } 
+				</div>
+			</div>
+		
+		</div>
+		<div class="col-md-3">
 		</div>
 	</div>
+</div>
+
+
+
 	
 	
 </body>
