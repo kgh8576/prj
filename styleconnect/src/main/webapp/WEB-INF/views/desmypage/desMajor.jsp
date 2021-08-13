@@ -226,7 +226,7 @@ img{
                     <div class="container">
                         <ol class="breadcrumb opacity-5">
                         </ol>
-                        <h1 class="font-weight-300">전문분야 설정</h1>
+                        <h1 class="font-weight-300">전문분야 키워드 설정</h1>
                     </div>
                 </div>
 				<form name="frm" id="frm" action="majorUpdate.do" method="post">

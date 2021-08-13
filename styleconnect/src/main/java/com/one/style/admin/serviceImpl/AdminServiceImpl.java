@@ -22,8 +22,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public int memberListTotalCountSelect() {
-		return adminMapper.memberListTotalCountSelect();
+	public int memberListTotalCountSelect(MemberVO vo) {
+		return adminMapper.memberListTotalCountSelect(vo);
 	}
 	
 	@Override
@@ -46,8 +46,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public int designerListTotalCountSelect() {
-		return adminMapper.designerListTotalCountSelect();
+	public int designerListTotalCountSelect(DesVO vo) {
+		return adminMapper.designerListTotalCountSelect(vo);
 	}
 
 	@Override

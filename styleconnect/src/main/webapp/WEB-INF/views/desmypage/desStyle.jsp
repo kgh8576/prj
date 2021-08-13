@@ -126,6 +126,12 @@ function delfunc(fileUuid){
 									aria-labelledby="heading-A">
 									<div class="card-body info_content">
 										<div class="add_bottom_25"></div>
+										<c:if test="${empty sty }">
+										<div align="center">
+										<h3>등록된 스타일이 없습니다. <br/>스타일을 등록해보세요!</h3>
+										</div>
+										</c:if>
+										<c:if test="${not empty sty }">
 										<h2>스타일링 사진</h2>
 										<div class="pictures magnific-gallery clearfix">
 											<c:forEach items="${sty }" var="vo">
@@ -140,8 +146,16 @@ function delfunc(fileUuid){
 											<button id="btnmargidn" onclick="delfunc('${vo.fileUuid}')">삭제</button>
 											</c:forEach>
 										</div>
+										</c:if>
 									</div>
 								</div>
+							</div>
+							<div align="center">
+								<form method="post" action="desStyleUp.do" enctype="multipart/form-data">
+									<input type="hidden" name="did" value="${did }">
+									<input type="file" id="file" name="file" class="multi" multiple="multiple" />
+									<button type="submit">등록</button>
+								</form>
 							</div>
 							<!-- /tab -->
 						</div>
@@ -158,13 +172,6 @@ function delfunc(fileUuid){
 	</div>
 	</div>
 	</main>
-	<div align="center">
-		<form method="post" action="desStyleUp.do" enctype="multipart/form-data">
-			<input type="hidden" name="did" value="${did }">
-			<input type="file" id="file" name="file" class="multi" multiple="multiple" />
-			<button type="submit">등록</button>
-		</form>
-	</div>
 	<br/><br/><br/><br/><br/><br/>
 	<!-- COMMON SCRIPTS -->
 	<script

@@ -125,9 +125,9 @@
                           </ul>
 							</c:forEach>
                                 <div align="right">
-                                <a href="reviewList.do?desId=${designer.id }"> > 리뷰 더 보기 </a>
-                                <input type="hidden" name="id" value="${designer.id }">
-                                    </div>
+                                	<a href="reviewList.do?desId=${designer.id }"> > 리뷰 더 보기 </a>
+                                	<input type="hidden" name="id" value="${designer.id }">
+                               </div>
                         </div>
                     </div>
                     <!-- 리뷰 끝 -->
@@ -142,33 +142,32 @@
                         <div class="padding-bottom-30px">
                         <!-- 별점 -->
                          <div class="rating clearfix">
-                                        <ul class="float-left">
-                                          <c:if test="${designer.rate != 0 }">
-										<c:forEach begin="1" end="${designer.rate }">
-												<li class="active"></li>
-										</c:forEach>  평점 ${designer.rate }
-										</c:if>
-										<c:if test="${designer.rate == 0 }">
+                           <ul class="float-left">
+                              <c:if test="${designer.rate != 0 }">
+								<c:forEach begin="1" end="${designer.rate }">
+								<li class="active"></li>
+								</c:forEach>  평점 ${designer.rate }
+							 </c:if>
+							 <c:if test="${designer.rate == 0 }">
 											등록된 후기가 없습니다.
-										</c:if>
-                                        </ul>
-                         </div>
-                             <!-- 디자이너 major 태그 -->
+							</c:if>
+                         </ul>
+                       </div>
+                      <!-- 디자이너 major 태그 -->
                          <div class="post-tags">
                             <div>
-										<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
-											<c:forEach var="major" items="${majors}">
-											    <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
-											</c:forEach>
-									</div>
+								<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
+								<c:forEach var="major" items="${majors}">
+								 <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
+								</c:forEach>
+							</div>
                             <!-- //디자이너 major 태그 -->
                             <!-- 상담목록가기 버튼 -->
                              <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
-                        </div>
-                        </div>
-                        </div>
+                       </div>
+                      </div>
+                     </div>
                     </div>
-
                     <div class="background-white border-radius-10 margin-bottom-45px">
                         <div class="padding-25px">
                         </div>

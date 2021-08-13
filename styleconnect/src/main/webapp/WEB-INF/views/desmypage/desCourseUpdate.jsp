@@ -61,7 +61,7 @@ function readURL(input) {
                                   </div>
                                   <div class="col-md-6">
                                      <label><i class="fas fa-info margin-right-10px"></i> 가격(원)</label>
-                                     <input type="text" class="form-control form-control-sm" value="${course.price }" id="price" name="price">
+                                     <input type="number" class="form-control form-control-sm" value="${course.price }" id="price" name="price">
                                   </div>
                                 </div>
                    				 <button type="submit" class="btn btn-lg border-2  btn-primary btn-block border-radius-15 padding-15px box-shadow">상담수정</button>
