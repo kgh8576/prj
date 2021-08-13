@@ -104,8 +104,10 @@ $(document).ready(function(){
 		success : function(data) {
 			console.log(data);
 			if(data == 1) {
-				document.getElementById("altercheck").style.display = 'block';
-			}	
+				document.getElementById("altercheck2").style.display = 'block';
+			}else {
+				document.getElementById("altercheck2").style.display = 'none';
+			}
 		},
 		error : function(err) {
 			console.log(err);
@@ -287,7 +289,7 @@ function crawl(gender) {
 		style="background-image: url('http://placehold.it/1600x830');">
 		<div class="container z-index-2 position-relative">
 			<div class="title text-center">
-				<div id="altercheck"class="alert alert-success alert-dismissible" style="display: none;">
+				<div id="altercheck2"class="alert alert-success alert-dismissible" style="display: none;">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
 </div>

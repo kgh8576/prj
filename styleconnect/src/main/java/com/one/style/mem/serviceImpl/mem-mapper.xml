@@ -32,13 +32,23 @@
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
    	  <![CDATA[
-   	 select a.* from 
+   	   select a.* from 
       (select con_no,to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,state FROM CONSULTING_HISTORY where mem_id = #{memId} and state='ccode002'OR state='ccode004' ORDER BY 2 ASC) a
-    where rownum = 1
-    and (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60 < 10
+      where rownum = 1 
+       and 0 < (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60
+      and (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60 < 10
     ]]>
 	</select>
-
+	<select id="startSchedule"
+		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
+		resultType="com.one.style.conhistory.vo.ConHistoryVO">
+	<![CDATA[
+	select a.* from 
+      (select con_no,to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,state FROM CONSULTING_HISTORY where mem_id = #{memId} and state='ccode002'OR state='ccode004' ORDER BY 2 ASC) a
+    where rownum = 1
+    and (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60 < 0
+       ]]>
+	</select>
 	<!-- rownum = 1 주어서 한 행만 리턴될텐데도 여러행이 리턴되었다면서 단일 VO로 받아지지가 않음... 잘 모르지만 List<MemberVO>로 
 		해결 -->
 	<select id="getUserIdByHpName" parameterType="hashMap"
@@ -63,5 +73,5 @@
 		set pw = #{pw}
 		where name = #{name} and hp = #{hp}
 	</update>
-	
+
 </mapper>

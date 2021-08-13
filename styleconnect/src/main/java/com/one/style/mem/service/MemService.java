@@ -18,5 +18,6 @@ public interface MemService {
 	public String getUserIdByHpName(Map<String, String> map);
 	public int updateUserPwByHpName(Map<String, String> map);
 	public boolean checkSchedule(ConHistoryVO vo);
+	public boolean startSchedule(ConHistoryVO vo);
 	public boolean checkExistUserByIdHp(Map<String, String> map);
 }
