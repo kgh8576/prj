@@ -265,7 +265,7 @@
 									<c:when test="${!empty conhis}">
 										<c:forEach var="conhis" begin="0" end="0"
 											items="${conhis }">
-											<c:if test="${conhis.codecontent eq '예약중' }">
+											<c:if test="${conhis.codecontent eq '예약중' || conhis.codecontent eq '예약확정' }">
 												<div>
 													<h3>${conhis.title }</h3>
 													<p>예약날짜 : ${conhis.day }</p>
@@ -295,23 +295,22 @@
 								<strong> 상담이 끝난 목록</strong>><br>
 								<br>
 								<c:choose>
-									<c:when test="${!empty conhisends}">
-										<c:forEach var="conhisend" begin="0" end="0" items="${conhisends }">
-											<c:if test="${conhisend.codecontent eq '상담완료'}">
+									<c:when test="${!empty conccode005}">
+										<c:forEach var="conccode005" begin="0" end="0" items="${conccode005 }">
+											<c:if test="${conccode005.codecontent eq '상담완료'}">
 												<div>
-													<h3>${conhisend.title }</h3>
-													<p>예약날짜 : ${conhisend.day }</p>
-													<p>예약시간 : ${conhisend.time }</p>
-													<p>예약신청한날짜 : ${conhisend.reservateDate }</p>
-													<p>디자이너 : ${conhisend.desName }</p>
-													<p>상세정보 : ${conhisend.detail }</p>
+													<h3>${conccode005.title }</h3>
+													<p>예약날짜 : ${conccode005.day }</p>
+													<p>예약시간 : ${conccode005.time }</p>
+													<p>예약신청한날짜 : ${conccode005.reservateDate }</p>
+													<p>디자이너 : ${conccode005.desName }</p>
+													<p>상세정보 : ${conccode005.detail }</p>
 												</div>
-												
 												<div style="text-align: center;">
 													<a href="confinish.do" style="color: blue">더보기</a>
 												</div>
 											</c:if>
-											<c:if test="${conhisend.codecontent ne '상담완료'}">
+											<c:if test="${conccode005.codecontent ne '상담완료'}">
 												<div>
 													<p>아직까지 컨설팅 받은 내역이없습니다!</p>
 													<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>

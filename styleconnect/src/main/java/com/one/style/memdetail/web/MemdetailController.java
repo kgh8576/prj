@@ -41,8 +41,7 @@ public class MemdetailController {
 		model.addAttribute("user",memDao.login(vo));
 		model.addAttribute("conhis",memdetailDao.conhisList(cvo));
 		model.addAttribute("conhisends",memdetailDao.conhisListend(cvo));
-		System.out.println(memdetailDao.conhisList(cvo));
-		System.out.println(memdetailDao.conhisListend(cvo));
+		model.addAttribute("conccode005",memdetailDao.conccode005(cvo));
 		return "mymenu/mymenu";
 	}
 	//상담내역 리스트

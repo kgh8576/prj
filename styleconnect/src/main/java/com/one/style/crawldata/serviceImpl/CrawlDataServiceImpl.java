@@ -29,13 +29,16 @@ import java.util.Set;
 @Repository("crawlDao")
 public class CrawlDataServiceImpl implements CrawlDataService{
 	
+	private int progress;
+	private boolean running;
+
 	@Autowired CrawlDataServiceMap map;
 
     //WebDriver
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
+    public static final String WEB_DRIVER_PATH = "C:\\chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
     CrawlDataVO vo;
@@ -44,6 +47,8 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     public void start(String gender) {
         initCrawl(gender);
         runCrawl();
+    	setProgress(0);
+    	setRunning(false);
     }
  
     @Override
@@ -52,7 +57,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         //Driver SetUp
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-gpu","-no-sandbox");
+        chromeOptions.addArguments("--disable-gpu","-no-sandbox","--headless");
         chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
         chromeOptions.addArguments("lang=ko_KR");
         driver = new ChromeDriver(chromeOptions);
@@ -84,18 +89,21 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     public void runCrawl() {
     	String crawlText = "";
     	try {
+    		setRunning(true);
         	WebElement mainDiv = driver.findElement(By.xpath("/html/body/div[1]/div/div/section/main/article/div[2]/div/div[1]/div[1]/a/div")); // 페이지에서 클릭해줄 div를 가져오는 과정
         	Thread.sleep(500);
     		mainDiv.click();
     		Thread.sleep(7000);
-    		for(int i=1; i <= 50; i++) {
+    		for(int i=1; i <= 10; i++) {
     			System.out.println(i + " Times try");
 //    			System.out.println(driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/article/div[3]/div[1]")).getText()); // 본문 내용
     			crawlText += driver.findElement(By.xpath("/html/body/div[6]/div[2]/div/article/div[3]/div[1]")).getText();
     			Thread.sleep(500);
     			driver.findElement(By.xpath("/html/body/div[6]/div[1]/div/div/a[2]")).click(); // 다음 게시글 버튼
-				Thread.sleep(5000);	
+				Thread.sleep(5000);
+				setProgress(i*10);
     		}
+    		Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         } finally{
@@ -114,7 +122,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 		String[] sliced2 = sliced.split(" ");
 		List<String> hashTags = new ArrayList<String>();
 		for(String s : sliced2) {
-			if(s.startsWith("#") && s.length() < 11 && !s.contains("#펌") && !s.contains("남자") && !s.contains("여자") && !s.contains("탈색") && !s.contains("염색")){
+			if(s.startsWith("#") && s.length() < 11 && !s.contains("#펌") && !s.contains("남자") && !s.contains("여자") && !s.contains("탈색") && !s.contains("염색") && s.length() > 2){
 				if(s.endsWith("펌") || s.endsWith("컷")) {
 					hashTags.add(s);
 				}
@@ -139,7 +147,6 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 				return obj2.getValue().compareTo(obj1.getValue());
 			}
 		});
-
 		System.out.println("내림 차순 정렬");
 		for(int i = 0; i <= 4; i++) {
 			System.out.println(list_entries.get(i).getKey() + " : " + list_entries.get(i).getValue());
@@ -149,8 +156,6 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 			if (i == 3) vo.setFour(list_entries.get(i).getKey());
 			if (i == 4) vo.setFive(list_entries.get(i).getKey());
 		}
-		System.out.println(vo.getOne());
-		System.out.println(vo.getFive());
 		insertCrawl(vo);
 	}
 
@@ -163,6 +168,28 @@ public class CrawlDataServiceImpl implements CrawlDataService{
 	public CrawlDataVO getCrawlList(String gender) {
 		return map.getCrawlList(gender);
 	}
+
+	@Override
+	public int getProgress() {
+		return progress;
+	}
+
+	@Override
+	public void setProgress(int progress) {
+		this.progress = progress;
+	}
+
+	@Override
+	public boolean getRunning() {
+		return running;
+	}
+
+	@Override
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+	
+	
 	
     
 }

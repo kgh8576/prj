@@ -45,6 +45,7 @@
 			if (mem_id == ""){
 				alert('로그인이 필요한 서비스 입니다. 로그인을 해주세요');
 				location.href='loginpage.do';
+				return false;
 			}
 			var selectTime = $("#selected_time").text();
 			var selectday = frm.day.value;

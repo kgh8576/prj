@@ -105,4 +105,13 @@ public class MemServiceImpl implements MemService {
 		return YorN;
 	}
 
+	@Override
+	public boolean checkExistUserByIdHp(Map<String, String> map) {
+		boolean b = false;
+		if (!memMapper.getUserIdByHpName(map).isEmpty()) {
+			b = true;
+		}
+		return b;
+	}
+
 }

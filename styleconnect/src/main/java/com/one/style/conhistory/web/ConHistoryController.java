@@ -51,7 +51,7 @@ public class ConHistoryController {
 	@RequestMapping("conHistoryInsert.do")
 	public String conHistoryInsert(ConHistoryVO vo) {
 		conHistoryDao.conHistoryInsert(vo);
-		return "redirect:main.do";//나중에 마이페이지 가야됨 ㅋㅋ
+		return "redirect:membermypage.do";
 	}
 	
 	//상담하기 페이지: 상담 참여 시 DB의 consulting_history 테이블의 mem_attend 또는 des_attend 값을 N에서 Y로 변경
