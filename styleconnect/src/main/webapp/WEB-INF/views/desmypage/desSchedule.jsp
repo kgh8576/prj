@@ -10,6 +10,24 @@
 .statestyl{
 	font-weight: bolder;;
 }
+.row2{
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+}
+.padding-30px2 {
+    padding: 30px;
+    width: 400px;
+    height: 400px;
+    }
+
 </style>
 <script>
 function denyfun(conNo){
@@ -109,7 +127,7 @@ function selectList(){
                     </div>
                 </div>
                 <!-- // Page Title -->
-                <div class="row margin-top-45px">
+                <div class="row2 margin-top-45px">
                 <c:if test="${empty sche }">
                 	<h1>예약이 없습니다.</h1>
                 </c:if>
@@ -117,7 +135,7 @@ function selectList(){
                     <!-- Booking item -->
                     <div class="col-lg-6 margin-bottom-45px full-width">
                         <div class="background-white thum-hover box-shadow  hvr-float">
-                            <div class="padding-30px full-width">
+                            <div class="padding-30px2 full-width">
                                 <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                 <div class="margin-left-85px">
                                 	<a class="d-block text-dark text-medium margin-bottom-5px" href="#">No. ${vo.conNo }  </a>
