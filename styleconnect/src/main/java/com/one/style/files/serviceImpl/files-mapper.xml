@@ -5,4 +5,8 @@
 	<insert id="fileinsert" parameterType="com.one.style.files.vo.FilesVO">
 		INSERT INTO FILES VALUES(file_no_seq.nextval,#{des_id},#{fileName},#{fileUuid},#{fileState},sysdate,#{courNo})
 	</insert>
+	
+	<select id="dateTest" resultType="com.one.style.wokrOpen.vo.WorkOpenVO">
+		select to_char(sysdate,'yyyy/mm/dd hh24:mi:dd') as timezone from dual
+	</select>
 </mapper>
