@@ -12,7 +12,7 @@
 	// 1. 작업 시켜놓고 나갔다가 들어오는 경우 페이지 로드 시 크롤링 중인지 검사
 	// 2. 버튼 눌러놓고 기다리는 경우
 	
-	// 페이지 로드 시 크롤링 중인지 검사
+	// 페이지 로드 시 크롤링 중인지 검사, 
 	$(function() {
 	    $.ajax({
 	    	url:'isCrawlRunning.do',
@@ -37,20 +37,19 @@
 		    					},
 		    					error : function(err) {
 		    						console.log(err);
-		    						$('#progressBar').text('에러!');
 		    						clearInterval(getCrawlProgress);
 		    						afterCrawl('error');
 		    					}
 		    				});
     					} else {
     						clearInterval(getCrawlProgress);
+    						isRun = false;
     					}
 	    			}, 4000);
 	    		}
 	    	},
 	    	error:function(err){
 	    		console.log(err);
-	    		$('#progressBar').text('에러!');
 	    		clearInterval(getCrawlProgress);
 	    		afterCrawl('error');
 	    	}
@@ -59,21 +58,35 @@
 
 	// 버튼 누르면 크롤링
 	function crawl(gender) {
-		if (isRun == false){ // 돌아가는 중이면
-			btnToggle('disable'); // 버튼 잠그기
+		if ($('#id').val() == ''){
+			alert('아이디를 입력하세요');
+			return false;
+		}
+		if ($('#pw').val() == ''){
+			alert('비밀번호를 입력하세요');
+			return false;
+		}
+		if (isRun == false){ // 돌아가는 중이 아니면
+			$('#progressBar').removeClass('bg-danger');
 			isRun = true; // 버튼 눌러서 크롤링 시작했으니까 true
+			btnToggle('disable'); // 버튼 잠그기
 			$('#progressDiv').css('display', 'block'); // 숨겼던 진행률 div show
 			$.ajax({
 				url : 'crawl.do',
 				method:'post',
-				data : {gender : gender},
-				success : function() {
+				data : {gender : gender, id : $('#id').val(), pw : $('#pw').val() },
+				success : function(result) {
+					console.log(result);
+					if(result == 'success') {
+						afterCrawl('done');
+					} else {
+						afterCrawl('error');
+					}
 				},
 				error : function(err) {
-					$('#progressBar').text('에러!');
 					clearInterval(getCrawlProgress);
-					console.log(err);
 					afterCrawl('error');
+					btnToggle('able');
 				}
 			});
 			
@@ -91,14 +104,13 @@
 							}
 						},
 						error : function(err) {
-							$('#progressBar').text('에러!');
 							clearInterval(getCrawlProgress);
-							console.log(err);
 							afterCrawl('error');
 						}
 					});
 				} else {
 					clearInterval(getCrawlProgress);
+					isRun = false;
 				}
 			}, 4000);
 		}
@@ -111,6 +123,7 @@
 			$('#progressBar').text('완료!');
 		} else {
 			$('#progressBar').text('에러!');
+			$('#progressBar').addClass('bg-danger');
 		}
 		
 	}
@@ -136,9 +149,6 @@
 			$('#crawlBtnFemale').attr('disabled', true);
 		}
 	}
-
-	
-
 	
 </script>
 </head>
@@ -151,13 +161,22 @@
 		</div>
 		<div class="col-md-6" style="margin:auto;">
 			<div class="btnGroup" align="center">
+				<div class="form-group label-floating">
+					인스타그램 ID : <input id="id"
+						class="form-control" placeholder="internet2dot02021"
+						type="text" style="width: 50%; display:inline-block;">
+				</div>
+				<div class="form-group label-floating">
+					비밀번호 : <input
+						class="form-control" placeholder="비밀번호를 입력해주세요." type="password"
+						id="pw" style="width: 50%; display:inline-block;">
+				</div>
 				<button class="btn btn-primary" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
 				<button class="btn btn-primary" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
-				<button class="btn btn-waring">둘다 하기</button>
 			</div>
 			<br>
 				<div class="alert alert-primary alert-dismissible fade show" role="alert" style="display:inline-block; width:100%;">
-				  완료까지는 <strong>약 7~8분의 시간이 소요</strong>됩니다. <br> 다른 작업을 하시다 오시는 것을 추천합니다
+				  완료까지는 <strong>약 7~8분의 시간이 소요</strong>됩니다. <br> 다른 작업을 하시다 오시는 것을 추천합니다.
 				</div>
 			<div class="progress" id="progressDiv" style="height:25px; width:100%; display:none;">
 				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="progressBar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">준비됨!</div>
