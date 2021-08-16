@@ -75,6 +75,7 @@ footer{
 		<br>
 		<br>
 		<br>
+		<br><br>
 		<article>
 			<tiles:insertAttribute name="body" />
 		</article>
