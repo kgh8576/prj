@@ -259,8 +259,7 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 			<a id="kakao-login-btn" class="btn btn-md bg-facebook full-width btn-icon-left" style="background-color: #ffeb06; color: black;" onclick="kakaoLogin();">Login with Kakao</a>
 
 			<p>
-				Don't you have an account? <a href="page-sign-up.html">Register
-					Now!</a>
+				아직 아이디가없다면? <a href="Insertchoice.do">지금 가입하세요!</a>
 			</p>
 		</div>
 	</div>
@@ -310,17 +309,8 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
 			<div class="or"></div>
 
-			<a href="#" class="btn btn-md bg-facebook full-width btn-icon-left"><i
-				class="fab fa-facebook margin-right-8px" aria-hidden="true"></i>
-				Login with Facebook</a> <a href="#"
-				class="btn btn-md bg-twitter full-width btn-icon-left"><i
-				class="fab fa-twitter margin-right-8px" aria-hidden="true"></i>
-				Login with Twitter</a>
-
-
 			<p>
-				Don't you have an account? <a href="page-sign-up.html">Register
-					Now!</a>
+				아직 아이디가없다면? <a href="Insertchoice.do">지금 가입하세요!</a>
 			</p>
 		</div>
 	</div>
