@@ -62,7 +62,6 @@ public class CrawlDataServiceImpl implements CrawlDataService{
         //Driver SetUp
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-gpu","-no-sandbox","--headless");
-        chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
         chromeOptions.addArguments("lang=ko_KR");
         driver = new ChromeDriver(chromeOptions);
         base_url = "https://www.instagram.com/accounts/login/";
