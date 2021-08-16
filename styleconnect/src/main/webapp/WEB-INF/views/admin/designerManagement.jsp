@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
@@ -62,7 +62,6 @@ function designerIDSearch(){
 <script>
 //모달 페이지 이동 함수 
 function goPageForModal1(id, page) {
-	console.log("페이지: " + page);
 	designerConHistoryUpdateForm(id, page);
 }
 
@@ -104,27 +103,34 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 			var designerConHistoryList = data.designerConHistoryList;
 			var paging = data.paging;
 			
-			//받아온 데이터의 null 처리(처리하지 않을 시 DB에서 null인 경우 null 문자가 그대로 출력됨)
-			for(var i = 0; i< designerConHistoryList.length; i++){
-				for(var key in designerConHistoryList[i]){
-					designerConHistoryList[i][key] = nullReplace(designerConHistoryList[i][key]);
-				}
-			}
-			//null 처리 끝
+
 			
 			//모달 바디 안에 태그 삽입
 				//1. 태그 생성
 			var designerConHistoryUpdateFormCode ='';
 
-					//코드 비효율적임. 추후 수정 시: 
-					//form을 list size만큼 생성하지 않고 
-					//1. 버튼 눌렀을 때 매개변수로 인덱스 값을 넘기고
-					//2. 넘긴 인덱스로 3개의 value값(conNo, desAttend, memAttend) 찾아서
-					//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
-			
-			if(memberConHistoryList.length == 0 ){
-				memberConHistoryUpdateFormCode = '검색 결과가 없습니다.';
+					//if: 검색 결과가 없을 때와 있을 때를 구분
+			if(designerConHistoryList.length == 0 ){
+				//검색 결과 메세지
+				designerConHistoryUpdateFormCode = '검색 결과가 없습니다.';
+				//'뒤로'버튼
+				designerConHistoryUpdateFormCode += '<button type="button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
 			} else {		
+
+				
+						//받아온 데이터의 null 처리(처리하지 않을 시 DB에서 null인 경우 null 문자가 그대로 출력됨)
+				for(var i = 0; i< designerConHistoryList.length; i++){
+					for(var key in designerConHistoryList[i]){
+						designerConHistoryList[i][key] = nullReplace(designerConHistoryList[i][key]);
+					}
+				}
+						//null 처리 끝
+						
+						//코드 비효율적임. 추후 수정 시: 
+						//form을 list size만큼 생성하지 않고 
+						//1. 버튼 눌렀을 때 매개변수로 인덱스 값을 넘기고
+						//2. 넘긴 인덱스로 3개의 value값(conNo, desAttend, memAttend) 찾아서
+						//3. ajax로 value값 GET으로 넘기거나 data생성해서 POST로 넘김
 					
 						//폼 데이터를 만들기 위한 폼
 				for(var i = 0; i < designerConHistoryList.length; i++){
@@ -210,6 +216,12 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 													
 				designerConHistoryUpdateFormCode += '</table>';
 						//테이블 끝
+						
+						//'뒤로'버튼
+				if(searchedConNo != null && searchedConNo !=''){	
+					designerConHistoryUpdateFormCode += '<button type="button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+				}
+						
 				
 						//페이지 네비게이션
 				designerConHistoryUpdateFormCode += '<div class="pagination">'//
@@ -233,10 +245,10 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 						//페이지 네비게이션 끝
 			}
 							
-				//1. 태그 생성 끝			
-				//2. 태그 삽입
+				//2. 태그 생성 끝			
+				//3. 태그 삽입
 			$('#designer-conHistory-update-form-target').html(designerConHistoryUpdateFormCode);
-				//2. 태그 삽입 끝
+				//3. 태그 삽입 끝
 
 			
 		}
@@ -484,43 +496,54 @@ function nullReplace(data) {
 <!-- 할까말까 -->
 
 <!-- 디자이너 리스트 -->
-<table>
-	<tr>
-		<td>ID</td>
-		<td>이름</td>
-		<td>성별</td>
-		<td>생년월일</td>
-		<td>휴대폰 번호</td>
-		<td>근무처</td>
-		<td>분야</td>
-		<td>전문</td>
-		<td>상태</td>
-		<td>가입일</td>
-		<!-- 수정 버튼 클릭 시 수정 폼페이지로 이동 -->
-		<td>처리</td>
-	</tr>
-	<c:forEach var="designer" items="${designerList }">
-	<tr>
-		<td>${designer.id}</td>
-		<td>${designer.name}</td>
-		<td>${designer.gender}</td>
-		<td>${designer.birth}</td>
-		<td>${designer.hp}</td>
-		<td>${designer.location}</td>
-		<td>메이크업: ${designer.makeupyn}<br>
-			컷: ${designer.cutyn}<br>
-			펌: ${designer.permyn}<br>
-			염색: ${designer.dyeyn}</td>
-		<td>${designer.major}</td>
-		<td>${designer.state}</td>
-		<td>${designer.regday}</td>
-		<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">상담내역 변경</button>
-			<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">회원상태 변경</button>
-		</td>
-	</tr>
-	</c:forEach>
+	<c:if test="${fn:length(designerList) == 0 }">
+		<p>검색 결과가 없습니다.</p>
+		<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+	</c:if>
 	
-</table>
+	<c:if test="${fn:length(designerList) != 0 }">
+		<table>
+			<tr>
+				<td>ID</td>
+				<td>이름</td>
+				<td>성별</td>
+				<td>생년월일</td>
+				<td>휴대폰 번호</td>
+				<td>근무처</td>
+				<td>분야</td>
+				<td>전문</td>
+				<td>상태</td>
+				<td>가입일</td>
+				<!-- 수정 버튼 클릭 시 수정 폼페이지로 이동 -->
+				<td>처리</td>
+			</tr>
+			<c:forEach var="designer" items="${designerList }">
+			<tr>
+				<td>${designer.id}</td>
+				<td>${designer.name}</td>
+				<td>${designer.gender}</td>
+				<td>${designer.birth}</td>
+				<td>${designer.hp}</td>
+				<td>${designer.location}</td>
+				<td>메이크업: ${designer.makeupyn}<br>
+					컷: ${designer.cutyn}<br>
+					펌: ${designer.permyn}<br>
+					염색: ${designer.dyeyn}</td>
+				<td>${designer.major}</td>
+				<td>${designer.state}</td>
+				<td>${designer.regday}</td>
+				<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">상담내역 변경</button>
+					<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">회원상태 변경</button>
+				</td>
+			</tr>
+			</c:forEach>
+			
+		</table>
+
+		<c:if test = "${param.searchedID != '' && param.searchedID != null }">
+			<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+		</c:if>
+	</c:if>
 
 <!-- 전체 페이지의 페이지 네비게이션 -->
 <div align="center">

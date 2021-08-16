@@ -48,6 +48,7 @@ public class AdminController {
 		//검색된 아이디가 있다면 사용
 		String searchedID = req.getParameter("searchedID");
 		vo.setId(searchedID);
+		//검색된 아이디가 있다면 사용 끝
 		
 		String page = req.getParameter("page");
 		int pageCnt = 0;
@@ -79,28 +80,22 @@ public class AdminController {
 			ConHistoryVO vo = new ConHistoryVO();
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
-			if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
-				vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));	
-			}
 				
-//주석 코드: Integer.parseInt 예외처리 하지 말고 jsp 페이지에서 숫자만 입력되게 하므로 사용하지 않음			
-			//검색된 상담번호가 있는 경우
-//			if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
-//			
-//				//상담번호는 int 형식이므로 Integer.parseInt()를 사용하고 예외처리
-//				  try {
-//					  vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));
-//					  memberConHistoryList = adminDao.memberConHistoryListSelect(vo);
-//					  map.put("memberConHistoryList", memberConHistoryList);
-//					  
-//					  } catch (NumberFormatException e) {
-//						  System.err.println("invalid searchedConNo");
-//						  map.put("memberConHistoryList", memberConHistoryList);
-//						  
-//						  return map;
-//					  }
-//			}
-//주석 코드
+			//검색된 상담번호가 있는 경우 *문자열 입력시 NumberFormatException 발생하므로 예외처리
+			if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
+				  try {
+					  vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));
+					  map.put("memberConHistoryList", adminDao.memberConHistoryListSelect(vo));
+					  
+					  } catch (NumberFormatException e) {
+						  List<ConHistoryVO>emptyMemberConHistoryList = new ArrayList<ConHistoryVO>();
+						  System.err.println("invalid searchedConNo");
+						  map.put("memberConHistoryList", emptyMemberConHistoryList);
+						  
+						  return map;
+					  }
+			}
+			//검색된 상담번호가 있는 경우 끝
 			
 			vo.setMemId(req.getParameter("memId"));
 			
@@ -200,12 +195,27 @@ public class AdminController {
 	public HashMap<String, Object> designerConsHistoryUpdateForm(Model model , HttpServletRequest req , HttpServletResponse resp) {
 		
 		ConHistoryVO vo = new ConHistoryVO();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+	
+		//검색된 상담번호가 있는 경우 *문자열 입력시 NumberFormatException 발생하므로 예외처리
+		if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
+		
+			try {
+				  vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));
+				  map.put("designerConHistoryList", adminDao.designerConHistoryListSelect(vo));
+				  
+			} catch (NumberFormatException e) {
+				List<ConHistoryVO>emptyDesignerConHistoryList = new ArrayList<ConHistoryVO>();
+				System.err.println("invalid searchedConNo");
+				map.put("designerConHistoryList", emptyDesignerConHistoryList);
+					  
+				return map;
+			}
+		}
+		//검색된 상담번호가 있는 경우 끝
 
 		vo.setDesId(req.getParameter("desId"));
-
-		if(req.getParameter("searchedConNo") != null && req.getParameter("searchedConNo") != "") {
-			vo.setConNo(Integer.parseInt(req.getParameter("searchedConNo")));	
-		}
 				
 		int pageCnt = 0;
 		if(req.getParameter("page") != null && req.getParameter("page") != "") {
@@ -226,7 +236,6 @@ public class AdminController {
 		List<ConHistoryVO> designerConHistoryList  = new ArrayList<ConHistoryVO>();
 		designerConHistoryList = adminDao.designerConHistoryListSelect(vo);	
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("designerConHistoryList", designerConHistoryList);
 		map.put("paging", paging);
 		

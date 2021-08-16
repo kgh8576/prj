@@ -103,14 +103,27 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 			var memberConHistoryList = data.memberConHistoryList;
 			var paging = data.paging;
 			
+			
+			
+			//모달 바디 안에 태그 삽입
+				//1. 태그 생성
 			var memberConHistoryUpdateFormCode ='';
 			
+					//if: 검색 결과가 없을 때와 있을 때를 구분
 			if(memberConHistoryList.length == 0 ){
+				//검색 결과 메세지
 				memberConHistoryUpdateFormCode = '검색 결과가 없습니다.';
+				//'뒤로'버튼
+				memberConHistoryUpdateFormCode += '<button type="button" onclick="memberConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
 			} else {
-				//모달 바디 안에 태그 삽입
-				//1. 태그 생성
-			
+
+						//받아온 데이터의 null 처리(처리하지 않을 시 DB에서 null인 경우 null 문자가 그대로 출력됨)
+				for(var i = 0; i< memberConHistoryList.length; i++){
+					for(var key in memberConHistoryList[i]){
+						memberConHistoryList[i][key] = nullReplace(memberConHistoryList[i][key]);
+					}
+				}
+						//null 처리 끝
 
 						//코드 추후 수정 한다면: 
 						//form을 list size만큼 생성하지 않고 
@@ -199,6 +212,12 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 													
 				memberConHistoryUpdateFormCode += '</table>';//
 						//테이블 끝
+						
+						//'뒤로'버튼
+				if(searchedConNo != null && searchedConNo !=''){	
+					memberConHistoryUpdateFormCode += '<button type="button" onclick="memberConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+				}
+						
 						//페이지 네비게이션
 				memberConHistoryUpdateFormCode += '<div class="pagination">'//
 													+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'//
@@ -254,6 +273,31 @@ function memberConHistoryUpdate(index) {
 }
 </script>
 
+<!-- 데이터 처리 함수 -->
+<script>
+// null 데이터 치환 함수
+// "", " ", null, undefined, {}, [] 도 NULL이라고 봄
+function nullReplace(data) {
+    if(typeof(data) === 'object'){
+        if(JSON.stringify(data) === '{}' || JSON.stringify(data) === '[]'){
+            return "";
+        }else if(!data){
+            return "";
+        }
+        return data;
+    }else if(typeof(data) === 'string'){
+        if(!data.trim()){
+            return "";
+        }
+        return data;
+    }else if(typeof(data) === 'undefined'){
+        return "";
+    }else{
+        return data;
+    }
+}
+</script>
+
 
 
 <br><br><br><br><br><br><br><br><br><br>
@@ -268,11 +312,9 @@ function memberConHistoryUpdate(index) {
 	
 	<c:if test="${fn:length(memberList) == 0 }">
 		<p>검색 결과가 없습니다.</p>
+		<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
 	</c:if>
-	
-	
 	<c:if test="${fn:length(memberList) != 0 }">
-	
 	<table>
 		<tr>
 			<td>회원ID</td>
@@ -296,6 +338,9 @@ function memberConHistoryUpdate(index) {
 		</c:forEach>
 		
 		</table>
+		<c:if test = "${param.searchedID != '' && param.searchedID != null }">
+			<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+		</c:if>
 	</c:if>
 
 

@@ -35,6 +35,9 @@ public class ConHistoryController {
 		HttpSession session = req.getSession();
 		ConHistoryVO vo = new ConHistoryVO();
 		
+		//테스트용 로그인 아이디
+		//session.setAttribute("id", "hotakshin");
+		
 		//일반회원인 경우
 		if(session.getAttribute("id") != null) {
 			vo.setMemId((String)session.getAttribute("id")); 
