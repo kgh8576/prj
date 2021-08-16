@@ -2,36 +2,39 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- Booking item -->
+<head>
+</head>
 <div class="col-lg-12" style="margin-bottom: 50px;">
-	<H3 style="text-align: center; margin-bottom: 50px">모든 예약하신 목록입니다.</H3>
+	<H3 style="text-align: center; ">모든 예약하신 목록입니다.</H3>
+	<p style="text-align: center; margin-bottom: 50px">파란글씨를 누르면 디자이너의 상세 페이지로 이동할수있어요!</p>
 	<c:forEach var="conList" items="${conList }">
 
 			<div style="margin: auto; width: 100%"
 				class="col-lg-6 margin-bottom-45px full-width">
 				<div class="background-white thum-hover box-shadow  hvr-float" style="display:inline-block; width:100%;">
 					<div class="padding-30px">
-						<img src="http://placehold.it/60x60"
-							class="float-left margin-right-20px border-radius-60 margin-bottom-20px"
-							alt="">
+						<img src="${pageContext.request.contextPath}/resources/img/${conList.fileUuid}"
+							class="float-left margin-right-100px border-radius-60 margin-bottom-20px"
+							alt="" style="width:300px;	height: 300px;">
 						<div class="margin-left-85px">
 							<a class="d-block text-dark text-medium margin-bottom-5px"
 								href="#">${conList.title } </a>
 							<div class="d-block padding-tb-5px">
-								예약날짜 : <a href="#" class="text-main-color">${conList.day }</a>
+								예약날짜 : <a href="desListSelect.do?id=${conList.id }" class="text-main-color">${conList.day }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								예약시간 : <a href="#" class="text-main-color">
+								예약시간 : <a href="desListSelect.do?id=${conList.id }" class="text-main-color">
 									${conList.time }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								예약신청한날짜 : <a href="#" class="text-main-color">${conList.reservateDate }</a>
+								예약신청한날짜 : <a href="desListSelect.do?id=${conList.id }" class="text-main-color">${conList.reservateDate }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								디자이너 : <a href="#" class="text-main-color">
+								디자이너 : <a href="desListSelect.do?id=${conList.id }" class="text-main-color">
 									${conList.desName }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								상태 : <a href="#" class="text-main-color">
+								상태 : <a href="desListSelect.do?id=${conList.id }" class="text-main-color">
 									${conList.codecontent }</a>
 							</div>
 							<p class="margin-top-15px text-grey-2">상세정보 :
