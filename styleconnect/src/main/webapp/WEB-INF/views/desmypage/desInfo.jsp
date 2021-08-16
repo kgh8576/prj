@@ -189,11 +189,18 @@ $(document).ready(function(){
 function imgCheck(){
 	if(imgfrm.file.value == ""){
 		alert("선택된 이미지가 없습니다.");
-		//frm.file.focus();
 		return false;
 	}else{
-		alert("이미지제출")
 		imgfrm.submit();
+
+	}
+}
+function cercheck(){
+	if(cerfrm.file.value == ""){
+		alert("선택된 파일이 없습니다.");
+		return false;
+	}else{
+		cerfrm.submit();
 
 	}
 }
@@ -356,12 +363,10 @@ function imgCheck(){
 								<c:if test="${empty des.career }">
 								<textarea maxlength="100" onchange="careerchange()" style="width:400px" class="career" name="career" placeholder="경력 사항을 적어주세요. &#13;&#10; ex) 청담동 OO헤어샵 2년 근무 &#13;&#10; - 디자이너 콘테스트 1등"></textarea>
 								</c:if>
-								
 								<c:if test="${not empty des.career }">
 								<textarea maxlength="100" onchange="careerchange()" style="width:400px" class="career" name="career" >${des.career }</textarea>
 								<br />
 								</c:if>
-								
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
 								<label><i class="fas fa-lock margin-right-10px"></i></label> <a
@@ -381,12 +386,12 @@ function imgCheck(){
                           <label><i class="far fa-user margin-right-10px"></i> 재직증명서나 미용자격증 등 첨부 </label>
                       			<div class="cerbtn" onclick="hpchange()"><a >증명서 제출하기</a></div><br/>
                       		<div id="phoneNochange" style="display: none;">
-                      		<form method="post" action="desCerUp.do" enctype="multipart/form-data">
+                      		<form id="cerfrm" method="post" action="desCerUp.do" enctype="multipart/form-data">
 								<img id="preview2" src="${pageContext.request.contextPath}/resources/img/${descer.fileUuid}" alt="">
                 	 			<input type="hidden" value="${descer.fileUuid}" name="fileUuid">
                              	<input type="file" name="file" onchange="readURL2(this);" >
-                             		<button type="submit" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">등록</button>
                             </form>
+                             		<button onclick="cercheck()" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">등록</button>
 							</div>
                       		</div>
                       	</c:if>
@@ -403,12 +408,12 @@ function imgCheck(){
             				</c:if>
                       		<div class="cerbtn" onclick="hpchange()"><a>증명서 제출하기</a></div><br/>${descer.fileName }
                       		<div id="phoneNochange" style="display: none;">
-                      		<form method="post" action="desCerUpdate.do" enctype="multipart/form-data">
+                      		<form id="cerfrm" method="post" action="desCerUpdate.do" enctype="multipart/form-data">
 								<img id="preview2" src="${pageContext.request.contextPath}/resources/img/${descer.fileUuid}" alt="">
                 	 			<input type="hidden" value="${descer.fileUuid}" name="fileUuid">
                              	<input type="file" name="file" onchange="readURL2(this);" >
-                             	<button type="submit">등록</button>
                             </form>
+                             	<button onclick="cercheck()">등록</button>
 							</div>
                       		</div>
                      </c:if>

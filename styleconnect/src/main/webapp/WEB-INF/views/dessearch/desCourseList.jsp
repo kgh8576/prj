@@ -21,8 +21,6 @@
         </c:forEach>
         </div>
     </div>
-
-
     <div class="margin-tb-30px">
         <div class="container">
             <div class="row">
@@ -59,16 +57,8 @@
                  <!-- 상담목록 끝 -->
 				</c:forEach>
                     <div class="row"></div>
-                    <ul class="pagination pagination-md ">
-                        <li class="page-item disabled"><a class="page-link rounded-0" href="#" tabindex="-1">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link rounded-0" href="#">Next</a></li>
-                    </ul>
                 </div>
                 <div class="col-lg-4">
-
                     <div class="margin-bottom-30px">
                         <div class="padding-30px background-white border-radius-10">
                             <h4><i class="fas fa-search margin-right-10px text-main-color"></i> Search</h4>
@@ -79,7 +69,6 @@
                                     <button class="btn btn-outline-secondary text-white background-main-color border-radius-0" type="button">Search</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <!-- 사이드 디자이너 이미지 -->
@@ -99,12 +88,9 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
-
 </body>
 </html>
