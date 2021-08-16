@@ -27,7 +27,7 @@ public class FilesServiceImpl implements FilesService {
 		MultipartHttpServletRequest request = req;
 		FilesVO vo = new FilesVO();
 		
-		String rootUploadDir = req.getSession().getServletContext().getRealPath("/resources/img");; // 업로드 주소
+		String rootUploadDir = req.getSession().getServletContext().getRealPath("/resources/img"); // 업로드 주소
 		System.out.println(rootUploadDir);
 		File dir = new File(rootUploadDir);
 		if (!dir.exists()) { // 업로드 디렉토리가 존재하지 않으면 생성

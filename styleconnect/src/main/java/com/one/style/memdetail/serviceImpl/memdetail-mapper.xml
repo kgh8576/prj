@@ -14,7 +14,8 @@
 	</update>
 	<!-- 모든상담내역 -->
 	<select id="conallList" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
-	SELECT
+	  select e.*, nvl(file_uuid, '0.png') as file_uuid from
+      (SELECT
 
 		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
 		a.time,a.state,a.price,
@@ -38,14 +39,20 @@
 		AND d.id = c.id
 		AND MEM_ID = #{memId}
 
-		ORDER BY LASTST_DATE desc
+		ORDER BY LASTST_DATE desc) e
+       left join 
+     (select file_uuid , des_id
+     from files
+     where file_state = 'pro') f
+   on id = f.des_id
 	</select>
 	<!-- 가장가까운예약목록 출력 -->
 	<select id="conhisList"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
 		 <![CDATA[
-		SELECT
+		   select e.*, nvl(file_uuid, '0.png') as file_uuid from   
+  (SELECT
 
 		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
 		a.time,a.state,a.price,
@@ -73,14 +80,21 @@
 		AND d.id = c.id
 		AND MEM_ID = #{memId}
 
-		ORDER BY LASTST_DATE asc
+		ORDER BY LASTST_DATE asc) e
+    
+      left join 
+     (select file_uuid , des_id
+     from files
+     where file_state = 'pro') f
+   on id = f.des_id
 			 ]]>
 	</select>
 	<select id="conhisListend"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
 		 <![CDATA[
-		SELECT 
+   select e.*, nvl(file_uuid, '0.png') as file_uuid from   
+   	(	SELECT 
 a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
 a.time,
 a.state,
@@ -114,7 +128,13 @@ AND c.cour_no = a.cour_no
 AND d.id = c.id
 AND r.con_no = a.con_no
 AND a.MEM_ID = #{memId}
-ORDER BY LASTST_DATE desc
+ORDER BY LASTST_DATE desc) e
+
+  left join 
+     (select file_uuid , des_id
+     from files
+     where file_state = 'pro') f
+   on id = f.des_id
   		 ]]>
 	</select>
 	<!-- 상담완료 목록'만'출력 -->

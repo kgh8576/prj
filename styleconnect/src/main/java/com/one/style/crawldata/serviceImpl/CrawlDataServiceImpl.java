@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Repository;
 
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,6 +26,8 @@ import com.one.style.home.service.HomeService;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Repository("crawlDao")
 public class CrawlDataServiceImpl implements CrawlDataService{
 	
@@ -38,29 +40,28 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
     CrawlDataVO vo;
     
     
-    public void start(String gender) {
+    public void start(String gender , HttpServletRequest req) {
     	setRunning(true);
     	setProgress(0);
-        initCrawl(gender);
+        initCrawl(gender , req);
         runCrawl();
     	setProgress(0);
     	setRunning(false);
     }
  
     @Override
-    public void initCrawl(String gender) {
+    public void initCrawl(String gender , HttpServletRequest req) {
         //System Property SetUp
+	String WEB_DRIVER_PATH = req.getSession().getServletContext().getRealPath("/resources") + File.separator + "chromedriver"; 
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         //Driver SetUp
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-gpu","-no-sandbox","--headless");
-        chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
         chromeOptions.addArguments("lang=ko_KR");
         driver = new ChromeDriver(chromeOptions);
         base_url = "https://www.instagram.com/accounts/login/";

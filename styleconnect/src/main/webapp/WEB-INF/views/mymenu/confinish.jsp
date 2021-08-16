@@ -6,32 +6,33 @@
 </script>
 <!-- Booking item -->
 <div class="col-lg-12">
-
+	<H3 style="text-align: center;">상담이 끝난 목록입니다.</H3>
+	<p style="text-align: center; margin-bottom: 50px">파란글씨를 누르면 디자이너의 상세 페이지로 이동할수있어요!</p>
 	<c:forEach var="conhisends" items="${conhisends }">
 
 		<c:if test="${conhisends.state eq 'ccode005' }">
 			<div style="margin: auto; width: 100%"
 				class="col-lg-6 margin-bottom-45px full-width">
-				<div class="background-white thum-hover box-shadow  hvr-float">
+				<div class="background-white thum-hover box-shadow  hvr-float" style="display:inline-block; width:100%;">
 					<div class="padding-30px full-width" style="width: 800px">
-						<img src="http://placehold.it/60x60"
-							class="float-left margin-right-20px border-radius-60 margin-bottom-20px"
-							alt="">
+						<img src="${pageContext.request.contextPath}/resources/img/${conhisends.fileUuid}"
+							class="float-left margin-right-100px border-radius-60 margin-bottom-20px"
+							alt="" style="width:300px;	height: 300px;">
 						<div class="margin-left-85px">
 							<a class="d-block text-dark text-medium margin-bottom-5px"
-								href="#">${conhisends.title } </a>
+								href="desListSelect.do?id=${conhisends.id }">${conhisends.title } </a>
 							<div class="d-block padding-tb-5px">
-								예약날짜 : <a href="#" class="text-main-color">${conhisends.day }</a>
+								예약날짜 : <a href="desListSelect.do?id=${conhisends.id }" class="text-main-color">${conhisends.day }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								예약시간 : <a href="#" class="text-main-color">
+								예약시간 : <a href="desListSelect.do?id=${conhisends.id }" class="text-main-color">
 									${conhisends.time }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								예약신청한날짜 : <a href="#" class="text-main-color">${conhisends.reservateDate }</a>
+								예약신청한날짜 : <a href="desListSelect.do?id=${conhisends.id }" class="text-main-color">${conhisends.reservateDate }</a>
 							</div>
 							<div class="d-block padding-tb-5px">
-								디자이너 : <a href="#" class="text-main-color">
+								디자이너 : <a href="desListSelect.do?id=${conhisends.id }" class="text-main-color">
 									${conhisends.desName }</a>
 							</div>
 							<p class="margin-top-15px text-grey-2">상세정보 :

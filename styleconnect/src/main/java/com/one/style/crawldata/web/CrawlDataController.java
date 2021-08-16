@@ -2,6 +2,8 @@ package com.one.style.crawldata.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +22,8 @@ public class CrawlDataController {
 	
 	@RequestMapping("crawl.do")
 	@ResponseBody
-	public String crawl(String gender){
-		crawlDao.start(gender);
+	public String crawl(String gender , HttpServletRequest req){
+		crawlDao.start(gender , req);
 		return "done!";
 	}
 	
