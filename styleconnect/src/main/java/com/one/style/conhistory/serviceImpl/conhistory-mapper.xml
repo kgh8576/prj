@@ -11,7 +11,7 @@
 		select con_no, <!-- 상담번호 -->
 				to_char(day, 'YYYY-mm-dd') as day, <!--형식 변환된 서비스 날짜(ex)2021-01-01) -->
 				time,	<!-- 서비스 시간 -->	
-				to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-sysdate)*24*60)) as remaining_time, <!-- 상담까지 남은 시간 -->
+				to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YYYY/MM/DDHH24:mi')-sysdate)*24*60)) as remaining_time, <!-- 상담까지 남은 시간 -->
 				designer.id as des_id, <!-- 디자이너 아이디 -->
 				name as des_name, <!-- 디자이너 이름 -->
 				title, <!-- 상담 코스 제목 -->
@@ -82,7 +82,7 @@
 	</select>
 	<!-- 테스트용2 -->
 	<select id="testRemainingTime" resultType="Integer">
-		select to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-(TO_DATE('21/08/1616:37', 'YY/MM/DDHH24:mi')))*24*60)) as test_remaining_time from consulting_history where con_no = 2108090077
+		select to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YYYY/MM/DDHH24:mi')-(TO_DATE('21/08/1616:37', 'YYYY/MM/DDHH24:mi')))*24*60)) as test_remaining_time from consulting_history where con_no = 2108090077
 	</select>
 
 
