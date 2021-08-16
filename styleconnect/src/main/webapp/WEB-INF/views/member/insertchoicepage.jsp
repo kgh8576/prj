@@ -58,12 +58,10 @@
     text-align: center;
     }
     .join-form.join-ent .join-area {
-    width: 100%;
     height: 212px;
     background-repeat: no-repeat;
     }
     .join-form.join-idv .join-area {
-    width: 100%;
     height: 212px;
     background-repeat: no-repeat;
     }
