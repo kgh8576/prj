@@ -63,7 +63,6 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     @Override
     public void initCrawl(String gender) {
         //System Property SetUp
-    	//final String WEB_DRIVER_PATH = req.getSession().getServletContext().getRealPath("/resources") + File.separator + "chromedriver.exe"; 
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         //Driver SetUp
         ChromeOptions chromeOptions = new ChromeOptions();

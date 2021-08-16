@@ -39,4 +39,6 @@ public class ConHistoryVO {
 	private int lastCnt;
 	private int firstCnt;
 	private String pullValue;
+	//파일
+	private String fileUuid;
 }
