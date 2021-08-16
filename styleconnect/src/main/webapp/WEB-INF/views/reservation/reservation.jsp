@@ -177,7 +177,7 @@
 									<input type="hidden" id="payNo" name="payNo">
 									<input type="hidden" id="desId" name="desId" value= "${course.id}">
 									<div class="form-group">
-										<label>디자이너 선생님에게 전할 말을 남겨 주세요 </label>
+										<label>디자이너 선생님에게 전할 말을 남겨 주세요</label>
 										<textarea class="form-control" id="exampleFormControlTextarea1" name="memComment" rows="3" placeholder="Ex)저는 심한 곱슬이에요 / 파마를 하려고 해요!"></textarea>
 									</div>
 								</form>
