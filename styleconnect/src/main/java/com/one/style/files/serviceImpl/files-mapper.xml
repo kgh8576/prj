@@ -6,7 +6,7 @@
 		INSERT INTO FILES VALUES(file_no_seq.nextval,#{des_id},#{fileName},#{fileUuid},#{fileState},sysdate,#{courNo})
 	</insert>
 	
-	<select id="dateTest">
+	<select id="dateTest" resultType="String">
 		select to_char(sysdate,'yyyy/mm/dd hh24:mi:dd') from dual
 	</select>
 </mapper>
