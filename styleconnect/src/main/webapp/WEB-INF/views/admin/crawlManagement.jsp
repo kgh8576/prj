@@ -23,26 +23,36 @@
 	    			btnToggle('disable'); // 실행중이므로 버튼 잠금
     				$('#progressDiv').css('display', 'block'); // 숨겨놨던 진행률 div show
     				var getCrawlProgress = setInterval(function(){ // 4초마다 진행률 가져오는 ajax 실행
-	    				$.ajax({
-	    					url : 'getCrawlProgress.do',
-	    					method:'post',
-	    					success : function(progress) {
-	    						if ( progress == 100 ) { // 0에서 시작한 진행률이 100이면
-	    							clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
-	    							afterCrawl();
-	    						} else { // 진행률이 0~98이면
-	    							$('#progressBar').text(progress+'% 완료됨');
-	    						}
-	    					},
-	    					error : function(err) {
-	    						console.log(err);
-	    					}
-	    				});
+    					if (isRun){
+		    				$.ajax({
+		    					url : 'getCrawlProgress.do',
+		    					method:'post',
+		    					success : function(progress) {
+		    						if ( progress == 100 ) { // 0에서 시작한 진행률이 100이면
+		    							clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
+		    							afterCrawl('done');
+		    						} else { // 진행률이 0~98이면
+		    							$('#progressBar').text(progress+'% 완료됨');
+		    						}
+		    					},
+		    					error : function(err) {
+		    						console.log(err);
+		    						$('#progressBar').text('에러!');
+		    						clearInterval(getCrawlProgress);
+		    						afterCrawl('error');
+		    					}
+		    				});
+    					} else {
+    						clearInterval(getCrawlProgress);
+    					}
 	    			}, 4000);
 	    		}
 	    	},
 	    	error:function(err){
 	    		console.log(err);
+	    		$('#progressBar').text('에러!');
+	    		clearInterval(getCrawlProgress);
+	    		afterCrawl('error');
 	    	}
 	    })
 	});
@@ -60,34 +70,49 @@
 				success : function() {
 				},
 				error : function(err) {
+					$('#progressBar').text('에러!');
+					clearInterval(getCrawlProgress);
 					console.log(err);
+					afterCrawl('error');
 				}
 			});
 			
 			var getCrawlProgress = setInterval(function(){ // ajax 안에 넣으면 크롤링 전부 다 끝나고 진행률을 보여주므로 바깥으로 빼야함
-				$.ajax({
-					url : 'getCrawlProgress.do',
-					method:'post',
-					success : function(progress) {
-						if ( progress == 100 ) {
-							clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
-							afterCrawl();
-						} else {
-							$('#progressBar').text(progress+'% 완료됨');
+				if (isRun){
+					$.ajax({
+						url : 'getCrawlProgress.do',
+						method:'post',
+						success : function(progress) {
+							if ( progress == 100 ) {
+								clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
+								afterCrawl('done');
+							} else {
+								$('#progressBar').text(progress+'% 완료됨');
+							}
+						},
+						error : function(err) {
+							$('#progressBar').text('에러!');
+							clearInterval(getCrawlProgress);
+							console.log(err);
+							afterCrawl('error');
 						}
-					},
-					error : function(err) {
-						console.log(err);
-					}
-				});
+					});
+				} else {
+					clearInterval(getCrawlProgress);
+				}
 			}, 4000);
 		}
 	}
-	function afterCrawl(){ // 크롤링 끝난 다음에 실행되는 후처리용 fnc
+	function afterCrawl(state){ // 크롤링 끝난 다음에 실행되는 후처리용 fnc
 		isRun == false;
 		resetCrawlData();
 		btnToggle('able'); // 버튼 잠금 해제
-		$('#progressBar').text('완료!');
+		if (state == ('done')){
+			$('#progressBar').text('완료!');
+		} else {
+			$('#progressBar').text('에러!');
+		}
+		
 	}
 	//setInterval 끝난 다음에 먹어야 하는데 추후 개선 필요... 귀찮으면 새로고침 하라 하면 됨
 	function resetCrawlData(){ // 크롤링 내역 다시 가져오는 fnc

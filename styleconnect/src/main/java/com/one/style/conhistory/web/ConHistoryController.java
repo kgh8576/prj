@@ -47,7 +47,7 @@ public class ConHistoryController {
 		}
 		
 		model.addAttribute("conHistoryList", conHistoryDao.conHistoryListSelect(vo));
-		
+		System.out.println("남은 상담시간 값: " + conHistoryDao.conHistoryListSelect(vo).get(0).getRemainingTime());
 		return "consulting/consulting";
 	}
 	

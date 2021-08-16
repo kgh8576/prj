@@ -40,24 +40,29 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
+    public static final String WEB_DRIVER_PATH = "/usr/local/apache-tomcat-9.0.52/webapps/insa/resources/chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
     CrawlDataVO vo;
     
     
-    public void start(String gender , HttpServletRequest req) {
+    public void start(String gender) {
     	setRunning(true);
     	setProgress(0);
-        initCrawl(gender , req);
-        runCrawl();
+    	try {
+    		initCrawl(gender);
+    		runCrawl();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
     	setProgress(0);
     	setRunning(false);
     }
  
     @Override
-    public void initCrawl(String gender , HttpServletRequest req) {
+    public void initCrawl(String gender) {
         //System Property SetUp
-	String WEB_DRIVER_PATH = req.getSession().getServletContext().getRealPath("/resources") + File.separator + "chromedriver"; 
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         //Driver SetUp
         ChromeOptions chromeOptions = new ChromeOptions();

@@ -83,9 +83,10 @@ function goChatting(conNo) {
 	    		<p class="text-grey-2">남은시간: ${conHistory.remainingTime}</p>
 	    		-->
 	    		<!-- (${conHistory.remainingTime}<=-30 || ${conHistory.remainingTime}>10)-->
-	    		<!-- 남은시간 확인 
+	    		<!-- 남은시간 확인-->
+	    		<h1>남은 시간</h1>
 	    		<c:out value="${conHistory.remainingTime}" />
-	    		-->
+	    		
 	    		<c:if test = "${conHistory.remainingTime le -30 || conHistory.remainingTime ge 10}">
 	    			<p>*상담시간 10분 전부터 상담 참여 가능합니다.</p>
 	    		</c:if>

@@ -22,8 +22,8 @@ public class CrawlDataController {
 	
 	@RequestMapping("crawl.do")
 	@ResponseBody
-	public String crawl(String gender , HttpServletRequest req){
-		crawlDao.start(gender , req);
+	public String crawl(String gender){
+		crawlDao.start(gender);
 		return "done!";
 	}
 	
