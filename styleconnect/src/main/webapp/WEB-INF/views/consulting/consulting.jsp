@@ -34,20 +34,12 @@ function goChatting(conNo) {
 <h1>일반회원 아이디 : ${id}</h1>
 <h1>디자이너 아이디 : ${did}</h1>
 	<br><br><br><br>
-	<!--  
-	<pre>
-	1.서비스 번호
-	2.디자이너 이름
-	3.상담 이름
-	4.서비스 날짜
-	5.서비스 시간
-	6.상담 상세내용
-	7.디자이너 코멘트
-	8.상태 및 링크
-	</pre>
-	-->		
+
+<div align="center">
 	<c:if test="${fn:length(conHistoryList)==0}">
-		<p>참여할 수 있는 상담이 없습니다.</p>
+		<div style="width:70%">
+			<p>참여할 수 있는 상담이 없습니다.</p>
+		</div>
 	</c:if>
 	<c:if test="${fn:length(conHistoryList)!=0}">	
 		<c:forEach var="conHistory" items="${conHistoryList}">
@@ -63,12 +55,13 @@ function goChatting(conNo) {
 		8.${conHistory.state}
 		</pre>
 		-->				
-	
+		<div style="width:70%; text-align:left;" >
 		<div class="margin-bottom-30px box-shadow">
 	    	<div class="padding-30px background-white">
-	    		<h3>상담 번호: ${conHistory.conNo}</h3>
-	    		<h3>상담 이름: ${conHistory.desName}</h3>
-	    		<h3>상담 일시: ${conHistory.day} ${conHistory.time}</h3>
+	    		<div style="float: left;"><h3>상담 번호: ${conHistory.conNo}</h3></div>
+	    		<div style="float: right;"><h3>상담 일시: ${conHistory.day} ${conHistory.time}</h3></div>
+	    		<div style="float: left;"><h3>상담 이름: ${conHistory.desName}</h3></div>
+	    		
 	    		<hr>
 	    		<p class="text-grey-2">상담 상세내용: ${conHistory.detail}</p>
 	    		<p class="text-grey-2">디자이너 코멘트: ${conHistory.desComment}</p>
@@ -83,9 +76,10 @@ function goChatting(conNo) {
 	    		<p class="text-grey-2">남은시간: ${conHistory.remainingTime}</p>
 	    		-->
 	    		<!-- (${conHistory.remainingTime}<=-30 || ${conHistory.remainingTime}>10)-->
-	    		<!-- 남은시간 확인 
+	    		<!-- 남은시간 확인-->
+	    		<h1>남은 시간</h1>
 	    		<c:out value="${conHistory.remainingTime}" />
-	    		-->
+	    		
 	    		<c:if test = "${conHistory.remainingTime le -30 || conHistory.remainingTime ge 10}">
 	    			<p>*상담시간 10분 전부터 상담 참여 가능합니다.</p>
 	    		</c:if>
@@ -98,7 +92,9 @@ function goChatting(conNo) {
 	    		
 	    	</div>
 	    </div>
+	    </div>
 	    <hr>	
 		</c:forEach>
-</c:if>	
+</c:if>
+</div>
 	

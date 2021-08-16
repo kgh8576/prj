@@ -46,8 +46,8 @@
 </script>
 <!-- Booking item -->
 <div class="col-lg-12">
-	<H3 style="text-align: center; margin-bottom: 50px">현재 예약중인 내역입니다.</H3>
-	<p>파란글씨를 누르면 디자이너의 상세 페이지로 이동할수있어요!</p>
+	<H3 style="text-align: center;">현재 예약중인 내역입니다.</H3>
+	<p style="text-align: center; margin-bottom: 50px">파란글씨를 누르면 디자이너의 상세 페이지로 이동할수있어요!</p>
 	<c:forEach var="conhis" items="${conhis }">
 
 		<c:if test="${conhis.codecontent eq '예약중' || conhis.codecontent eq '예약확정' || conhis.codecontent eq '상담중'}">

@@ -21,7 +21,7 @@ public class WorkOpenVO {
 	private String closeTime;
 	private String time;
 	private String desId;
-	
+	private String timezone;
 	
 	
 }

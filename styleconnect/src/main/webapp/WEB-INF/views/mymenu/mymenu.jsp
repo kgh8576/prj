@@ -5,17 +5,23 @@
 <html>
 <head>
 <style>
-.hpcheckbtn1 {
-	width: 10%;
-	display: flex;
-	padding: 4px 4px 5px 16px;
-	color: #110202;
-	border: solid 1px #aab7ad;
-	height: 35px;
-	font-family: sans-serif;
-	font-weight: 600;
-	margin-left: 330px;
-}
+.btnw {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    /* padding: .375rem .75rem; */
+    /* font-size: 1rem; */
+    /* line-height: 1.5; */
+    border-radius: .25rem;
+    transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
 
 .hpchange {
 	font-family: sans-serif;
@@ -199,7 +205,7 @@
 							<div class="col-md-6 margin-bottom-20px">
 								<label><i class="fas fa-mobile-alt margin-right-10px"></i>
 									연락처 : ${user.hp }
-									<button type="button" onclick="hpchange()">수정</button></label>
+									<button type="button" class="btnw btn-primary" style="margin-left: 25px" onclick="hpchange()">수정</button></label>
 								<form id="frm" action="hpchange.do" method="post">
 									<input type="hidden" id="hppasschk" name="hppasschk"
 										value="unChecked">
@@ -211,8 +217,8 @@
 											id="hp" name="hp" placeholder="변경할 연락처를 입력해주세요"
 											onkeyup='siche_next()'>
 
-										<button type="button" class="hpcheckbtn1" id="hpcheckbtn"
-											name="hpcheckbtn" onclick="hpbtn()">전송</button>
+										<button type="button" class="btnw btn-primary" id="hpcheckbtn"
+											name="hpcheckbtn" style="padding: .375rem .75rem;" onclick="hpbtn()">전송</button>
 
 										<br> <br>
 										<div style="text-align: left">
@@ -225,8 +231,8 @@
 											maxlength="4" type="text" id="hppass" name="hppass"
 											placeholder="인증번호" onkeyup='siche_next()'>
 										<p></p>
-										<button type="button" onclick="hppasscancle()">수정취소</button>
-										<button type="button" class="hpfinalcheck" id="hpfinalcheck"
+										<button class="btnw btn-primary" type="button" onclick="hppasscancle()">수정취소</button>
+										<button class="btnw btn-primary" type="button" class="hpfinalcheck" id="hpfinalcheck"
 											name="hpfinalcheck" style="margin-left: 30px;"
 											onclick="hpsubmit()">수정완료</button>
 									</div>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.one.style.crawldata.service.CrawlDataService;
 import com.one.style.home.service.HomeService;
@@ -28,7 +29,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest req) {
-		
 		// 로그인되어 있는 경우 추천 디자이너 뿌리기
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
@@ -40,9 +40,21 @@ public class HomeController {
 				model.addAttribute("rcmdDesByRate", homeDao.rcmdDesByRate(memDetail));
 			}
 		}
+		
+		
+		
 		model.addAttribute("hashTag", crawlDao.getCrawlList("MALE"));
 		return "main/home";
 	}
-	
-	
+	//카카오로그인
+	@RequestMapping("kakaologin.do")
+	public String kakaohome(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String id = request.getParameter("id");
+		session.setAttribute("id", id);
+		
+		return "redirect:main.do";
+		
+	}
 }

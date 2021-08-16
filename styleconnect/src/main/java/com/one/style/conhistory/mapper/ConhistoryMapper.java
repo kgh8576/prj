@@ -16,4 +16,7 @@ public interface ConhistoryMapper {
 	public List<FilesVO> reservationDesImg(ConHistoryVO vo);
 	public List<ConHistoryVO> memResrTimeCheck(ConHistoryVO vo);
 	
+	//시간 테스트 매퍼
+	public String testCurrentTime();
+	public int testRemainingTime();
 }

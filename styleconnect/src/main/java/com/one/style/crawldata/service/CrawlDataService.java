@@ -8,10 +8,10 @@ import com.one.style.crawldata.vo.CrawlDataVO;
 
 public interface CrawlDataService {
 	
-	 public void initCrawl(String gender , HttpServletRequest req);
+	public String start(String gender, String id, String password);
+	 public void initCrawl(String gender, String id, String password);
 	 public void runCrawl();
 	 public void splitTest(String crawlText);
-	 public void start(String gender, HttpServletRequest req);
 	 void insertCrawl(CrawlDataVO vo);
 	 CrawlDataVO getCrawlList(String gender);
 	 List<CrawlDataVO> getCrawlData1Row();

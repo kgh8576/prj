@@ -30,7 +30,7 @@ $(document).ready(function(){
 				if (data == 1) {
 					$('#hppass').val('Checked');
 					$('#chkNotice3').html('인증이 완료되었습니다.').attr('color',
-					'#f82a2aa3');
+					'#007bff');
 				} else {
 					$('#hppass').val('unChecked');
 					$('#chkNotice3').html('인증번호가 틀렸습니다.').attr('color',
@@ -38,8 +38,9 @@ $(document).ready(function(){
 				}
 			},
 			error : function(err) {
-				console.log(err);
-				console.log("핸드폰번호 인증 에러");
+				$('#hppass').val('unChecked');
+				$('#chkNotice3').html('인증하기 버튼을 눌러주세요.').attr('color',
+				'#f82a2aa3');
 			}
 		})
 	};
@@ -59,7 +60,7 @@ $(document).ready(function(){
 			success : function(data) {
 				if(data == 1){
 					$('#chkNotice3').html('입력완료 인증번호받기를 눌러주세요.').attr('color',
-					'#f82a2aa3');
+					'#007bff');
 				}else {
 					$('#chkNotice3').html('휴대폰번호 형식이 맞지않습니다.').attr('color',
 					'#f82a2aa3');
@@ -87,7 +88,7 @@ $(document).ready(function(){
 			success : function(data) {
 				if(data == 1){
 					$('#chkNoticeP').html('사용할수있는 비밀번호입니다.').attr('color',
-					'#132bab');
+					'#007bff');
 					$('#passwordpass').val('Checked');
 				}else {
 					$('#chkNoticeP').html('사용할수 없는 비밀번호입니다.').attr('color',
@@ -117,7 +118,7 @@ function hpcheckbtn() {
 			frm.hpcheck.focus();
 			button_joinus.disabled = true;
 			$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
-			'#f82a2aa3');
+			'#007bff');
 		},
 		error : function(err) {
 			console.log(err);
@@ -143,7 +144,7 @@ function hpcheckbtn() {
 					$('#passwordCheck').val('unChecked');
 				} else {
 					chkNotice.html('비밀번호 일치함<br><br>').attr('color',
-							'#199894b3');
+							'#007bff');
 					$('#passwordCheck').val('Checked');
 				}
 			}
@@ -164,7 +165,7 @@ function hpcheckbtn() {
 					$('#idCheck').val('unChecked');
 				} else {
 					$('#chkNotice2').html('사용가능한 아이디 입니다.').attr('color',
-					'#f82a2aa3');
+					'#007bff');
 					$('#idCheck').val('Checked');
 				}
 			},

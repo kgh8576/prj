@@ -26,5 +26,6 @@ public interface AdminMapper {
 	public List<FilesVO> designerCertificationFileListSelect(FilesVO vo);
 	public int designerStateUpdate(DesVO vo);
 
+
 	
 }

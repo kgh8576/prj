@@ -265,7 +265,7 @@ body {
 									$('#passwordCheck').val('unChecked');
 								} else {
 									chkNotice.html('비밀번호 일치함<br><br>').attr(
-											'color', '#199894b3');
+											'color', '#007bff');
 									$('#passwordCheck').val('Checked');
 								}
 							}
@@ -287,7 +287,7 @@ body {
 									if (data == 1) {
 										$('#hppass').val('Checked');
 										$('#chkNotice3').html('인증이 완료되었습니다.')
-												.attr('color', '#f82a2aa3');
+												.attr('color', '#007bff');
 									} else {
 										$('#hppass').val('unChecked');
 										$('#chkNotice3').html('인증번호가 틀렸습니다.')
@@ -295,8 +295,9 @@ body {
 									}
 								},
 								error : function(err) {
-									console.log(err);
-									console.log("핸드폰번호 인증 에러");
+									$('#hppass').val('unChecked');
+									$('#chkNotice3').html('인증하기 버튼을 눌러주세요.')
+											.attr('color', '#f82a2aa3');
 								}
 							})
 						};
@@ -317,7 +318,7 @@ body {
 									if (data == 1) {
 										$('#chkNotice3').html(
 												'입력완료 인증번호받기를 눌러주세요.').attr(
-												'color', '#f82a2aa3');
+												'color', '#007bff');
 									} else {
 										$('#chkNotice3').html(
 												'휴대폰번호 형식이 맞지않습니다.').attr(
@@ -347,7 +348,7 @@ body {
 									if (data == 1) {
 										$('#chkNoticeP')
 												.html('사용할수있는 비밀번호입니다.').attr(
-														'color', '#132bab');
+														'color', '#007bff');
 										$('#passwordpass').val('Checked');
 									} else {
 										$('#chkNoticeP').html(
@@ -383,7 +384,7 @@ body {
 					$('#idCheck').val('unChecked');
 				} else {
 					$('#chkNotice2').html('사용가능한 아이디 입니다.').attr('color',
-							'#f82a2aa3');
+							'#007bff');
 					$('#idCheck').val('Checked');
 				}
 			},
@@ -409,7 +410,7 @@ body {
 					frm.hpcheck.focus();
 					button_joinus.disabled = true;
 					$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
-							'#f82a2aa3');
+							'#007bff');
 					
 					
 				},
@@ -435,7 +436,14 @@ body {
 
 		frm.submit();
 	}
-
+	function siche_next() {
+		if (document.getElementById("hp").value.length==11) {
+			document.getElementById("hpcheck").focus();
+		}
+		if (document.getElementById("hpcheck").value.length==4) {
+			document.getElementById("hpcheckbtn").focus();
+		}
+	}
 	function nextpage() {
 
 		if (frm.id.value == "") {
@@ -693,10 +701,10 @@ body {
 					<div class="form-group label-floating">
 						<label class="control-label">핸드폰 번호</label> <input
 							class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요."
-							type="text" name="hp" id="hp" min="11" maxlength="11"> <input
+							type="text" name="hp" id="hp" min="11" maxlength="11" onkeyup="siche_next()"> <input
 							style="width: 80%; display: flex; float: left;"
 							class="form-control" placeholder="인증번호" type="text"
-							name="hpcheck" id="hpcheck"> <input type="hidden"
+							name="hpcheck" id="hpcheck" onkeyup="siche_next()"> <input type="hidden"
 							id="hppass" name="hppass" value="unChecked">
 						<button type="button" class="hpcheckbtn1" id="hpcheckbtn"
 							name="hpcheckbtn">인증하기</button>

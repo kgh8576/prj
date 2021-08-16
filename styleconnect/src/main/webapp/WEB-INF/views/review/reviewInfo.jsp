@@ -11,6 +11,10 @@
 <script>
 	//삭제 버튼 ajax
 	function deletes(target, desId){
+		if (confirm("정말 삭제하시겠습니까??") == true){
+		} else {
+		    return;
+		}
 		$.ajax({
 			data:{conNo:target},
 			url:'reviewDelete.do',
@@ -122,13 +126,7 @@
 			<hr>
 			${reviewInfo.contents}
 		</div>
-		<div align="center">
-			<br><button class="btn btn-info" onclick="back('${reviewInfo.desId}')">돌아가기</button>
-		</div>
-		
-		
-		
-		
+
 		<!-- 답변 영역 -->
 		<div class="margin-bottom-20px padding-bottom-40px box-shadow">
 			<c:if test="${id eq reviewInfo.desId && empty replyInfo }">
@@ -162,7 +160,7 @@
 			        
 			        	
 				        <h3>디자이너의 답변</h3>
-				        <div id="beforeContent">${replyInfo.contents }</div>
+				        <div class="padding-20px" id="beforeContent">${replyInfo.contents }</div>
 				        
 				        <div style="display: none;" id="hiddenModifyDiv">
 							<textarea class="form-control" id="replyModifyContents" name="replyModifyContents">${replyInfo.contents }</textarea>
@@ -190,10 +188,12 @@
 				<input type="hidden" name="conNo" value="${reviewInfo.conNo }">
 			</form>
 			
-
-			
 		</div>
 		
+		<div align="center">
+			
+			<br><button class="btn btn-info" onclick="back('${reviewInfo.desId}')">돌아가기</button>
+		</div>
 		
 	</div>
 	<div class="col-md-3"></div>
