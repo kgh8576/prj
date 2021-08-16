@@ -135,4 +135,8 @@ public class FilesServiceImpl implements FilesService {
 			System.out.println(string);
 		}
 	}
+	
+	public void dateTest(){
+		map.dateTest();
+	}
 }
