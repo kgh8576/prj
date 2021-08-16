@@ -19,6 +19,10 @@ h1{
 #cbtn{
 	align: right;
 }
+#courseline{
+border: 1px solid #333;
+
+}
 </style>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top" id="mainNav">
@@ -88,11 +92,20 @@ h1{
              <button onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 생성하기 </button>
              </div>
              </c:if>
+             <!-- 상담목록 없을경우 //-->
 			<!-- 상담목록있을경우(조회,수정,삭제) -->
-				<button id='cbtn'onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/>
+			<c:if test="${not empty course }">
+				<c:if test="${fn:length(course) >= 5}"> 
+					<div align="center">
+					<h2>상담생성불가</h2><br/><h5>최대5개 생성가능</h5><hr/>
+					</div>
+				</c:if>
+				<c:if test="${fn:length(course) < 5}">
+					<button id='cbtn'onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/>
+				</c:if>
 				<c:forEach items="${course}" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">
-                        <div class="row no-gutters">
+                        <div class="row no-gutters" id="courseline">
                             <div class="img-in col-lg-5">
                             <a href="#"><img src="resources/img/${vo.fileUuid }" alt=""></a>
                             </div>
@@ -113,16 +126,9 @@ h1{
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                 <!-- 상담목록 끝 -->
 				</c:forEach>
-                    <div class="row"></div>
-                    <ul class="pagination pagination-md ">
-                        <li class="page-item disabled"><a class="page-link rounded-0" href="#" tabindex="-1">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link rounded-0" href="#">Next</a></li>
-                    </ul>
+			</c:if>
+         <!-- 상담목록 끝 //-->
                 </div>
                 <div class="col-lg-4">
                 </div>

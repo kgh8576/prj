@@ -163,29 +163,11 @@ img{
 		});	
 	}); 
 	
-
-	function updateMajor(){
+function updateMajor(){
 		var frm = document.frm;
 		var major_arr = [];
-		
-		console.log('실행 체크');
-		//var major = document.getElementsByName("major").value;
-		
 		var obj_length = document.getElementsByName("major").length;
-		  
-        //for (var i=0; i<obj_length; i++) {
-        //    if (document.getElementsByName("major")[i].checked == true) {
-        //        console.log(document.getElementsByName("major")[i].value);
-        //        major_arr.push(document.getElementsByName("major")[i].value);
-        //    }
-        //}
-		
-		
-		//frm.major.value = '테스트';
-		
 		frm.submit();
-		
-
 	}
 	
 </script>

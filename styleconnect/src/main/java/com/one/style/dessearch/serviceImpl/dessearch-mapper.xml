@@ -163,7 +163,7 @@
 	
 	<!-- 검색 -->
 	<select id="searchList" parameterType="String" resultType="com.one.style.dessearch.vo.DessearchVO">
-	select d.id , d.name , d.major , nvl2(r.rate,r.rate,0)as rate, nvl2(f.file_uuid,f.file_uuid,'0.png')as file_uuid
+	select d.id ,d.state, d.name , d.major , nvl2(r.rate,r.rate,0)as rate, nvl2(f.file_uuid,f.file_uuid,'0.png')as file_uuid
 	from designer d
  	left join
           (
@@ -182,8 +182,8 @@
  	where id in (
               select id from des_course 
               where title like'%'||#{search}||'%' or detail like'%'||#{search}||'%'
-              )
- 	or major like'%'||#{search}||'%' or name like'%'||#{search}||'%'
+ 	or major like'%'||#{search}||'%' or name like'%'||#{search}||'%' )
+ 	and d.state = 'dcode003'
 	</select>
 	
 	<!-- 디자이너 선택 - 썸네일-->

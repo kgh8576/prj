@@ -2,6 +2,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<head>
+
+<style>
+.reserbtn{
+ width: 200px;
+ color: black;
+}
+#fixed {
+  position: fixed;
+  right: 0;
+}
+#dname{
+	color: black;
+}
+#side{
+align-content: center;
+ border :1px;
+}
+
+#rate{
+ margin-left:100px;
+}
+#tag{
+ margin:  50px;
+}
+span:hover{
+	color:white;
+   background-color: grey;
+}
+#styimg{
+ border: 1px solid #333;
+}
+.border-radius-img {
+    border-radius: 10px;
+    width: 300;
+    margin: auto;
+}
+</style>
+</head>
+
 <body>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
@@ -19,11 +59,11 @@
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
                     	<c:if test="${empty img }">
-                    		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/logo.jpg" alt=""></div>
+                    		 <div class="col-6 margin-bottom-20px"><img class="border-radius-img" src="resources/img/logo.jpg" alt=""></div>
                     	</c:if>
                     	<c:if test="${not empty img }">
                        	<c:forEach items="${img}" var="img1" begin="3" end="3"> 
-                             <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${img1.fileUuid }" alt=""></div>
+                             <div class="margin-bottom-20px"><img class="border-radius-img" src="resources/img/${img1.fileUuid }" alt=""></div>
                         </c:forEach>  
                         </c:if>
                         <div class="padding-30px background-white">
@@ -40,14 +80,12 @@
                             </div>
                         </div>
                     </div>
-
-
                    <!-- 프로필(경력) -->
                     <div class="margin-bottom-30px box-shadow">
                         <div class="padding-30px background-white">
                             <h3><i class="far fa-hospital margin-right-10px text-main-color"></i> 경력 </h3>
                             <hr>
-                            <p class="text-grey-2">${designer.career }</p>
+                            <p class="text-grey-4">${designer.career }</p>
                         </div>
                     </div>
                     <!-- 전문분야-->
@@ -59,16 +97,15 @@
                         <hr>
                         <div class="post-tags">
                             <div>
-										<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
-											<c:forEach var="major" items="${majors}">
-											    <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
-											</c:forEach>
-									</div>
+								<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
+								<c:forEach var="major" items="${majors}">
+									<a href="searchList.do?search=${major }"> <span class="text-grey-4"># ${major} </span> </a>
+								</c:forEach>
+							</div>
                             <!-- // Post tags -->
                         </div>
                         </div>
                     </div>
-                    
                     	<!-- 디자이너 이미지 -->
                     <div class="margin-bottom-30px box-shadow">
                         <div class="padding-30px background-white">
@@ -76,13 +113,13 @@
                             <hr>
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
-                                <div class="row">
+                                <div class="row"  >
                                 <c:if test="${empty img2 }">
                                 		<h3>등록된 스타일이 없습니다.</h3>
                                   </c:if>
                                 <c:if test="${not empty img2 }">
                                  	<c:forEach items="${img2}" var="vo"> 
-                                		 <div class="col-6 margin-bottom-20px"><img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></div>
+                                		 <div class="col-6 margin-bottom-20px"><img id="styimg"class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></div>
                                 	</c:forEach>  
                                   </c:if>
                                 </div>
@@ -90,8 +127,6 @@
                         </div>
                     </div>
                         </div>
-                 
-                    
                     <!-- 리뷰 -->
                     <div class="margin-bottom-30px box-shadow">
                         <div class="padding-30px background-white">
@@ -119,7 +154,7 @@
                                         	</ul>
                                     	</div>
                                         <!-- 별점 끝-->
-                                        <p class="margin-top-15px text-grey-2">${vo.title } </p>
+                                        <p class="margin-top-15px text-grey-4">${vo.title } </p>
                                		</div>
                               	</li>
                           </ul>
@@ -131,17 +166,15 @@
                         </div>
                     </div>
                     <!-- 리뷰 끝 -->
-                    
                        </div>
-                       
                 <!-- 사이드바 div -->
-                <div class="col-lg-4">
-                    <div class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
-                        <h3 class="padding-lr-30px padding-top-20px"><i class="far fa-clock margin-right-10px"></i> ${designer.name}디자이너</h3>
+                <div class="col-lg-4" id="fixed">
+                    <div id="side" class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
+                        <h3 id="dname" class="padding-lr-30px padding-top-20px"><i class="far fa-clock margin-right-10px"></i> ${designer.name}디자이너</h3>
                         <hr>
                         <div class="padding-bottom-30px">
                         <!-- 별점 -->
-                         <div class="rating clearfix">
+                         <div class ="rating clearfix" id="rate">
                            <ul class="float-left">
                               <c:if test="${designer.rate != 0 }">
 								<c:forEach begin="1" end="${designer.rate }">
@@ -154,20 +187,23 @@
                          </ul>
                        </div>
                       <!-- 디자이너 major 태그 -->
-                         <div class="post-tags">
+                         <div  class="post-tags" id="tag">
                             <div>
 								<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
 								<c:forEach var="major" items="${majors}">
 								 <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
 								</c:forEach>
-							</div>
+							</div><br/>
                             <!-- //디자이너 major 태그 -->
                             <!-- 상담목록가기 버튼 -->
-                             <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
+                             <div class="col-4">
+                             <a class="reserbtn" href="courseList.do?id=${designer.id }" ><i class="far fa-bookmark"></i><h2>예약하러가기</h2> </a>
+                             </div>
                        </div>
                       </div>
                      </div>
                     </div>
+                    <!-- 사이드바 끝 -->
                     <div class="background-white border-radius-10 margin-bottom-45px">
                         <div class="padding-25px">
                         </div>

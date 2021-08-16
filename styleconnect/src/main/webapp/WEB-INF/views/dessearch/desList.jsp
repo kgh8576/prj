@@ -4,11 +4,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <head>
-	<style type="text/css">
-		.background-white{
+<style type="text/css">
+.background-white{
 			height: 100%;
-		}
-	</style>
+}
+
+span:hover{
+	color:white;
+   background-color: grey;
+}
+</style>
 </head>
 <body>
 
@@ -64,7 +69,7 @@
 									<div>
 										<c:set var="majors" value="${fn:split(vo.major,',')}"></c:set>
 											<c:forEach var="major" items="${majors}">
-											    <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
+											    <a href="searchList.do?search=${major }"> <span># ${major} </span> </a>
 											</c:forEach>
 									</div>
 										<h5 class="margin-tb-15px">
