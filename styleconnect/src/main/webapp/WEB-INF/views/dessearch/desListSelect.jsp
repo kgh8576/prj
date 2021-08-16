@@ -2,6 +2,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<head>
+
+<style>
+.reserbtn{
+ align-content: center;
+ text-align: center;
+ text-decoration: underline;
+ width: 200px;
+}
+#fixed {
+  position: fixed;
+  right: 0;
+}
+</style>
+</head>
+
 <body>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
@@ -135,7 +151,7 @@
                        </div>
                        
                 <!-- 사이드바 div -->
-                <div class="col-lg-4">
+                <div class="col-lg-4" id="fixed">
                     <div class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
                         <h3 class="padding-lr-30px padding-top-20px"><i class="far fa-clock margin-right-10px"></i> ${designer.name}디자이너</h3>
                         <hr>
@@ -154,7 +170,7 @@
                          </ul>
                        </div>
                       <!-- 디자이너 major 태그 -->
-                         <div class="post-tags">
+                         <div  class="post-tags">
                             <div>
 								<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
 								<c:forEach var="major" items="${majors}">
@@ -163,7 +179,9 @@
 							</div>
                             <!-- //디자이너 major 태그 -->
                             <!-- 상담목록가기 버튼 -->
-                             <div class="col-4"><a href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a></div>
+                             <div class="col-4">
+                             <a class="reserbtn" href="courseList.do?id=${designer.id }" class="text-lime"><i class="far fa-bookmark"></i> 예약하러가기</a>
+                             </div>
                        </div>
                       </div>
                      </div>

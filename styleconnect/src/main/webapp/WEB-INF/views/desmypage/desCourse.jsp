@@ -89,7 +89,16 @@ h1{
              </div>
              </c:if>
 			<!-- 상담목록있을경우(조회,수정,삭제) -->
-				<button id='cbtn'onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/>
+			
+			<c:if test="${not empty course }">
+				<c:if test="${fn:length(course) >= 5}"> 
+					<div align="center">
+					<h2>상담생성불가</h2>
+					</div>
+				</c:if>
+				<c:if test="${fn:length(course) < 5}">
+					<button id='cbtn'onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/>
+				</c:if>
 				<c:forEach items="${course}" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">
                         <div class="row no-gutters">
@@ -115,6 +124,7 @@ h1{
                     </div>
                  <!-- 상담목록 끝 -->
 				</c:forEach>
+			</c:if>
                     <div class="row"></div>
                     <ul class="pagination pagination-md ">
                         <li class="page-item disabled"><a class="page-link rounded-0" href="#" tabindex="-1">Previous</a></li>

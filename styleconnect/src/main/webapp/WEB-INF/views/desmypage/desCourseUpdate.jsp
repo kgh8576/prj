@@ -4,7 +4,7 @@
 <html>
 <head>
 <script>
-
+//파일이미지 미리보기
 function readURL(input) {
 	  if (input.files && input.files[0]) {
 	    var reader = new FileReader();
@@ -16,6 +16,21 @@ function readURL(input) {
 	    document.getElementById('preview').src = "";
 	  }
 	}
+//글자수 카운트
+$(document).ready(function(){
+	$("textarea").keyup(function(e){
+		console.log(" 키업확인");
+		
+		 var content = $(this).val();
+		$('#counter').html("("+content.length+" / 최대 300자)");   //글자수 실시간 카운팅
+		
+		if(content.length > 300){
+			alert("최대 300자까지 입력 가능합니다.");
+		$(this).val(content.substring(0, 300));
+        $('#counter').html("(300/ 최대 300자)");
+		}
+	});
+});
 </script>
 <meta charset="UTF-8">
 <title>디자이너마이페이지/상담수정</title>
@@ -49,7 +64,7 @@ function readURL(input) {
                                     <input type="text" class="form-control form-control-sm" id="title" name="title" value="${course.title }">
                                 </div>
                                  <div class="form-group margin-bottom-20px">
-                                    <label><i class="far fa-list-alt margin-right-10px"></i> 상담상세정보</label>
+                                    <label><i class="far fa-list-alt margin-right-10px"></i> 상담상세정보 </label> <span style="color:#aaa;" id="counter">(0 / 최대 300자)</span>
                                      <textarea class="form-control" id="detail" name="detail" rows="6">${course.detail }</textarea>
                                 </div>
                                 <div class="row">
