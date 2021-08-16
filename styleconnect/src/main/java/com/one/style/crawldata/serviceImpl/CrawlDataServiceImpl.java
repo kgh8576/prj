@@ -31,7 +31,7 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    public static final String WEB_DRIVER_PATH = "/usr/local/apache-tomcat-9.0.52/webapps/insa/resources/chromedriver.exe";
+    public static final String WEB_DRIVER_PATH = "/usr/local/apache-tomcat-9.0.52/webapps/insa/resources/chromedriver";
     //테스트용
     //public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
     //크롤링 할 URL
