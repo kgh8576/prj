@@ -8,8 +8,8 @@
 
 			<div style="margin: auto; width: 100%"
 				class="col-lg-6 margin-bottom-45px full-width">
-				<div class="background-white thum-hover box-shadow  hvr-float">
-					<div class="padding-30px full-width" style="width: 800px">
+				<div class="background-white thum-hover box-shadow  hvr-float" style="display:inline-block; width:100%;">
+					<div class="padding-30px">
 						<img src="http://placehold.it/60x60"
 							class="float-left margin-right-20px border-radius-60 margin-bottom-20px"
 							alt="">
