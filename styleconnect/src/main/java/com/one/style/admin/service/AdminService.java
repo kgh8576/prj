@@ -24,4 +24,6 @@ public interface AdminService {
 	public DesVO designerStateOneSelect(DesVO vo);
 	public List<FilesVO> designerCertificationFileListSelect(FilesVO vo);
 	public int designerStateUpdate(DesVO vo);
+	
+
 }
