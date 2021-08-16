@@ -8,6 +8,7 @@ Configuration 2.1//EN"
 
 	<definition name="userTemplate"	template="/WEB-INF/views/tiles/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+		<put-attribute name="blank" value="/WEB-INF/views/tiles/blank.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/tiles/body.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
 	</definition>
