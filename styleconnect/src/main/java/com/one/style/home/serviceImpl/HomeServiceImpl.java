@@ -1,6 +1,7 @@
 package com.one.style.home.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,27 @@ public class HomeServiceImpl implements HomeService{
 	@Override
 	public void memDetailInsert(MemDetailVO vo) {
 		map.memDetailInsert(vo);
+	}
+
+	@Override
+	public Map<String, String> searchKeywordsList() {
+//		List<HomeVO> list = map.searchKeywordsList();
+//		String[] sliced;
+//		Map<HomeVO, String> map;
+//		for(int i = 0; i < list.size(); i++) {
+//			if ( list.get(i).getCategory().equals("major") ){
+//				sliced = list.get(i).getKeyword().split(",");
+//				for (int j = 0; j < sliced.length; j++) {
+//					HomeVO vo = new HomeVO();
+//					vo.setCategory("major");
+//					vo.setKeyword(sliced[j]);
+//					map.put( vo, Integer.toString(map.size()+1));
+//				}
+//				
+//			}
+//		}
+//
+		return null;
 	}
 
 

@@ -5,6 +5,20 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<style>
+#crawlBtnMale, #crawlBtnFemale{
+	background-color:#A8C1C1;
+	color:black;
+}
+
+#crawlBtnMale:hover{
+	background-color:#5B9DF7;
+}
+#crawlBtnFemale:hover{
+	background-color:#F7775B;
+}
+</style>
+
 <script>
 	
 	var isRun = false;
@@ -58,13 +72,13 @@
 
 	// 버튼 누르면 크롤링
 	function crawl(gender) {
-		if ($('#id').val() == ''){
+		if ( $('#id').val() == '' ){
 			alert('아이디를 입력하세요');
-			return false;
+			return;
 		}
-		if ($('#pw').val() == ''){
+		if ( $('#pw').val() == '' ){
 			alert('비밀번호를 입력하세요');
-			return false;
+			return;
 		}
 		if (isRun == false){ // 돌아가는 중이 아니면
 			$('#progressBar').removeClass('bg-danger');
@@ -140,10 +154,11 @@
 			}
 		});
 	}
+
 	function btnToggle(state){ // 버튼 잠그는 fnc
 		if (state == 'able'){
 			$('#crawlBtnMale').attr('disabled', false);
-			$('#crawlBtnFemale').attr('disabled', false);	
+			$('#crawlBtnFemale').attr('disabled', false);
 		} else if (state == 'disable') {
 			$('#crawlBtnMale').attr('disabled', true);
 			$('#crawlBtnFemale').attr('disabled', true);
@@ -171,8 +186,8 @@
 						class="form-control" placeholder="비밀번호를 입력해주세요." type="password"
 						id="pw" style="width: 50%; display:inline-block;">
 				</div>
-				<button class="btn btn-primary" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
-				<button class="btn btn-primary" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
+				<button class="btn btn-info" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
+				<button class="btn btn-info" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
 			</div>
 			<br>
 				<div class="alert alert-primary alert-dismissible fade show" role="alert" style="display:inline-block; width:100%;">

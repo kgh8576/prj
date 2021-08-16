@@ -22,5 +22,9 @@ public class HomeVO {
 	private int count;
 	private String fileUuid;
 	
+	//
+	private String category;
+	private String keyword;
+	
 	
 }
