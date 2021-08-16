@@ -10,4 +10,5 @@ public interface FilesService {
 
 	public void upload(MultipartHttpServletRequest req , String fileState,String des_id);
 	public void upload(MultipartHttpServletRequest req , String fileState ,String des_id , String courNo);
+	public void dateTest();
 }

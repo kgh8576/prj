@@ -22,9 +22,9 @@ public class CrawlDataController {
 	
 	@RequestMapping("crawl.do")
 	@ResponseBody
-	public String crawl(String gender , HttpServletRequest req){
-		crawlDao.start(gender , req);
-		return "done!";
+	public String crawl(String gender, String id, String pw){
+		String state = crawlDao.start(gender, id, pw);
+		return state;
 	}
 	
 	@RequestMapping("getCrawlData.do")

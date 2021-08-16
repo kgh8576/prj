@@ -47,5 +47,14 @@ public class ConhistoryServiceImple implements ConhistoryService {
 		// TODO Auto-generated method stub
 		return conHistoryMapper.memResrTimeCheck(vo);
 	}
+	@Override
+	public String testCurrentTime() {
+		return conHistoryMapper.testCurrentTime();
+	}
+	@Override
+	public int testRemainingTime() {
+		// TODO Auto-generated method stub
+		return conHistoryMapper.testRemainingTime();
+	}
 
 }

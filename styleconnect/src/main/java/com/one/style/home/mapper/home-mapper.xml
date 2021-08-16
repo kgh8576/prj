@@ -146,4 +146,11 @@
 		insert into mem_detail values(#{location}, #{makeupYn}, #{cutYn}, #{permYn}, #{dyeYn}, null, #{id})		
 	</insert>
 	
+	<select id="searchKeywordsList" resultType="com.one.style.home.vo.HomeVO">
+		select major as keyword, category from
+		(SELECT major, 'major' as category from designer)
+		union
+		(select name, 'name' from designer)
+	</select>
+	
 </mapper>

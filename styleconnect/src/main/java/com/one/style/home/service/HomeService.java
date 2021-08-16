@@ -1,6 +1,7 @@
 package com.one.style.home.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.one.style.home.vo.HomeVO;
 import com.one.style.mem.vo.MemDetailVO;
@@ -12,4 +13,5 @@ public interface HomeService {
 	public HomeVO rcmdDesByRate(MemDetailVO vo);
 	public HomeVO rcmdDesByConHis(MemDetailVO vo);
 	void memDetailInsert(MemDetailVO vo);
+	public Map<String, String> searchKeywordsList();
 }

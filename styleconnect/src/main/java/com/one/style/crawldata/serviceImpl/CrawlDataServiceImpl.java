@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Repository;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,18 +13,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.one.style.crawldata.mapper.CrawlDataServiceMap;
 import com.one.style.crawldata.service.CrawlDataService;
 import com.one.style.crawldata.vo.CrawlDataVO;
-import com.one.style.home.mapper.HomeServiceMap;
-import com.one.style.home.service.HomeService;
-
 import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Repository("crawlDao")
 public class CrawlDataServiceImpl implements CrawlDataService{
@@ -40,37 +31,52 @@ public class CrawlDataServiceImpl implements CrawlDataService{
     private WebDriver driver;
     //Properties
     public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
+    //public static final String WEB_DRIVER_PATH = "/usr/local/apache-tomcat-9.0.52/webapps/insa/resources/chromedriver.exe";
+    //테스트용
+    public static final String WEB_DRIVER_PATH = "C:\\Users\\admin\\git\\prj\\styleconnect\\src\\main\\webapp\\resources\\chromedriver.exe";
     //크롤링 할 URL
     private String base_url;
     CrawlDataVO vo;
     
     
-    public void start(String gender , HttpServletRequest req) {
+    public String start(String gender, String id, String pw) {
+    	String state = "success";
     	setRunning(true);
     	setProgress(0);
-        initCrawl(gender , req);
-        runCrawl();
-    	setProgress(0);
-    	setRunning(false);
+    	try {
+    		initCrawl(gender, id, pw);
+    		runCrawl();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    		setRunning(false);
+    		state = "error";
+    	} finally {
+    		setProgress(0);
+    		setRunning(false);
+    	}
+    	return state;
     }
  
     @Override
-    public void initCrawl(String gender , HttpServletRequest req) {
+    public void initCrawl(String gender, String id, String pw) {
         //System Property SetUp
-	final String WEB_DRIVER_PATH = req.getSession().getServletContext().getRealPath("/resources") + File.separator + "chromedriver"; 
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
         //Driver SetUp
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-gpu","-no-sandbox","--headless");
         chromeOptions.addArguments("lang=ko_KR");
+        chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36");
+        //리눅스 환경 userAgent 필요한지 ?
         driver = new ChromeDriver(chromeOptions);
         base_url = "https://www.instagram.com/accounts/login/";
         try {
         	driver.manage().window().maximize();
         	driver.get(base_url);
         	Thread.sleep(5000);
-        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(1) > div > label > input")).sendKeys("internet2dot02021"); // 로그인 비번
-        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(2) > div > label > input")).sendKeys("crawlcrawl"); // 로그인 비밀번호
+        	// 시연용 ID internet2dot02021 || 비밀번호 crawlcrawl
+        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(1) > div > label > input")).sendKeys(id); // 로그인 비번
+        	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(2) > div > label > input")).sendKeys(pw); // 로그인 비밀번호
         	driver.findElement(By.cssSelector("#loginForm > div > div:nth-child(3) > button")).click();
         	Thread.sleep(8000);
         	vo = new CrawlDataVO();
