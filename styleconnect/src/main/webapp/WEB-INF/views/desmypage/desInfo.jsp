@@ -121,7 +121,24 @@ body {margin: 10px;}
 #adcomments{
 	color: red;
 }
+
+.cerbtn{
+	box-sizing: boder-box;
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+	border: 2px solid #ddd;
+	border-radius: 30px;
+	cursor: pointer;
+	margin-left: 30px;
+}
+.cerbtn a{
+	width: 150px;
+	display: block;
+	text-align: center;
+}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 function readURL(input) {
 	  if (input.files && input.files[0]) {
@@ -148,6 +165,25 @@ function readURL2(input) {
 	
 function hpchange() {
 	document.getElementById("phoneNochange").style.display = 'block';
+}
+
+$(document).ready(function (e){
+    var content = $('.career').val();
+    $('#counter').html("("+content.length+" / 최대 150자)");    //글자수 실시간 카운팅
+
+    if (content.length > 150){
+        alert("최대 150자까지 입력 가능합니다.");
+        $('.career').val(content.substring(0, 150));
+        $('#counter').html("(150/ 최대 150자)");
+    }
+});
+
+function imgCheck(){
+	if(imgfrm.file.value == ""){
+		alert("선택된 이미지가 없습니다.");
+		frm.file.focus();
+		return false;
+	}
 }
 </script>
 <body>
@@ -217,23 +253,23 @@ function hpchange() {
                         <!-- 프로필 이미지 -->
                 			<!-- 이미지 등록  -->
                 			<c:if test="${empty despro.fileUuid  }">
-                				<form method="post" action="desProUpdate.do" enctype="multipart/form-data">
+                				<form id="imgfrm" name="imgfrm" method="post" action="desProUpdate.do" enctype="multipart/form-data">
                 	 			 <label ><i class="far fa-images margin-right-10px"></i> 프로필 사진 등록</label>
                 	 			<input type="hidden" value="${despro.fileUuid}" name="fileUuid">
                             	<a href="#" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/이미지 등록.png" alt=""></a>
                              	<input type="file" name="file" onchange="readURL(this);" >
-                            	<button type="submit" class="btn btn-sm  text-white background-main-color btn-block">이미지 등록하기</button>
+                            	<button onclick="imgCheck()" class="btn btn-sm  text-white background-main-color btn-block">이미지 등록하기</button>
                         		</form>
                         	</c:if>
                         <!-- 이미지 등록// -->
                         <!-- 이미지 수정 -->
                         	<c:if test="${not empty despro.fileUuid  }">
-                			 <form method="post" action="desProUpdate.do"  enctype="multipart/form-data">
+                			 <form id="imgfrm" name="imgfrm" method="post" action="desProUpdate.do"  enctype="multipart/form-data">
                 			  <label ><i class="far fa-images margin-right-10px"></i> 프로필 사진 수정</label>
                 	 		  <input type="hidden" value="${despro.fileUuid}" name="fileUuid">
                             	<a href="#" class="d-block margin-bottom-10px"> <img id="preview" src="${pageContext.request.contextPath}/resources/img/${despro.fileUuid}" alt=""></a>
                              	<input type="file" name="file" onchange="readURL(this);" >
-                            	<button class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 이미지 수정하기 </button>
+                            	<button onclick="imgCheck()" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 이미지 수정하기 </button>
                        		 </form>
                        		</c:if>
                         </div>
@@ -242,7 +278,7 @@ function hpchange() {
                       <!-- 프로필 이미지// -->
                    <!-- 기본정보 수정 -->
                     <div class="col-md-8">
-                        <form action="desUpdate.do" method="post" id="frm" name="frm" enctype="multipart/form-data">
+                        <form action="desUpdate.do" method="post" id="infofrm" name="frm" enctype="multipart/form-data">
                       <div class="row">
                     	<input type="hidden" id="pw" name="pw" value="${des.pw }">  
                    		 <input type="hidden" id="major" name="major" value="${des.major }">
@@ -305,7 +341,14 @@ function hpchange() {
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
                               <label><i class="far fa-list-alt margin-right-10px"></i>경력사항</label><br/>
-								<textarea  class="textarea" id="career" name="career" >${des.career }</textarea>
+								<c:if test="${empty des.career }">
+								<textarea style="width:300px" class="career" name="career" placeholder="선택하신 서류사항 항목에 대한 내용을 200자 이내로 기재해주세요.">
+								</textarea>
+								</c:if>
+								<textarea style="width:300px" class="career" name="career" >${des.career }
+								</textarea>
+								<br />
+								<span style="color:#aaa;" id="counter">(0 / 최대 150자)</span>
                           </div>
                           <div class="col-md-6 margin-bottom-20px">
 								<label><i class="fas fa-lock margin-right-10px"></i></label> <a
@@ -323,13 +366,13 @@ function hpchange() {
             			<c:if test="${empty descer.fileUuid }">
                           <div class="col-md-6 margin-bottom-20px">
                           <label><i class="far fa-user margin-right-10px"></i> 재직증명서나 미용자격증 등 첨부 </label>
-                      		<button type="button" onclick="hpchange()">증명서 제출하기</button><br/>
+                      			<div class="cerbtn" onclick="hpchange()"><a >증명서 제출하기</a></div><br/>
                       		<div id="phoneNochange" style="display: none;">
                       		<form method="post" action="desCerUp.do" enctype="multipart/form-data">
 								<img id="preview2" src="${pageContext.request.contextPath}/resources/img/${descer.fileUuid}" alt="">
                 	 			<input type="hidden" value="${descer.fileUuid}" name="fileUuid">
                              	<input type="file" name="file" onchange="readURL2(this);" >
-                             	<button type="submit">등록</button>
+                             		<button type="submit" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">등록</button>
                             </form>
 							</div>
                       		</div>
@@ -345,7 +388,7 @@ function hpchange() {
             				${descer.comments }<br/>
             				</div>
             				</c:if>
-                      		<button type="button" onclick="hpchange()">증명서 제출하기</button><br/>${descer.fileName }
+                      		<div class="cerbtn" onclick="hpchange()"><a>증명서 제출하기</a></div><br/>${descer.fileName }
                       		<div id="phoneNochange" style="display: none;">
                       		<form method="post" action="desCerUpdate.do" enctype="multipart/form-data">
 								<img id="preview2" src="${pageContext.request.contextPath}/resources/img/${descer.fileUuid}" alt="">
@@ -364,34 +407,7 @@ function hpchange() {
                 </div>
 
             </div>
-        </div>
         <!-- /.container-fluid-->
-        <!-- /.content-wrapper-->
-        <a class="scroll-to-top rounded" href="#page-top">
-          <i class="fa fa-angle-up"></i>
-        </a>
-        <!-- Logout Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="page-login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
 </body>
 
 </html>

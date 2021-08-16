@@ -64,7 +64,7 @@ public class DessearchController {
 	}
 	//컷 디자이너 목록
 	@RequestMapping("cutList.do")
-	public String cutList(Model model, HttpServletRequest request) {		
+	public String cutList(Model model) {		
 		model.addAttribute("designer",dao.cutList());
 	
 	return("dessearch/desList");
@@ -72,21 +72,7 @@ public class DessearchController {
 	
 	//펌전문디자이너 목록
 	@RequestMapping("permList.do")
-	public String permList(Model model, DessearchVO vo, HttpServletRequest request) {
-		String page = request.getParameter("page");
-		if(page == null) page = "1";
-		int getNum = Integer.parseInt(page);
-		vo.setFirstCnt(1+(getNum -1)* 10);
-		vo.setLastCnt(getNum * 10);
-		vo.setTotalCnt(dao.permCnt());
-		
-		Paging paging = new Paging();
-		paging.setPageNo(getNum);
-		paging.setPageSize(6);
-		paging.setTotalCount(vo.getTotalCnt());
-		
-		model.addAttribute("paging",paging);
-		
+	public String permList(Model model) {
 		model.addAttribute("designer",dao.permList());
 	return("dessearch/desList");
 	}

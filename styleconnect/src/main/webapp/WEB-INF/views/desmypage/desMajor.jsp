@@ -128,6 +128,26 @@ img{
 	width: 100px;
 	height: 100px;
 }
+.content{
+	width: 500px;
+	height: 300px;
+	box-sizing: border-box;
+	border: 2px solid #ddd;
+}
+.content p:first-child{
+	width: 380px;
+	height: 20px;
+	background-color: #fff;
+	display: block;
+	font-size: 20px;
+	margin-top: -10px;
+	z-index: 99;
+	
+}
+.content p:last-child{
+	margin-top: -30px;
+	margin-bottom: 100px;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -231,15 +251,14 @@ img{
                 </div>
 				<form name="frm" id="frm" action="majorUpdate.do" method="post">
 				<input type="hidden" name="id" id="id" value="${des.id }"> 
-					<div align="center">
-							 ${des.id } 디자이너 전문분야 <br/>
+					<div align="center" class="content">
 							<c:set var="majors" value="${fn:split(des.major,',')}"></c:set>
 							<c:set var="selectmajor" value="${des.major }"></c:set>
 							<c:forEach var="major" items="${majors}" >
-							 <span class="text-grey-2"> ${major} </span> </a>
 							</c:forEach> 
 							<div class="form-group label-floating">
-						<p>특별히 잘하는 스타일링이 있나요? 3개만 선택해주세요!</p>
+						<p>특별히 잘하는 스타일링이 있나요? </p>
+						<p>3개만 선택해주세요!</p>
 						 <div class="select" style="text-align: center;">
 							<input type="checkbox" style="display:none;" name="major" id="major1" value="탈색"  <c:if test="${fn:contains(selectmajor,'탈색')}">checked</c:if>/><label for="major1">탈색</label>
 							<input type="checkbox" style="display:none;" name="major" id="major2" value="댄디컷"  <c:if test="${fn:contains(selectmajor,'댄디컷')}">checked</c:if>/><label for="major2">댄디컷</label> 
@@ -270,10 +289,10 @@ img{
 										
 				</div>
 			</form>
-			<div align="center">
-			<button onclick="updateMajor()">수정하기</button>
-			</div>
 		</div>
+			<div align="center">
+				<button onclick="updateMajor()" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">수정하기</button>
+			</div>
 	</div>
 </div>
 			

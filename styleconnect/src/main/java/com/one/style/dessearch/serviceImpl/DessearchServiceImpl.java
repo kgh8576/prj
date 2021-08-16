@@ -15,7 +15,6 @@ public class DessearchServiceImpl implements DessearchService {
 
 	@Autowired
 	SqlSession sqlSession;
-
 	@Override
 	public List<DessearchVO> dessearchList() {
 		// 전체디자이너 리스트
@@ -68,12 +67,6 @@ public class DessearchServiceImpl implements DessearchService {
 	public List<DessearchVO> dessearchSelectReview(DessearchVO vo) {
 		// 리뷰
 		return sqlSession.selectList("dessearchSelectReview", vo);
-	}
-
-	@Override
-	public int permCnt() {
-		// 페이징
-		return sqlSession.selectOne("permCnt");
 	}
 
 	@Override

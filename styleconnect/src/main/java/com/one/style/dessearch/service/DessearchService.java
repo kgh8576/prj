@@ -21,8 +21,6 @@ public interface DessearchService {
 	//검색
 	List<DessearchVO> searchList(DessearchVO vo);
 	
-	//페이징
-	int permCnt();
 	//디자이너 프로필 이미지
 	List<DessearchVO> desProImg(DessearchVO vo);
 	public List<DessearchVO> dessearchDesThum(DessearchVO vo);

@@ -37,17 +37,44 @@ function delfunc(fileUuid){
 <!-- 파일 다중 업로드 JQUERY -->	
 <script	src="${pageContext.request.contextPath}/resources/assets/js/jquery.MultiFile.js" type="text/javascript" language="javascript"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<style type="text/css">
-	#btnmargin{
-		margin: 80px;
-	}
+<style>
 	.multi{
-    width: 78px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-left: 20px;
+		float:left;
+		width: 350px;
+		height:40px;
+		}
+	.btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block{float:left; margin-left: -100px;}
+	.a{width: 500px;}
+
+
+		
+	.f{
+		width: 23%;
+		height: 200px;
+		box-sizing: border-box;
+		border: 1px solid #ddd;
+		float: left;
+		margin: 5px;
+		position: relative;
+		
+	}
+	.f .figure{
+		width: 100%;
+		height: 100%;
+	}
+	.f #btnmargidn{
+	width: 30%;
+    height: 30px;
+    position: absolute;
+    bottom: 0px;
+    left: 38%;
+    right: 0;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    border-radius: 3px;
+    background-color: #333;
+    color: #fff;
+
 	}
 </style>
 </head>
@@ -126,15 +153,18 @@ function delfunc(fileUuid){
 									aria-labelledby="heading-A">
 									<div class="card-body info_content">
 										<div class="add_bottom_25"></div>
+										<!-- 사진없을경우 -->
 										<c:if test="${empty sty }">
 										<div align="center">
 										<h3>등록된 스타일이 없습니다. <br/>스타일을 등록해보세요!</h3>
 										</div>
 										</c:if>
+										<!-- 사진있을때 -->
 										<c:if test="${not empty sty }">
 										<h2>스타일링 사진</h2>
 										<div class="pictures magnific-gallery clearfix">
 											<c:forEach items="${sty }" var="vo">
+											<div class="f">
 											<figure>
 												<a href="${pageContext.request.contextPath}/resources/img/${vo.fileUuid}"
 													title="${vo.fileName }" data-effect="mfp-zoom-in">
@@ -142,21 +172,24 @@ function delfunc(fileUuid){
 													data-src="${pageContext.request.contextPath}/resources/img/${vo.fileUuid}"
 													class="lazy" alt="">
 												</a>
+											
 											</figure>
 											<button id="btnmargidn" onclick="delfunc('${vo.fileUuid}')">삭제</button>
+											</div>
 											</c:forEach>
-										</div>
+											</div>
 										</c:if>
 									</div>
 								</div>
 							</div>
 							<div align="center">
-								<form method="post" action="desStyleUp.do" enctype="multipart/form-data">
+								<form class="a" method="post" action="desStyleUp.do" enctype="multipart/form-data">
 									<input type="hidden" name="did" value="${did }">
 									<input type="file" id="file" name="file" class="multi" multiple="multiple" />
-									<button type="submit">등록</button>
+									<button type="submit" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">사진등록</button>
 								</form>
 							</div>
+							
 							<!-- /tab -->
 						</div>
 						<!-- /tab-content -->
