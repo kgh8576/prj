@@ -9,4 +9,11 @@
 	<select id="dateTest" resultType="com.one.style.wokrOpen.vo.WorkOpenVO">
 		select (sysdate - (sysdate+1))*24*60 as timezone from dual
 	</select>
+	
+	
+	<select id="dateTest2" resultType="com.one.style.wokrOpen.vo.WorkOpenVO">
+		select TRUNC((TO_DATE(CONCAT(day, time), 'YYYY-MM-DD HH24:mi')-(TO_DATE('21/08/1616:37', 'YYYY-MM-DDHH24:mi')))*24*60) as timezone  from consulting_history where con_no = 2108090077
+	</select>
+	
+	
 </mapper>
