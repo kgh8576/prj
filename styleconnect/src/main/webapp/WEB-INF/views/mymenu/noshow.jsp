@@ -44,11 +44,16 @@
 		</c:if>
 	</c:forEach>
 	<div style="text-align: center;">
+	<c:set var="state" value="clean"/>
 	<c:forEach var="conhisends" items="${conhisends }">
-	 <c:if test="${conhisends.state ne 'ccode006' }">
-           <c:set></c:set>
-      </c:if>
-      	</c:forEach>
-      	</div>
+		<c:if test="${conhisends.state eq 'ccode006'}">
+			<c:set var="state" value="dirty"/>
+		</c:if>
+ 	</c:forEach>
+	 <c:if test="${state eq 'clean' }">
+           깨끗~~~
+     </c:if>
+     
+  	</div>
 
 </div>
