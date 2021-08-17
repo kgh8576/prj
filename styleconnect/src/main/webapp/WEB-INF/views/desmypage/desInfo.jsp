@@ -23,6 +23,7 @@
 	font-size: 13px;
 	margin-right: 15px;
 	margin-left: 15px;
+	margin-top: 36px;
 }
 .select input[type=checkbox]+label {
 	background-color: #fff;
@@ -140,6 +141,21 @@ body {margin: 10px;}
 textarea {
  height: 100px;
 }
+.mtitle {
+	font-size: 30px;
+	text-decoration: underline;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+.select{
+	width: 500px;
+	height:100px;
+	box-sizing: border-box;
+	border: 2px solid #ddd;
+	margin-top: 10px;
+}
+
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -255,15 +271,9 @@ function cercheck(){
     </nav>
     <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
+          <h1 class="mtitle">My Profile</h1>
             <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
                 <!-- Page Title -->
-                <div id="page-title" class="padding-30px background-white full-width">
-                    <div class="container">
-                        <ol class="breadcrumb opacity-5">
-                        </ol>
-                        <h1 class="font-weight-300">My Profile</h1>
-                    </div>
-                </div>
                 <!-- // Page Title -->
 <!-- 개인정보 수정 -->
                 <div class="row margin-tb-45px full-width">
@@ -330,7 +340,7 @@ function cercheck(){
                               <input id="location" name="location"  type="tel" class="form-control form-control-sm" value="${des.location }">
                           </div>
                       </div>
-                      <hr class="margin-tb-40px">
+                      <br/><br/>
                       <!-- 전문분야 -->
                       <div class="row">
                           <div class="col-md-6 margin-bottom-20px">
