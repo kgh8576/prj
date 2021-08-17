@@ -3,6 +3,7 @@ package com.one.style.crawldata.web;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,9 @@ public class CrawlDataController {
 	
 	@RequestMapping("crawl.do")
 	@ResponseBody
-	public String crawl(String gender, String id, String pw){
+	public String crawl(String gender, String id, String pw, HttpServletRequest req){
+		HttpSession session = req.getSession();
+		session.setAttribute("instaId", id);
 		String state = crawlDao.start(gender, id, pw);
 		return state;
 	}
