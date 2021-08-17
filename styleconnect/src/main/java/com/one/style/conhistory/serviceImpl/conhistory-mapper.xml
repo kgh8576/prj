@@ -11,7 +11,10 @@
 		select con_no, <!-- 상담번호 -->
 				to_char(day, 'YYYY-mm-dd') as day, <!--형식 변환된 서비스 날짜(ex)2021-01-01) -->
 				time,	<!-- 서비스 시간 -->	
-				to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YYYY/MM/DDHH24:mi')-sysdate)*24*60)) as remaining_time, <!-- 상담까지 남은 시간 -->
+				trunc((
+        				cast(systimestamp as date)
+      					-cast(to_timestamp(concat(to_char(day, 'yyyymmdd'), concat(substr(time,1,2), substr(time,-2))))as date)
+      					)*24*60) as remaining_time, <!-- 상담까지 남은 시간 -->
 				designer.id as des_id, <!-- 디자이너 아이디 -->
 				name as des_name, <!-- 디자이너 이름 -->
 				title, <!-- 상담 코스 제목 -->
