@@ -93,55 +93,57 @@
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
 		 <![CDATA[
-   select e.*, nvl(file_uuid, '0.png') as file_uuid from   
-   	(	SELECT 
-a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
-a.time,
-a.state,
-a.price,
-a.reservate_date,
-a.cour_no,
-a.mem_attend,
-a.des_attend,
-a.con_no,
-b.code,
-b.CODECONTENT,
-c.title,
-c.detail,
-d.name AS desName,
-d.career,
-d.major,
-d.id,
-r.reviewexist
-FROM CONSULTING_HISTORY a, COMMCODEDETAIL b , 
-         DES_COURSE c, DESIGNER d, (select c.con_no , c.mem_id, nvl2(r.title,1,0) as reviewexist from
-                                                consulting_history c
-                                                join commcodedetail cc
-                                                on c.state = cc.code
-                                                left join review r
-                                                on c.con_no = r.con_no
-                                                where c.mem_id = #{memId}
-                                                ) r
-WHERE a.state = b.code
-AND to_char(day,'YY/MM/DD')||' '||time < to_char(sysdate,'YY/MM/DD hh24:mi')
-AND c.cour_no = a.cour_no
-AND d.id = c.id
-AND r.con_no = a.con_no
-AND a.MEM_ID = #{memId}
-ORDER BY LASTST_DATE desc) e
-
-  left join 
-     (select file_uuid , des_id
-     from files
-     where file_state = 'pro') f
-   on id = f.des_id
+   select e.*, nvl(file_uuid, '0.png') as file_uuid
+from(
+       SELECT
+       a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
+       a.time,a.state,a.price,a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,a.con_no,
+       b.code,b.CODECONTENT,
+       c.title,c.detail,
+       d.name AS desName,d.career,d.major,d.id,
+       r.reviewexist,
+       nvl2(cr.con_no,1,0) as canreview
+       FROM CONSULTING_HISTORY a,
+                COMMCODEDETAIL b,
+                DES_COURSE c,
+                DESIGNER d, 
+                (
+                select c.con_no , c.mem_id, nvl2(r.title,1,0) as reviewexist 
+                from consulting_history c
+                join commcodedetail cc
+                on c.state = cc.code
+                left join review r
+                on c.con_no = r.con_no
+                where c.mem_id = #{memId}
+                ) r,
+                (
+                select to_char(day,'YYYY/MM/DD')||' '||time as lastst_date , con_no
+                from CONSULTING_HISTORY
+                where to_char(day,'YYYY/MM/DD')||' '||time > to_char(sysdate - 3 ,'YYYY/MM/DD HH24:mi:ss')
+                )cr
+      WHERE a.state = b.code
+      AND to_char(day,'YY/MM/DD')||' '||time < to_char(sysdate,'YY/MM/DD hh24:mi')
+      AND c.cour_no = a.cour_no
+      AND d.id = c.id
+      AND r.con_no = a.con_no
+      and a.con_no = cr.con_no(+)
+      AND a.MEM_ID = #{memId}
+      ORDER BY LASTST_DATE desc
+      ) e
+      left join (
+                  select file_uuid , des_id
+                  from files
+                  where file_state = 'pro'
+                  ) f
+      on e.id = f.des_id
+      ORDER BY LASTST_DATE desc
   		 ]]>
 	</select>
 	<!-- 상담완료 목록'만'출력 -->
 	<select id="conccode005" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
 	    		 <![CDATA[
-	    		SELECT 
-a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
+	    	SELECT 
+a.day, to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,
 a.time,
 a.state,
 a.price,
@@ -158,21 +160,30 @@ d.name AS desName,
 d.career,
 d.major,
 d.id,
-r.reviewexist
-FROM CONSULTING_HISTORY a, COMMCODEDETAIL b , 
-         DES_COURSE c, DESIGNER d, (select c.con_no , c.mem_id, nvl2(r.title,1,0) as reviewexist from
-                                                consulting_history c
-                                                join commcodedetail cc
-                                                on c.state = cc.code
-                                                left join review r
-                                                on c.con_no = r.con_no
-                                                where c.mem_id =#{memId}
-                                                ) r
+r.reviewexist,
+nvl2(cr.con_no,1,0) as canreview
+FROM CONSULTING_HISTORY a,
+         COMMCODEDETAIL b , 
+         DES_COURSE c,
+         DESIGNER d,
+         (select c.con_no , c.mem_id, nvl2(r.title,1,0) as reviewexist
+          from consulting_history c
+          join commcodedetail cc
+          on c.state = cc.code
+          left join review r
+          on c.con_no = r.con_no
+          where c.mem_id = #{memId}
+          ) r ,
+          (
+          select to_char(day,'YYYY/MM/DD')||' '||time as lastst_date , con_no
+          from CONSULTING_HISTORY
+          where to_char(day,'YYYY/MM/DD')||' '||time > to_char(sysdate - 3 ,'YYYY/MM/DD') 
+          ) cr
 WHERE a.state = b.code
-AND to_char(day,'YY/MM/DD')||' '||time < to_char(sysdate,'YY/MM/DD hh24:mi')
 AND c.cour_no = a.cour_no
 AND d.id = c.id
 AND r.con_no = a.con_no
+and a.con_no = cr.con_no(+)
 AND a.MEM_ID = #{memId}
 AND a.state = 'ccode005'
 ORDER BY LASTST_DATE desc

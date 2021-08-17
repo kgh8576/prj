@@ -44,13 +44,9 @@
 		</c:if>
 	</c:forEach>
 	<div style="text-align: center;">
-	<c:forEach var="conhisends" begin="0" end="0" items="${conhisends }">
+	<c:forEach var="conhisends" items="${conhisends }">
 	 <c:if test="${conhisends.state ne 'ccode006' }">
-           <div>
-				<p>불참한 내역이 없습니다!</p>
-				<p>소중한 시간약속 계속해서 잘 지켜주세요!</p>
-				<a href="membermypage.do" style="color: blue">마이페이지로!</a>
-			</div>
+           <c:set></c:set>
       </c:if>
       	</c:forEach>
       	</div>

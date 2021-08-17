@@ -6,4 +6,5 @@ public interface FilesMapper {
 
 	public void fileinsert(FilesVO vo);
 	public void dateTest();
+	public void dateTest2();
 }

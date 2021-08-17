@@ -291,9 +291,8 @@
 													<p>상세정보 : ${conhis.detail }</p>
 												</div>
 												<div style="text-align: center;">
-													<a href="consulting.do" style="color: blue">상담하러가기</a> <a
-														style="margin-left: 100px;" href="conhispage.do"
-														style="color: blue">더보기</a>
+												<button type="button" class="btnw btn-primary" style="margin-left: 25px" onclick="location.href='consulting.do' ">상담하러가기</button>
+												<button type="button" class="btnw btn-primary" style="margin-left: 25px" onclick="location.href='conhispage.do' ">더보기</button>	
 												</div>
 											</c:if>
 									
@@ -304,7 +303,7 @@
 										<div>
 											<p>아직까지 예약된 내역이없습니다!</p>
 											<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
-											<a href="category.do" style="color: blue">찾으러가기!</a>
+											<button type="button" class="btnw btn-primary" onclick="location.href='category.do' ">찾으러가기!</button>
 										</div>
 									</c:otherwise>
 								</c:choose>
@@ -325,7 +324,7 @@
 													<p>상세정보 : ${conccode005.detail }</p>
 												</div>
 												<div style="text-align: center;">
-													<a href="confinish.do" style="color: blue">더보기</a>
+												<button type="button" class="btnw btn-primary" onclick="location.href='confinish.do' ">더보기!</button>
 												</div>
 											</c:if>
 											
@@ -335,7 +334,7 @@
 										<div>
 											<p>아직까지 컨설팅 받은 내역이없습니다!</p>
 											<p>나에게 맞는 선생님을 찾으러 가볼까요?</p>
-											<a href="category.do" style="color: blue">찾으러가기!</a>
+											<button type="button" class="btnw btn-primary" onclick="location.href='category.do' ">찾으러가기!</button>
 										</div>
 									</c:otherwise>
 								</c:choose>

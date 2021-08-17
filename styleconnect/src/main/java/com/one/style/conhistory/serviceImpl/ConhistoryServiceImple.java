@@ -52,7 +52,7 @@ public class ConhistoryServiceImple implements ConhistoryService {
 		return conHistoryMapper.testCurrentTime();
 	}
 	@Override
-	public int testRemainingTime() {
+	public String testRemainingTime() {
 		// TODO Auto-generated method stub
 		return conHistoryMapper.testRemainingTime();
 	}

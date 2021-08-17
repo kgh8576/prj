@@ -138,12 +138,12 @@ function selectList(){
                             <div class="padding-30px2 full-width">
                                 <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                 <div class="margin-left-85px">
-                                	<a class="d-block text-dark text-medium margin-bottom-5px" href="#">No. ${vo.conNo }  </a>
-                                    <a class="d-block text-dark text-medium margin-bottom-5px" href="#">상담명: ${vo.title }  </a>
-                                    <div class="d-block padding-tb-5px">예약날짜 :  <a href="#" class="text-main-color">${vo.day } </a></div>
-                                    <div class="d-block padding-tb-5px">예약시간 :  <a href="#" class="text-main-color">${vo.time }</a></div>
-                                    <div class="d-block padding-tb-5px">예약자  :  <a href="#" class="text-main-color">${vo.memName}</a></div>
-                                     <div class="d-block padding-tb-5px">예약상태  :  <a href="#" class="text-main-color">${vo.codecontent}</a></div>
+                                	<a class="d-block text-dark text-medium margin-bottom-5px" >No. ${vo.conNo }  </a>
+                                    <a class="d-block text-dark text-medium margin-bottom-5px" >상담명: ${vo.title }  </a>
+                                    <div class="d-block padding-tb-5px">예약날짜 :  <a  class="text-main-color">${vo.day } </a></div>
+                                    <div class="d-block padding-tb-5px">예약시간 :  <a  class="text-main-color">${vo.time }</a></div>
+                                    <div class="d-block padding-tb-5px">예약자  :  <a  class="text-main-color">${vo.memName}</a></div>
+                                     <div class="d-block padding-tb-5px">예약상태  :  <a  class="text-main-color">${vo.codecontent}</a></div>
                                     <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a><br/> ${vo.memComment }</p>
                                     <!-- 예약중상태 -->
                                     <c:if test="${vo.state eq 'ccode001'}">

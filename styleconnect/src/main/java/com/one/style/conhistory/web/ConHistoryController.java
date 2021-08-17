@@ -57,7 +57,7 @@ public class ConHistoryController {
 		String day = conHistoryDao.conHistoryListSelect(vo).get(0).getDay();
 		String time = conHistoryDao.conHistoryListSelect(vo).get(0).getTime();
 		String DBCurrentTime = conHistoryDao.testCurrentTime();
-		int testRemainigTime = conHistoryDao.testRemainingTime(); 
+		String testRemainigTime = conHistoryDao.testRemainingTime(); 
 		//체크1
 		System.out.println("---------------------컨트롤러에서 받은 남은 상담시간 값: " + remaingTime);
 		System.out.println("---------------------컨트롤러에서 받은 예약날짜 값: " + day);

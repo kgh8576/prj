@@ -11,7 +11,7 @@
 		select con_no, <!-- 상담번호 -->
 				to_char(day, 'YYYY-mm-dd') as day, <!--형식 변환된 서비스 날짜(ex)2021-01-01) -->
 				time,	<!-- 서비스 시간 -->	
-				to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-sysdate)*24*60)) as remaining_time, <!-- 상담까지 남은 시간 -->
+				trunc((to_date(to_char(day,'YYYY/MM/DD')||' '||time , 'YYYY/MM/DD HH24:mi') - sysdate)*24*60) as remaining_time, <!-- 상담까지 남은 시간 -->
 				designer.id as des_id, <!-- 디자이너 아이디 -->
 				name as des_name, <!-- 디자이너 이름 -->
 				title, <!-- 상담 코스 제목 -->
@@ -22,8 +22,13 @@
 			where consulting_history.cour_no = des_course.cour_no <!-- 테이블 조인 조건 -->
 				and des_course.id = designer.id <!-- 테이블 조인 조건 -->
 				and consulting_history.state = commcodedetail.code <!-- 테이블 조인 조건 -->
-
-				and consulting_history.con_no = 2108090077
+				and commcodedetail.codecontent in ('예약확정', '상담중')<!-- 진행상황이 예약확정, 상담중인 행 검색 --> 
+			<if test="memId != null and memId != ''"> <!-- 일반회원 로그인 시 일반회원 아이디로 검색 -->
+				and consulting_history.mem_id=#{memId}
+			</if>
+			<if test="desId != null and desId != ''"> <!-- 디자이너 로그인 시 디자이너 아이디로 검색-->
+				and des_course.id=#{desId}
+			</if>
 			order by con_no desc
 	</select>
 
@@ -81,22 +86,10 @@
 		select to_char(sysdate, 'YYYY-MM-dd HH24:mi:ss') from dual
 	</select>
 	<!-- 테스트용2 -->
-	<select id="testRemainingTime" resultType="Integer">
-		select to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YY/MM/DDHH24:mi')-(TO_DATE('21/08/1616:37', 'YY/MM/DDHH24:mi')))*24*60)) as test_remaining_time from consulting_history where con_no = 2108090077
+	<select id="testRemainingTime" resultType="String">
+		select to_char(to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YYYY/MM/DDHH24:mi')-(TO_DATE('21/08/1616:37', 'YYYY/MM/DDHH24:mi')))*24*60))) as test_remaining_time from consulting_history where con_no = 2108090077
 	</select>
 
 
 </mapper>
 
-				<!-- 진행상황이 예약확정, 상담중인 행 검색 -->
-				<!--  and commcodedetail.codecontent in ('예약확정', '상담중') -->
-			<!-- 일반회원 로그인 시 일반회원 아이디로 검색 -->
-			<!-- 디자이너 로그인 시 디자이너 아이디로 검색-->
-			<!--  
-			<if test="memId != null and memId != ''"> 
-				and consulting_history.mem_id=#{memId}
-			</if>
-			<if test="desId != null and desId != ''"> 
-				and des_course.id=#{desId}
-			</if>
-			-->

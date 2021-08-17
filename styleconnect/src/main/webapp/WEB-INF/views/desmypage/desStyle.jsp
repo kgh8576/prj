@@ -26,29 +26,26 @@ function delfunc(fileUuid){
 	rel="stylesheet">
 
 <!-- SPECIFIC CSS -->
-<link
+ <link
 	href="${pageContext.request.contextPath}/resources/reservationreso/css/detail-page.css"
 	rel="stylesheet">
 
 <!-- YOUR CUSTOM CSS -->
-<link
+ <link
 	href="${pageContext.request.contextPath}/resources/reservationreso/css/custom.css"
-	rel="stylesheet">
+	rel="stylesheet"> 
 <!-- 파일 다중 업로드 JQUERY -->	
 <script	src="${pageContext.request.contextPath}/resources/assets/js/jquery.MultiFile.js" type="text/javascript" language="javascript"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
-	.multi{
+.multi{
 		float:left;
 		width: 350px;
 		height:40px;
 		}
-	.btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block{float:left; margin-left: -100px;}
-	.a{width: 500px;}
-
-
-		
-	.f{
+.btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block{float:left; margin-left: -100px;}
+.a{width: 500px;}
+.f{
 		width: 23%;
 		height: 200px;
 		box-sizing: border-box;
@@ -56,13 +53,12 @@ function delfunc(fileUuid){
 		float: left;
 		margin: 5px;
 		position: relative;
-		
 	}
-	.f .figure{
+.f .figure{
 		width: 100%;
 		height: 100%;
 	}
-	.f #btnmargidn{
+.f #btnmargidn{
 	width: 30%;
     height: 30px;
     position: absolute;
@@ -76,6 +72,18 @@ function delfunc(fileUuid){
     color: #fff;
 
 	}
+.mtitle {
+	font-size: 30px;
+	text-decoration: underline;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+.card tab-pane fade show active 1{
+	width: 500px;
+	height: 300px;
+	box-sizing: border-box;
+	border: 2px solid #ddd;
+}
 </style>
 </head>
 <body>
@@ -129,20 +137,14 @@ function delfunc(fileUuid){
 <main>
 <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
-            <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">    
-     <div id="page-title" class="padding-30px background-white full-width">
-                    <div class="container">
-                        <ol class="breadcrumb opacity-5">
-                        </ol>
-                        <h1 class="font-weight-300">내 스타일링 사진 관리</h1>
-                    </div>
-                </div>
+                        <h1 class="mtitle">Styling image setting</h1>
+            <div class="row margin-lr-10px sm-mrl-0px">    
 		<div class="container margin_detail">
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="tabs_detail">
 						<div class="tab-content" role="tablist">
-							<div id="pane-A" class="card tab-pane fade show active"
+							<div id="pane-A" class="card tab-pane fade show active 1"
 								role="tabpanel" aria-labelledby="tab-A">
 								<div class="card-header" role="tab" id="heading-A">
 									<h5>
