@@ -303,26 +303,16 @@ function hpcheckbtn() {
 				</div>
 				<div class="remember">
 					<div class="checkbox">
-						<label> <input name="optionsCheckboxes" type="checkbox">
-							I accept the <a href="#">Terms and Conditions</a> of the website
-						</label>
+						
 					</div>
 				</div>
 
-				<button type="button" id="hpfinalcheck" onclick="formCheck()" class="btn btn-md btn-primary full-width">가입하기</button>>
+				<button type="button" id="hpfinalcheck" onclick="formCheck()" class="btn btn-md btn-primary full-width">가입하기</button>
 
 				<div class="or"></div>
 
-				<a href="#" class="btn btn-md bg-facebook full-width btn-icon-left"><i
-					class="fab fa-facebook margin-right-8px" aria-hidden="true"></i>
-					Login with Facebook</a> <a href="#"
-					class="btn btn-md bg-twitter full-width btn-icon-left"><i
-					class="fab fa-twitter margin-right-8px" aria-hidden="true"></i>
-					Login with Twitter</a>
-
-
 				<p>
-					you have an account? <a href="page-login.html"> Sing in !</a>
+					계정이있으신가요!? <a href="loginpage.do"> 로그인화면으로 </a>
 				</p>
 			</form>
 

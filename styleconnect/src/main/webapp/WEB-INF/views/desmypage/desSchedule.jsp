@@ -27,7 +27,12 @@
     width: 400px;
     height: 400px;
     }
-
+.mtitle {
+	font-size: 30px;
+	text-decoration: underline;
+	margin-left: 50px;
+	margin-top: 50px;
+}
 </style>
 <script>
 function denyfun(conNo){
@@ -104,19 +109,13 @@ function selectList(){
         </div>
     </nav>
 <div class="content-wrapper">
-        <div class="container-fluid overflow-hidden">
-            <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
-                <!-- Page Title -->
-                <div id="page-title" class="padding-30px background-white full-width">
-                    <div class="container">
-                        <ol class="breadcrumb opacity-5">
-                         
-                        </ol>
-                        <h1 class="font-weight-300">예약내역</h1>
-                <div align="right">
-                <input type="hidden" name="state" value="${state }">
-                <select name="state" id="state" onchange="selectList()">
-                
+  <div class="container-fluid overflow-hidden">
+	<h1 class="mtitle">Reservation List</h1>
+     <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+       <div class="container">
+			<div align="right">
+               <input type="hidden" name="state" value="${state }">
+               <select name="state" id="state" onchange="selectList()">
                 	<option value="ccode001" <c:if test="${state eq 'ccode001'}">selected</c:if> >예약중</option>
                 	<option value="ccode002" <c:if test="${state eq 'ccode002'}">selected</c:if> >예약확정</option>
                 	<option value="ccode007" <c:if test="${state eq 'ccode007'}">selected</c:if> >예약거절</option>
@@ -124,8 +123,8 @@ function selectList(){
                 	<option value="ccode006" <c:if test="${state eq 'ccode006'}">selected</c:if>>상담불참</option>
                 </select>
                 </div>
-                    </div>
-                </div>
+       </div>
+	  </div>
                 <!-- // Page Title -->
                 <div class="row2 margin-top-45px">
                 <c:if test="${empty sche }">
