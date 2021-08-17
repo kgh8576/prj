@@ -85,6 +85,20 @@ section .container img{
     top: 30%;
     margin: 0 auto;
 }
+.title text-right {
+	text-align:right;
+}
+
+.text-main-color{
+	color:black;
+}
+
+#main-search-button{
+	background-color:#ea42b0;
+	border-top-right-radius:10px;
+	border-bottom-right-radius:10px;
+	
+}
 
 .card-title, .card-titleH5 {
 	display:inline;
@@ -286,18 +300,17 @@ function crawl(gender) {
 
 
 	<section class="banner padding-tb-200px sm-ptb-80px background-overlay"
-		style="background-image: url('http://placehold.it/1600x830');">
+		style="background-image: url('resources/assets/img/designTest/mainTestImg.png');">
 		<div class="container z-index-2 position-relative">
-			<div class="title text-center">
+			<div class="title text-right">
 				<div id="altercheck2"class="alert alert-success alert-dismissible" style="display: none;">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
-</div>
-				<h1
-					class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Style
-					Connect</h1>
-				<h4 class="font-weight-300 text-main-color text-up-small">나에게
-					맞는 디자이너를 찾아보세요!</h4>
+  					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  					<strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
+				</div>
+				<p class="text-title-large text-main-color font-weight-300 margin-bottom-15px">STYLE
+					CONNECT</p>
+				<p class="font-weight-300 text-main-color text-up-small">나에게
+					맞는 디자이너를 찾아보세요!</p>
 			</div>
 			<!-- 검색창 -->
 			<div class="row justify-content-center margin-tb-60px">
@@ -307,11 +320,13 @@ function crawl(gender) {
 						<form id="frm" action="searchList.do" method="post">
 							<div class="margin-bottom-30px">
 								<div class="padding-30px background-white border-radius-10"
-									id="searchBox" style="height:180px;">
+									id="searchBox" style="height:80px;"> <!-- 원본 180px -->
+									<!--  
 									<h4>
 										<i class="fas fa-search margin-right-10px text-main-color"></i>
 										Search
 									</h4>
+									-->
 									<hr>
 									<div class="input-group mb-3">
 										<input type="text" name="search"
@@ -320,6 +335,7 @@ function crawl(gender) {
 										<div class="input-group-append">
 											<button
 												class="btn btn-outline-secondary text-white background-main-color border-radius-0"
+												id="main-search-button"
 												type="submit">Search</button>
 										</div>
 									</div>
