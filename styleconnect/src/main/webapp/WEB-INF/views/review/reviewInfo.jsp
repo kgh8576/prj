@@ -87,15 +87,19 @@
 		});		
 	}
 	
-	
-	
 </script>
 </head>
 <body>
 <br><br><br>
+<c:if test="${reviewInfo.state eq 'N' }">
+	<script>
+		location.href = 'errorPage.do';
+	</script>
+</c:if>
+<c:if test="${reviewInfo.state eq 'Y' }">
 <div class="row">
-	<div class="col-md-3"></div>
 	
+	<div class="col-md-3"></div>
 	<div class="col-md-6">
 		<div align="right" style="border-bottom: 1px solid black;">
 			<c:if test="${id eq reviewInfo.memId }">
@@ -198,5 +202,6 @@
 	</div>
 	<div class="col-md-3"></div>
 </div>
+</c:if>
 </body>
 </html>

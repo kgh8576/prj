@@ -26,8 +26,15 @@
 	// 1. 작업 시켜놓고 나갔다가 들어오는 경우 페이지 로드 시 크롤링 중인지 검사
 	// 2. 버튼 눌러놓고 기다리는 경우
 	
-	// 페이지 로드 시 크롤링 중인지 검사, 
+	// 페이지 로드 시 크롤링 중인지 검사, 세션값에 입력한 instagram ID가 있는지 검사
 	$(function() {
+	    // 세션값에 입력한 instagram ID가 있는지 검사. crawl.do 호출 시에 세션 생성
+	    $('#id').val( '${instaId }' );
+	    if ( $('#id').val() == '' ){
+	    	$('#id').focus();
+	    }
+	    	
+	 	// 페이지 로드 시 크롤링 중인지 검사
 	    $.ajax({
 	    	url:'isCrawlRunning.do',
 	    	method:'post',
@@ -68,7 +75,15 @@
 	    		afterCrawl('error');
 	    	}
 	    })
+	    
+
+	    
 	});
+	
+	
+	
+	
+	
 
 	// 버튼 누르면 크롤링
 	function crawl(gender) {
