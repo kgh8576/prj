@@ -110,8 +110,9 @@ function selectList(){
     </nav>
 <div class="content-wrapper">
   <div class="container-fluid overflow-hidden">
-	<h1 class="mtitle">Reservation List</h1>
+	<h1 class="mtitle">&nbsp&nbsp&nbsp Reservation List</h1>
      <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+     <div id="page-title" class="padding-30px background-white full-width">
        <div class="container">
 			<div align="right">
                <input type="hidden" name="state" value="${state }">
@@ -123,6 +124,7 @@ function selectList(){
                 	<option value="ccode006" <c:if test="${state eq 'ccode006'}">selected</c:if>>상담불참</option>
                 </select>
                 </div>
+               
        </div>
 	  </div>
                 <!-- // Page Title -->

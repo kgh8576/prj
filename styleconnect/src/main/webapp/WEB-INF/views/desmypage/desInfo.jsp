@@ -271,7 +271,7 @@ function cercheck(){
     </nav>
     <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
-          <h1 class="mtitle">My Profile</h1>
+          <h1 class="mtitle"> &nbsp&nbsp&nbsp My Profile</h1>
             <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
                 <!-- Page Title -->
                 <!-- // Page Title -->
@@ -413,7 +413,7 @@ function cercheck(){
             				<c:if test="${not empty descer.comments }"><br/>
             				<div>
             				<p id="adcomments">*증명서를 다시 제출해주세요</p>
-            				${descer.comments }<br/>
+            				승인거절이유 - ${descer.comments }<br/>
             				</div>
             				</c:if>
                       		<div class="cerbtn" onclick="hpchange()"><a>증명서 제출하기</a></div><br/>${descer.fileName }

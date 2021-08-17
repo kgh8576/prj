@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +83,17 @@
 	width: 500px;
 	height: 300px;
 	box-sizing: border-box;
-	border: 2px solid #ddd;
+	border: 2px solid #aaa;
+}
+.row{
+	margin-top: 30px;
+}
+#content{
+	width: 800px;
+	height: 500px;
+	box-sizing: border-box;
+	border: 5px solid #bfbcbc;
+	border-radius: 10px;
 }
 </style>
 </head>
@@ -137,7 +148,7 @@
 		</nav>
 		<div class="content-wrapper">
 			<div class="container-fluid overflow-hidden">
-				<h1 class="mtitle">Styling image setting</h1>
+				<h1 class="mtitle">&nbsp&nbsp&nbsp Styling image setting</h1>
 				<div class="row margin-lr-10px sm-mrl-0px">
 					<div class="container margin_detail">
 						<div class="row">
@@ -154,8 +165,7 @@
 									</c:if>
 									<!-- 사진있을때 -->
 									<c:if test="${not empty sty }">
-										<h2>스타일링 사진</h2>
-										<div class="pictures magnific-gallery clearfix">
+										<div class="pictures magnific-gallery clearfix" id="content">
 											<c:forEach items="${sty }" var="vo">
 												<div class="f">
 													<figure>
@@ -172,6 +182,7 @@
 								</div>
 							</div>
 						</div>
+						<c:if test="${fn:length(sty) < 8}">
 						<div align="center">
 							<form class="a" method="post" action="desStyleUp.do"
 								enctype="multipart/form-data">
@@ -182,7 +193,13 @@
 									class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">사진등록</button>
 							</form>
 						</div>
-
+						</c:if>
+						<c:if test="${fn:length(sty) >=8}"> 
+						<br/>
+						<div align="center">
+						<p>사진등록 최대 8개 가능<br/>(사진변경은 기존사진 삭제 후 재등록하세요.)</p>
+						</div>
+						</c:if>
 						<!-- /tab -->
 					</div>
 					<!-- /tab-content -->
