@@ -150,7 +150,7 @@
 	</insert>
 	
 	<select id="searchKeywordsList" resultType="com.one.style.home.vo.HomeVO">
-		select major as keyword, category from
+		select major, category from
 		(SELECT major, 'major' as category from designer)
 		union
 		(select name, 'desinger' from designer)

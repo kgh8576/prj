@@ -180,6 +180,19 @@
 		}
 	}
 	
+	function testZaso(){
+		$.ajax({
+			url : 'searchKeywordsList.do',
+			type : 'post',
+			data : {inputKeywords : '테스트'},
+			success : function(result){
+				console.log(result);
+			}, error: function(err){
+				console.log(err);
+			}
+		});
+	}
+	
 </script>
 </head>
 <body>
@@ -225,7 +238,9 @@
 	</div>
 </div>
 
-
+<div>
+	<button onclick="testZaso()">자소분해테스트~~</button>
+</div>
 
 	
 	
