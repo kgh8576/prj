@@ -9,9 +9,6 @@
 <title>디자이너 상담목록 리스트 (blog-grid.html)</title>
 </head>
 <style>
-h1{
-	color: navy;
-}
 .nocourse{
 	align: center;
 	margin: 100px;
@@ -22,6 +19,12 @@ h1{
 #courseline{
 border: 1px solid #333;
 
+}
+.mtitle {
+	font-size: 30px;
+	text-decoration: underline;
+	margin-left: 50px;
+	margin-top: 50px;
 }
 </style>
 <body>
@@ -72,15 +75,10 @@ border: 1px solid #333;
             </ul>
         </div>
     </nav>
-			 <div id="page-title" class="padding-tb-30px gradient-white">
-			        <div class="container">
-			            <ol class="breadcrumb opacity-5">
-			            </ol>
-			          <c:forEach items="${course }" var="vo" begin="1" end="1">
-			            <h1 class="font-weight-300">${vo.name } 디자이너의 상담 목록</h1>
-			        </c:forEach>
-			        </div>
-			    </div>
+<div class="content-wrapper">
+  <div class="container-fluid overflow-hidden">
+	<h1 class="mtitle">&nbsp&nbsp&nbsp Consulting List</h1>
+		</div>
     <div class="margin-tb-30px">
         <div class="container">
             <div class="row">
@@ -135,6 +133,6 @@ border: 1px solid #333;
             </div>
         </div>
     </div>
-
+</div>
 </body>
 </html>

@@ -23,6 +23,7 @@ public class DessearchVO {
 	private int rate;
 	private Date wDate;
 	private String title;
+	private String reviewCnt;
 	//course
 	private int courNo;
 	private String Ctitle;
@@ -32,11 +33,6 @@ public class DessearchVO {
 	private String search;
 	//member
 	private String mName;
-	//페이징
-	private int firstCnt;
-	private int lastCnt;
-	private int totalCnt;
-	
 	//files
 	private String fileUuid;
 	private String fileState;

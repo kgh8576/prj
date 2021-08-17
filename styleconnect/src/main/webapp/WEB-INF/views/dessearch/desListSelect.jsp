@@ -45,11 +45,6 @@ span:hover{
 <body>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
-            <ol class="breadcrumb opacity-5">
-                <li><a href="main.do">Home</a></li>
-                <li><a href="#">Clinics</a></li>
-                <li class="active">${designer.name} 디자이너</li>
-            </ol>
             <h1 class="font-weight-300">${designer.name} 디자이너</h1>
         </div>
     </div>
@@ -83,7 +78,7 @@ span:hover{
                    <!-- 프로필(경력) -->
                     <div class="margin-bottom-30px box-shadow">
                         <div class="padding-30px background-white">
-                            <h3><i class="far fa-hospital margin-right-10px text-main-color"></i> 경력 </h3>
+                            <h3><i class="far fa-user margin-right-10px text-main-color"></i> 경력 </h3>
                             <hr>
                             <p class="text-grey-4">${designer.career }</p>
                         </div>
@@ -91,8 +86,7 @@ span:hover{
                     <!-- 전문분야-->
                     <div class="margin-bottom-30px box-shadow">
                         <div class="padding-30px background-white">
-                            <h3><i class="far fa-hospital margin-right-10px text-main-color
-                            "></i> 전문분야 </h3>
+                            <h3><i class="far fa-file margin-right-10px text-main-color"></i> 전문분야 </h3>
                           <!-- Post tags -->
                         <hr>
                         <div class="post-tags">
@@ -109,7 +103,7 @@ span:hover{
                     	<!-- 디자이너 이미지 -->
                     <div class="margin-bottom-30px box-shadow">
                         <div class="padding-30px background-white">
-                            <h3><i class="far fa-hospital margin-right-10px text-main-color"></i> 디자이너 스타일링 이미지 </h3>
+                            <h3><i class="far fa-image margin-right-10px text-main-color"></i> 디자이너 스타일링 이미지 </h3>
                             <hr>
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
@@ -137,7 +131,8 @@ span:hover{
                             <h3>등록된 후기가 없습니다.</h3>                            
                             </div>                            
                             </c:if>
-							<c:forEach items="${review}" var="vo">
+                            <c:if test="${not empty review }">
+							<c:forEach items="${review}" var="vo" begin="1" end="4">
                             <ul class="commentlist padding-0px margin-0px list-unstyled text-grey-3">
                                 <li class="border-bottom-1 border-grey-1 margin-bottom-20px">
                                     <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
@@ -150,7 +145,6 @@ span:hover{
                                         	<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
 											</c:forEach> 
-										 	평점 ${vo.rate }
                                         	</ul>
                                     	</div>
                                         <!-- 별점 끝-->
@@ -159,6 +153,7 @@ span:hover{
                               	</li>
                           </ul>
 							</c:forEach>
+							</c:if>
                                 <div align="right">
                                 	<a href="reviewList.do?desId=${designer.id }"> > 리뷰 더 보기 </a>
                                 	<input type="hidden" name="id" value="${designer.id }">
@@ -170,18 +165,18 @@ span:hover{
                 <!-- 사이드바 div -->
                 <div class="col-lg-4" id="fixed">
                     <div id="side" class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
-                        <h3 id="dname" class="padding-lr-30px padding-top-20px"><i class="far fa-clock margin-right-10px"></i> ${designer.name}디자이너</h3>
+                        <h3 id="dname" class="padding-lr-30px padding-top-20px"><i class="far fa-user margin-right-10px"></i> ${designer.name}디자이너</h3>
                         <hr>
                         <div class="padding-bottom-30px">
                         <!-- 별점 -->
                          <div class ="rating clearfix" id="rate">
                            <ul class="float-left">
-                              <c:if test="${designer.rate != 0 }">
+                              <c:if test="${designer.reviewCnt != 0 }">
 								<c:forEach begin="1" end="${designer.rate }">
 								<li class="active"></li>
-								</c:forEach>  평점 ${designer.rate }
+								</c:forEach>  (${designer.reviewCnt })건
 							 </c:if>
-							 <c:if test="${designer.rate == 0 }">
+							 <c:if test="${designer.reviewCnt == 0 }">
 											등록된 후기가 없습니다.
 							</c:if>
                          </ul>
@@ -197,7 +192,7 @@ span:hover{
                             <!-- //디자이너 major 태그 -->
                             <!-- 상담목록가기 버튼 -->
                              <div class="col-4">
-                             <a class="reserbtn" href="courseList.do?id=${designer.id }" ><i class="far fa-bookmark"></i><h2>예약하러가기</h2> </a>
+                             <a class="reserbtn" href="courseList.do?id=${designer.id }" ><i class="far fa-bookmark"></i>예약하러가기 </a>
                              </div>
                        </div>
                       </div>
