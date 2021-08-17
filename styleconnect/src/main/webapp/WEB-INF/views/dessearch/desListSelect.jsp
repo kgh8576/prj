@@ -45,11 +45,6 @@ span:hover{
 <body>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
-            <ol class="breadcrumb opacity-5">
-                <li><a href="main.do">Home</a></li>
-                <li><a href="#">Clinics</a></li>
-                <li class="active">${designer.name} 디자이너</li>
-            </ol>
             <h1 class="font-weight-300">${designer.name} 디자이너</h1>
         </div>
     </div>

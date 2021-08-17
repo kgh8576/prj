@@ -19,11 +19,6 @@ span:hover{
 
 	<div id="page-title" class="padding-tb-30px gradient-white">
 		<div class="container">
-			<ol class="breadcrumb opacity-5">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Pages</a></li>
-				<li class="active">Doctors List</li>
-			</ol>
 			<h1 class="font-weight-300">Designer List</h1>
 		</div>
 	</div>
@@ -74,7 +69,6 @@ span:hover{
 									</div>
 										<h5 class="margin-tb-15px">
 											<a class="text-dark" href="desListSelect.do?id=${vo.id }">${vo.name }디자이너</a>
-											
 										</h5>
 										<div class="rating clearfix">
 											<ul class="float-left">
@@ -83,8 +77,8 @@ span:hover{
 												<li class="active"></li>
 										</c:forEach>  평점 ${vo.rate }
 										</c:if>
-										<c:if test="${vo.rate == 0 }">
-											등록된 후기가 없습니다.
+										<c:if test="${vo.rate == 0}">
+											등록된 후기가 없습니다. 
 										</c:if>
 											</ul>
 										</div>
