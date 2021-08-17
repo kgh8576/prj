@@ -78,11 +78,11 @@
 							</div>
 							<p class="margin-top-15px text-grey-2">상세정보 : ${conhis.detail }</p>
 							<a href="reviewList.do?desId=${conhis.desId }"
-								class="d-inline-block text-grey-2 text-up-small"><i
+								class="d-inline-block text-grey-2 text-up-small" style="color: black;"><i
 								class="far fa-file-alt"></i> 리뷰보기</a>
 							<button type="button"
 								class="d-inline-block margin-lr-20px text-grey-2 text-up-small"
-								onclick="paycancle('${conhis.conNo}')">
+								onclick="paycancle('${conhis.conNo}')" style="color: black;">
 								<i class="far fa-window-close"></i> 예약취소
 							</button>
 							<font id="Noticemessage${conhis.conNo }" size="2"></font>
