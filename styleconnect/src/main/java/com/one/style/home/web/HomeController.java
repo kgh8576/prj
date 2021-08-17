@@ -57,4 +57,10 @@ public class HomeController {
 		return "redirect:main.do";
 		
 	}
+	
+	@RequestMapping("errorPage.do")
+	public String errorPage() {
+		return "main/error";
+	}
+		
 }

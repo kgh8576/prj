@@ -7,6 +7,14 @@
 	</insert>
 	
 	<select id="dateTest" resultType="com.one.style.wokrOpen.vo.WorkOpenVO">
-		select to_char(sysdate,'yyyy/mm/dd hh24:mi:dd') as timezone from dual
+		select (sysdate - (sysdate+1))*24*60 as timezone from dual
 	</select>
+	
+	
+	<select id="dateTest2" resultType="com.one.style.wokrOpen.vo.WorkOpenVO">
+		select trunc((to_date(to_char(day,'YYYY/MM/DD')||' '||time , 'YYYY/MM/DD HH24:mi') - sysdate)*24*60) as timezone 
+		from consulting_history where con_no = 2108090077
+	</select>
+	
+	
 </mapper>

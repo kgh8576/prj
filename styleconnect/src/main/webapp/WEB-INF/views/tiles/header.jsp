@@ -44,11 +44,11 @@ pageEncoding="UTF-8" %>
         <div id="fixed-header-dark" class="header-output fixed-header">
             <div class="container header-in">
                 <div class="row">
-                    <div class="col-lg-2 col-md-12">
-                    	<a href="main.do">
-	                    	<img alt="" src="${pageContext.request.contextPath}/resources/img/logo.jpg">
-                    	</a>
-                    </div>
+                	<div class="col-xl-2 col-lg-2">
+	                    <a id="logo" href="main.do" class="d-inline-block margin-tb-15px">
+	                    	<img src="${pageContext.request.contextPath}/resources/img/logo.jpg" alt="">
+	                    </a>
+                	</div>
                     <div class="col-lg-7 col-md-12 position-inherit">
                         <ul id="menu-main" class="nav-menu float-lg-right link-padding-tb-20px">
                         	<li><a href="consulting.do">상담하기</a></li>

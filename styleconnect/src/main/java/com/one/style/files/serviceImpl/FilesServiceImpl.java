@@ -139,4 +139,9 @@ public class FilesServiceImpl implements FilesService {
 	public void dateTest(){
 		map.dateTest();
 	}
+	public void dateTest2() {
+		map.dateTest2();
+	}
+	
+	
 }

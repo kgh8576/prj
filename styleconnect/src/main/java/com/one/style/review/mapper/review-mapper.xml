@@ -35,17 +35,17 @@ and rn between #{firstCnt} and #{lastCnt}
 	</select>
 	
 	<select id="getReviewWriter" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
-select * from
-(select outSq.* from
-  (select inSq.con_no, dc.cour_no, dc.price, dc.title, inSq.title as review_title, inSq.contents, inSq.rate, inSq.mem_id, inSq.des_id, to_char(wdate, 'YYYY-MM-DD') as stringwDate
-  from DES_COURSE dc,
-    (select ch.con_no, ch.price, ch.cour_no, r.contents, r.title, r.rate, r.mem_id, r.des_id, wdate
-    from consulting_history ch, review r
-    where ch.con_no = r.con_no
-    and r.con_no = #{conNo}) inSq
-  where inSq.cour_no = dc.cour_no
-  order by wdate desc) outSq  
-)
+	select * from
+	(select outSq.* from
+	  (select inSq.con_no, dc.cour_no, dc.price, dc.title, inSq.title as review_title, inSq.contents, inSq.rate, inSq.mem_id, inSq.des_id, to_char(wdate, 'YYYY-MM-DD') as stringwDate, state
+	  from DES_COURSE dc,
+	    (select ch.con_no, ch.price, ch.cour_no, r.contents, r.title, r.rate, r.mem_id, r.des_id, wdate, r.state
+	    from consulting_history ch, review r
+	    where ch.con_no = r.con_no
+	    and r.con_no = #{conNo}) inSq
+	  where inSq.cour_no = dc.cour_no
+	  order by wdate desc) outSq
+	)
 	</select>
 	
 	<select id="canReviewRegCheckDate" parameterType="com.one.style.review.vo.ReviewVO" resultType="com.one.style.review.vo.ReviewVO">
