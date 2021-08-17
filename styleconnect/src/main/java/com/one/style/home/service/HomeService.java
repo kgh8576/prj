@@ -13,5 +13,5 @@ public interface HomeService {
 	public HomeVO rcmdDesByRate(MemDetailVO vo);
 	public HomeVO rcmdDesByConHis(MemDetailVO vo);
 	void memDetailInsert(MemDetailVO vo);
-	public Map<String, String> searchKeywordsList();
+	public List<HomeVO> searchKeywordsList();
 }

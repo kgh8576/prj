@@ -77,7 +77,7 @@ border: 1px solid #333;
     </nav>
 <div class="content-wrapper">
   <div class="container-fluid overflow-hidden">
-	<h1 class="mtitle"> Consulting List</h1>
+	<h1 class="mtitle">&nbsp&nbsp&nbsp Consulting List</h1>
 		</div>
     <div class="margin-tb-30px">
         <div class="container">
