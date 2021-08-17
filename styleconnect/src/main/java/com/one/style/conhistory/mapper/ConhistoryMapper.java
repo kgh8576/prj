@@ -18,5 +18,5 @@ public interface ConhistoryMapper {
 	
 	//시간 테스트 매퍼
 	public String testCurrentTime();
-	public int testRemainingTime();
+	public String testRemainingTime();
 }
