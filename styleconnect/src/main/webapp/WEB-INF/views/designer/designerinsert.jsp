@@ -715,7 +715,7 @@ body {
 						class="btn btn-md btn-primary full-width">다음단계</button>
 
 					<p>
-						you have an account? <a href="page-login.html"> Sing in !</a>
+						계정이 있다면? <a href="loginpage.do"> 로그인화면으로 !</a>
 					</p>
 				</div>
 
@@ -802,7 +802,7 @@ body {
 						class="btn btn-md btn-primary full-width">다음단계</button>
 
 					<p>
-						you have an account? <a href="page-login.html"> Sing in !</a>
+						계정이있다면? <a href="loginpage.do"> 로그인화면으로 </a>
 					</p>
 				</div>
 
@@ -867,7 +867,7 @@ body {
 
 
 					<p>
-						you have an account? <a href="page-login.html"> Sing in !</a>
+						계정이있다면?  <a href="loginpage.do"> 로그인화면으로 !</a>
 					</p>
 				</div>
 
