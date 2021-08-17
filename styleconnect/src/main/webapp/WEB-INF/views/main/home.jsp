@@ -57,7 +57,7 @@ section .container img{
 	 border: 1px solid white;
 	width: 49%;
     text-align: center;
-    height: 50px;
+    height: 40px;
     padding-top: 10px;
     margin: 0px;
     font-size: 18px;
@@ -68,8 +68,10 @@ section .container img{
 	 border: 1px solid white;
 	width: 49%;
     text-align: center;
-    height: 50px;
-    background-color: #d8d8d8;
+    height: 40px;
+    background-color: #6f60fc;
+    color:white; 
+    font-weight:bold;
     padding-top: 10px;
     margin: 0px;
     font-size: 18px;
@@ -85,10 +87,63 @@ section .container img{
     top: 30%;
     margin: 0 auto;
 }
+.title text-right {
+	text-align:right;
+}
+.form-control {
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+	border: 0;
+	box-shadow:0px 4px 10px -1px rgb(0 0 0 / 50%);
+}
+
+.text-main-color{
+	color:black;
+}
+
+#main-search-button{
+	background-color:black;
+	border-top-right-radius:10px;
+	border-bottom-right-radius:10px;
+	border: 0;
+	
+}
 
 .card-title, .card-titleH5 {
 	display:inline;
 }
+
+.font-weight-1000{
+ font-weight:1000;
+}
+
+.font-weight-800{
+font-weight:800;
+}
+
+.margin-bottom-50{
+margin-bottom:50px;
+}
+
+.margin-top-50 {
+margin-top:50px;
+}
+
+.text-second-color{
+color:black;
+}
+/*
+.btn-info {
+background-color:#6f60fc;
+border:0;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #6f60fc;
+}
+*/
+
 </style>
 <script>
 $(document).ready(function(){
@@ -286,46 +341,39 @@ function crawl(gender) {
 
 
 	<section class="banner padding-tb-200px sm-ptb-80px background-overlay"
-		style="background-image: url('http://placehold.it/1600x830');">
+		style="background-image: url('resources/assets/img/designTest/mainTestImg3.png');
+			   padding-top: 0px; padding-bottom: 400px;">
 		<div class="container z-index-2 position-relative">
-			<div class="title text-center">
-				<div id="altercheck2"class="alert alert-success alert-dismissible" style="display: none;">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
-</div>
-				<h1
-					class="text-title-large text-main-color font-weight-300 margin-bottom-15px">Style
-					Connect</h1>
-				<h4 class="font-weight-300 text-main-color text-up-small">나에게
-					맞는 디자이너를 찾아보세요!</h4>
-			</div>
-			<!-- 검색창 -->
-			<div class="row justify-content-center margin-tb-60px">
+		<div class="row justify-content-center margin-tb-60px">
 				<div class="col-lg-2"></div>
-				<div class="col-lg-7" style="padding-top: 50px;">
+				<div class="col-lg-7" style="padding-top: 0px; padding-bottom: 50px;">
 					<div class="listing-search">
 						<form id="frm" action="searchList.do" method="post">
-							<div class="margin-bottom-30px">
-								<div class="padding-30px background-white border-radius-10"
-									id="searchBox" style="height:180px;">
+							<div class="margin-top-20px">
+								<div id="searchBox" style="height:80px;"> <!-- class="padding-30px background-white border-radius-10" 원본 : "height:180px" -->
+									<!--  
 									<h4>
 										<i class="fas fa-search margin-right-10px text-main-color"></i>
 										Search
 									</h4>
+									
 									<hr>
+									-->
 									<div class="input-group mb-3">
 										<input type="text" name="search"
-											placeholder="${searchkeyword}"
+											placeholder="키워드를 검색하세요."
 											class="form-control border-radius-0">
 										<div class="input-group-append">
 											<button
 												class="btn btn-outline-secondary text-white background-main-color border-radius-0"
+												id="main-search-button"
 												type="submit">Search</button>
 										</div>
 									</div>
 										<div align="center">
-											<a href="searchList.do?search=호일펌" class="text-primary">#호일펌</a> <a href="searchList.do?search=구자혁"
-												class="text-primary">#구자혁</a> <a href="searchList.do?search=병지컷" class="text-primary">#병지컷</a>
+											<a href="searchList.do?search=호일펌" class="text-primary">#호일펌</a>&nbsp;&nbsp;&nbsp;
+											<a href="searchList.do?search=구자혁" class="text-primary">#구자혁</a>&nbsp;&nbsp;&nbsp; 
+											<a href="searchList.do?search=병지컷" class="text-primary">#병지컷</a>&nbsp;&nbsp;&nbsp;
 										</div>
 									
 								</div>
@@ -338,11 +386,11 @@ function crawl(gender) {
 				<div class="col-lg-3">
 					<div class="hashTagList"
 						style="display: inline-block; width: 200px; overflow: auto;">
+						<h4 style="text-align:center"><strong>인스타그램 인기 헤어 태그</strong></h4>
 						<ul id="checkBar" class="ul1" style="padding-left: 0px;">
 							<li class="lit" id="MALE" onclick="show('MALE')">남자</li>
 							<li class="li1" id="FEMALE" onclick="show('FEMALE')">여자</li>
 						</ul>
-						<h6 style="text-align:center"><strong>인스타그램 인기 헤어 태그</strong></h6>
 						<div class="list-group">
 							<a class="list-group-item list-group-item-action" id="hashTagOne">#${hashTag.one }</a>
 							<a class="list-group-item list-group-item-action" id="hashTagTwo">#${hashTag.two }</a>
@@ -354,13 +402,25 @@ function crawl(gender) {
 				</div>
 				<div class="col-lg-2"></div>
 			</div>
+			<div class="title text-right">
+				<div id="altercheck2"class="alert alert-success alert-dismissible" style="display: none;">
+  					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  					<strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
+				</div>
+				<p class="text-title-large font-weight-1000 margin-bottom-15px">STYLE
+					CONNECT</p>
+				<p class="font-weight-800 text-up-small">나에게
+					맞는 디자이너를 찾아보세요!</p>
+			</div>
+			<!-- 검색창 -->
+			
 		</div>
 		<!-- 검색창 끝 -->
 
-
-
+	<!-- 공간유지 위한 div -->
+	<div></div>
 	</section>
-	<div class="row justify-content-center">
+	<div class="row justify-content-center margin-bottom-50 margin-top-50">
 		<!-- 디자이너 추천 영역 -->
 		<c:if test="${empty memDetail && not empty id }">
 			<!-- modal Btn -->
