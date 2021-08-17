@@ -18,5 +18,5 @@ public interface ConhistoryService {
 	
 	//테스트 시간
 	public String testCurrentTime();
-	public int testRemainingTime();
+	public String testRemainingTime();
 }

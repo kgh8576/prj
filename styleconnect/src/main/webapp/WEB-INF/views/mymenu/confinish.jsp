@@ -39,17 +39,22 @@
 								${conhisends.detail }</p>
 							<c:if test="${conhisends.reviewexist eq 1 }">
 								<a href="reviewList.do?desId=${conhisends.id }"
-									class="d-inline-block text-grey-2 text-up-small" style="margin-right: 50px"><i
+									class="d-inline-block text-grey-2 text-up-small" style="margin-right: 50px; color: black;"><i
 									class="far fa-file-alt"></i> 리뷰보기</a>
 								<a href="reviewModify.do?conNo=${conhisends.conNo }"
-									class="d-inline-block text-grey-2 text-up-small"><i
+									class="d-inline-block text-grey-2 text-up-small" style="color: black;"><i
 									class="far fa-file-alt"></i> 리뷰수정</a>
 
 							</c:if>
 							<c:if test="${conhisends.reviewexist eq 0 }">
 								<a href="reviewRegister.do?id=${id }&conNo=${conhisends.conNo}"
-									class="d-inline-block text-grey-2 text-up-small"><i
-									class="far fa-file-alt"></i> 리뷰쓰기</a>
+									class="d-inline-block text-grey-2 text-up-small" style="color: black; margin-right: 50px;"><i
+									class="far fa-file-alt" style="color: blue;"></i> 리뷰쓰기</a>
+									<a href="reviewList.do?desId=${conhisends.id }"
+									class="d-inline-block text-grey-2 text-up-small" style="margin-right: 50px; color: black;"><i
+									class="far fa-file-alt"></i> 리뷰보기</a>
+									<p> 리뷰를 쓰면 500 포인트를 적립해드려요! </p>
+									
 							</c:if>
 							<font id="Noticemessage${conhisends.conNo }" size="2"></font>
 						</div>

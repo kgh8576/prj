@@ -81,8 +81,8 @@
 		select to_char(sysdate, 'YYYY-MM-dd HH24:mi:ss') from dual
 	</select>
 	<!-- 테스트용2 -->
-	<select id="testRemainingTime" resultType="Integer">
-		select to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YYYY/MM/DDHH24:mi')-(TO_DATE('21/08/1616:37', 'YYYY/MM/DDHH24:mi')))*24*60)) as test_remaining_time from consulting_history where con_no = 2108090077
+	<select id="testRemainingTime" resultType="String">
+		select to_char(to_number(TRUNC((TO_DATE(CONCAT(day, time), 'YYYY/MM/DDHH24:mi')-(TO_DATE('21/08/1616:37', 'YYYY/MM/DDHH24:mi')))*24*60))) as test_remaining_time from consulting_history where con_no = 2108090077
 	</select>
 
 

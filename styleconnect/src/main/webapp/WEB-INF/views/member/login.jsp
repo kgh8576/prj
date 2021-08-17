@@ -237,12 +237,9 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
 				<div class="remember">
 					<div class="checkbox">
-						<label> <input name="optionsCheckboxes" type="checkbox">
-							Remember Me
-						</label>
+						
 					</div>
-					<a href="recoverIdPwPage.do?MEM" class="forgot">Forgot my
-						ID/Password</a>
+					<a href="recoverIdPwPage.do?MEM" class="forgot">아이디/비밀번호를 잊으셧나요?</a>
 				</div>
 				<div style="text-align: left">
 					<font id="chkNotice" size="2"></font>
@@ -292,12 +289,9 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 
 				<div class="remember">
 					<div class="checkbox">
-						<label> <input name="optionsCheckboxes" type="checkbox">
-							Remember Me
-						</label>
+						
 					</div>
-					<a href="recoverIdPwPage.do?DES" class="forgot">Forgot my
-						ID/Password</a>
+					<a href="recoverIdPwPage.do?DES" class="forgot">아이디/비밀번호를 잊으셧나요?</a>
 				</div>
 				<div style="text-align: left">
 					<font id="chkNotice2" size="2"></font>
