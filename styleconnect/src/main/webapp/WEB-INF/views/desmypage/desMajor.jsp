@@ -148,6 +148,12 @@ img{
 	margin-top: -30px;
 	margin-bottom: 100px;
 }
+.mtitle {
+	font-size: 30px;
+	text-decoration: underline;
+	margin-left: 50px;
+	margin-top: 50px;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -223,12 +229,12 @@ function updateMajor(){
     <!-- 네비 끝// -->
 <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
+    		<h1 class="mtitle"> #keyword setting</h1>
             <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">    
      <div id="page-title" class="padding-30px background-white full-width">
                     <div class="container">
                         <ol class="breadcrumb opacity-5">
                         </ol>
-                        <h1 class="font-weight-300">전문분야 키워드 설정</h1>
                     </div>
                 </div>
 				<form name="frm" id="frm" action="majorUpdate.do" method="post">

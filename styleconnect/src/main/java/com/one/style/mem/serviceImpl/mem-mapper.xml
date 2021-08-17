@@ -39,6 +39,7 @@
       and (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60 < 10
     ]]>
 	</select>
+	<!-- 상담시작시간 알리미  -->
 	<select id="startSchedule"
 		parameterType="com.one.style.conhistory.vo.ConHistoryVO"
 		resultType="com.one.style.conhistory.vo.ConHistoryVO">
