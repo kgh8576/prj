@@ -13,7 +13,10 @@
 
 <style>
 .note {
-	color:red;
+color:red;
+}
+.box-header {
+background-color:
 }
 </style>
 
