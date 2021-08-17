@@ -50,29 +50,7 @@ public class ConHistoryController {
 		}
 		
 		model.addAttribute("conHistoryList", conHistoryDao.conHistoryListSelect(vo));
-		
-		//변수
-		
-		int remaingTime = conHistoryDao.conHistoryListSelect(vo).get(0).getRemainingTime();
-		String day = conHistoryDao.conHistoryListSelect(vo).get(0).getDay();
-		String time = conHistoryDao.conHistoryListSelect(vo).get(0).getTime();
-		String DBCurrentTime = conHistoryDao.testCurrentTime();
-		String testRemainigTime = conHistoryDao.testRemainingTime(); 
-		//체크1
-		System.out.println("---------------------컨트롤러에서 받은 남은 상담시간 값: " + remaingTime);
-		System.out.println("---------------------컨트롤러에서 받은 예약날짜 값: " + day);
-		System.out.println("---------------------컨트롤러에서 받은 예약시간 값: " + time);
-		System.out.println("---------------------컨트롤러에서 받은 DB의 sysdate 값: " + DBCurrentTime);
-
-		//체크2
-		long CurrentTime = System.currentTimeMillis();
-		SimpleDateFormat simpl = new SimpleDateFormat("yyyy년 MM월 dd일 aa hh시 mm분 ss초"); 
-		String JavaCurrentTime = simpl.format(CurrentTime);
-
-		System.out.println("---------------------자바 시스템 이용 현재시간: " + JavaCurrentTime);
-		System.out.println("---------------------컨트롤러에서 받은 남은 테스트 상담시간 값: " + testRemainigTime);
-		
-		
+				
 		return "consulting/consulting";
 	}
 	
