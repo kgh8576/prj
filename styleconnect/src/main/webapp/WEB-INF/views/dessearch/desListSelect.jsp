@@ -39,6 +39,24 @@ span:hover{
     width: 300;
     margin: auto;
 }
+.row3 {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+}
+.row2{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+}
 </style>
 </head>
 
@@ -50,7 +68,7 @@ span:hover{
     </div>
     <div class="margin-tb-30px">
         <div class="container">
-            <div class="row">
+            <div class="row3">
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
                     	<c:if test="${empty img }">
@@ -107,7 +125,7 @@ span:hover{
                             <hr>
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
-                                <div class="row"  >
+                                <div class="row2"  >
                                 <c:if test="${empty img2 }">
                                 		<h3>등록된 스타일이 없습니다.</h3>
                                   </c:if>
