@@ -188,7 +188,7 @@
 								enctype="multipart/form-data">
 								<input type="hidden" name="did" value="${did }"> <input
 									type="file" id="file" name="file" class="multi"
-									multiple="multiple" />
+									 />
 								<button type="submit"
 									class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">사진등록</button>
 							</form>

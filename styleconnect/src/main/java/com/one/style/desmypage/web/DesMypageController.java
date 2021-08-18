@@ -305,7 +305,7 @@ public class DesMypageController {
 			}
 		}
 		desMyDao.desCourseUpdate(vo);
-		return "redirect:desCourseUpdate.do?courNo="+vo.getCourNo();
+		return "redirect:desCourse.do";
 	}
 
 	
