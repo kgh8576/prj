@@ -12,14 +12,14 @@
 
 /*--- Global Background ---*/
 .background-main-color {
-  background-color: #0864b2; }
+  background-color: #584ccb; }
 
 .background-second-color {
   background-color: #FFFFFF	; }
 
 /*--- Text Color ---*/
 .text-main-color {
-  color: #0864b2; }
+  color: #584ccb; }
 
 .text-second-color {
   color: #007cff; }
@@ -76,7 +76,7 @@ header a.model-link span {
 header ul.nav-menu > li.active > a {
   color: #0864b2; }
 header ul.nav-menu > li > a:hover {
-  color: #0864b2; }
+  color: #584ccb; }
 
 .mega-links-4columns ul.sub-menu-columns > li > a {
   color: #0864b2; }

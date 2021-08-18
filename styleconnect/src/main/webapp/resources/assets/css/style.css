@@ -250,7 +250,7 @@ header ul.nav-menu .mega-menu-out .mega-menu-list li a {
   border-bottom: 1px solid #eee;
 }
 header ul.nav-menu .mega-menu-out .mega-menu-list li a:hover {
-  color: #F44336;
+  color: black;
   padding-left: 5px;
 }
 header ul.dropdown-dark .mega-menu-out {
@@ -1039,18 +1039,18 @@ a {
 }
 
 a:hover {
-  color: #F44336;
+  color: #584ccb;
   text-decoration: none;
 }
 
 a:focus {
-  color: #F44336;
+  color: black;
   outline: none;
   text-decoration: none;
 }
 
 a:active {
-  color: #F44336;
+  color: black;
   outline: none;
   text-decoration: none;
 }
