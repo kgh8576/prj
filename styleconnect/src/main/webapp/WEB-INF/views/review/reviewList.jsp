@@ -25,7 +25,7 @@
 }
 
 .pagination a.active {
-  background-color: #4CAF50;
+  background-color: #7357B2;
   color: white;
   border: 1px solid #4CAF50;
   border-radius: 5px;
@@ -130,7 +130,10 @@ elip{
 						</ul>
 						<p align="right" style="color: grey;">${vo.stringwDate }&emsp;&emsp;&emsp; ${vo.memId }</p>
 					</div>
-					<elip>${vo.contents}</elip>
+					<hr>
+					<div class="padding-20px" id="beforeContent">
+						<elip>${vo.contents}</elip>
+					</div>
 					<br><p style="color: grey; font-size: 20px;">${vo.title } &emsp; <fmt:formatNumber value="${vo.price}" pattern="#,###"/>
 					</p>
 					
