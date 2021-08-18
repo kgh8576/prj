@@ -69,6 +69,8 @@ public class ConHistoryController {
 		
 		vo.setConNo(conNo);
 		
+		//!!!!!로그인 안 되어 있으면 빈 리스트 반환!!!!!
+		
 		//일반회원인 경우
 		if(session.getAttribute("id") != null) {
 			vo.setMemId((String)session.getAttribute("id")); 	 

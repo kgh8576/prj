@@ -33,6 +33,10 @@ font-size: 24px;
 	width: 100%;
 	margin-left: 0px;
 	margin-right: 0px;
+}
+
+#entire-container-for-width{
+width:70%;
 }    
 </style>
 
@@ -300,84 +304,88 @@ function nullReplace(data) {
 
 
 
-<br><br><br><br><br><br><br><br><br><br>
-<h1>일반회원 관리 페이지</h1>
-<!-- 검색창 추가 -->
-<input type="text" id="member-id-search-box" placeholder="일반회원 ID 검색"></input>
-<button type="button" onclick="memberIDSearch()">검색</button>
-<!-- 할까말까 -->
-
-<!-- 일반회원 리스트 -->
-
-	
-	<c:if test="${fn:length(memberList) == 0 }">
-		<p>검색 결과가 없습니다.</p>
-		<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
-	</c:if>
-	<c:if test="${fn:length(memberList) != 0 }">
-	<table>
-		<tr>
-			<td>회원ID</td>
-			<td>이름</td>
-			<td>성별</td>
-			<td>생년월일</td>
-			<td>휴대폰 번호</td>
-			<td>가입일</td>
-			<td>처리</td>
-		</tr>
-		<c:forEach var="member" items="${memberList }">
-		<tr>
-			<td>${member.id}</td>
-			<td>${member.name}</td>
-			<td>${member.gender}</td>
-			<td>${member.birth}</td>
-			<td>${member.hp}</td>
-			<td>${member.regday}</td> 
-			<td><button data-toggle="modal" data-target="#member-conHistory-update-modal" onclick="memberConHistoryUpdateForm('${member.id}')">상담내역 변경</button></td>
-		</tr>
-		</c:forEach>
-		
-		</table>
-		<c:if test = "${param.searchedID != '' && param.searchedID != null }">
-			<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
-		</c:if>
-	</c:if>
-
-
-
-<!-- 페이징 -->
+<br><br><br><br><br>
 <div align="center">
-	<jsp:include page="pagingForEntirePage.jsp" flush="true">
-		<jsp:param name="firstPageNo" value="${paging.firstPageNo}" />
-		<jsp:param name="prevPageNo" value="${paging.prevPageNo}" />
-		<jsp:param name="startPageNo" value="${paging.startPageNo}" />
-		<jsp:param name="pageNo" value="${paging.pageNo}" />
-		<jsp:param name="endPageNo" value="${paging.endPageNo}" />
-		<jsp:param name="nextPageNo" value="${paging.nextPageNo}" />
-		<jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
-	</jsp:include>
-</div>
-
-<!-- 상담내역 수정 모달 -->
-<div class="modal fade" id="member-conHistory-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body" id="member-conHistory-update-form-target">
-			<!-- ajax로 태그 삽입 -->
-			</div>
-			<div class="modal-footer">
+	<div id="entire-container-for-width">
+		<h1>일반회원 관리</h1>
+		
+		
+		<!-- 검색창 추가 -->
+		<input type="text" id="member-id-search-box" placeholder="일반회원 ID 검색"></input>
+		<button type="button" onclick="memberIDSearch()">검색</button>
+		<!-- 할까말까 -->
+		
+		<!-- 일반회원 리스트 -->
+		
+			
+			<c:if test="${fn:length(memberList) == 0 }">
+				<p>검색 결과가 없습니다.</p>
+				<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+			</c:if>
+			<c:if test="${fn:length(memberList) != 0 }">
+			<table>
+				<tr>
+					<td>회원ID</td>
+					<td>이름</td>
+					<td>성별</td>
+					<td>생년월일</td>
+					<td>휴대폰 번호</td>
+					<td>가입일</td>
+					<td>처리</td>
+				</tr>
+				<c:forEach var="member" items="${memberList }">
+				<tr>
+					<td>${member.id}</td>
+					<td>${member.name}</td>
+					<td>${member.gender}</td>
+					<td>${member.birth}</td>
+					<td>${member.hp}</td>
+					<td>${member.regday}</td> 
+					<td><button data-toggle="modal" data-target="#member-conHistory-update-modal" onclick="memberConHistoryUpdateForm('${member.id}')">상담내역 변경</button></td>
+				</tr>
+				</c:forEach>
+				
+				</table>
+				<c:if test = "${param.searchedID != '' && param.searchedID != null }">
+					<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+				</c:if>
+			</c:if>
+		
+		
+		
+		<!-- 페이징 -->
+		<div align="center">
+			<jsp:include page="pagingForEntirePage.jsp" flush="true">
+				<jsp:param name="firstPageNo" value="${paging.firstPageNo}" />
+				<jsp:param name="prevPageNo" value="${paging.prevPageNo}" />
+				<jsp:param name="startPageNo" value="${paging.startPageNo}" />
+				<jsp:param name="pageNo" value="${paging.pageNo}" />
+				<jsp:param name="endPageNo" value="${paging.endPageNo}" />
+				<jsp:param name="nextPageNo" value="${paging.nextPageNo}" />
+				<jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
+			</jsp:include>
+		</div>
+		
+		<!-- 상담내역 수정 모달 -->
+		<div class="modal fade" id="member-conHistory-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="member-conHistory-update-form-target">
+					<!-- ajax로 태그 삽입 -->
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-
 
 <pre>
 게시 글 수: ${paging.pageSize}
