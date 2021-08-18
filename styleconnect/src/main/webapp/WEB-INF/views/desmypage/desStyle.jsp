@@ -93,7 +93,7 @@
 	height: 500px;
 	box-sizing: border-box;
 	border: 5px solid #bfbcbc;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 </style>
 </head>

@@ -59,6 +59,7 @@ $(document).ready(function(){
 			type : 'post',
 			success : function(data) {
 				if(data == 1){
+					document.getElementById("hppasschk").value = "Checked"
 					$('#chkNotice3').html('입력완료 인증번호받기를 눌러주세요.').attr('color',
 					'#007bff');
 				}else {
@@ -108,23 +109,33 @@ $(document).ready(function(){
 //핸드폰인증 번호전송
 function hpcheckbtn() {
 	var button_joinus = document.getElementById('hpcheckbtn');
-	$.ajax({
-		url : 'sendSMS.do',
-		data : {
-			hp : $('#hp').val(),
-		},
-		type : 'post',
-		success : function(data) {
-			frm.hpcheck.focus();
-			button_joinus.disabled = true;
-			$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
-			'#007bff');
-		},
-		error : function(err) {
-			console.log(err);
-			console.log("휴대폰 인증에러");
-		}
-	})
+	
+	if(frm.hp.value == "") {
+		alert("핸드폰번호를 입력해주세요.")
+	}
+	if (document.getElementById("hppasschk").value == "unChecked") {
+		alert("핸드폰번호를 정상적으로 입력했는지 확인해주세요.");
+	} else {
+		$.ajax({
+			url : 'sendSMS.do',
+			data : {
+				hp : $('#hp').val(),
+			},
+			type : 'post',
+			success : function(data) {
+				frm.hpcheck.focus();
+				button_joinus.disabled = true;
+				$('#chkNotice3').html('인증번호가 전송되었습니다.').attr('color',
+				'#007bff');
+			},
+			error : function(err) {
+				console.log(err);
+				console.log("휴대폰 인증에러");
+			}
+		})
+	}
+	
+	
 };
 
 
@@ -164,7 +175,7 @@ function hpcheckbtn() {
 					'#f82a2aa3');
 					$('#idCheck').val('unChecked');
 				} else {
-					$('#chkNotice2').html('사용가능한 아이디 입니다.').attr('color',
+					$('#chkNotice2').html('멋진 아이디네요!').attr('color',
 					'#007bff');
 					$('#idCheck').val('Checked');
 				}
@@ -183,6 +194,11 @@ function hpcheckbtn() {
 			document.getElementById("hpfinalcheck").focus();
 		}
 	}
+	function hpceck(obj)
+	{ 
+		document.getElementById("hppasschk").value = "unChecked"
+	}
+
 	function formCheck() {
 		if (frm.id.value == "") {
 			alert("아이디를 입력하세요.");
@@ -227,6 +243,10 @@ function hpcheckbtn() {
 		if (frm.passwordCheck.value == 'unChecked') {
 			alert("비밀번호를 다시 한번 똑같이 입력해주세요.");
 			frm.pw2.focus();
+			return false;
+		}
+		if (frm.hppasschk.value == "unChecked") {
+			alert("핸드폰 형식을 다시한번 확인해주세요.");
 			return false;
 		}
 		
@@ -293,13 +313,15 @@ function hpcheckbtn() {
 									<div class="form-group label-floating">
 						<label class="control-label">핸드폰 번호</label> <input
 							class="form-control" placeholder="핸드폰번호입력 '-'는 빼고 입력해주세요." type="text" name="hp"
-							id="hp" min="11" maxlength="11" onkeyup="siche_next()">
+							id="hp" min="11" maxlength="11" onkeyup="siche_next()" onchange="hpceck(this)">
 							<input style="width: 80%;display: flex;float: left;"
 							class="form-control" placeholder="인증번호" type="text" name="hpcheck"
 							id="hpcheck" onkeyup="siche_next()">
 							<input type="hidden" id="hppass" name="hppass" value="unChecked">
 							<button type="button" class="hpcheckbtn1" id="hpcheckbtn" name="hpcheckbtn">인증하기</button>
 							<font id="chkNotice3" size="2"></font>
+							<input type="hidden" id="hppasschk" name="hppasschk"
+										value="unChecked">
 				</div>
 				<div class="remember">
 					<div class="checkbox">

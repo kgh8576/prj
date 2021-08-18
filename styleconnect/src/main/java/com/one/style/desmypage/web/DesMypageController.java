@@ -193,12 +193,11 @@ public class DesMypageController {
 		String[] major = request.getParameterValues("major");
 		// 문자열 합치기
 		List<String> majors = new ArrayList<String>();
-		majors.add(major[0]);
-		majors.add(major[1]);
-		majors.add(major[2]);
-		String seperatedToComma = StringUtil.join(majors, ",");
-		vo.setMajor(seperatedToComma);
-
+		for(int i=0; i<major.length; i++) {
+			majors.add(major[i]);
+			String seperatedToComma = StringUtil.join(majors, ",");
+			vo.setMajor(seperatedToComma);	
+		}
 		desMyDao.desmajorUpdate(vo);
 		return "redirect:desMajor.do";
 	}

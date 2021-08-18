@@ -219,7 +219,7 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 	<div id="log-in"
 		class="site-form log-in-form box-shadow border-radius-10">
 		<ul class="ul1">
-			<li class="lit" onclick="membershow()">일반</li>
+			<li class="lit" onclick="membershow()">개인</li>
 			<li class="li1" onclick="desshow()">디자이너</li>
 		</ul>
 		<div class="form-output">
