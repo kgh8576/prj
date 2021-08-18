@@ -2,117 +2,117 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.style.home.mapper.HomeServiceMap">
 
-	<!-- 메인에서 평점 순 top3 디자이너 가져오기 -->
-	<select id="ajaxTopDesInfo" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
-	
-	select id, name, major, count, trunc(rate) as rate, nvl(file_uuid, '0.png') as file_uuid
-	from
-	  (select id, name, major, count, rate from
-	    (select id, name, major, count, rate
-	    from
-	      (select des_id, count(*) as count
-	      from review
-	      group by des_id) a,
-	    
-	      (select id, name, major, avg(rate) as rate
-	      from designer d, review r
-	      where d.id = r.des_id
+   <!-- 메인에서 평점 순 top3 디자이너 가져오기 -->
+   <select id="ajaxTopDesInfo" parameterType="string" resultType="com.one.style.home.vo.HomeVO">
+   
+   select id, name, major, count, trunc(rate) as rate, nvl(file_uuid, '0.png') as file_uuid
+   from
+     (select id, name, major, count, rate from
+       (select id, name, major, count, rate
+       from
+         (select des_id, count(*) as count
+         from review
+         group by des_id) a,
+       
+         (select id, name, major, avg(rate) as rate
+         from designer d, review r
+         where d.id = r.des_id
           and d.STATE = 'dcode003'
-	   	    <if test='keyword == "cut"'>
-		    and cut_yn = 'Y'
-		    </if>
-		    <if test='keyword == "perm"'>
-		    and perm_yn = 'Y'
-		    </if>
-		    <if test='keyword == "dye"'>
-		    and dye_yn = 'Y'
-		    </if>
-		    <if test='keyword == "makeUp"'>
-		    and makeup_yn = 'Y'
-		    </if>
-	      group by id, name, major) b
-	    where id = des_id
-	    order by rate desc)
-	  where  <![CDATA[ rownum <= 3 ]]> )
-	left join 
-	  (select file_uuid , des_id
-	  from files
-	  where file_state = 'pro') f
-	on id = f.des_id
-	order by rate desc
-	</select>
-	
-	<select id="memDetail" parameterType="String" resultType="com.one.style.mem.vo.MemDetailVO">
-		select m.id, name, gender, location, md.MAKEUP_YN, md.CUT_YN, md.PERM_YN, md.DYE_YN
-		from mem_detail md, member m
-		where md.id = m.id
-		and m.id = #{id}
-	</select>
-	
-	<select id="rcmdDesByConHis" parameterType="com.one.style.mem.vo.MemDetailVO" resultType="com.one.style.home.vo.HomeVO">
-	
-	select in1.* , nvl(f.file_uuid, '0.png') as file_uuid
-	from
-	      (
-	      select * from
-	                        (
-	                         select d.id , d.name , d.major ,count(*) as count
-	                         from CONSULTING_HISTORY c
-	                         join des_course dc
-	                         on c.cour_no = dc.cour_no
-	                         join designer d
-	                         on dc.id = d.id
-	                            where (major_gender = #{gender} or major_gender = 'ALL')
-	                            and d.STATE = 'dcode003'
-	                            and
-	                              (
-			                        <if test='makeupYn == "Y"'>
-			                          makeup_yn = 'Y'
-			                          <if test='cutYn == "Y" or permYn == "Y" or dyeYn == "Y"'>
-			                            or
-			                          </if>
-			                        </if>
-			                        <if test='cutYn == "Y"' >
-			                          cut_yn = 'Y'
-			                          <if test='permYn == "Y" or dyeYn == "Y"'>
-			                            or
-			                          </if>
-			                        </if>
-			                        <if test='permYn == "Y"' >
-			                          perm_yn = 'Y'
-			                          <if test='dyeYn == "Y"'>
-			                            or
-			                          </if>
-			                        </if>
-			                        <if test='dyeYn == "Y"' >
-			                          dye_yn = 'Y'
-			                        </if>
-	                            )
-	                         group by d.id , d.name , d.major
-	                         order by 4 desc
-	                         )
-	      where rownum =1
-	      ) in1
-	      left join(
-	                 select file_uuid , des_id
-	                 from files
-	                 where file_state = 'pro'
-	                 ) f
-	on in1.id = f.des_id
+             <if test='keyword == "cut"'>
+          and cut_yn = 'Y'
+          </if>
+          <if test='keyword == "perm"'>
+          and perm_yn = 'Y'
+          </if>
+          <if test='keyword == "dye"'>
+          and dye_yn = 'Y'
+          </if>
+          <if test='keyword == "makeUp"'>
+          and makeup_yn = 'Y'
+          </if>
+         group by id, name, major) b
+       where id = des_id
+       order by rate desc)
+     where  <![CDATA[ rownum <= 3 ]]> )
+   left join 
+     (select file_uuid , des_id
+     from files
+     where file_state = 'pro') f
+   on id = f.des_id
+   order by rate desc
+   </select>
+   
+   <select id="memDetail" parameterType="String" resultType="com.one.style.mem.vo.MemDetailVO">
+      select m.id, name, gender, location, md.MAKEUP_YN, md.CUT_YN, md.PERM_YN, md.DYE_YN
+      from mem_detail md, member m
+      where md.id = m.id
+      and m.id = #{id}
+   </select>
+   
+   <select id="rcmdDesByConHis" parameterType="com.one.style.mem.vo.MemDetailVO" resultType="com.one.style.home.vo.HomeVO">
+   
+   select in1.* , nvl(f.file_uuid, '0.png') as file_uuid
+   from
+         (
+         select * from
+                           (
+                            select d.id , d.name , d.major ,count(*) as count
+                            from CONSULTING_HISTORY c
+                            join des_course dc
+                            on c.cour_no = dc.cour_no
+                            join designer d
+                            on dc.id = d.id
+                               where (major_gender = #{gender} or major_gender = 'ALL')
+                               and d.STATE = 'dcode003'
+                               and
+                                 (
+                                 <if test='makeupYn == "Y"'>
+                                   makeup_yn = 'Y'
+                                   <if test='cutYn == "Y" or permYn == "Y" or dyeYn == "Y"'>
+                                     or
+                                   </if>
+                                 </if>
+                                 <if test='cutYn == "Y"' >
+                                   cut_yn = 'Y'
+                                   <if test='permYn == "Y" or dyeYn == "Y"'>
+                                     or
+                                   </if>
+                                 </if>
+                                 <if test='permYn == "Y"' >
+                                   perm_yn = 'Y'
+                                   <if test='dyeYn == "Y"'>
+                                     or
+                                   </if>
+                                 </if>
+                                 <if test='dyeYn == "Y"' >
+                                   dye_yn = 'Y'
+                                 </if>
+                               )
+                            group by d.id , d.name , d.major
+                            order by 4 desc
+                            )
+         where rownum =1
+         ) in1
+         left join(
+                    select file_uuid , des_id
+                    from files
+                    where file_state = 'pro'
+                    ) f
+   on in1.id = f.des_id
 
-	</select>
-	
-	<select id="rcmdDesByRate" parameterType="com.one.style.mem.vo.MemDetailVO" resultType="com.one.style.home.vo.HomeVO">
-	
-	select inSq.*, nvl(file_uuid, '0.png') as file_uuid
-	from
-	    (select id, name, major, trunc(rate) as rate from
-	      (select id, name, major, avg(rate) as rate
-	      from designer d, review r
-	      where d.id = r.des_id
+   </select>
+   
+   <select id="rcmdDesByRate" parameterType="com.one.style.mem.vo.MemDetailVO" resultType="com.one.style.home.vo.HomeVO">
+   
+   select inSq.*, nvl(file_uuid, '0.png') as file_uuid
+   from
+       (select id, name, major, trunc(rate) as rate from
+         (select id, name, major, avg(rate) as rate
+         from designer d, review r
+         where d.id = r.des_id
           and d.STATE = 'dcode003'
-	      and (major_gender = #{gender} or major_gender = 'ALL')
-	      and
+         and (major_gender = #{gender} or major_gender = 'ALL')
+         and
               (
           <if test='makeupYn == "Y"'>
             makeup_yn = 'Y'
@@ -136,24 +136,24 @@
             dye_yn = 'Y'
           </if>
             )
-	      group by id, name, major
-	      order by 4 desc)
-	    where rownum = 1) inSq
-	left join
-	(select file_uuid, des_id from files where file_state = 'pro') f
-	on inSq.id = f.des_id
+         group by id, name, major
+         order by 4 desc)
+       where rownum = 1) inSq
+   left join
+   (select file_uuid, des_id from files where file_state = 'pro') f
+   on inSq.id = f.des_id
 
-	</select>
-	
-	<insert id="memDetailInsert" parameterType="com.one.style.mem.vo.MemDetailVO">
-		insert into mem_detail values(#{location}, #{makeupYn}, #{cutYn}, #{permYn}, #{dyeYn}, null, #{id})		
-	</insert>
-	
-	<select id="searchKeywordsList" resultType="com.one.style.home.vo.HomeVO">
-		select major, category from
-		(SELECT major, 'major' as category from designer)
-		union
-		(select name, 'desinger' from designer)
-	</select>
-	
+   </select>
+   
+   <insert id="memDetailInsert" parameterType="com.one.style.mem.vo.MemDetailVO">
+      insert into mem_detail values(#{location}, #{makeupYn}, #{cutYn}, #{permYn}, #{dyeYn}, null, #{id})      
+   </insert>
+   
+   <select id="searchKeywordsList" resultType="com.one.style.home.vo.HomeVO">
+      select major, category from
+      (SELECT major, 'major' as category from designer)
+      union
+      (select name, 'desinger' from designer where state = 'dcode003')
+   </select>
+   
 </mapper>

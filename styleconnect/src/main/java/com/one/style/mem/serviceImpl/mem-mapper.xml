@@ -50,10 +50,8 @@
     and (to_date(lastst_date,'YYYY/MM/DD HH24:MI')-sysdate)*24*60 < 0
        ]]>
 	</select>
-	<!-- rownum = 1 주어서 한 행만 리턴될텐데도 여러행이 리턴되었다면서 단일 VO로 받아지지가 않음... 잘 모르지만 List<MemberVO>로 
-		해결 -->
-	<select id="getUserIdByHpName" parameterType="hashMap"
-		resultType="com.one.style.mem.vo.MemberVO">
+	
+	<select id="getUserIdByHpName" parameterType="hashMap" resultType="com.one.style.mem.vo.MemberVO">
 		<if test='searchTable == "designer"'>
 			select * from designer
 		</if>
@@ -61,7 +59,6 @@
 			select * from member
 		</if>
 		where hp = #{hp} and name = #{name}
-		and rownum = 1
 	</select>
 
 	<update id="updateUserPwByHpName" parameterType="hashMap">
@@ -72,7 +69,7 @@
 			update member
 		</if>
 		set pw = #{pw}
-		where name = #{name} and hp = #{hp}
+		where id = #{id}
 	</update>
 
 </mapper>

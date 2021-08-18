@@ -2,6 +2,7 @@ package com.one.style.mem.web;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -142,31 +143,30 @@ public class MemController {
 	//통합 ID 찾기
 	@RequestMapping("getUserIdByHpName.do")
 	@ResponseBody
-	public String getUserIdByHpName(String hp, String name, String searchTable) {
+	public List<MemberVO> getUserIdByHpName(String hp, String name, String searchTable) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("hp", hp); // 전화번호 정규식 적용하여 넣는 게 필요한지 ?
 		map.put("name", name);
 		map.put("searchTable", searchTable); // 디자이너와 멤버 테이블 어느걸 조회할지 분기하는 파라미터
 		
-		String resultId = memberDao.getUserIdByHpName(map); // 핸드폰 번호와 이름으로 아이디 리턴
+		List<MemberVO> list = memberDao.getUserIdByHpName(map); // 핸드폰 번호와 이름으로 아이디 리턴
 		
-		if (resultId != null) {
-			return resultId;	
+		if (list.size() != 0) {
+			return list;	
 		} else {
-			return "해당 유저 없음";
+			return null; 
 		}
 	}
 	//통합 비밀번호 변경
-	@RequestMapping("updateUserPwByHpName.do")
+	@RequestMapping("updateUserPwById.do")
 	@ResponseBody
-	public String updateUserPwByHpName(String hp, String name, String searchTable, String pw) {
+	public String updateUserPwByHpName(String id, String searchTable, String pw) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4); // 비밀번호 암호화
 		String encoderPW = encoder.encode(pw);
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("hp", hp);
+		map.put("id", id);
 		map.put("pw", encoderPW);
-		map.put("name", name);
 		map.put("searchTable", searchTable); // 디자이너와 멤버 테이블 어디에 update 할지 분기하는 파라미터
 		int r = memberDao.updateUserPwByHpName(map);
 		return r + "건 업데이트";
