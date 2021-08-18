@@ -133,7 +133,7 @@
 
 		<!-- 답변 영역 -->
 		<div class="margin-bottom-20px padding-bottom-40px box-shadow">
-			<c:if test="${id eq reviewInfo.desId && empty replyInfo }">
+			<c:if test="${did eq reviewInfo.desId && empty replyInfo }">
 				<p id="replyFrmBtn">고객에게 피드백을 남길 수 있습니다.
 					<button class="btn btn-info" onclick="showReplyFrm()">답변 등록하기</button>
 				</p>

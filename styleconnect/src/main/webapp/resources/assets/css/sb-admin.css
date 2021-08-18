@@ -157,13 +157,13 @@ body.fixed-nav {
     padding: 10px 20px 10px 20px;
     display: block;
     text-transform: uppercase;
-    color: #5cb0f7
+    color: #cfe6ff
 }
 
 .admin-nav > li > a{
     padding: 15px 15px 15px 15px;
-    border-bottom: 1px solid #0b6ec1 ;
-    border-left: 4px solid  #0864b2;
+    border-bottom: 1px solid #584ccb ;
+    border-left: 4px solid  #584ccb;
 }
 .admin-nav > li > a .fa-fw{
     margin-right: 10px;

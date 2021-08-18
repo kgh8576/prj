@@ -69,7 +69,7 @@ section .container img{
 	width: 49%;
     text-align: center;
     height: 40px;
-    background-color: #6f60fc;
+    background-color: #584ccb;
     color:white; 
     font-weight:bold;
     padding-top: 10px;

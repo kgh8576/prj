@@ -1717,7 +1717,7 @@ hr {
 
 /*General links color*/
 a {
-  color: #007bff;;
+  color: black;
   text-decoration: none;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -1727,7 +1727,7 @@ a {
   outline: none;
 }
 a:hover, a:focus {
-  color: #111;
+  color: #584ccb;
   text-decoration: none;
   outline: none;
 }
@@ -3779,7 +3779,7 @@ ul#top_menu li a.login:before {
 a.btn_1,
 .btn_1 {
   border: none;
-  background: #007bff;
+  background: #584ccb;
   outline: none;
   cursor: pointer;
   display: inline-block;
@@ -4079,8 +4079,8 @@ a.btn_1.gray:hover,
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  border-bottom: 2px solid #007bff;
-  color: #007bff;
+  border-bottom: 2px solid #584ccb;
+  color: #584ccb;
   background-color: transparent;
 }
 

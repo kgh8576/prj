@@ -25,6 +25,7 @@ public class HomeVO {
 	//
 	private String category;
 	private String keyword;
+	private String planeKeyword;
 	
 	
 }
