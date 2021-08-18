@@ -12,12 +12,53 @@
 <!-- 테스트 주석 -->
 
 <style>
+
+p{
+margin:0;
+}
+
 .note {
 color:red;
 }
-.box-header {
-background-color:
+#consulting-history-box-top{
+display: flex;
+justify-content: space-between;
+padding:10px;
 }
+
+.active{
+background-color: #584ccb;
+color:white;
+}
+
+.unactive{
+background-color: #dedede;
+}
+
+#consulting-history-box-middle{
+text-align:left;
+padding:20px;
+}
+#consulting-history-box-middle-content-title{
+color:#584ccb;
+font-weight:bold;
+}
+
+
+#consulting-history-box-low{
+text-align:right;
+padding:10px;
+}
+
+#entire-container-for-width{
+width:70%;
+}
+
+#consulting-history-box{
+width:70%;
+}
+
+
 </style>
 
 <script>
@@ -40,54 +81,89 @@ function goChatting(conNo) {
 }
 </script>			
 
-<h1>세션 값 확인</h1>
-<h1>일반회원 아이디 : ${id}</h1>
-<h1>디자이너 아이디 : ${did}</h1>
+
 	<br><br><br><br>
 
 <div align="center">
+	<div id="entire-container-for-width">
 
 	<c:if test="${fn:length(conHistoryList)==0}">
-		<div style="width:70%">
-			<p>참여할 수 있는 상담이 없습니다.</p>
-		</div>
+		<p>참여할 수 있는 상담이 없습니다.</p>
 	</c:if>
 	
 	<c:if test="${fn:length(conHistoryList)!=0}">	
 		<c:forEach var="conHistory" items="${conHistoryList}">
 		
-		<div style="width:70%;" >
-			<div class="margin-bottom-30px box-shadow">
-	    		<div class="padding-30px background-white">
-	    			<div>
-			    		<div><h3>상담 번호: ${conHistory.conNo}</h3></div>
-			    		<div><h3>상담 일시: ${conHistory.day} ${conHistory.time}</h3></div>
-			    		<div><h3>상담 이름: ${conHistory.desName}</h3></div>
+			<!-- consulting-history-box-->
+			<div id="consulting-history-box" class="margin-bottom-30px box-shadow">
+	    		<div class="background-white">
+	    			<!-- consulting-history-box-top  -->
+	    				<!-- 비활성화된 상담의 box-top -->
+	    			<c:if test = "${conHistory.remainingTime le -30 || conHistory.remainingTime ge 10}">
+	    			<div class="unactive" id="consulting-history-box-top">
+			    		<div><span>${conHistory.title}</span></div>
+			    		<div><span>${conHistory.day} ${conHistory.time}</span></div>
 	    			</div>
-		    		<p class="text-grey-2">상담 상세내용: ${conHistory.detail}</p>
-		    		<p class="text-grey-2">디자이너 코멘트: ${conHistory.desComment}</p>
-		    		<p class="text-grey-2">상태: ${conHistory.state}</p>
-	    		
+		    		</c:if>
+		    			<!-- 활성화된 상담의 box-top -->
+		    		<c:if test = "${conHistory.remainingTime ge -30 && conHistory.remainingTime le 10}">
+		    		<div class="active" id= "consulting-history-box-top">
+			    		<div><span>${conHistory.title}</span></div>
+			    		<div><span>${conHistory.day} ${conHistory.time}</span></div>
+	    			</div>
+		    		</c:if>
+		    		<!-- consulting-history-box-top 끝-->
+		    		
+		    		<!-- consulting-history-box-middle-->
+					<div id="consulting-history-box-middle">
+		    		<p id="consulting-history-box-middle-content-title">상담 상세내용</p>
+		    		<p id="consulting-history-box-middle-content">${conHistory.detail}</p>
+		    		
+		    		<p id="consulting-history-box-middle-content-title">회원 코멘트</p>
+		    		<c:if test="${conHistory.memComment != null && conHistory.memComment != ''}">
+		    			<p id="consulting-history-box-middle-content">${conHistory.memComment}</p>
+		    		</c:if>
+		    		<c:if test="${conHistory.memComment == null || conHistory.memComment == ''}">
+		    			<p id="consulting-history-box-middle-content">없음</p>
+		    		</c:if>
+		    		
+		    		<p id="consulting-history-box-middle-content-title">디자이너 코멘트</P>
+		    		<c:if test="${conHistory.desComment != null && conHistory.desComment != ''}">
+		    			<p id="consulting-history-box-middle-content">${conHistory.desComment}</p>
+		    		</c:if>
+		    		<c:if test="${conHistory.desComment == null || conHistory.desComment == ''}">
+		    			<p id="consulting-history-box-middle-content">없음</p>
+		    		</c:if>
+	    			</div>
+	    			<!-- consulting-history-box-middle 끝-->
+	    			
 					<!-- 남은 시간 
 		    		<h1>남은 시간</h1>
 		    		<c:out value="${conHistory.remainingTime}" />
 		    		-->
 		    		
+		    		<!-- consulting-history-box-low-->
 		    		<c:if test = "${conHistory.remainingTime le -30 || conHistory.remainingTime ge 10}">
-		    			<p><span class="note">*</span>상담시간 10분 전부터 상담 참여 가능합니다.</p>
-		    		</c:if>
-		    		<!-- 하드코딩? 원본코드: (${conHistory.remainingTime}>-30 || ${conHistory.remainingTime}<=10)-->
-		    		<c:if test = "${conHistory.remainingTime ge -30 && conHistory.remainingTime le 10}">
-		    			<!-- 공통 코드 참조해서 상담중으로 update -->
-		    			<!-- document.get~ 으로 사용하면 보다 쉽게 페이지에서 동작하는 함수를 알 수 있으나 일단 걍 만듦 -->
-		    			<button type="button" onclick="goChatting(${conHistory.conNo});">상담 참여 생성 테스트</button>
+		    			<div id="consulting-history-box-low">
+		    				<p>${conHistory.state}</p>
+		    				<p><span class="note">*</span>상담시간 10분 전부터 상담 참여 가능합니다.</p>
+		    			</div>
 		    		</c:if>
 		    		
+		    		<c:if test = "${conHistory.remainingTime ge -30 && conHistory.remainingTime le 10}">
+		    			<div id="consulting-history-box-low">
+		    				<p>${conHistory.state}</p>
+		    				<button type="button" onclick="goChatting(${conHistory.conNo});">상담 참여 생성 테스트</button>
+		    			</div>
+		    		</c:if>
+		    		<!-- consulting-history-box-low 끝-->
 		    	</div>
+		    	
 		    </div>
-	    </div>
-	    <hr>	
+		    <!-- consulting-history-box 끝-->
 		</c:forEach>
-</c:if>
+	</c:if>
+	
+	</div>
 </div>
 	
