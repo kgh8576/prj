@@ -77,7 +77,7 @@
 									frm.hp.focus();
 								} else {
 									$('#NoticeHP').html('입력완료 인증번호받기를 눌러주세요.')
-											.attr('color', '#f82a2aa3');
+											.attr('color', '#007bff');
 									$('#hiddenpass').val('Checked');
 								}
 
@@ -109,7 +109,7 @@
 							if (data == 1) {
 								$('#hppasschk').val('Checked');
 								$('#NoticeHP').html('인증이 완료되었습니다.').attr(
-										'color', '#f82a2aa3');
+										'color', '#007bff');
 							} else {
 								$('#hppasschk').val('unChecked');
 								$('#NoticeHP').html('인증번호가 틀렸습니다.').attr(
@@ -156,7 +156,7 @@
 					frm.hppass.focus();
 					button_joinus.disabled = true;
 					$('#NoticeHP').html('인증번호가 전송되었습니다.').attr('color',
-							'#f82a2aa3');
+							'#007bff');
 
 				},
 				error : function(err) {
