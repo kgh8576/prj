@@ -1,10 +1,7 @@
 package com.one.style.desmypage.web;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -28,7 +24,6 @@ import com.one.style.desmypage.vo.DesMypageVO;
 import com.one.style.dessearch.service.DessearchService;
 import com.one.style.dessearch.vo.DessearchVO;
 import com.one.style.files.service.FilesService;
-import com.one.style.mem.vo.MemberVO;
 
 @Controller
 public class DesMypageController {
@@ -321,17 +316,14 @@ public class DesMypageController {
 	// 마이페이지/상담시간설정 (월화수목금토 Update)
 	@RequestMapping("desWorkOpenUpdate.do")
 	public String desWorkOpenUpdate(HttpServletRequest req , DesMypageVO vo) {
-		for (String time : vo.getTime()) {
-			System.out.println(time);
-		}
-		vo.setTimes(String.join(",", vo.getTime())); 
 		HttpSession session = req.getSession();
+		if(vo.getTime() == null) {
+			vo.setTimes("");
+		} else {
+			vo.setTimes(String.join(",", vo.getTime())); 
+		}
 		String did = (String) session.getAttribute("did");
 		vo.setId(did);
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("id", id);
-//		map.put("targetDay", targetDay);
-//		map.put("times", times);
 		desMyDao.desWorkOpenUpdate(vo);
 		return "redirect:desWorkOpen.do";
 	}

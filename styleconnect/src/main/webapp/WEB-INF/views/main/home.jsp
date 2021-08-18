@@ -11,6 +11,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
 <style>
 body {
 	font-family: 'Gothic A1', sans-serif;
@@ -331,6 +335,38 @@ function crawl(gender) {
 			}
 		});
 	}
+	   function searchKeywords(t){
+		      var searchVal = $('#search').val();
+		      if ( isNaN(searchVal) ) { // 숫자가 아니면
+		         $.ajax({
+		            url : 'searchKeywordsList.do',
+		            type : 'post',
+		            data : {inputKeywords : searchVal },
+		            success : function(result){
+		               console.log(result);
+		               if(result != null){
+		                  var sourceList = [];
+		                  for(var i = 0; i < result.length; i++){
+		                     sourceList.push(result[i].planeKeyword);
+		                  }
+		                  console.log(sourceList);
+		                  $("#search").autocomplete({  //오토 컴플릿트 시작
+		                     source: sourceList,
+		                     focus : function(event, ui) { // 방향키로 자동완성단어 선택 가능하게 만들어줌   
+		                        return false;
+		                     }
+		                     //disabled: true, //자동완성 기능 끄기
+		                  });
+		               }
+		            }, error: function(err){
+		               console.log(err);
+		            }
+		         });
+		      }
+		   }
+
+	
+	
 </script>
 </head>
 
@@ -360,7 +396,7 @@ function crawl(gender) {
 									<hr>
 									-->
 									<div class="input-group mb-3">
-										<input type="text" name="search"
+										<input type="text" name="search" id="search" onkeyup="searchKeywords(this);"
 											placeholder="키워드를 검색하세요."
 											class="form-control border-radius-0">
 										<div class="input-group-append">
@@ -422,7 +458,7 @@ function crawl(gender) {
 	</section>
 	<div class="row justify-content-center margin-bottom-50 margin-top-50">
 		<!-- 디자이너 추천 영역 -->
-		<c:if test="${empty memDetail && not empty id }">
+		<c:if test="${empty memDetail && not empty id && id ne 'admin'}">
 			<!-- modal Btn -->
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#preferenceFrmModal">더 나은 서비스 제공을 위해서 시간을

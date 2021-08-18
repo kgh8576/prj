@@ -101,7 +101,7 @@
 	
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
-		<div align="right" style="border-bottom: 1px solid black;">
+		<div align="right">
 			<c:if test="${id eq reviewInfo.memId }">
 				<button class="btn btn-info" onclick="deletes('${reviewInfo.conNo}', '${reviewInfo.desId }')">삭제</button>
 				<button class="btn btn-info" onclick="modify()">수정</button>
@@ -113,26 +113,27 @@
 			<br>
 		</div>
 		<br><br>
-		<div class="rating clearfix">
-			<ul class="float-left">
-				<c:forEach begin="1" end="${reviewInfo.rate }">
-					<li class="active"></li>
-				</c:forEach>
-				<c:forEach begin="${reviewInfo.rate+1}" end="5">
-					<li></li>
-				</c:forEach>
-			</ul>
-			<p align="right" style="color: grey;">${reviewInfo.stringwDate }&emsp;&emsp;&emsp; ${reviewInfo.memId }</p>
-		</div>
 
-		<div>
+		<div class="margin-bottom-20px box-shadow">
+		
+			<div class="rating clearfix">
+				<ul class="float-left">
+					<c:forEach begin="1" end="${reviewInfo.rate }">
+						<li class="active"></li>
+					</c:forEach>
+					<c:forEach begin="${reviewInfo.rate+1}" end="5">
+						<li></li>
+					</c:forEach>
+				</ul>
+				<p align="right" style="color: grey;">${reviewInfo.stringwDate }&emsp;&emsp;&emsp; ${reviewInfo.memId }</p>
+			</div>
 			<h3>${reviewInfo.reviewTitle }</h3>
 			<hr>
 			${reviewInfo.contents}
 		</div>
 
 		<!-- 답변 영역 -->
-		<div class="margin-bottom-20px padding-bottom-40px box-shadow">
+		<div class="margin-bottom-20px box-shadow">
 			<c:if test="${did eq reviewInfo.desId && empty replyInfo }">
 				<p id="replyFrmBtn">고객에게 피드백을 남길 수 있습니다.
 					<button class="btn btn-info" onclick="showReplyFrm()">답변 등록하기</button>

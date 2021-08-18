@@ -85,7 +85,7 @@
 			case 'wed':
 				init('${schedules.wed }');
 				break;
-			case 'tur':
+			case 'thu':
 				init('${schedules.thu }');
 				break;
 			case 'fri':
@@ -117,7 +117,7 @@
 			}
 		}
 		console.log(sliced);
-		for(var i = 0; i < sliced.length; i++){ // 그 맞춰진 요소 갯수로 for문. Btn 생성 과정
+		for(var i = 0; i < slicedCompareTime.length; i++){ // 그 맞춰진 요소 갯수로 for문. Btn 생성 과정
 			if ( sliced[i] != 'none' ){ // 요소값이 none이 아니면 셀렉티드 버튼 만들어주고
 				$('#times').append($("<input class='check' type='checkbox' style='display: none;' name='time' id="+slicedCompareTime[i]+" value="+slicedCompareTime[i]+" checked> <label style='width: 60px;' for="+slicedCompareTime[i]+">"+slicedCompareTime[i]+"</label>"));
 			}
@@ -128,6 +128,7 @@
 	}
 	
 	function submit(){
+
 		var checked = $('input:checkbox[name=time]:checked');
 		var times = new Array();
 		var sliced = '';
@@ -160,6 +161,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top" id="mainNav">
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
                 <li class="nav-item">
@@ -210,23 +212,24 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+			
 			<div>
 				<ul id="checkBar" class="ul1">
 					<li class="lit" id="mon" onclick="show('mon')">월</li>
 					<li class="li1" id="tue" onclick="show('tue')">화</li>
 					<li class="li1" id="wed" onclick="show('wed')">수</li>
-					<li class="li1" id="tur" onclick="show('tur')">목</li>
+					<li class="li1" id="thu" onclick="show('thu')">목</li>
 					<li class="li1" id="fri" onclick="show('fri')">금</li>
 					<li class="li1" id="sat" onclick="show('sat')">토</li>
 					<li class="li1" id="sun" onclick="show('sun')">일</li>
 				</ul>
 			</div>
 			<form action="desWorkOpenUpdate.do" id="weekfrm">
-			<input type="hidden" id="weeked" name ="weeked" value="">
+				<input type="hidden" id="weeked" name ="weeked" value="">
 				<div id="times" style="border: 1px solid black;">
 					
 				</div>
-				<button>수정</button>
+				<button type="button" onclick="submit()">수정</button>
 			</form>
 			<div id="ComparativeGroup" style="display:none;">
 				<input class='check' type='checkbox' name='compareTime' value="09:00">
@@ -251,6 +254,7 @@
 		<div class="col-md-2"></div>
 	</div>
 <br>
+
 
 </body>
 </html>
