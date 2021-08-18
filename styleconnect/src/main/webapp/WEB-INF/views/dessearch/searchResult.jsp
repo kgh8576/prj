@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>검색결과 페이지 </title>
+<style type="text/css">
+#imgsize {
+    width: 200px;
+    height: 200px;
+}
+</style>
 </head>
 <body>
 <body>
@@ -48,10 +54,10 @@
 									<div class="thum">
 										<a href="desListSelect.do?id=${vo.id}">
 										<c:if test="${vo.fileUuid == '0'}">
-										<img src="resources/img/이미지 등록.png" alt="">
+										<img id="imgsize" src="resources/img/이미지 등록.png" alt="">
 										</c:if>
 										<c:if test="${vo.fileUuid != '0'}">
-										<img src="resources/img/${vo.fileUuid }" alt="">
+										<img id="imgsize" src="resources/img/${vo.fileUuid }" alt="">
 										</c:if>
 										</a>
 									</div>

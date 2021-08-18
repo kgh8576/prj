@@ -20,7 +20,6 @@
     flex-wrap: wrap;
     flex-direction: row;
     align-content: center;
-    justify-content: space-evenly;
 }
 .padding-30px2 {
     padding: 30px;
@@ -124,7 +123,6 @@ function selectList(){
                 	<option value="ccode006" <c:if test="${state eq 'ccode006'}">selected</c:if>>상담불참</option>
                 </select>
                 </div>
-               
        </div>
 	  </div>
                 <!-- // Page Title -->
@@ -134,11 +132,10 @@ function selectList(){
                 </c:if>
                  <c:forEach items="${sche }" var="vo">
                     <!-- Booking item -->
-                    <div class="col-lg-6 margin-bottom-45px full-width">
+                    <div class="col-lg-6 margin-bottom-35px full-width">
                         <div class="background-white thum-hover box-shadow  hvr-float">
                             <div class="padding-30px2 full-width">
-                                <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
-                                <div class="margin-left-85px">
+                                <div class="margin-left-35px">
                                 	<a class="d-block text-dark text-medium margin-bottom-5px" >No. ${vo.conNo }  </a>
                                     <a class="d-block text-dark text-medium margin-bottom-5px" >상담명: ${vo.title }  </a>
                                     <div class="d-block padding-tb-5px">예약날짜 :  <a  class="text-main-color">${vo.day } </a></div>

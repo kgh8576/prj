@@ -13,7 +13,12 @@ span:hover{
 	color:white;
    background-color: grey;
 }
+#imgsize {
+    width: 200px;
+    height: 200px;
+}
 </style>
+
 </head>
 <body>
 
@@ -56,7 +61,7 @@ span:hover{
 								 <!-- 디자이너 프로필 이미지 -->
 									<div class="thum">
 										<a href="desListSelect.do?id=${vo.id}">
-											<img src="resources/img/${vo.fileUuid }" alt="">
+											<img id="imgsize" src="resources/img/${vo.fileUuid }" alt="">
 										</a>
 									</div>
 								<!-- 디자이너 프로필 이미지 -->
