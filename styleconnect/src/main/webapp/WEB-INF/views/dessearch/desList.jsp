@@ -77,14 +77,14 @@ span:hover{
 										</h5>
 										<div class="rating clearfix">
 											<ul class="float-left">
-										<c:if test="${vo.rate != 0 }">
+										 <c:if test="${vo.rate != 0 }">
 										<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
-										</c:forEach>  (${vo. reviewCnt })
+										</c:forEach>  
 										</c:if>
 										<c:if test="${vo.rate == 0}">
 											등록된 후기가 없습니다. 
-										</c:if>
+										</c:if> 
 											</ul>
 										</div>
 									</div>
