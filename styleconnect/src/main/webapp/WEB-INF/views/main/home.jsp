@@ -479,7 +479,6 @@ function crawl(gender) {
 						<div class="modal-body">
 							<form id="preferenceFrm" action="memDetailInsert.do"
 								method="post">
-								<h5>내가 필요한 서비스는...</h5>
 								<h6 align="right" style="color: grey;">다중 선택 가능</h6>
 								<div class="select" style="text-align: center;" id="needService">
 									<input class="check" type="checkbox" name="YesorNo"	id="makeupyn1" value="Y"><label style="width: 60px;" for="makeupyn1"> 메이크업 </label>
@@ -492,7 +491,6 @@ function crawl(gender) {
 									<input class="finalcheck" type="hidden" id="dyeyn" name="dyeyn">
 								</div>
 
-								<h5>내 거주지는...</h5>
 								<div class="input-group mb-3">
 									<select class="custom-select" id="location" name="location" style="margin: auto;">
 										<option disabled="disabled" selected="selected" value="false">거주지 선택</option>

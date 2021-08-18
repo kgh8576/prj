@@ -114,8 +114,10 @@
 		</div>
 		<br><br>
 
-		<div class="margin-bottom-20px box-shadow">
-		
+		<div class="margin-bottom-20px padding-20px box-shadow">
+			<hr>
+			<br>
+			<h3>${reviewInfo.reviewTitle }</h3>
 			<div class="rating clearfix">
 				<ul class="float-left">
 					<c:forEach begin="1" end="${reviewInfo.rate }">
@@ -127,9 +129,11 @@
 				</ul>
 				<p align="right" style="color: grey;">${reviewInfo.stringwDate }&emsp;&emsp;&emsp; ${reviewInfo.memId }</p>
 			</div>
-			<h3>${reviewInfo.reviewTitle }</h3>
+			<br>
 			<hr>
-			${reviewInfo.contents}
+			<div class="padding-20px" id="beforeContent">
+				${reviewInfo.contents}
+			</div>
 		</div>
 
 		<!-- 답변 영역 -->
@@ -163,8 +167,8 @@
 				<div class="margin-bottom-20px padding-bottom-40px box-shadow">
 			        <div class="padding-20px background-white">
 			        
-			        	
 				        <h3>디자이너의 답변</h3>
+				        <hr>
 				        <div class="padding-20px" id="beforeContent">${replyInfo.contents }</div>
 				        
 				        <div style="display: none;" id="hiddenModifyDiv">
@@ -178,7 +182,7 @@
 						</div>
 
 			        </div><br>
-			        <c:if test="${id eq reviewInfo.desId }">
+			        <c:if test="${did eq reviewInfo.desId }">
 				        <div align="center" id="modifyBtn">
 				        	<button class="btn btn-info" onclick="replyModifyFrm()">수정</button>
 				        </div>

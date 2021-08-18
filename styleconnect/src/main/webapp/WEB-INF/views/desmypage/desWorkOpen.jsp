@@ -301,7 +301,6 @@
 					<input type="hidden" id="weeked" name ="weeked" value="">
 					
 					<div id="times" style="border: 1px solid black; padding:55px; width:500px; display:inline-block; align:center; margin:50px;">
-						<div>taweaweklaw</div>
 					</div>
 					<div align="center" style="margin:30px;">
 						<button type="button" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block" onclick="submit()">수정하기</button>

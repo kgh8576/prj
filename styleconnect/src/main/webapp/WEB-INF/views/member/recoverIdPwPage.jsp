@@ -56,6 +56,7 @@
 	var searchTable;
 	var name;
 	var idCheck = false;
+	var targetId;
 	
 	function realhpcheck(){
 
@@ -199,10 +200,10 @@
 			success : function(data) {
 				document.getElementById("log-in").style.display = 'none';
 				document.getElementById("getIdDiv").style.display = 'block';
-				$('#getId').append(data);
-				
-				hp = $('#hp').val();
-				name = $('#name').val();
+				for(var i = 0; i < data.length; i++){
+					$('#innerGetIdDiv').append('<strong>고객님의 아이디는 <b>'+data[i].id+'</b></strong>');
+					$('#innerGetIdDiv').append('<button type="button" onclick="nextpage('+"'"+data[i].id+"'"+')" class="btn btn-md btn-primary" style="width:100px;">비밀번호 찾기</button><br>');
+				}
 			},
 			error : function(err) {
 				console.log(err);
@@ -211,9 +212,10 @@
 		});
 	}
 		
-	function nextpage(){
+	function nextpage(id){
 		document.getElementById("getIdDiv").style.display = 'none';
 		document.getElementById("updatePwDiv").style.display = 'block';
+		targetId = id;
 	}
 	
 	//비밀번호 정규화
@@ -237,7 +239,6 @@
 				}
 			},
 			error : function(err) {
-				console.log(err);
 				console.log("비밀번호 검증 오류");
 			}
 		});
@@ -292,21 +293,18 @@
 			pw = $('#pw').val();
 			
 			$.ajax({
-				url : 'updateUserPwByHpName.do',
+				url : 'updateUserPwById.do',
 				data : {
-					hp : hp,
-					name : name,
+					id : targetId,
 					searchTable : searchTable,
 					pw : pw
 				},
 				type : 'post',
 				success : function(data) {
 					alert('성공했습니다. 재 로그인하세요');
-					console.log(data);
 					location.href='main.do';
 				},
 				error : function(err) {
-					console.log(err);
 					console.log("비밀번호 변경 에러");
 				}
 			});
@@ -354,10 +352,8 @@
 	
 <div id="getIdDiv" class="site-form log-in-form box-shadow border-radius-10" style="display: none;">
 	<div class="form-output">
-		<div class="form-group label-floating">
-			<strong>고객님의 아이디는 <b><getId id="getId"></getId></b></strong>	
+		<div class="form-group label-floating" id="innerGetIdDiv">
 		</div>
-		<button type="button" onclick="nextpage()" class="btn btn-md btn-primary full-width">비밀번호 찾기</button>
 	</div>
 </div>
 	
