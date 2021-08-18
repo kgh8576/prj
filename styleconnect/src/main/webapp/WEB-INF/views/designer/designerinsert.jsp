@@ -628,9 +628,10 @@ body {
 			}
 		}
 		if (chkCnt > 3) {
+			obj.checked = false;
 			alert("3개 까지만 선택이 가능합니다.");
-
 			return false;
+			
 		}
 	}
 	//전문분야 1개라도 클릭할수있게

@@ -7,8 +7,9 @@
 	select d.id, d.name, d.major, d.state,nvl2(r.rate,r.rate,0)as rate, nvl2(f.file_uuid,f.file_uuid,'0.png')fileUuid, nvl2(f.file_state,f.file_state,0)fileState
 	from DESIGNER d
 	left join (
-      select des_id ,  TRUNC(AVG(RATE),1) AS RATE
-      from review
+      select des_id ,  TRUNC(AVG(RATE),1) AS RATE, count(*)as reviewCnt
+      from review 
+      where state='Y'
       group by des_id) r
       on d.id = r.des_id
   	left join  (
@@ -32,6 +33,7 @@
                        from DESIGNER d
                        where cut_yn = 'Y'
                        )
+	  and state='Y'
       group by des_id) r
       on d.id = r.des_id
   	left join  (
@@ -55,6 +57,7 @@
                        from DESIGNER d
                        where perm_yn = 'Y'
                        )
+	  and state='Y'
       group by des_id) r
       on d.id = r.des_id
   	left join  (
@@ -78,6 +81,7 @@
                        from DESIGNER d
                        where dye_yn = 'Y'
                        )
+	  and state='Y'
       group by des_id) r
       on d.id = r.des_id
   	left join  (
@@ -101,6 +105,7 @@
                        from DESIGNER d
                        where makeup_yn = 'Y'
                        )
+      and state='Y'
       group by des_id) r
       on d.id = r.des_id
   	left join  (
@@ -123,6 +128,7 @@
                        select id
                        from DESIGNER d
                        )
+      and state='Y'
       group by des_id) r
       on d.id = r.des_id
 	where d.id= #{id}
@@ -130,7 +136,7 @@
 	
 	<!-- 디자이너 상세정보 리뷰 -->
 	<select id="dessearchSelectReview" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
-	select r.title, r.rate,r.des_id, nvl(m.name,'익명회원') as mName
+	select r.title, nvl2(r.rate,r.rate,0)as rate ,r.des_id, nvl(m.name,'익명회원') as mName
 	from review r 
 	left join member m
 	on m.id = r.mem_id
@@ -188,7 +194,7 @@
 	
 	<!-- 디자이너 선택 - 썸네일-->
 	<select id="dessearchDesThum" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
-		SELECT FILE_UUID, FILE_NAME, COUR_NO
+		SELECT FILE_UUID, FILE_NAME, COUR_NO, file_state
 		FROM FILES 
 		WHERE  FILE_STATE= 'thum'
 		AND des_ID= #{id}

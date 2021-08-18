@@ -14,7 +14,7 @@
 	margin: 100px;
 }
 #cbtn{
-	align: right;
+	    margin-left: 70%;
 }
 #courseline{
 border: 1px solid #333;
@@ -99,7 +99,7 @@ border: 1px solid #333;
 					</div>
 				</c:if>
 				<c:if test="${fn:length(course) < 5}">
-					<button id='cbtn'onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/>
+					<button id='cbtn'  onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/><br/><br/><br/><br/><br/>
 				</c:if>
 				<c:forEach items="${course}" var="vo">
                     <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">

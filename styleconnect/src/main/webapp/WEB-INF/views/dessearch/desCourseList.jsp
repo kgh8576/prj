@@ -7,6 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>디자이너 상담목록 리스트 (blog-grid.html)</title>
+<style type="text/css">
+.row1 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+}
+</style>
 </head>
 <body>
  <div id="page-title" class="padding-tb-30px gradient-white">
@@ -56,29 +68,31 @@
                     </div>
                  <!-- 상담목록 끝 -->
 				</c:forEach>
-                    <div class="row"></div>
+               <div class="row"></div>
                 </div>
                 <div class="col-lg-4">
+                <form id="frm" action="searchList.do" method="post">
                     <div class="margin-bottom-30px">
                         <div class="padding-30px background-white border-radius-10">
-                            <h4><i class="fas fa-search margin-right-10px text-main-color"></i> Search</h4>
+                            <h4><i class="fas fa-search margin-right-10px text-main-color"></i> 검색</h4>
                             <hr>
                             <div class="input-group mb-3">
-                                <input type="text" value="Search..." class="form-control border-radius-0">
+                              <input type="text" name="search" placeholder="키워드를 입력하세요" class="form-control border-radius-0">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary text-white background-main-color border-radius-0" type="button">Search</button>
+                                    <button class="btn btn-outline-secondary text-white background-main-color border-radius-0" type="submit">Search</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                     <!-- 사이드 디자이너 이미지 -->
                     <div class="widget widget_categories">
                         <div class="margin-bottom-30px">
                             <div class="padding-30px background-white border-radius-10">
                                 <h4><i class="fab fa-instagram margin-right-10px text-main-color"></i> 디자이너 이미지 </h4>
                                 <hr>
-                                <div class="row">
-                                <c:forEach items="${img2 }" var="vo" begin="1" end="4">
+                                <div class="row1">
+                                <c:forEach items="${img2 }" var="vo" begin="1" end="5">
                                 	<c:if test="${vo.fileState eq 'sty' }">
                                     	<div class="col-6 margin-bottom-20px"><a href="#">
                                    		<img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></a></div>

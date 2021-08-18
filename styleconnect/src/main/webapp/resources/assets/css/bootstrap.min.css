@@ -2321,12 +2321,12 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-info:hover {
 	color: #fff;
-	background-color: #138496;
-	border-color: #117a8b
+	background-color: #463c9e;
+	border-color: #463c9e
 }
 
 .btn-info.focus, .btn-info:focus {
-	box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5)
+	box-shadow: 0 0 0 .2rem #463c9e
 }
 
 .btn-info.disabled, .btn-info:disabled {

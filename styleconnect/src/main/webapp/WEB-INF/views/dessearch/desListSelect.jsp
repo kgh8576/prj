@@ -57,9 +57,36 @@ span:hover{
     flex-direction: row;
     align-content: center;
 }
+#sidevar{
+color: black;
+}
+#thumimg{
+	width: 100%;
+	height: 100%;
+}
+
+#reserbt {
+    float: left;
+    display: block;
+    margin: 0px 10px 10px 10px;
+    padding: 0px 9px;
+    font-size: 20px !important;
+    line-height: 48px;
+    color: #fff!important;
+    border: #584ccb solid 1px;
+    border-radius: 30px;
+    text-decoration: none;
+    background: #584ccb;
+    text-align: center;
+}
+.col-44 {
+    flex: 0 0 33.333333%;
+    max-width: 90%;
+    width: 100%;
+}
 </style>
 </head>
-
+<br/><br/><br/>
 <body>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
@@ -72,24 +99,15 @@ span:hover{
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
                     	<c:if test="${empty img }">
-                    		 <div class="col-6 margin-bottom-20px"><img class="border-radius-img" src="resources/img/logo.jpg" alt=""></div>
+                    		 <div class="col-6 margin-bottom-20px"><img id="thumimg"class="border-radius-img" src="resources/img/logo.jpg" alt=""></div>
                     	</c:if>
                     	<c:if test="${not empty img }">
-                       	<c:forEach items="${img}" var="img1" begin="3" end="3"> 
-                             <div class="margin-bottom-20px"><img class="border-radius-img" src="resources/img/${img1.fileUuid }" alt=""></div>
+                       	<c:forEach items="${img}" var="img1" begin="0" end="0"> 
+                             <div class="margin-bottom-20px"><img id="thumimg" class="border-radius-img" src="resources/img/${img1.fileUuid }" alt=""></div>
                         </c:forEach>  
                         </c:if>
-                        <div class="padding-30px background-white">
+                        <div class="padding-10px background-white">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="rating clearfix">
-                                        <ul class="float-right">
-                                          <c:forEach begin="1" end="${designer.rate }">
-												<li class="active"></li>
-										</c:forEach>  평점 ${designer.rate } 
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -185,33 +203,12 @@ span:hover{
                     <div id="side" class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
                         <h3 id="dname" class="padding-lr-30px padding-top-20px"><i class="far fa-user margin-right-10px"></i> ${designer.name}디자이너</h3>
                         <hr>
-                        <div class="padding-bottom-30px">
-                        <!-- 별점 -->
-                         <div class ="rating clearfix" id="rate">
-                           <ul class="float-left">
-                              <c:if test="${designer.reviewCnt != 0 }">
-								<c:forEach begin="1" end="${designer.rate }">
-								<li class="active"></li>
-								</c:forEach>  (${designer.reviewCnt })건
-							 </c:if>
-							 <c:if test="${designer.reviewCnt == 0 }">
-											등록된 후기가 없습니다.
-							</c:if>
-                         </ul>
-                       </div>
-                      <!-- 디자이너 major 태그 -->
-                         <div  class="post-tags" id="tag">
-                            <div>
-								<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
-								<c:forEach var="major" items="${majors}">
-								 <a href="searchList.do?search=${major }"> <span class="text-grey-2"># ${major} </span> </a>
-								</c:forEach>
-							</div><br/>
-                            <!-- //디자이너 major 태그 -->
+                        <div class="padding-bottom-80px">
                             <!-- 상담목록가기 버튼 -->
-                             <div class="col-4">
-                             <a class="reserbtn" href="courseList.do?id=${designer.id }" ><i class="far fa-bookmark"></i>예약하러가기 </a>
-                             </div>
+                         <div class="col-44" id="reserbt">
+                             <a  href="courseList.do?id=${designer.id }" ><i class="far fa-bookmark"></i>&nbsp 예 약 하 러 가 기 </a>
+                          </div>
+                       </div>
                        </div>
                       </div>
                      </div>
@@ -221,10 +218,7 @@ span:hover{
                         <div class="padding-25px">
                         </div>
                     </div>
-
                 </div>
-            </div>
-        </div>
 </body>
 
 
