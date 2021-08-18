@@ -80,9 +80,8 @@ public class MemServiceImpl implements MemService {
 	
 //회원ID찾기
 	@Override
-	public String getUserIdByHpName(Map<String, String> map) {
-		List<MemberVO> list = memMapper.getUserIdByHpName(map);
-		return list.get(0).getId();
+	public List<MemberVO> getUserIdByHpName(Map<String, String> map) {
+		return memMapper.getUserIdByHpName(map);
 	}
 
 	@Override
