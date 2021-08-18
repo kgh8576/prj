@@ -60,6 +60,77 @@
 	background-color: #fff;
 	color: #333;
 }
+.multi {
+	float: left;
+	width: 350px;
+	height: 40px;
+}
+
+.btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block
+	{
+	float: left;
+	margin-left: -100px;
+}
+
+.a {
+	width: 500px;
+}
+
+.f {
+	width: 23%;
+	height: 200px;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+	float: left;
+	margin: 5px;
+	position: relative;
+}
+
+.f .figure {
+	width: 100%;
+	height: 100%;
+}
+
+.f #btnmargidn {
+	width: 30%;
+	height: 30px;
+	position: absolute;
+	bottom: 0px;
+	left: 38%;
+	right: 0;
+	box-sizing: border-box;
+	border: 1px solid #333;
+	border-radius: 3px;
+	background-color: #333;
+	color: #fff;
+}
+
+.mtitle {
+	font-size: 30px;
+	text-decoration: underline;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+.card tab-pane fade show active 1 {
+	width: 500px;
+	height: 300px;
+	box-sizing: border-box;
+	border: 2px solid #aaa;
+}
+.row{
+	margin-top: 30px;
+}
+#content{
+	width: 800px;
+	height: 500px;
+	box-sizing: border-box;
+	border: 5px solid #bfbcbc;
+	border-radius: 5px;
+}
+
+
+
 </style>
 <script>
 	
@@ -103,6 +174,7 @@
 	
 	function init(times){
 		$('#times').html(''); // 비우기
+		$('#times').append('<div align="center">검은색 : 상담 불가 시간 <br> 하얀색 : 상담 가능 시간 </div><br>');
 		var sliced = times.split(','); // 시간 별로 ,로 자르기
 		var compareTime = $('input:checkbox[name="compareTime"]'); // 시간 비교군 배열
 		var slicedCompareTime = new Array();
@@ -208,51 +280,56 @@
             </ul>
         </div>
     </nav>
-<br><br><br><br><br><br>
+<div class="container-fluid overflow-hidden">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			
-			<div>
-				<ul id="checkBar" class="ul1">
-					<li class="lit" id="mon" onclick="show('mon')">월</li>
-					<li class="li1" id="tue" onclick="show('tue')">화</li>
-					<li class="li1" id="wed" onclick="show('wed')">수</li>
-					<li class="li1" id="thu" onclick="show('thu')">목</li>
-					<li class="li1" id="fri" onclick="show('fri')">금</li>
-					<li class="li1" id="sat" onclick="show('sat')">토</li>
-					<li class="li1" id="sun" onclick="show('sun')">일</li>
-				</ul>
-			</div>
-			<form action="desWorkOpenUpdate.do" id="weekfrm">
-				<input type="hidden" id="weeked" name ="weeked" value="">
-				<div id="times" style="border: 1px solid black;">
-					
+		<h1 class="mtitle"> &nbsp;&nbsp;&nbsp; My Schedules</h1>
+			<div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+				<div>
+					<ul id="checkBar" class="ul1">
+						<li class="lit" id="mon" onclick="show('mon')">월</li>
+						<li class="li1" id="tue" onclick="show('tue')">화</li>
+						<li class="li1" id="wed" onclick="show('wed')">수</li>
+						<li class="li1" id="thu" onclick="show('thu')">목</li>
+						<li class="li1" id="fri" onclick="show('fri')">금</li>
+						<li class="li1" id="sat" onclick="show('sat')">토</li>
+						<li class="li1" id="sun" onclick="show('sun')">일</li>
+					</ul>
 				</div>
-				<button type="button" onclick="submit()">수정</button>
-			</form>
-			<div id="ComparativeGroup" style="display:none;">
-				<input class='check' type='checkbox' name='compareTime' value="09:00">
-				<input class='check' type='checkbox' name='compareTime' value="09:30"> 
-				<input class='check' type='checkbox' name='compareTime' value="10:00"> 
-				<input class='check' type='checkbox' name='compareTime' value="10:30">
-				<input class='check' type='checkbox' name='compareTime' value="11:00">
-				<input class='check' type='checkbox' name='compareTime' value="11:30">
-				<input class='check' type='checkbox' name='compareTime' value="13:00"> 
-				<input class='check' type='checkbox' name='compareTime' value="13:30"> 
-				<input class='check' type='checkbox' name='compareTime' value="14:00"> 
-				<input class='check' type='checkbox' name='compareTime' value="14:30">
-				<input class='check' type='checkbox' name='compareTime' value="15:00">
-				<input class='check' type='checkbox' name='compareTime' value="15:30"> 
-				<input class='check' type='checkbox' name='compareTime' value="16:00">
-				<input class='check' type='checkbox' name='compareTime' value="16:30">
-				<input class='check' type='checkbox' name='compareTime' value="17:00"> 
-				<input class='check' type='checkbox' name='compareTime' value="17:30">
+				<form action="desWorkOpenUpdate.do" id="weekfrm">
+					<input type="hidden" id="weeked" name ="weeked" value="">
+					
+					<div id="times" style="border: 1px solid black; padding:55px; width:500px; display:inline-block; align:center; margin:50px;">
+						<div>taweaweklaw</div>
+					</div>
+					<div align="center" style="margin:30px;">
+						<button type="button" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block" onclick="submit()">수정하기</button>
+					</div>
+				</form>
+				<div id="ComparativeGroup" style="display:none;">
+					<input class='check' type='checkbox' name='compareTime' value="09:00">
+					<input class='check' type='checkbox' name='compareTime' value="09:30"> 
+					<input class='check' type='checkbox' name='compareTime' value="10:00"> 
+					<input class='check' type='checkbox' name='compareTime' value="10:30">
+					<input class='check' type='checkbox' name='compareTime' value="11:00">
+					<input class='check' type='checkbox' name='compareTime' value="11:30">
+					<input class='check' type='checkbox' name='compareTime' value="13:00"> 
+					<input class='check' type='checkbox' name='compareTime' value="13:30"> 
+					<input class='check' type='checkbox' name='compareTime' value="14:00"> 
+					<input class='check' type='checkbox' name='compareTime' value="14:30">
+					<input class='check' type='checkbox' name='compareTime' value="15:00">
+					<input class='check' type='checkbox' name='compareTime' value="15:30"> 
+					<input class='check' type='checkbox' name='compareTime' value="16:00">
+					<input class='check' type='checkbox' name='compareTime' value="16:30">
+					<input class='check' type='checkbox' name='compareTime' value="17:00"> 
+					<input class='check' type='checkbox' name='compareTime' value="17:30">
+				</div>
 			</div>
-			
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+</div>
 <br>
 
 
