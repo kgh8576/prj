@@ -397,10 +397,6 @@ $(function() {
 				<div class="col-lg-2"></div>
 			</div>
 			<div class="title text-right">
-				<div id="altercheck2"class="alert alert-success alert-dismissible" style="display: none;">
-  					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  					<strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
-				</div>
 				<p class="text-title-large font-weight-1000 margin-bottom-15px">STYLE
 					CONNECT</p>
 				<p class="font-weight-800 text-up-small">나에게
