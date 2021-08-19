@@ -47,8 +47,6 @@ public class DessearchController {
 	//검색결과
 	@RequestMapping("searchList.do")
 	public String searchList(Model model, DessearchVO vo, HttpServletRequest request) {
-		System.out.println("=====서치 키워드: "+vo.getSearch());
-		
 		HttpSession session = request.getSession();
 		model.addAttribute("search",dao.searchList(vo));
 		session.setAttribute("searchkeyword", vo.getSearch());
