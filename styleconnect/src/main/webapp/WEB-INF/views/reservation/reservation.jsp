@@ -43,7 +43,7 @@
 		$("#check_module").click(function() {
 			var mem_id = "${id}";
 			if (mem_id == ""){
-				alert('로그인이 필요한 서비스 입니다. 로그인을 해주세요');
+				alert('일반회원만 예약이 가능합니다. 회원으로 로그인을 해주세요');
 				location.href='loginpage.do';
 				return false;
 			}

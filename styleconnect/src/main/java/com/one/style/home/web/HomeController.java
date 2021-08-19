@@ -67,7 +67,7 @@ public class HomeController {
    public String errorPage() {
       return "main/error";
    }
-   
+   /*
    @RequestMapping("searchKeywordsList.do")
    @ResponseBody
    public List<HomeVO> searchKeywordsList(String inputKeywords) {
@@ -140,5 +140,6 @@ public class HomeController {
       }
       return out;
    }
+   */
    
 }

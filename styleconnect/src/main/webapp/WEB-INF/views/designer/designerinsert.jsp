@@ -383,7 +383,7 @@ body {
 							'color', '#f82a2aa3');
 					$('#idCheck').val('unChecked');
 				} else {
-					$('#chkNotice2').html('사용가능한 아이디 입니다.').attr('color',
+					$('#chkNotice2').html('멋진 아이디네요!').attr('color',
 							'#007bff');
 					$('#idCheck').val('Checked');
 				}
