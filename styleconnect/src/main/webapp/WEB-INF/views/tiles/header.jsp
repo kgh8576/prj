@@ -33,7 +33,11 @@ header ul.nav-menu > li > a {
 #loginJoin a{
 	margin-right: 30px;
 }
+#logo{
+	
 
+
+}
 
 
 
@@ -44,9 +48,11 @@ header ul.nav-menu > li > a {
 
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
+		
+		
+		
+		
 						//상담시작 알람
 						<c:if test="${not empty id}">
 						var memId = "${id}";
@@ -70,10 +76,31 @@ header ul.nav-menu > li > a {
 									}
 
 								})
+								$.ajax({
+		url : 'checkSchedule.do',
+		data : {
+			memId : memId
+		},
+		type : 'post',
+		success : function(data) {
+			console.log(data);
+			if(data == 1) {
+				document.getElementById("altercheck").style.display = 'block';
+			}else {
+				document.getElementById("altercheck").style.display = 'none';
+			}
+		},
+		error : function(err) {
+			console.log(err);
+			console.log("스케줄러 불러오기오류");
+		}
+		
+	})
 
 						</c:if>
 
 					});
+	
 </script>
 </head>
 
@@ -84,9 +111,7 @@ header ul.nav-menu > li > a {
 				<div class="row">
 					<div class="col-xl-2 col-lg-2">
 						<a id="logo" href="main.do" class="d-inline-block margin-tb-15px">
-							<img
-							src="${pageContext.request.contextPath}/resources/img/logo.jpg"
-							alt="">
+							<strong>STYLE CONNECT</strong>
 						</a>
 					</div>
 					<div class="col-lg-7 col-md-12 position-inherit">

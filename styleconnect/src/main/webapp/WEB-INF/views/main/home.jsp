@@ -149,36 +149,7 @@ border:0;
 */
 
 </style>
-<script>
-$(document).ready(function(){
-	//상담시작 알람
-	<c:if test="${not empty id}">
-	var memId = "${id}";
-	$.ajax({
-		url : 'checkSchedule.do',
-		data : {
-			memId : memId
-		},
-		type : 'post',
-		success : function(data) {
-			console.log(data);
-			if(data == 1) {
-				document.getElementById("altercheck2").style.display = 'block';
-			}else {
-				document.getElementById("altercheck2").style.display = 'none';
-			}
-		},
-		error : function(err) {
-			console.log(err);
-			console.log("스케줄러 불러오기오류");
-		}
-		
-	})
-	
-	</c:if>
-	
-});
-	
+<script>	
 // 페이지 로드 시 cut 디자이너(디폴트값) 데이터 뿌리기
 $(function() {
 	topDesChange('cut');
