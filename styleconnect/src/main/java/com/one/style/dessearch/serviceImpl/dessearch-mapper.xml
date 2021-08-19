@@ -141,6 +141,7 @@
 	left join member m
 	on m.id = r.mem_id
 	where des_id= #{id}
+	and state='Y'
 	</select>
 	
 	<!-- 디자이너 프로필 사진 -->

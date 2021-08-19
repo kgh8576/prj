@@ -230,7 +230,7 @@ function updateMajor(){
 <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
     		<h1 class="mtitle">&nbsp&nbsp&nbsp #keyword setting</h1>
-            <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">    
+            <div class="row margin-tb-90px margin-lr-0px sm-mrl-0px">    
      <div id="page-title" class="padding-30px background-white full-width">
                     <div class="container">
                         <ol class="breadcrumb opacity-5">
