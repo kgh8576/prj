@@ -62,8 +62,8 @@ span:hover{
 color: black;
 }
 #thumimg{
-	width: 100%;
-	height: 100%;
+	width: 400px;
+	height: 400px;
 }
 
 #reserbt {
@@ -84,6 +84,9 @@ color: black;
     flex: 0 0 33.333333%;
     max-width: 90%;
     width: 100%;
+}
+.margin-bottom-20px{
+	text-align: center;
 }
 </style>
 </head>

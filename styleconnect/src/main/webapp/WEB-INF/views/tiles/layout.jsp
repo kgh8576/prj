@@ -64,6 +64,9 @@ footer{
     width: 100%;
 	padding: 15px 0;
 }
+#fixed-header-dark {
+	border-bottom: 1px solid #584ccb;
+}
 </style>
 </head>
 

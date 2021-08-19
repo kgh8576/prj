@@ -594,7 +594,7 @@ $(function() {
 		</c:if>
 	</div>
 
-	<section class="padding-tb-100px background-grey-1">
+	<section class="padding-tb-100px">
 		<div class="container">
 			<!-- Title -->
 			<div class="row justify-content-center margin-bottom-45px">

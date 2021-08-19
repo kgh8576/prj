@@ -180,16 +180,14 @@
 		</div>
 		<div class="col-md-6" style="margin:auto;">
 			<div class="btnGroup" align="center">
-				<div class="form-group label-floating">
-					인스타그램 ID : <input id="id"
-						class="form-control" placeholder="internet2dot02021"
-						type="text" style="width: 50%; display:inline-block;">
-				</div>
-				<div class="form-group label-floating">
-					비밀번호 : <input
-						class="form-control" placeholder="비밀번호를 입력해주세요." type="password"
-						id="pw" style="width: 50%; display:inline-block;">
-				</div>
+			<table style="text-align: center;">
+				<tr>
+					<td style="text-align: center;">인스타그램 ID : </td> <td><input id="id" class="form-control" placeholder="internet2dot02021"	type="text" style="width: 100%; display:inline-block;"></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">비밀번호 :  </td> <td><input class="form-control" placeholder="비밀번호를 입력해주세요." type="password"	id="pw" style="width: 100%; display:inline-block;"></td>
+				</tr>
+			</table>
 				<button class="btn btn-info" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
 				<button class="btn btn-info" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
 			</div>
