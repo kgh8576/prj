@@ -1,6 +1,5 @@
 package com.one.style.memdetail.web;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,9 +16,6 @@ import com.one.style.mem.service.MemService;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.memdetail.service.MemdetailService;
 import com.one.style.review.vo.ReviewVO;
-
-import mx4j.tools.config.DefaultConfigurationBuilder.New;
-
 
 @Controller
 public class MemdetailController {
