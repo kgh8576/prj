@@ -32,11 +32,49 @@ font-size: 24px;
     }
 }
 
-#searchBox{
-	width: 100%;
-	margin-left: 0px;
-	margin-right: 0px;
+.modal-lg {
+    max-width: 90%;
+}
+
+#entire-container-for-width{
+width:70%;
+}
+
+td {
+text-align:center;
+}  
+
+#designer-id-search-container-in-entire-page {
+text-align:left;
+margin:10px;
+}
+
+#consulting-history-number-search-container-in-modal1 {
+text-align:left;
+margin:10px;
 }    
+
+#pagination span{
+margin:10px;
+}
+
+.active {
+color: #584ccb;
+font-weight:bold;
+}
+
+#designer-id-search-button, 
+#designer-consulting-history-list-select-button, #designer-consulting-history-update-button,
+#designer-state-select-button, #designer-state-update-button,
+#back-button, #consulting-history-number-search-button{
+background-color:#584ccb;
+color:white;
+border-radius:5px;
+padding:5px;
+border:0;
+margin:2px;
+}
+
 </style>
 
 
@@ -108,16 +146,25 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 			//모달 바디 안에 태그 삽입
 				//1. 태그 생성
 			var designerConHistoryUpdateFormCode ='';
+			
+				//검색창
+			designerConHistoryUpdateFormCode += '<div id="consulting-history-number-search-container-in-modal1">'
+												+ '<input type="text" id="consulting-history-number-search-box" placeholder="상담번호 검색"></input>'
+												+ '<button type="button" id="consulting-history-number-search-button" onclick="conHistoryNoSearch(' + "'" + id + "'" + ')">검색</button>'
+											+ '</div>';
+				//검색창 끝
 
-					//if: 검색 결과가 없을 때와 있을 때를 구분
+				//if: 검색 결과가 없을 때와 있을 때를 구분
 			if(designerConHistoryList.length == 0 ){
+				designerConHistoryUpdateFormCode += '<div align="center">'
 				//검색 결과 메세지
-				designerConHistoryUpdateFormCode = '검색 결과가 없습니다.';
+				designerConHistoryUpdateFormCode += '<p>조회 결과가 없습니다.</p>';
 				//'뒤로'버튼
-				designerConHistoryUpdateFormCode += '<button type="button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+				designerConHistoryUpdateFormCode += '<button type="button" id="back-button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+			
+				designerConHistoryUpdateFormCode += '</div>';
 			} else {		
 
-				
 						//받아온 데이터의 null 처리(처리하지 않을 시 DB에서 null인 경우 null 문자가 그대로 출력됨)
 				for(var i = 0; i< designerConHistoryList.length; i++){
 					for(var key in designerConHistoryList[i]){
@@ -140,12 +187,7 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 														+ '<input type="hidden" id="member-attend' + i + '"' + 'name="memAttend" value="' + designerConHistoryList[i].memAttend + '">'//memAttend 히든
 														+ '</form>';
 				}
-						//폼 데이터를 만들기 위한 폼 끝
-				
-						//검색창
-				designerConHistoryUpdateFormCode += '<input type="text" id="consulting-history-number-search-box" placeholder="상담번호 검색"></input>';
-				designerConHistoryUpdateFormCode += '<button type="button" onclick="conHistoryNoSearch(' + "'" + id + "'" + ')">검색</button>';
-						//검색창 끝
+						//폼 데이터를 만들기 위한 폼 끝	
 				
 						//테이블
 				designerConHistoryUpdateFormCode += '<table>';//
@@ -210,7 +252,7 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 					}
 	
 					designerConHistoryUpdateFormCode += '<td>' + designerConHistoryList[i].state + '</td>'//
-														+ '<td>' + '<button type="button" onclick="designerConHistoryUpdate('+ i + ');">수정</button>' + '</td>'//
+														+ '<td>' + '<button type="button" id="designer-consulting-history-update-button" onclick="designerConHistoryUpdate('+ i + ');">수정</button>' + '</td>'//
 														+ '</tr>';//
 				}
 													
@@ -219,29 +261,29 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 						
 						//'뒤로'버튼
 				if(searchedConNo != null && searchedConNo !=''){	
-					designerConHistoryUpdateFormCode += '<button type="button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+					designerConHistoryUpdateFormCode += '<div align="center">';
+					designerConHistoryUpdateFormCode += '<button type="button" id="back-button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+					designerConHistoryUpdateFormCode += '</div>';
 				}
 						
 				
 						//페이지 네비게이션
-				designerConHistoryUpdateFormCode += '<div class="pagination">'//
-													+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</p>'//
-													+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</p>'//
-													+ '<span>';//
+				designerConHistoryUpdateFormCode += '<div id="pagination" align="center">'//
+													+ '<span onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.firstPageNo + ')" class="first">first</span>'//
+													+ '<span onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.prevPageNo + ')" class="prev">prev</span>';//
 													
 								
 				for(var i=paging.startPageNo; i<=paging.endPageNo; i++){
 					if(i == paging.pageNo){
-						designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</p>';//
+						designerConHistoryUpdateFormCode += '<span onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')" class="active">' + i + '</span>';//
 					} else {
-						designerConHistoryUpdateFormCode += '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</p>';//
+						designerConHistoryUpdateFormCode += '<span onclick="goPageForModal1(' + "'" + id + "'" + ',' + i + ')">' + i + '</span>';//
 					}
 				}
 	
-				designerConHistoryUpdateFormCode += '</span>'//
-													+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</p>'//
-													+ '<p onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</p>'//
-													+ '</div>';//
+				designerConHistoryUpdateFormCode += '<span onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.nextPageNo + ')" class="next">next</span>'//
+													+ '<span onclick="goPageForModal1(' + "'" + id + "'" + ',' + paging.finalPageNo + ')" class="last">last</span>'//
+												+ '</div>';//
 						//페이지 네비게이션 끝
 			}
 							
@@ -419,7 +461,9 @@ function designerStateUpdateForm(id) {
 			designerStateUpdateFormCode += '</tr>';//
 			
 			designerStateUpdateFormCode += '</table>';//
-			designerStateUpdateFormCode += '<button type="button" onclick="designerStateUpdate('+ "'" + designerStateOne.id + "'" +');">수정</button>';//
+			designerStateUpdateFormCode += '<div align="center">' 
+											+ '<button type="button" id="designer-state-update-button" onclick="designerStateUpdate('+ "'" + designerStateOne.id + "'" +');">수정</button>'//
+										+ '</div>'//
 					//테이블 끝
 					
 				//1. 태그 생성 끝
@@ -485,20 +529,21 @@ function nullReplace(data) {
 
 
 
-<br><br><br><br><br><br><br><br><br><br>
-<h1>디자이너 관리 페이지</h1>
-<!-- 셀렉트 박스로 상태 구분하여 보여줌 -->
-<!-- 하지말자 -->
+<br><br><br><br><br>
+<!-- 디자이너 관리 페이지 -->
+<div align="center">
+	<div id="entire-container-for-width">
+		<!-- 검색창 -->
+		<div id="designer-id-search-container-in-entire-page">
+			<input type="text" id="designer-id-search-box" placeholder="디자이너 ID 검색"></input>
+			<button type="button" id="designer-id-search-button" onclick="designerIDSearch()">검색</button>
+		</div>
 
-<!-- 검색창 -->
-<input type="text" id="designer-id-search-box" placeholder="디자이너 ID 검색"></input>
-<button type="button" onclick="designerIDSearch()">검색</button>
-<!-- 할까말까 -->
 
 <!-- 디자이너 리스트 -->
 	<c:if test="${fn:length(designerList) == 0 }">
-		<p>검색 결과가 없습니다.</p>
-		<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+			<p>조회 결과가 없습니다.</p>
+			<button type="button" id="back-button" onclick="location.href='javascript:history.back();'">뒤로</button>
 	</c:if>
 	
 	<c:if test="${fn:length(designerList) != 0 }">
@@ -532,8 +577,8 @@ function nullReplace(data) {
 				<td>${designer.major}</td>
 				<td>${designer.state}</td>
 				<td>${designer.regday}</td>
-				<td><button data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">상담내역 변경</button>
-					<button data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">회원상태 변경</button>
+				<td><button id="designer-consulting-history-list-select-button" data-toggle="modal" data-target="#designer-conHistory-update-modal" onclick="designerConHistoryUpdateForm('${designer.id}')">상담내역 변경</button>
+					<button id="designer-state-select-button" data-toggle="modal" data-target="#designer-state-update-modal" onclick="designerStateUpdateForm('${designer.id}')">회원상태 변경</button>
 				</td>
 			</tr>
 			</c:forEach>
@@ -541,12 +586,13 @@ function nullReplace(data) {
 		</table>
 
 		<c:if test = "${param.searchedID != '' && param.searchedID != null }">
-			<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+			<button type="button" id="back-button" onclick="location.href='javascript:history.back();'">뒤로</button>
 		</c:if>
 	</c:if>
-
-<!-- 전체 페이지의 페이지 네비게이션 -->
-<div align="center">
+	
+	</div>
+	<!-- 전체 페이지의 페이지 네비게이션 -->
+<div id="pagination" align="center">
 	<jsp:include page="pagingForEntirePage.jsp" flush="true">
 		<jsp:param name="firstPageNo" value="${paging.firstPageNo}" />
 		<jsp:param name="prevPageNo" value="${paging.prevPageNo}" />
@@ -557,6 +603,9 @@ function nullReplace(data) {
 		<jsp:param name="finalPageNo" value="${paging.finalPageNo}" />
 	</jsp:include>
 </div>
+</div>
+
+
 
 <!-- 모달1: 상담내역 수정 모달 -->
 <div class="modal fade" id="designer-conHistory-update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
@@ -582,7 +631,7 @@ function nullReplace(data) {
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+				<h5 class="modal-title" id="exampleModalLabel"><!-- 모달 타이틀 --></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 				</button>
@@ -596,19 +645,6 @@ function nullReplace(data) {
 	</div>
 </div>
 
-
-
-<pre>
-게시 글 수: ${paging.pageSize}
-첫 번째 페이지 번호: ${paging.firstPageNo}
-이전 페이지 번호: ${paging.prevPageNo}
-시작 페이지 (페이징 네비 기준): ${paging.startPageNo}
-페이지 번호: ${paging.pageNo}
-끝 페이지 (페이징 네비 기준): ${paging.endPageNo}
-다음 페이지 번호: ${paging.nextPageNo}
-마지막 페이지 번호: ${paging.finalPageNo}
-게시 글 전체 수: ${paging.totalCount}
-</pre>
 
 
 
