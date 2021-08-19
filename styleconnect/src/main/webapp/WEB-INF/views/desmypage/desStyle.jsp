@@ -118,13 +118,13 @@
 					</li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="My Favorites">
 						<a href="desStyle.do" class="nav-link active" href="dashboard-my-favorites.html">
-							<i class="fa fa-fw fa-table"></i>
+							<i class="fa fa-fw fa-image"></i>
 							<span class="nav-link-text">스타일링사진 관리</span>
 						</a>
 					</li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
 						<a class="nav-link" href="desWorkOpen.do?id=${my.id }">
-							<i class="fa fa-fw fa-star"></i>
+							<i class="fa fa-fw fa-table"></i>
 							<span class="nav-link-text">스케쥴관리</span>
 						</a>
 					</li>
@@ -133,14 +133,20 @@
 					</li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
 						<a href="desCourse.do" class="nav-link"	href="dashboard-bookings.html">
-							<i class="far fa-fw fa-bookmark"></i>
+							<i class="fa fa-fw fa-plus-circle"></i>
 							<span class="nav-link-text">내상담관리</span>
 						</a>
 					</li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add Listing">
 						<a href="desSchedule.do" class="nav-link" href="dashboard-add-listing.html">
-							<i class="fa fa-fw fa-plus-circle"></i>
+							<i class="fa fa-fw fa-bookmark"></i>
 								<span class="nav-link-text">예약관리</span>
+						</a>
+					</li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add Listing">
+						<a href="reviewList.do?desId=${did}" class="nav-link" href="dashboard-add-listing.html">
+							<i class="fa fa-fw fa-star"></i>
+								<span class="nav-link-text">리뷰관리</span>
 						</a>
 					</li>
 				</ul>
