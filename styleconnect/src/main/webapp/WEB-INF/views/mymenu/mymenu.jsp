@@ -174,6 +174,52 @@
 			frm.submit();
 		}
 	}
+	
+	function preFrmSubmit() {
+		var id = '${id }';
+		if ($("input:checkbox[name=YesorNo]:checked").length == 0) {
+			alert("필요한 서비스를 체크하세요");
+			return false;
+		}
+		var yncheck = document.getElementsByName("YesorNo");
+		for (var i = 0; i < yncheck.length; i++) {
+			if (yncheck[i].checked) {
+				yncheck[i].value = "Y";
+			} else {
+				yncheck[i].value = "N";
+			}
+		}
+		var permYn = $('#permyn1').val();
+		var cutYn = $('#cutyn1').val();
+		var dyeYn = $('#dyeyn1').val();
+		var makeUpYn = $('#makeupyn1').val();
+
+		$.ajax({
+			url : 'memDetailUpdate.do',
+			method : 'post',
+			data : {
+				id : id,
+				permYn : permYn,
+				cutYn : cutYn,
+				dyeYn : dyeYn,
+				makeupYn : makeUpYn
+			},
+			success : function(result) {
+				if ( result != 0 ) {
+					alert('감사합니다!');					
+					location.reload();
+				} else {
+					alert('수정되지 않았습니다');
+				}
+			},
+			error : function(err) {
+				console.log(err);
+			}
+
+		});
+	}
+	
+	
 </script>
 </head>
 <body>
@@ -251,9 +297,11 @@
 									href="pwchangepage.do">비밀번호 변경하기</a>
 							</div>
 							<div class="col-md-6 margin-bottom-20px">
+								<c:if test="${preferExist eq true }">
 								♥&nbsp;&nbsp;&nbsp;
 								<button type="button" class="looksNotBtn" data-toggle="modal"
 									data-target="#preferenceFrmModal">관심 분야 변경</button>
+								</c:if>
 							</div>
 							<div class="col-md-6 margin-bottom-20px">
 								<label><svg xmlns="http://www.w3.org/2000/svg"

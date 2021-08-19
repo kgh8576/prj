@@ -74,42 +74,46 @@
 </style>
 
 </head>
-<div>
-<div class="login-top">
-		<div class="login-head">
-			<strong>개인회원과 디자이너 회원 중 원하는 유형을 선택해주세요.</strong>
-			<p class="min-txt">개인회원과 디자이너의 두 개의 유형으로 회원가입이 가능합니다.</p>
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="login-top">
+				<div class="login-head">
+					<strong>개인회원과 디자이너 회원 중 원하는 유형을 선택해주세요.</strong>
+					<p class="min-txt">개인회원과 디자이너의 두 개의 유형으로 회원가입이 가능합니다.</p>
+				</div>
+				<div class="join-wrap bdb-no">
+					<!-- 개인회원 -->
+					<div class="join-form join-idv">
+						<div class="join-area">
+							<a href="memberinsertpage.do" class="button blue"><img src="../insa/resources/assets/img/1.PNG"></a>
+						</div>
+					</div>
+					
+					<!-- 기업회원 -->
+					<div class="join-form join-ent">
+						<div class="join-area">
+							<a href="desinsertpage.do" class="button navy"><img src="../insa/resources/assets/img/2.png"></a>
+						</div>
+					</div>
+				</div>
+				<div class="join-wrap bdt-no">
+					<div class="join-form join-idv pd00">
+						<div class="box-gray">
+							<ul class="dot-list v1 v2">
+								<li class="mt05" style="display: inline;">나만의 스타일을 찾기위한 회원!</li>
+							</ul>
+						</div>
+					</div>
+					<div class="join-form join-ent pd00">
+						<div class="box-gray">
+							<ul class="dot-list v1 w50pc float-l">
+								<li class="mt05" style="display: inline;">고객의 미용을 책임지기 위한 회원! </li>
+							</ul> 
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="join-wrap bdb-no">
-			<!-- 개인회원 -->
-			<div class="join-form join-idv">
-				<div class="join-area">
-					<a href="memberinsertpage.do" class="button blue"><img src="../insa/resources/assets/img/1.PNG"></a>
-				</div>
-			</div>
-			
-			<!-- 기업회원 -->
-			<div class="join-form join-ent">
-				<div class="join-area">
-					<a href="desinsertpage.do" class="button navy"><img src="../insa/resources/assets/img/2.png"></a>
-				</div>
-			</div>
-		</div>
-		<div class="join-wrap bdt-no">
-			<div class="join-form join-idv pd00">
-				<div class="box-gray">
-					<ul class="dot-list v1 v2">
-						<li class="mt05" style="display: inline;">나만의 스타일을 찾기위한 회원!</li>
-					</ul>
-				</div>
-			</div>
-			<div class="join-form join-ent pd00">
-				<div class="box-gray">
-					<ul class="dot-list v1 w50pc float-l">
-						<li class="mt05" style="display: inline;">고객의 미용을 책임지기 위한 회원! </li>
-					</ul> 
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
+	<div class="col-md-2"></div>
+</div>
