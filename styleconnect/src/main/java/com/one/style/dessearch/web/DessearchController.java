@@ -28,6 +28,7 @@ public class DessearchController {
 	//상담 목록
 	@RequestMapping("courseList.do")
 	public String courseList(Model model,DessearchVO vo) {
+		model.addAttribute("designer",vo);
 		model.addAttribute("course",dao.courseList(vo));
 		model.addAttribute("img2", dao.desProImg(vo));
 		return ("dessearch/desCourseList");
@@ -35,9 +36,6 @@ public class DessearchController {
 	//디자이너상세페이지
 	@RequestMapping("desListSelect.do")
 	public String desListSelect(Model model,DessearchVO vo, HttpServletRequest request) {
-		String id = request.getParameter("id");
-		vo.setId(id);
-		System.out.println("===========================아이디"+id);
 		
 		model.addAttribute("designer",dao.dessearchSelect(vo));
 		model.addAttribute("review",dao.dessearchSelectReview(vo));
@@ -49,8 +47,6 @@ public class DessearchController {
 	//검색결과
 	@RequestMapping("searchList.do")
 	public String searchList(Model model, DessearchVO vo, HttpServletRequest request) {
-		System.out.println("=====서치 키워드: "+vo.getSearch());
-		
 		HttpSession session = request.getSession();
 		model.addAttribute("search",dao.searchList(vo));
 		session.setAttribute("searchkeyword", vo.getSearch());

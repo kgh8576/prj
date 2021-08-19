@@ -2228,18 +2228,18 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary {
 	color: #fff;
-	background-color: #007bff;
-	border-color: #007bff
+	background-color: #584ccb;
+	border-color: #584ccb
 }
 
 .btn-primary:hover {
 	color: #fff;
-	background-color: #0069d9;
-	border-color: #0062cc
+	background-color: #584ccb;
+	border-color: #584ccb
 }
 
 .btn-primary.focus, .btn-primary:focus {
-	box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5)
+	box-shadow: 0 0 0 .2rem #584ccb
 }
 
 .btn-primary.disabled, .btn-primary:disabled {

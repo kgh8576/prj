@@ -84,6 +84,16 @@ max-width: 100px;
                                 </div>
                             </a>
                         </div>
+                        <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
+                            <a href="reviewList.do?desId=${my.id }" class="d-block border-radius-15 hvr-float hvr-sh2">
+                                <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
+                                    <div class="icon margin-bottom-15px opacity-7">
+                                        <img id="img" src="${pageContext.request.contextPath}/resources/assets/img/icon/review-icon.png" alt="">
+                                    </div>
+                                    리뷰관리
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

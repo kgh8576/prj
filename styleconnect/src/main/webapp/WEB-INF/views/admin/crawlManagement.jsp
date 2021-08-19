@@ -6,17 +6,6 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <style>
-#crawlBtnMale, #crawlBtnFemale{
-	background-color:#A8C1C1;
-	color:black;
-}
-
-#crawlBtnMale:hover{
-	background-color:#5B9DF7;
-}
-#crawlBtnFemale:hover{
-	background-color:#F7775B;
-}
 </style>
 
 <script>
@@ -180,19 +169,6 @@
 		}
 	}
 	
-	function testZaso(){
-		$.ajax({
-			url : 'searchKeywordsList.do',
-			type : 'post',
-			data : {inputKeywords : '테스트'},
-			success : function(result){
-				console.log(result);
-			}, error: function(err){
-				console.log(err);
-			}
-		});
-	}
-	
 </script>
 </head>
 <body>
@@ -204,16 +180,14 @@
 		</div>
 		<div class="col-md-6" style="margin:auto;">
 			<div class="btnGroup" align="center">
-				<div class="form-group label-floating">
-					인스타그램 ID : <input id="id"
-						class="form-control" placeholder="internet2dot02021"
-						type="text" style="width: 50%; display:inline-block;">
-				</div>
-				<div class="form-group label-floating">
-					비밀번호 : <input
-						class="form-control" placeholder="비밀번호를 입력해주세요." type="password"
-						id="pw" style="width: 50%; display:inline-block;">
-				</div>
+			<table style="text-align: center;">
+				<tr>
+					<td style="text-align: center;">인스타그램 ID : </td> <td><input id="id" class="form-control" placeholder="internet2dot02021"	type="text" style="width: 100%; display:inline-block;"></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;">비밀번호 :  </td> <td><input class="form-control" placeholder="비밀번호를 입력해주세요." type="password"	id="pw" style="width: 100%; display:inline-block;"></td>
+				</tr>
+			</table>
 				<button class="btn btn-info" onclick="crawl('MALE')" id="crawlBtnMale">남자 헤어 크롤링</button>
 				<button class="btn btn-info" onclick="crawl('FEMALE')" id="crawlBtnFemale">여자 헤어 크롤링</button>
 			</div>
@@ -236,10 +210,6 @@
 		<div class="col-md-3">
 		</div>
 	</div>
-</div>
-
-<div>
-	<button onclick="testZaso()">자소분해테스트~~</button>
 </div>
 
 	

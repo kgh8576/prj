@@ -72,7 +72,7 @@
 						select id from des_course
 						where cour_no = #{courNo}
 						)
-		and file_state = 'thum'
+		and file_state = 'sty'
 	</select>
 	<select id="memResrTimeCheck" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
 		select *

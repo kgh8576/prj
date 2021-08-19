@@ -149,36 +149,7 @@ border:0;
 */
 
 </style>
-<script>
-$(document).ready(function(){
-	//상담시작 알람
-	<c:if test="${not empty id}">
-	var memId = "${id}";
-	$.ajax({
-		url : 'checkSchedule.do',
-		data : {
-			memId : memId
-		},
-		type : 'post',
-		success : function(data) {
-			console.log(data);
-			if(data == 1) {
-				document.getElementById("altercheck2").style.display = 'block';
-			}else {
-				document.getElementById("altercheck2").style.display = 'none';
-			}
-		},
-		error : function(err) {
-			console.log(err);
-			console.log("스케줄러 불러오기오류");
-		}
-		
-	})
-	
-	</c:if>
-	
-});
-	
+<script>	
 // 페이지 로드 시 cut 디자이너(디폴트값) 데이터 뿌리기
 $(function() {
 	topDesChange('cut');
@@ -426,10 +397,6 @@ $(function() {
 				<div class="col-lg-2"></div>
 			</div>
 			<div class="title text-right">
-				<div id="altercheck2"class="alert alert-success alert-dismissible" style="display: none;">
-  					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  					<strong>상담 시작시간까지 얼마 남지않았습니다!</strong> <a href="consulting.do">　　　여기를 눌러 디자이너 선생님과 상담을 준비해요!　　</a>
-				</div>
 				<p class="text-title-large font-weight-1000 margin-bottom-15px">STYLE
 					CONNECT</p>
 				<p class="font-weight-800 text-up-small">나에게
@@ -594,7 +561,7 @@ $(function() {
 		</c:if>
 	</div>
 
-	<section class="padding-tb-100px background-grey-1">
+	<section class="padding-tb-100px">
 		<div class="container">
 			<!-- Title -->
 			<div class="row justify-content-center margin-bottom-45px">
