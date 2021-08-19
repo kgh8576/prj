@@ -28,6 +28,9 @@ font-size: 24px;
         margin-bottom: 30px;
     }
 }
+.modal-lg {
+    max-width: 90%;
+}
 
 #entire-container-for-width{
 width:70%;
@@ -63,10 +66,9 @@ color:white;
 border-radius:5px;
 padding:5px;
 border:0;
+margin:2px;
 }
-.modal-lg {
-    max-width: 90%;
-}
+
 </style>
 
 

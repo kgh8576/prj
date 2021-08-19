@@ -377,7 +377,7 @@ function crawl(gender) {
 
 
 	<section class="banner padding-tb-200px sm-ptb-80px background-overlay"
-		style="background-image: url('resources/assets/img/designTest/mainTestImg3.png');
+		style="background-image: url('resources/assets/img/designTest/mainTestImg4.png');
 			   padding-top: 0px; padding-bottom: 400px;">
 		<div class="container z-index-2 position-relative">
 		<div class="row justify-content-center margin-tb-60px">
