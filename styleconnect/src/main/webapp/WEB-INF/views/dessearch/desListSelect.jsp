@@ -1,7 +1,8 @@
-<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
 <head>
 
 <style>
@@ -86,10 +87,14 @@ color: black;
 }
 </style>
 </head>
-<br/><br/><br/>
 <body>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
+         <ol class="breadcrumb opacity-5">
+                <li><a href="main.do">Home</a></li>
+                <li><a href="dessearchList.do">디자이너 리스트</a></li>
+                <li class="active">${designer.name} 디자이너</li>
+            </ol>
             <h1 class="font-weight-300">${designer.name} 디자이너</h1>
         </div>
     </div>
@@ -218,8 +223,6 @@ color: black;
                         <div class="padding-25px">
                         </div>
                     </div>
-                </div>
+	</div>
 </body>
-
-
 </html>
