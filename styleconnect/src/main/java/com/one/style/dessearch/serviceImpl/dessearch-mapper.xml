@@ -188,8 +188,8 @@
   	on d.id = f.des_id
  	where id in (
               select id from des_course 
-              where title like'%'||#{search}||'%' or detail like'%'||#{search}||'%'
- 	or major like'%'||#{search}||'%' or name like'%'||#{search}||'%' )
+              where title like'%'||#{search}||'%' or detail like'%'||#{search}||'%')
+ 	or major like'%'||#{search}||'%' or name like'%'||#{search}||'%' 
  	and d.state = 'dcode003'
 	</select>
 	
