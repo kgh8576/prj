@@ -25,7 +25,7 @@
         <div class="container">
             <ol class="breadcrumb opacity-5">
                 <li><a href="main.do">Home</a></li>
-                <li><a href="desListSelect.do?id=${id}">디자이너 상세정보</a></li>
+                <li><a href="desListSelect.do?id=${designer.id}">디자이너 상세정보</a></li>
                 <li class="active">상담 목록</li>
             </ol>
           <c:forEach items="${course }" var="vo" begin="1" end="1">

@@ -185,20 +185,6 @@ $(function() {
 	topDesChange('makeUp');
 });
 
-function crawl(gender) {
-	$.ajax({
-		url : 'crawl.do',
-		method:'post',
-		data : {gender : gender},
-		success : function(result) {
-			console.log(result);
-		},
-		error : function(err) {
-			console.log(err);
-		}
-	});
-}
-
 	// 버튼 클릭 시 디자이너 top3 아이디, 이름, 메이저, 총 리뷰 수, 평점, 이미지 경로 가져오는 ajax    		
 	function topDesChange(keyword) {
 		$.ajax({
@@ -335,6 +321,7 @@ function crawl(gender) {
 			}
 		});
 	}
+	/*
 	   function searchKeywords(t){
 		      var searchVal = $('#search').val();
 		      if ( isNaN(searchVal) ) { // 숫자가 아니면
@@ -364,7 +351,7 @@ function crawl(gender) {
 		         });
 		      }
 		   }
-
+	*/
 	
 	
 </script>
@@ -396,7 +383,7 @@ function crawl(gender) {
 									<hr>
 									-->
 									<div class="input-group mb-3">
-										<input type="text" name="search" id="search" onkeyup="searchKeywords(this);"
+										<input type="text" name="search" id="search"
 											placeholder="키워드를 검색하세요."
 											class="form-control border-radius-0">
 										<div class="input-group-append">
