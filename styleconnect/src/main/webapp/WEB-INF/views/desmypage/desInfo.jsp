@@ -410,15 +410,16 @@ function cercheck(){
                       	</c:if>
                       <!-- 재첨부 끝// -->
             		<!-- 증명서 재첨부(수정) -->
+            		<c:if test="${descer.state eq 'dcode002' }"><br/>
             		<c:if test="${not empty descer.fileUuid }">
                           <div class="col-md-6 margin-bottom-20px">
                           <label><i class="far fa-folder-open margin-right-10px"></i> 재직증명서나 미용자격증 등 재첨부 <br/> (*재첨부시 기존 파일은 전부 삭제됩니다.) </label>
-            				<c:if test="${not empty descer.comments }"><br/>
+            				
             				<div>
             				<p id="adcomments">*증명서를 다시 제출해주세요</p>
             				승인거절이유 - ${descer.comments }<br/>
             				</div>
-            				</c:if>
+            				
                       		<div class="cerbtn" onclick="hpchange()"><a>증명서 제출하기</a></div><br/>${descer.fileName }
                       		<div id="phoneNochange" style="display: none;">
                       		<form id="cerfrm" method="post" action="desCerUpdate.do" enctype="multipart/form-data">
@@ -429,6 +430,7 @@ function cercheck(){
                              	<button onclick="cercheck()">등록</button>
 							</div>
                       		</div>
+                     </c:if>
                      </c:if>
                       <!-- 재첨부 끝// -->
                      <!-- 증명서 제출 끝// -->

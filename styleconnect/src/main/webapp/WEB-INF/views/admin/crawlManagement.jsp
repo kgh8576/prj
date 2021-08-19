@@ -6,17 +6,6 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <style>
-#crawlBtnMale, #crawlBtnFemale{
-	background-color:#A8C1C1;
-	color:black;
-}
-
-#crawlBtnMale:hover{
-	background-color:#5B9DF7;
-}
-#crawlBtnFemale:hover{
-	background-color:#F7775B;
-}
 </style>
 
 <script>
@@ -180,19 +169,6 @@
 		}
 	}
 	
-	function testZaso(){
-		$.ajax({
-			url : 'searchKeywordsList.do',
-			type : 'post',
-			data : {inputKeywords : '테스트'},
-			success : function(result){
-				console.log(result);
-			}, error: function(err){
-				console.log(err);
-			}
-		});
-	}
-	
 </script>
 </head>
 <body>
@@ -236,10 +212,6 @@
 		<div class="col-md-3">
 		</div>
 	</div>
-</div>
-
-<div>
-	<button onclick="testZaso()">자소분해테스트~~</button>
 </div>
 
 	
