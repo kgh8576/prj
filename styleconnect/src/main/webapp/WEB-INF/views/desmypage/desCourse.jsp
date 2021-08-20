@@ -31,7 +31,7 @@ border: 1px solid #333;
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
 			id="mainNav">
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
+				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:150px">
 					<li class="nav-item"><span class="nav-title-text">디자이너	기본정보</span></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
 						<a href="desInfo.do" class="nav-link" href="dashboard-home.html">

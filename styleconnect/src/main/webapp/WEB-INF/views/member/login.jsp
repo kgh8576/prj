@@ -28,6 +28,9 @@
 	padding-top: 10px;
 	margin: 0px;
 	font-size: 18px;
+	background-color: #584ccb;
+    color: white;
+    font-weight: bold;
 }
 
 .ul1 {
