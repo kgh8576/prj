@@ -21,6 +21,7 @@
 
 .border-radius-10a {
     border-radius: 10px;
+    border: 1px solid #eaeaea;
     width: 100px;
     height: 100px;
     margin: auto;
@@ -30,6 +31,7 @@
     width: 300px;
     margin: auto;
 }
+
 </style>
 </head>
 <body>
@@ -105,12 +107,19 @@
                                 <h4><i class="fab fa-instagram margin-right-10px text-main-color"></i> 스타일링 </h4>
                                 <hr>
                                 <div class="row1">
+                                <c:if test="${not empty img2 }">
                                 <c:forEach items="${img2 }" var="vo" begin="0" end="3">
                                 	<c:if test="${vo.fileState eq 'sty' }">
                                     	<div class="col-6 margin-bottom-20px"><a href="#">
                                    		<img class="border-radius-10a" src="resources/img/${vo.fileUuid }" alt=""></a></div>
                                		</c:if>
                                	</c:forEach>
+                               	</c:if>
+                               	<c:if test="${empty img2 }">
+                               	<div align="center">
+                               	 <p> &nbsp&nbsp&nbsp 등록된 스타일이 없습니다.</p>
+                               	</div>
+                               	</c:if>
                                	</div>
                             </div>
                         </div>

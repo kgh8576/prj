@@ -33,7 +33,7 @@ span:hover{
    background-color: grey;
 }
 #styimg{
- border: 1px solid #333;
+ border: 1px solid #eaeaea;
  max-width: 119px;
  height: 120px;
 }
@@ -103,6 +103,12 @@ color: black;
     width: 90%;
     margin: auto;
 }
+.border-radius-10nav {
+    border-radius: 10px;
+    width: 380px;
+    margin: auto;
+    margin-right: 260px;
+}
 .col-6zz {
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
@@ -129,7 +135,7 @@ color: black;
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
                     	<c:if test="${empty img }">
-                    		 <div class="col-6 margin-bottom-20px"><img id="thumimg"class="border-radius-img" src="resources/img/logo.jpg" alt=""></div>
+                    		 <div class="col-6 margin-bottom-20px-thum"><img id="thumimg"class="border-radius-img" src="resources/img/logo.jpg" alt=""></div>
                     	</c:if>
                     	<c:if test="${not empty img }">
                        	<c:forEach items="${img}" var="img1" begin="0" end="0"> 
@@ -173,10 +179,12 @@ color: black;
                             <hr>
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
-                                <div class="row2"  >
                                 <c:if test="${empty img2 }">
-                                		<h3>등록된 스타일이 없습니다.</h3>
+                                <div align="center">
+                                	<h3>등록된 스타일이 없습니다.</h3>
+                                </div>
                                   </c:if>
+                                <div class="row2"  >
                                 <c:if test="${not empty img2 }">
                                  	<c:forEach items="${img2}" var="vo"> 
                                 		 <div class="col-6zz margin-bottom-20px"><img id="styimg"class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></div>
@@ -194,6 +202,7 @@ color: black;
                             <hr>
                             <c:if test="${empty review }">
                             <div align="center">
+                            <br/>
                             <h3>등록된 후기가 없습니다.</h3>                            
                             </div>                            
                             </c:if>
@@ -229,7 +238,7 @@ color: black;
                        </div>
                 <!-- 사이드바 div -->
                 <div class="col-lg-4" id="fixed">
-                    <div id="side" class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
+                    <div id="side" class="background-second-color border-radius-10nav margin-bottom-45px text-white box-shadow">
                         <h3 id="dname" class="padding-lr-30px padding-top-20px"><i class="far fa-user margin-right-10px"></i> ${designer.name}디자이너</h3>
                         <hr>
                         <div class="padding-bottom-80px">
