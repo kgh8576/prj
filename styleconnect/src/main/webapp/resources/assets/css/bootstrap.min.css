@@ -2250,9 +2250,9 @@ a.btn.disabled, fieldset[disabled] a.btn {
 .btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active,
 	.show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #0062cc;
-	border-color: #005cbf;
-	box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .5)
+	background-color: #584ccb;
+	border-color: #584ccb;
+	box-shadow: 0 0 0 .2rem #584ccb;
 }
 
 .btn-secondary {
@@ -2337,9 +2337,9 @@ a.btn.disabled, fieldset[disabled] a.btn {
 .btn-info:not([disabled]):not(.disabled).active, .btn-info:not([disabled]):not(.disabled):active,
 	.show>.btn-info.dropdown-toggle {
 	color: #fff;
-	background-color: #117a8b;
-	border-color: #10707f;
-	box-shadow: 0 0 0 .2rem rgba(23, 162, 184, .5)
+	background-color: #463c9e;
+	border-color: #463c9e;
+	box-shadow: 0 0 0 .2rem #463c9e;
 }
 
 .btn-warning {
