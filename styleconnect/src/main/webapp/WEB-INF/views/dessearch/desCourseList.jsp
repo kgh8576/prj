@@ -73,7 +73,7 @@
                         			 <hr>
                                         <span> ${vo.detail }  </span>
                                         <div align="right">
-                                        <a class="text-main-color" href="reservation.do?courNo=${vo.courNo }" >>예약하러가기</a>
+                                        <a class="text-main-color" href="reservation.do?courNo=${vo.courNo }" >>예약하기</a>
                                     	</div>
                                     </div>
                                 </div>
