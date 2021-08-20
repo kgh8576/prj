@@ -18,9 +18,22 @@
     flex-direction: row;
     align-content: center;
 }
+
+.border-radius-10a {
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+.border-radius-10b {
+    border-radius: 10px;
+    width: 300px;
+    margin: auto;
+}
 </style>
 </head>
 <body>
+<br/><br/>
  <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
             <ol class="breadcrumb opacity-5">
@@ -73,11 +86,11 @@
                 <div class="col-lg-4">
                 <form id="frm" action="searchList.do" method="post">
                     <div class="margin-bottom-30px">
-                        <div class="padding-30px background-white border-radius-10">
+                        <div class="padding-30px background-white border-radius-10b">
                             <h4><i class="fas fa-search margin-right-10px text-main-color"></i> 검색</h4>
                             <hr>
                             <div class="input-group mb-3">
-                              <input type="text" name="search" placeholder="키워드를 입력하세요" class="form-control border-radius-0">
+                              <input type="text" name="search" placeholder="" class="form-control border-radius-0">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary text-white background-main-color border-radius-0" type="submit">Search</button>
                                 </div>
@@ -88,14 +101,14 @@
                     <!-- 사이드 디자이너 이미지 -->
                     <div class="widget widget_categories">
                         <div class="margin-bottom-30px">
-                            <div class="padding-30px background-white border-radius-10">
-                                <h4><i class="fab fa-instagram margin-right-10px text-main-color"></i> 디자이너 이미지 </h4>
+                            <div class="padding-30px background-white border-radius-10b">
+                                <h4><i class="fab fa-instagram margin-right-10px text-main-color"></i> 스타일링 </h4>
                                 <hr>
                                 <div class="row1">
-                                <c:forEach items="${img2 }" var="vo" begin="1" end="5">
+                                <c:forEach items="${img2 }" var="vo" begin="0" end="3">
                                 	<c:if test="${vo.fileState eq 'sty' }">
                                     	<div class="col-6 margin-bottom-20px"><a href="#">
-                                   		<img class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></a></div>
+                                   		<img class="border-radius-10a" src="resources/img/${vo.fileUuid }" alt=""></a></div>
                                		</c:if>
                                	</c:forEach>
                                	</div>
