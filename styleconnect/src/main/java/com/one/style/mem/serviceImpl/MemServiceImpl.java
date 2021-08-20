@@ -116,15 +116,12 @@ public class MemServiceImpl implements MemService {
 	@Override
 	public boolean startSchedule(ConHistoryVO vo) {
 		boolean YorN = false;
-		
 		ConHistoryVO cvo = memMapper.startSchedule(vo);
-		
 		if (cvo != null) {
 			YorN = true;
 		} else {
 			YorN = false;
 		}
-		
 		return YorN;
 	}
 

@@ -54,7 +54,7 @@ height: 150px;
 					function() {
 
 						//상담시작 알람
-						<c:if test="${not empty id}">
+						<c:if test="${not empty id && id ne 'admin'}">
 						var memId = "${id}";
 						$
 								.ajax({
