@@ -15,4 +15,6 @@ public class MemDetailVO {
 	
 	//조인용
 	private String gender;
+	//
+	private int count;
 }

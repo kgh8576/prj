@@ -3,6 +3,7 @@ package com.one.style.memdetail.service;
 import java.util.List;
 
 import com.one.style.conhistory.vo.ConHistoryVO;
+import com.one.style.mem.vo.MemDetailVO;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.review.vo.ReviewVO;
 
@@ -18,4 +19,6 @@ public interface MemdetailService {
 	public String getCancleDate(ConHistoryVO vo);
 	public void reservationcancle(ConHistoryVO vo);
 	public String reviewyoumu(ReviewVO vo);
+	int memDetailUpdate(MemDetailVO vo);
+	boolean preferExist(String id);
 }

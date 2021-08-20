@@ -77,7 +77,7 @@
 								예약상태 : <a href="desListSelect.do?id=${conhis.id }" class="text-main-color"> ${conhis.codecontent }</a>
 							</div>
 							<p class="margin-top-15px text-grey-2">상세정보 : ${conhis.detail }</p>
-							<a href="reviewList.do?desId=${conhis.desId }"
+							<a href="reviewList.do?desId=${conhis.id }"
 								class="d-inline-block text-grey-2 text-up-small" style="color: black;"><i
 								class="far fa-file-alt"></i> 리뷰보기</a>
 							<button type="button"

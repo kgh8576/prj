@@ -257,7 +257,7 @@ $(function() {
 				location : locations
 			},
 			success : function(result) {
-				alert(result);
+				alert('감사합니다!');
 				location.reload();
 			},
 			error : function(err) {

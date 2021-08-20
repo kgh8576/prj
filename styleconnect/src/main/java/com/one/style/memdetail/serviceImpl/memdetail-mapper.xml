@@ -216,4 +216,12 @@ ORDER BY LASTST_DATE desc
 		SELECT * FROM REVIEW where con_no = #{conNo} and mem_id = #{memId}
 	</select>
 
+   <update id="memDetailUpdate" parameterType="com.one.style.mem.vo.MemDetailVO">
+		update mem_detail set makeup_Yn = #{makeupYn}, cut_Yn = #{cutYn}, perm_yn = #{permYn}, dye_yn = #{dyeYn} where id = #{id}
+   </update>
+   
+   <select id="preferExist" parameterType="String" resultType="com.one.style.mem.vo.MemDetailVO">
+		select count(*) as count from mem_detail where id = #{id}
+   </select>
+
 </mapper>

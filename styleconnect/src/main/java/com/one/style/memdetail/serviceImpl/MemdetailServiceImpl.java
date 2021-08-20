@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.one.style.conhistory.vo.ConHistoryVO;
+import com.one.style.home.mapper.HomeServiceMap;
+import com.one.style.mem.vo.MemDetailVO;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.memdetail.mapper.MemdetailMapper;
 import com.one.style.memdetail.service.MemdetailService;
@@ -16,7 +18,8 @@ public class MemdetailServiceImpl implements MemdetailService {
 
 	@Autowired
 	MemdetailMapper detailMapper;
-	
+	@Autowired
+	HomeServiceMap homeMapper;
 	@Override
 	public void hpchange(MemberVO vo) {
 
@@ -76,7 +79,20 @@ public class MemdetailServiceImpl implements MemdetailService {
 		// TODO Auto-generated method stub
 		return detailMapper.conccode005(vo);
 	}
-	
 
+	@Override
+	public int memDetailUpdate(MemDetailVO vo) {
+		return detailMapper.memDetailUpdate(vo);
+	}
+
+	@Override
+	public boolean preferExist(String id) {
+		MemDetailVO vo = detailMapper.preferExist(id);
+		if ( vo.getCount() != 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 }

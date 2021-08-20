@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.style.conhistory.vo.ConHistoryVO;
 import com.one.style.mem.service.MemService;
+import com.one.style.mem.vo.MemDetailVO;
 import com.one.style.mem.vo.MemberVO;
 import com.one.style.memdetail.service.MemdetailService;
 import com.one.style.review.vo.ReviewVO;
@@ -37,6 +38,7 @@ public class MemdetailController {
 		model.addAttribute("user",memDao.login(vo));
 		model.addAttribute("conhis",memdetailDao.conhisList(cvo));
 		model.addAttribute("conccode005",memdetailDao.conccode005(cvo));
+		model.addAttribute("preferExist", memdetailDao.preferExist(id));
 		return "mymenu/mymenu";
 	}
 	//상담내역 리스트
@@ -176,7 +178,13 @@ public class MemdetailController {
 	//예약취소
 	@RequestMapping("/reservationcancle.do")
 	public void reservationcancle (ConHistoryVO vo) {
-		
 		memdetailDao.reservationcancle(vo);
+	}
+	
+	@RequestMapping("memDetailUpdate.do")
+	@ResponseBody
+	public int memDetailUpdate(MemDetailVO vo) {
+		System.out.println(vo.getId());
+		return memdetailDao.memDetailUpdate(vo);
 	}
 }
