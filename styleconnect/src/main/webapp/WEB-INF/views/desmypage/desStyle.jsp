@@ -73,10 +73,10 @@
 }
 
 .mtitle {
-	font-size: 30px;
-	text-decoration: underline;
-	margin-left: 50px;
-	margin-top: 50px;
+    font-size: 30px;
+    text-decoration: underline;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 .card tab-pane fade show active 1 {
@@ -154,7 +154,7 @@
 		</nav>
 		<div class="content-wrapper">
 			<div class="container-fluid overflow-hidden">
-				<h1 class="mtitle">&nbsp;&nbsp;&nbsp; Styling image setting</h1>
+			<h1 class="mtitle">&nbsp;&nbsp;&nbsp; Styling image setting</h1>
 				<div class="row margin-lr-10px sm-mrl-0px">
 					<div class="container margin_detail">
 						<div class="row">
@@ -241,5 +241,4 @@
 		src="${pageContext.request.contextPath}/resources/reservationreso/js/datepicker_func_1.js"></script>
 
 </body>
->>>>>>> branch 'main' of https://github.com/kgh8576/prj.git
 </html>
