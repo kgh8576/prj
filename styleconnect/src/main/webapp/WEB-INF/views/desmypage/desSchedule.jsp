@@ -28,6 +28,7 @@
     }
 .mtitle {
 	font-size: 30px;
+	text-decoration: underline;
 	margin-left: 50px;
 	margin-top: 50px;
 }
@@ -59,11 +60,10 @@ function selectList(){
 </script>
 </head>
 <body>
-<div>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
 			id="mainNav">
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:150px;">
+				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:150px">
 					<li class="nav-item"><span class="nav-title-text">디자이너	기본정보</span></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
 						<a href="desInfo.do" class="nav-link" href="dashboard-home.html">
@@ -113,12 +113,9 @@ function selectList(){
 				</ul>
 			</div>
 		</nav>
-	</div>
 <div class="content-wrapper">
   <div class="container-fluid overflow-hidden">
-  <div id="container-for-width" align="center">
-  <div id="container-for-width" style="width:80%;" align="left">
-	<h1 class="mtitle" style="border-bottom: 1px solid black"> &nbsp;&nbsp;&nbsp;Reservation List</h1>
+	<h1 class="mtitle">&nbsp&nbsp&nbsp Reservation List</h1>
      <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
      <div id="page-title" class="padding-30px background-white full-width">
        <div class="container">
@@ -135,7 +132,7 @@ function selectList(){
        </div>
 	  </div>
                 <!-- // Page Title -->
-                <div align="center">
+                <div class="row2 margin-top-45px">
                 <c:if test="${empty sche }">
                 	<h3>예약이 없습니다.</h3>
                 </c:if>
@@ -170,8 +167,6 @@ function selectList(){
 
                 </div>
             </div>
-        </div>
-        </div>    
         </div>
         <!-- /.container-fluid-->
         <!-- /.content-wrapper-->

@@ -18,10 +18,10 @@ max-width: 100px;
 </style>
 <body>
 <div class="row justify-content-center">
-	              <div class="col-lg-7">
-	              <br/><br/><br/><br/><br/>
+	              <div class="col-lg-7">					
+					<br/><br/><br/><br/><br/>
 					<div align="center" style="margin:100px;">
-					<h1>${my.name }님의 마이페이지</h1>
+						<h1>${my.name }님의 마이페이지</h1>
 					</div>
                     <div class="row">
                         <div class="col-d-3 col-6 sm-mb-30px wow fadeInUp">

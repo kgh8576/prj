@@ -26,8 +26,8 @@
     text-align: center;
     height: 50px;
     background-color: #584ccb;
-    color:white;
-    font-weight:bold;
+    color: white;
+    font-weight: bold;
     padding-top: 10px;
     margin: 0px;
     font-size: 18px;
@@ -237,7 +237,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
 			id="mainNav">
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
+				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:150px">
 					<li class="nav-item"><span class="nav-title-text">디자이너	기본정보</span></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
 						<a href="desInfo.do" class="nav-link" href="dashboard-home.html">

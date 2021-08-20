@@ -143,12 +143,12 @@ textarea {
 }
 .mtitle {
 	font-size: 30px;
-	
+	text-decoration: underline;
 	margin-left: 50px;
 	margin-top: 50px;
 }
 .select{
-	width: 100%;
+	width: 500px;
 	height:100px;
 	box-sizing: border-box;
 	border: 2px solid #ddd;
@@ -158,7 +158,6 @@ textarea {
 	margin-top: 30px;
 	
 }
-
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -228,9 +227,8 @@ function cercheck(){
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
 			id="mainNav">
-			
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:150px;">
+				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:150px">
 					<li class="nav-item"><span class="nav-title-text">디자이너	기본정보</span></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
 						<a href="desInfo.do" class="nav-link active" href="dashboard-home.html">
@@ -281,17 +279,15 @@ function cercheck(){
 			</div>
 		</nav>
     <div class="content-wrapper">
-    <div id="container-for-align" align="center">
-    <div id="container-for-width" style="width:80%">
-        <div class="container-fluid overflow-hidden" align="left">
-          <h1 class="mtitle" style="border-bottom: 1px solid black"> &nbsp;&nbsp;&nbsp; My Profile</h1>
+        <div class="container-fluid overflow-hidden">
+          <h1 class="mtitle"> &nbsp&nbsp&nbsp My Profile</h1>
             <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
                 <!-- Page Title -->
                 <!-- // Page Title -->
 <!-- 개인정보 수정 -->
-                <div class="row margin-tb-45px full-width" align="left">
+                <div class="row margin-tb-45px full-width">
                     <div class="col-md-4">
-                        <div class="background-white">
+                        <div class="padding-15px background-white">
                         <!-- 프로필 이미지 -->
                 			<!-- 이미지 등록  -->
                 			<c:if test="${empty despro.fileUuid  }">
@@ -299,9 +295,9 @@ function cercheck(){
                 	 			 <label ><i class="far fa-images margin-right-10px"></i> 프로필 사진 등록</label>
                 	 			<input type="hidden" value="${despro.fileUuid}" name="fileUuid">
                             	<a href="#" class="d-block margin-bottom-10px"><img id="preview" src="${pageContext.request.contextPath}/resources/img/이미지 등록.png" alt=""></a>
-                             	<input type="file" name="file" onchange="readURL(this);" style="width:100%">
+                             	<input type="file" name="file" onchange="readURL(this);" >
                         		</form>
-                            	<div align="left"><button onclick="imgCheck()" class="btn btn-sm  text-white background-main-color btn-block" style="width:50%; margin-top:20px">이미지 등록하기</button></div>
+                            	<button onclick="imgCheck()" class="btn btn-sm  text-white background-main-color btn-block">이미지 등록하기</button>
                         	</c:if>
                         <!-- 이미지 등록// -->
                         <!-- 이미지 수정 -->
@@ -396,13 +392,13 @@ function cercheck(){
 									href="despwchangepage.do" >비밀번호 변경하기</a>
 							</div>
                           </div>
-                         	
+                         	<div align="center">
                         		<button type="submit" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">기본정보 수정하기</button>
-            				
+            				</div>
             		</form>
             		<!-- 기본정보 수정 끝// -->
             		<!-- 증명서 제출 -->
-            		<!-- <hr class="margin-tb-40px"> -->
+            		<hr class="margin-tb-40px">
             		<!-- 증명서 첨부(등록) -->
             			<c:if test="${empty descer.fileUuid }">
                           <div class="col-md-6 margin-bottom-20px">
@@ -448,10 +444,8 @@ function cercheck(){
             		</div>
                     </div>
                 </div>
-				</div>
-				</div>
+
             </div>
-          
         <!-- /.container-fluid-->
 </body>
 

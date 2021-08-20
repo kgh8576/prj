@@ -160,7 +160,10 @@ function designerConHistoryUpdateForm(id, page, searchedConNo) {
 				//검색 결과 메세지
 				designerConHistoryUpdateFormCode += '<p>조회 결과가 없습니다.</p>';
 				//'뒤로'버튼
-				designerConHistoryUpdateFormCode += '<button type="button" id="back-button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+				if(searchedConNo != null && searchedConNo != ''){
+					designerConHistoryUpdateFormCode += '<button type="button" id="back-button" onclick="designerConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+				}
+				
 			
 				designerConHistoryUpdateFormCode += '</div>';
 			} else {		
@@ -542,7 +545,7 @@ function nullReplace(data) {
 
 <!-- 디자이너 리스트 -->
 	<c:if test="${fn:length(designerList) == 0 }">
-			<p>조회 결과가 없습니다.</p>
+			<div style="margin: 100px;"><p>조회 결과가 없습니다.</p></div>
 			<button type="button" id="back-button" onclick="location.href='javascript:history.back();'">뒤로</button>
 	</c:if>
 	
