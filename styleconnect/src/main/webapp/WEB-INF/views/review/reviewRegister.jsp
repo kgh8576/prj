@@ -47,12 +47,51 @@
 
 </style>
 <script>
+
+var rate;
+
+function getTextLength(str){ // 한글은 2바이트 계산해주는 함수
+	var len = 0;
+	for (var i = 0; i < str.length; i++){
+		if (escape(str.charAt(i)).length == 6){
+			len++;
+			
+		}
+		len++;
+	}
+	return len;
+}
+
+
+
 function insert(conNo){
 		var contents = CKEDITOR.instances.contents.getData();
+		if (getTextLength(contents) <= 200){ // 200바이트 이하이면
+			alert('최소 200바이트 ( 한글 100자 ) 이상 작성해주세요');
+			return false;
+		}
+		
+		
+		if ( $('input[name="rate"]:radio:checked').length < 1 ) {
+			alert('평점을 입력하세요');
+			return false;
+		}
+		
 		var rate = document.querySelector('input[name="rate"]:checked').value;
 		var title = $('#title').val();
 		var id = $('#hiddenId').val();
 		var des_id = $('#hiddenDesId').val();
+		
+		var title = $('#title').val();
+		if (contents == ''){
+			alert('내용을 입력하세요');
+			return false;
+		}
+		if (title == ''){
+			alert('제목을 입력하세요');
+			return false;
+		}
+		
 		$.ajax({
 			url:'reviewInsert.do',
 			type:'post',
@@ -89,7 +128,9 @@ function insert(conNo){
 	            <div class="alert alert-info alert-dismissible fade show" role="alert">
   					<h5>리뷰 작성 시 500포인트가 적립됩니다 <br>
   					등록하시는 리뷰와 사진은 현행 법률에 부합하여야 하며 본 사의 이용 규칙에 따라야 합니다. <br>
-  					 부적절한 게시물은 법률과 규칙에 따라 사전통보 없이 삭제될 수 있으며 서비스 이용이 제한될 수 있습니다.</h5>
+  					 부적절한 게시물은 법률과 규칙에 따라 사전통보 없이 삭제될 수 있으며 서비스 이용이 제한될 수 있습니다. <br>
+  					 최소 한글 100자 이상으로 작성해주세요.</h5>
+  					 
   					 
   					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     					<span aria-hidden="true">&times;</span>
