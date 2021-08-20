@@ -117,10 +117,10 @@ public class MemServiceImpl implements MemService {
 	public boolean startSchedule(ConHistoryVO vo) {
 		boolean YorN = false;
 		ConHistoryVO cvo = memMapper.startSchedule(vo);
-		if (cvo.getState().isEmpty()) {
-			YorN = false;
-		} else {
+		if (cvo != null) {
 			YorN = true;
+		} else {
+			YorN = false;
 		}
 		return YorN;
 	}
