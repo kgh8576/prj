@@ -253,9 +253,9 @@ document.cookie = "crossCookie=bar; SameSite=None; Secure";
 			</form>
 
 			<div class="or"></div>
-			<a href="javascript:void(0)" id="GgCustomLogin"
+			<!-- <a href="javascript:void(0)" id="GgCustomLogin"
 				class="btn btn-md bg-facebook full-width btn-icon-left"> Login
-				with Google</a>
+				with Google</a> -->
 			<a id="kakao-login-btn" class="btn btn-md bg-facebook full-width btn-icon-left" style="background-color: #ffeb06; color: black;" onclick="kakaoLogin();">Login with Kakao</a>
 
 			<p>
