@@ -12,7 +12,7 @@
 
 span:hover{
 	color:white;
-   background-color: grey;
+   background-color: #8279d8;;
 }
 #imgsize {
     width: 200px;

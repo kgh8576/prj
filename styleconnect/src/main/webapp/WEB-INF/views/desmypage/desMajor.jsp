@@ -235,7 +235,7 @@ function updateMajor(){
     <!-- 네비 끝// -->
 <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
-    		<h1 class="mtitle">&nbsp&nbsp&nbsp #keyword setting</h1>
+    		<h1 class="mtitle">&nbsp;&nbsp;&nbsp; #keyword setting</h1>
             <div class="row margin-tb-90px margin-lr-0px sm-mrl-0px">    
      <div id="page-title" class="padding-30px background-white full-width">
                     <div class="container">
@@ -261,9 +261,9 @@ function updateMajor(){
 					</div>
 					<div class="form-group label-floating">
 						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major4" value="모즈 컷" <c:if test="${fn:contains(selectmajor,'모즈 컷')}">checked</c:if>/><label for="major4">모즈 컷</label>
-							<input type="checkbox" style="display:none;" name="major" id="major5" value="리젠트컷" <c:if test="${fn:contains(selectmajor,'리젠트컷')}">checked</c:if>/><label for="major5">리젠트컷</label> 
-							<input type="checkbox" style="display:none;" name="major" id="major6" value="포마드컷" <c:if test="${fn:contains(selectmajor,'포마드컷')}">checked</c:if>/><label for="major6">포마드컷</label>
+							<input type="checkbox" style="display:none;" name="major" id="major4" value="레이어드컷" <c:if test="${fn:contains(selectmajor,'레이어드컷')}">checked</c:if>/><label for="major4">레이어드컷</label>
+							<input type="checkbox" style="display:none;" name="major" id="major5" value="레이어드펌" <c:if test="${fn:contains(selectmajor,'레이어드펌')}">checked</c:if>/><label for="major5">레이어드펌</label> 
+							<input type="checkbox" style="display:none;" name="major" id="major6" value="웨이브펌" <c:if test="${fn:contains(selectmajor,'웨이브펌')}">checked</c:if>/><label for="major6">웨이브펌</label>
 						</div>
 					</div>
 					<div class="form-group label-floating">
@@ -275,7 +275,7 @@ function updateMajor(){
 					</div>
 					<div class="form-group label-floating">
 						 <div class="select" style="text-align: center;">
-							<input type="checkbox" style="display:none;" name="major" id="major10" value="벌룬펌" <c:if test="${fn:contains(selectmajor,'벌룬펌')}">checked</c:if>/><label for="major10">벌룬펌</label>
+							<input type="checkbox" style="display:none;" name="major" id="major10" value="볼륨펌" <c:if test="${fn:contains(selectmajor,'볼륨펌')}">checked</c:if>/><label for="major10">볼륨펌</label>
 							<input type="checkbox" style="display:none;" name="major" id="major11" value="삭발" <c:if test="${fn:contains(selectmajor,'삭발')}">checked</c:if>/><label for="major11">삭발</label> 
 							<input type="checkbox" style="display:none;" name="major" id="major12" value="투블럭" <c:if test="${fn:contains(selectmajor,'투블럭')}">checked</c:if>/><label for="major12">투블럭</label>
 						</div>
