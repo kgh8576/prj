@@ -30,7 +30,7 @@ public class DessearchController {
 	public String courseList(Model model,DessearchVO vo) {
 		model.addAttribute("designer",vo);
 		model.addAttribute("course",dao.courseList(vo));
-		model.addAttribute("img2", dao.desProImg(vo));
+		model.addAttribute("img2", dao.dessearchDesSty(vo));
 		return ("dessearch/desCourseList");
 	}
 	//디자이너상세페이지

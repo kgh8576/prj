@@ -151,13 +151,17 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 											+ '</div>';
 				//검색창 끝
 			
-				//if: 검색 결과가 없을 때와 있을 때를 구분
+				//if:  없을 때와 있을 때를 구분
 			if(memberConHistoryList.length == 0 ){
 				memberConHistoryUpdateFormCode += '<div align="center">';
 				//검색 결과 메세지
 				memberConHistoryUpdateFormCode += '<p>조회 결과가 없습니다.</p>';
 				//'뒤로'버튼
-				memberConHistoryUpdateFormCode += '<button type="button" id="back-button" onclick="memberConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+				
+				if(searchedConNo != null && searchedConNo != ''){
+					memberConHistoryUpdateFormCode += '<button type="button" id="back-button" onclick="memberConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+				}
+				
 				
 				memberConHistoryUpdateFormCode +='</div>';
 			} else {
@@ -256,7 +260,7 @@ function memberConHistoryUpdateForm(id, page, searchedConNo) {
 						
 						//'뒤로'버튼
 				if(searchedConNo != null && searchedConNo !=''){	
-					memberConHistoryUpdateFormCode += '<button type="button" id="back-button"onclick="memberConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button>';
+					memberConHistoryUpdateFormCode += '<div align="center"><button type="button" id="back-button"onclick="memberConHistoryUpdateForm(' + "'" + id + "'," + page + ');">뒤로</button></div>';
 				}
 						
 						//페이지 네비게이션
@@ -352,8 +356,8 @@ function nullReplace(data) {
 		
 			
 			<c:if test="${fn:length(memberList) == 0 }">
-				<p>검색 결과가 없습니다.</p>
-				<button type="button" onclick="location.href='javascript:history.back();'">뒤로</button>
+				<div style="margin: 100px;"><p>조회 결과가 없습니다.</p></div>
+				<button type="button" id="back-button" onclick="location.href='javascript:history.back();'">뒤로</button>
 			</c:if>
 			<c:if test="${fn:length(memberList) != 0 }">
 			<table>

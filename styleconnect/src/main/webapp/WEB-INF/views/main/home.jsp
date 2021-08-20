@@ -281,11 +281,11 @@ $(function() {
 			},
 			success:function(result){
 				console.log(result);
-				$('#hashTagOne').text('#'+result.one);
-				$('#hashTagTwo').text('#'+result.two);
-				$('#hashTagThree').text('#'+result.three);
-				$('#hashTagFour').text('#'+result.four);
-				$('#hashTagFive').text('#'+result.five);
+				$('#hashTagOne').text('1. '+result.one);
+				$('#hashTagTwo').text('2. '+result.two);
+				$('#hashTagThree').text('3. '+result.three);
+				$('#hashTagFour').text('4. '+result.four);
+				$('#hashTagFive').text('5. '+result.five);
 			},
 			error:function(err){
 				console.log(err)
@@ -386,11 +386,11 @@ $(function() {
 							<li class="li1" id="FEMALE" onclick="show('FEMALE')">여자</li>
 						</ul>
 						<div class="list-group">
-							<a class="list-group-item list-group-item-action" id="hashTagOne">#${hashTag.one }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagTwo">#${hashTag.two }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagThree">#${hashTag.three }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagFour">#${hashTag.four }</a>
-							<a class="list-group-item list-group-item-action" id="hashTagFive">#${hashTag.five }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagOne">1. ${hashTag.one }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagTwo">2. ${hashTag.two }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagThree">3. ${hashTag.three }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagFour">4. ${hashTag.four }</a>
+							<a class="list-group-item list-group-item-action" id="hashTagFive">5. ${hashTag.five }</a>
 						</div>
 					</div>
 				</div>

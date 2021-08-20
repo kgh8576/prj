@@ -39,6 +39,10 @@ header ul.nav-menu>li>a {
 	font-size: 20px;
 	margin-top: 70px;
 }
+
+.fixed-header{
+height: 150px;
+}
 </style>
 
 
@@ -50,7 +54,7 @@ header ul.nav-menu>li>a {
 					function() {
 
 						//상담시작 알람
-						<c:if test="${not empty id}">
+						<c:if test="${not empty id && id ne 'admin'}">
 						var memId = "${id}";
 						$
 								.ajax({
@@ -114,8 +118,13 @@ header ul.nav-menu>li>a {
 					<div class="col-lg-7 col-md-12 position-inherit">
 						<ul id="menu-main"
 							class="nav-menu float-lg-right link-padding-tb-20px">
+							<c:if test="${(id != null && id !='')||(did != null && did !='')}">
 							<li><a href="consulting.do"><strong>상담하기</strong></a></li>
-							<li><a href="category.do"><strong>디자이너 찾기</strong></a></li>
+							</c:if>
+							<c:if test="${(id == null || id =='')&&(did == null || did =='')}">
+							<li><a href="loginpage.do"><strong>상담하기</strong></a></li>
+							</c:if>
+							<li><a href="category.do"><strong>디자이너 찾기</strong></a></li>					
 						</ul>
 					</div>
 

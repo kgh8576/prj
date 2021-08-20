@@ -30,10 +30,12 @@ align-content: center;
 }
 span:hover{
 	color:white;
-   background-color: grey;
+   background-color: #8279d8;;
 }
 #styimg{
- border: 1px solid #333;
+ border: 1px solid #eaeaea;
+ max-width: 119px;
+ height: 120px;
 }
 .border-radius-img {
     border-radius: 10px;
@@ -63,7 +65,7 @@ color: black;
 }
 #thumimg{
 	width: 400px;
-	height: 400px;
+	height: 270px;
 }
 
 #reserbt {
@@ -85,12 +87,38 @@ color: black;
     max-width: 90%;
     width: 100%;
 }
-.margin-bottom-20px{
-	text-align: center;
+.margin-bottom-20px {
+    text-align: left;
 }
+.margin-bottom-20px-thum {
+    text-align: center;
+}
+.col-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 100%;
+}
+.border-radius-10 {
+    border-radius: 10px;
+    width: 90%;
+    margin: auto;
+}
+.border-radius-10nav {
+    border-radius: 10px;
+    width: 380px;
+    margin: auto;
+    margin-right: 260px;
+}
+.col-6zz {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 140px;
+}
+
 </style>
 </head>
 <body>
+<br/><br/>
     <div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">
          <ol class="breadcrumb opacity-5">
@@ -107,11 +135,11 @@ color: black;
                 <div class="col-lg-8">
                     <div class="margin-bottom-30px box-shadow">
                     	<c:if test="${empty img }">
-                    		 <div class="col-6 margin-bottom-20px"><img id="thumimg"class="border-radius-img" src="resources/img/logo.jpg" alt=""></div>
+                    		 <div class="col-6 margin-bottom-20px-thum"><img id="thumimg"class="border-radius-img" src="resources/img/logo.jpg" alt=""></div>
                     	</c:if>
                     	<c:if test="${not empty img }">
                        	<c:forEach items="${img}" var="img1" begin="0" end="0"> 
-                             <div class="margin-bottom-20px"><img id="thumimg" class="border-radius-img" src="resources/img/${img1.fileUuid }" alt=""></div>
+                             <div class="margin-bottom-20px-thum"><img id="thumimg" class="border-radius-img" src="resources/img/${img1.fileUuid }" alt=""></div>
                         </c:forEach>  
                         </c:if>
                         <div class="padding-10px background-white">
@@ -151,13 +179,15 @@ color: black;
                             <hr>
                              <div class="widget widget_categories">
                             <div class="padding-30px background-white border-radius-10">
-                                <div class="row2"  >
                                 <c:if test="${empty img2 }">
-                                		<h3>등록된 스타일이 없습니다.</h3>
+                                <div align="center">
+                                	<h3>등록된 스타일이 없습니다.</h3>
+                                </div>
                                   </c:if>
+                                <div class="row2"  >
                                 <c:if test="${not empty img2 }">
                                  	<c:forEach items="${img2}" var="vo"> 
-                                		 <div class="col-6 margin-bottom-20px"><img id="styimg"class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></div>
+                                		 <div class="col-6zz margin-bottom-20px"><img id="styimg"class="border-radius-10" src="resources/img/${vo.fileUuid }" alt=""></div>
                                 	</c:forEach>  
                                   </c:if>
                                 </div>
@@ -172,14 +202,14 @@ color: black;
                             <hr>
                             <c:if test="${empty review }">
                             <div align="center">
+                            <br/>
                             <h3>등록된 후기가 없습니다.</h3>                            
                             </div>                            
                             </c:if>
                             <c:if test="${not empty review }">
-							<c:forEach items="${review}" var="vo" begin="1" end="4">
+							<c:forEach items="${review}" var="vo" begin="0" end="3">
                             <ul class="commentlist padding-0px margin-0px list-unstyled text-grey-3">
                                 <li class="border-bottom-1 border-grey-1 margin-bottom-20px">
-                                    <img src="http://placehold.it/60x60" class="float-left margin-right-20px border-radius-60 margin-bottom-20px" alt="">
                                     <div class="margin-left-85px">
                                         <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 작성자 : ${vo.MName} </a>
                                        <%--  <span class="text-extra-small">상담명 :  <a href="#" class="text-main-color">${review1.title }</a></span> --%>
@@ -208,7 +238,7 @@ color: black;
                        </div>
                 <!-- 사이드바 div -->
                 <div class="col-lg-4" id="fixed">
-                    <div id="side" class="background-second-color border-radius-10 margin-bottom-45px text-white box-shadow">
+                    <div id="side" class="background-second-color border-radius-10nav margin-bottom-45px text-white box-shadow">
                         <h3 id="dname" class="padding-lr-30px padding-top-20px"><i class="far fa-user margin-right-10px"></i> ${designer.name}디자이너</h3>
                         <hr>
                         <div class="padding-bottom-80px">

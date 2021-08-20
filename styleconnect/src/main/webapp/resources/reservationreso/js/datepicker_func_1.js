@@ -48,6 +48,7 @@ $('#DatePicker').datepicker({
 			success: function(data) {
 				$(".can_reservation_time").html("");
 				var i = 1;
+				console.log(data);
 				for (var time of data) {
 					var today = new Date();
 					var date = new Date(dateString);

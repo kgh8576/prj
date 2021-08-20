@@ -17,10 +17,14 @@ flex-wrap: nowrap;
 </div>
 -->
 
+<div align="center" style="margin:100px;">
+	<h1>관리자 홈</h1>
+</div>
+
 <div class="margin-tb-100px">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8">
+			<div class="col-lg-7">
 				<div class="row">
 					<div class="featured-categorey">
 						<div class="row">

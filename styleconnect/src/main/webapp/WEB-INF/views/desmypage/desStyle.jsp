@@ -73,10 +73,10 @@
 }
 
 .mtitle {
-	font-size: 30px;
-	text-decoration: underline;
-	margin-left: 50px;
-	margin-top: 50px;
+    font-size: 30px;
+    text-decoration: underline;
+    margin-left: 50px;
+    margin-top: 50px;
 }
 
 .card tab-pane fade show active 1 {
@@ -102,7 +102,7 @@
 		<nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
 			id="mainNav">
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
+				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:0px">
 					<li class="nav-item"><span class="nav-title-text">디자이너	기본정보</span></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
 						<a href="desInfo.do" class="nav-link" href="dashboard-home.html">
@@ -154,7 +154,7 @@
 		</nav>
 		<div class="content-wrapper">
 			<div class="container-fluid overflow-hidden">
-				<h1 class="mtitle">&nbsp&nbsp&nbsp Styling image setting</h1>
+			<h1 class="mtitle">&nbsp;&nbsp;&nbsp; Styling image setting</h1>
 				<div class="row margin-lr-10px sm-mrl-0px">
 					<div class="container margin_detail">
 						<div class="row">

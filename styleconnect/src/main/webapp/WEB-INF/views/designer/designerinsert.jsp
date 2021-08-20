@@ -826,13 +826,13 @@ body {
 					<div class="form-group label-floating">
 						<div class="select" style="text-align: center;">
 							<input type="checkbox" style="display: none;" name="major"
-								id="major4" value="모즈 컷" onClick="count_ck(this);"><label
-								for="major4">모즈 컷</label> <input type="checkbox"
-								style="display: none;" name="major" id="major5" value="리젠트컷"
-								onClick="count_ck(this);"><label for="major5">리젠트컷</label>
+								id="major4" value="레이어드컷" onClick="count_ck(this);"><label
+								for="major4">레이어드컷</label> <input type="checkbox"
+								style="display: none;" name="major" id="major5" value="레이어드펌"
+								onClick="count_ck(this);"><label for="major5">레이어드펌</label>
 							<input type="checkbox" style="display: none;" name="major"
-								id="major6" value="포마드컷" onClick="count_ck(this);"><label
-								for="major6">포마드컷</label>
+								id="major6" value="웨이브펌" onClick="count_ck(this);"><label
+								for="major6">웨이브펌</label>
 						</div>
 					</div>
 					<div class="form-group label-floating">
@@ -850,8 +850,8 @@ body {
 					<div class="form-group label-floating">
 						<div class="select" style="text-align: center;">
 							<input type="checkbox" style="display: none;" name="major"
-								id="major10" value="벌룬펌" onClick="count_ck(this);"><label
-								for="major10">벌룬펌</label> <input type="checkbox"
+								id="major10" value="볼륨펌" onClick="count_ck(this);"><label
+								for="major10">볼륨펌</label> <input type="checkbox"
 								style="display: none;" name="major" id="major11" value="삭발"
 								onClick="count_ck(this);"><label for="major11">삭발</label>
 							<input type="checkbox" style="display: none;" name="major"

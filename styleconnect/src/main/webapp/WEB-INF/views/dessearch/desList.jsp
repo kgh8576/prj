@@ -12,7 +12,7 @@
 
 span:hover{
 	color:white;
-   background-color: grey;
+   background-color: #8279d8;;
 }
 #imgsize {
     width: 200px;
@@ -22,12 +22,14 @@ span:hover{
 
 </head>
 <body>
-
+	<br><br><br><br><br>
+	<!--  
 	<div id="page-title" class="padding-tb-30px gradient-white">
 		<div class="container">
 			<h1 class="font-weight-300">Designer List</h1>
 		</div>
 	</div>
+	-->
 	<!-- 검색창 -->
 <form id="frm" action="searchList.do" method="post">
 	<div class="margin-bottom-30px">

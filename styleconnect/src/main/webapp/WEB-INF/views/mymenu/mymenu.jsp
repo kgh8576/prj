@@ -322,7 +322,7 @@
 						</div>
 						<hr class="margin-tb-40px">
 						<div class="row" style="background-color: #e1e1e133;">
-							<div class="col-md-6">
+							<div class="col-md-6" style="padding: 30px;">
 								<strong> 가장 가까운 예약목록 </strong>><br> <br>
 								<c:choose>
 									<c:when test="${!empty conhis}">
@@ -356,7 +356,7 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6" style="padding: 30px;">
 								<strong> 상담이 끝난 목록</strong>><br> <br>
 								<c:choose>
 									<c:when test="${!empty conccode005}">

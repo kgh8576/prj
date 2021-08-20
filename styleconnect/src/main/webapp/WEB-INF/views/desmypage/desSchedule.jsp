@@ -63,7 +63,7 @@ function selectList(){
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
 			id="mainNav">
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
+				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:0px">
 					<li class="nav-item"><span class="nav-title-text">디자이너	기본정보</span></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
 						<a href="desInfo.do" class="nav-link" href="dashboard-home.html">
@@ -115,7 +115,7 @@ function selectList(){
 		</nav>
 <div class="content-wrapper">
   <div class="container-fluid overflow-hidden">
-	<h1 class="mtitle">&nbsp&nbsp&nbsp Reservation List</h1>
+	<h1 class="mtitle">&nbsp;&nbsp;&nbsp; Reservation List</h1>
      <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
      <div id="page-title" class="padding-30px background-white full-width">
        <div class="container">
@@ -172,4 +172,5 @@ function selectList(){
         <!-- /.content-wrapper-->
     </div>
 </body>
+>>>>>>> branch 'main' of https://github.com/kgh8576/prj.git
 </html>
