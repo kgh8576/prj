@@ -66,14 +66,14 @@
                             <img src="resources/img/${vo.fileUuid }" alt=""></a></div>
                             <div class="col-lg-7">
                                 <div class="padding-25px">
-                                    <a class="d-block h4  text-capitalize margin-bottom-8px" href="#">${vo.title} </a>
+                                    <a class="d-block h4  text-capitalize margin-bottom-8px" href="reservation.do?courNo=${vo.courNo }">${vo.title} </a>
                                     <div class="meta">
-                                        <span class="margin-right-20px text-extra-small"><a href="#" class="text-main-color"> ${vo.name }</a>디자이너</span>
-                        			상담번호:${vo.courNo } / ${vo.price }원
+                                        <span class="margin-right-20px text-extra-small"> ${vo.name }디자이너</span>
+                        			<br/> ${vo.price }원
                         			 <hr>
                                         <span> ${vo.detail }  </span>
                                         <div align="right">
-                                        <a href="reservation.do?courNo=${vo.courNo }" >>예약하러가기</a>
+                                        <a class="text-main-color" href="reservation.do?courNo=${vo.courNo }" >>예약하기</a>
                                     	</div>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                	</c:if>
                                	<c:if test="${empty img2 }">
                                	<div align="center">
-                               	 <p> &nbsp&nbsp&nbsp 등록된 스타일이 없습니다.</p>
+                               	 <p> &nbsp;&nbsp;&nbsp; 등록된 스타일이 없습니다.</p>
                                	</div>
                                	</c:if>
                                	</div>

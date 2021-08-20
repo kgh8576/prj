@@ -48,10 +48,11 @@
 									class="d-inline-block text-grey-2 text-up-small"
 									style="margin-right: 50px; color: black;"><i
 									class="far fa-file-alt"></i> 리뷰보기</a>
+							</c:if>
+							<c:if test="${conhisends.canmodify eq 1 }">
 								<a href="reviewModify.do?conNo=${conhisends.conNo }"
 									class="d-inline-block text-grey-2 text-up-small"
 									style="color: black;"><i class="far fa-file-alt"></i> 리뷰수정</a>
-
 							</c:if>
 							<c:if test="${conhisends.reviewexist eq 0 }">
 								<c:if test="${conhisends.canreview eq 1 }">

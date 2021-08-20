@@ -26,36 +26,55 @@ justify-content: space-between;
 padding:10px;
 }
 
-.active{
+div.active{
 background-color: #584ccb;
 color:white;
+}
+
+li.active{
+
 }
 
 .unactive{
 background-color: #dedede;
 }
 
+#consulting-history-box-top{
+padding:30px;
+font-size : 25px;
+font-weight:bold;
+}
+
 #consulting-history-box-middle{
 text-align:left;
-padding:20px;
+padding:40px 40px 0px 40px;
+font-size : 20px;
 }
-#consulting-history-box-middle-content-title{
+#consulting-history-box-middle-title{
 color:#584ccb;
 font-weight:bold;
+font-size : 20px;
+margin-bottom: 10px;
+
+}
+#consulting-history-box-middle-content{
+font-size : 15px;
+margin-bottom: 30px;
 }
 
 
 #consulting-history-box-low{
 text-align:right;
-padding:10px;
+padding:0px 30px 30px 30px;
+font-size : 15px;
 }
 
-#entire-container-for-width{
+#container-for-width{
 width:70%;
 }
 
 #consulting-history-box{
-width:70%;
+width:80%;
 }
 
 
@@ -63,8 +82,16 @@ width:70%;
 
 <script>
 function goChatting(conNo) {
+	var id = '${id}';
+	var did = '${did}';
+	var userkey;
 	//ajax 사용할지 페이지 이동할지 아니면 새로운 페이지를 띄울지 결정
-	window.location.href = 'https://192.168.0.15:8443/chatting.do?conNo=' + conNo;
+	if(id != null && id !=""){
+		userkey = "member";
+	}else{
+		userkey = "desinder";
+	}
+	window.location.href = 'https://192.168.0.15:8443/chatting.do?conNo=' + conNo + '&user=' + userkey;
 	
 	$.ajax({
 		url:'conHistoryAttendUpdate.do',
@@ -82,13 +109,30 @@ function goChatting(conNo) {
 </script>			
 
 
-	<br><br><br><br>
+	<br><br><br><br><br>
+
+
+
 
 <div align="center">
-	<div id="entire-container-for-width">
+	<div id="container-for-width">
+	
+	<div align="left">
+		<div id="page-title" class="padding-tb-30px gradient-white">
+	        <div class="container">
+	            <ol class="breadcrumb opacity-5">
+	                <li><a href="main.do">Home<svg class="svg-inline--fa fa-angle-right fa-w-8" data-fa-pseudo-element=":after" aria-hidden="true" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas" data-fa-pseudo-element=":after"></i> --></a></li>
+	                <li class="active"><a href="#">상담하기</a></li>
+	            </ol>
+	            <h1 class="font-weight-300">상담하기</h1>
+	        </div>
+	    </div>
+	</div>
 
 	<c:if test="${fn:length(conHistoryList)==0}">
-		<p>참여할 수 있는 상담이 없습니다.</p>
+		<div style="background-color:#e2e2e2; margin-top:15%; width:50%; padding:30px;">
+			<h3>참여할 수 있는 상담이 없습니다.</h3>
+		</div>
 	</c:if>
 	
 	<c:if test="${fn:length(conHistoryList)!=0}">	
@@ -116,10 +160,10 @@ function goChatting(conNo) {
 		    		
 		    		<!-- consulting-history-box-middle-->
 					<div id="consulting-history-box-middle">
-		    		<p id="consulting-history-box-middle-content-title">상담 상세내용</p>
+		    		<p id="consulting-history-box-middle-title">상담 상세내용</p>
 		    		<p id="consulting-history-box-middle-content">${conHistory.detail}</p>
 		    		
-		    		<p id="consulting-history-box-middle-content-title">회원 코멘트</p>
+		    		<p id="consulting-history-box-middle-title">회원 코멘트</p>
 		    		<c:if test="${conHistory.memComment != null && conHistory.memComment != ''}">
 		    			<p id="consulting-history-box-middle-content">${conHistory.memComment}</p>
 		    		</c:if>
@@ -127,7 +171,7 @@ function goChatting(conNo) {
 		    			<p id="consulting-history-box-middle-content">없음</p>
 		    		</c:if>
 		    		
-		    		<p id="consulting-history-box-middle-content-title">디자이너 코멘트</P>
+		    		<p id="consulting-history-box-middle-title">디자이너 코멘트</P>
 		    		<c:if test="${conHistory.desComment != null && conHistory.desComment != ''}">
 		    			<p id="consulting-history-box-middle-content">${conHistory.desComment}</p>
 		    		</c:if>
@@ -153,7 +197,7 @@ function goChatting(conNo) {
 		    		<c:if test = "${conHistory.remainingTime ge -30 && conHistory.remainingTime le 10}">
 		    			<div id="consulting-history-box-low">
 		    				<p>${conHistory.state}</p>
-		    				<button type="button" onclick="goChatting(${conHistory.conNo});">상담 참여 생성 테스트</button>
+		    				<button type="button" class="btn btn-info" onclick="goChatting(${conHistory.conNo});">상담 참여</button>
 		    			</div>
 		    		</c:if>
 		    		<!-- consulting-history-box-low 끝-->

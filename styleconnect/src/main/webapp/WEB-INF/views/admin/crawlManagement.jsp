@@ -11,7 +11,7 @@
 <script>
 	
 	var isRun = false;
-	
+	var isError = false;
 	// 1. 작업 시켜놓고 나갔다가 들어오는 경우 페이지 로드 시 크롤링 중인지 검사
 	// 2. 버튼 눌러놓고 기다리는 경우
 	
@@ -34,23 +34,26 @@
     				$('#progressDiv').css('display', 'block'); // 숨겨놨던 진행률 div show
     				var getCrawlProgress = setInterval(function(){ // 4초마다 진행률 가져오는 ajax 실행
     					if (isRun){
-		    				$.ajax({
-		    					url : 'getCrawlProgress.do',
-		    					method:'post',
-		    					success : function(progress) {
-		    						if ( progress == 100 ) { // 0에서 시작한 진행률이 100이면
-		    							clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
-		    							afterCrawl('done');
-		    						} else { // 진행률이 0~98이면
-		    							$('#progressBar').text(progress+'% 완료됨');
-		    						}
-		    					},
-		    					error : function(err) {
-		    						console.log(err);
-		    						clearInterval(getCrawlProgress);
-		    						afterCrawl('error');
-		    					}
-		    				});
+    						if (!isError){
+			    				$.ajax({
+			    					url : 'getCrawlProgress.do',
+			    					method:'post',
+			    					success : function(progress) {
+			    						if ( progress == 100 ) { // 0에서 시작한 진행률이 100이면
+			    							clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
+			    							afterCrawl('done');
+			    						} else { // 진행률이 0~98이면
+			    							$('#progressBar').text(progress+'% 완료됨');
+			    						}
+			    					},
+			    					error : function(err) {
+			    						console.log(err);
+			    						clearInterval(getCrawlProgress);
+			    						afterCrawl('error');
+			    						
+			    					}
+			    				});
+    						}
     					} else {
     						clearInterval(getCrawlProgress);
     						isRun = false;
@@ -110,22 +113,24 @@
 			
 			var getCrawlProgress = setInterval(function(){ // ajax 안에 넣으면 크롤링 전부 다 끝나고 진행률을 보여주므로 바깥으로 빼야함
 				if (isRun){
-					$.ajax({
-						url : 'getCrawlProgress.do',
-						method:'post',
-						success : function(progress) {
-							if ( progress == 100 ) {
-								clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
-								afterCrawl('done');
-							} else {
-								$('#progressBar').text(progress+'% 완료됨');
+					if (!isError){
+						$.ajax({
+							url : 'getCrawlProgress.do',
+							method:'post',
+							success : function(progress) {
+								if ( progress == 100 ) {
+									clearInterval(getCrawlProgress); // 인터벌 걸린 함수 삭제
+									afterCrawl('done');
+								} else {
+									$('#progressBar').text(progress+'% 완료됨');
+								}
+							},
+							error : function(err) {
+								clearInterval(getCrawlProgress);
+								afterCrawl('error');
 							}
-						},
-						error : function(err) {
-							clearInterval(getCrawlProgress);
-							afterCrawl('error');
-						}
-					});
+						});
+					}
 				} else {
 					clearInterval(getCrawlProgress);
 					isRun = false;
@@ -135,13 +140,14 @@
 	}
 	function afterCrawl(state){ // 크롤링 끝난 다음에 실행되는 후처리용 fnc
 		isRun == false;
-		resetCrawlData();
 		btnToggle('able'); // 버튼 잠금 해제
 		if (state == ('done')){
+			resetCrawlData();
 			$('#progressBar').text('완료!');
 		} else {
 			$('#progressBar').text('에러!');
 			$('#progressBar').addClass('bg-danger');
+			isError = true;
 		}
 		
 	}
@@ -193,7 +199,7 @@
 			</div>
 			<br>
 				<div class="alert alert-primary alert-dismissible fade show" role="alert" style="display:inline-block; width:100%;">
-				  완료까지는 <strong>약 7~8분의 시간이 소요</strong>됩니다. <br> 다른 작업을 하시다 오시는 것을 추천합니다.
+				  완료까지는 <strong>약 7~8분의 시간이 소요</strong>됩니다. <br> 다른 작업을 하시다 오시는 것을 추천합니다.<br> 에러가 나는 경우 페이지를 새로고침하고 재시도하세요.
 				</div>
 			<div class="progress" id="progressDiv" style="height:25px; width:100%; display:none;">
 				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" id="progressBar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">준비됨!</div>

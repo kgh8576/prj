@@ -18,10 +18,10 @@ max-width: 100px;
 </style>
 <body>
 <div class="row justify-content-center">
-	              <div class="col-lg-7">
-	              <br/><br/><br/><br/><br/><br/><br/><br/>
-					<div align="center">
-					${my.name }님의 마이페이지<br/><br/>
+	              <div class="col-lg-7">					
+					<br/><br/><br/><br/><br/>
+					<div align="center" style="margin:100px;">
+						<h1>${my.name }님의 마이페이지</h1>
 					</div>
                     <div class="row">
                         <div class="col-d-3 col-6 sm-mb-30px wow fadeInUp">
@@ -34,7 +34,7 @@ max-width: 100px;
                                 </div>
                             </a>
                         </div>
-                        <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="col-d-3 col-6 wow fadeInUp">
                             <a href="desMajor.do" class="d-block border-radius-15 hvr-float hvr-sh2">
                                 <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
                                     <div class="icon margin-bottom-15px opacity-7">
@@ -44,7 +44,7 @@ max-width: 100px;
                                 </div>
                             </a>
                         </div>
-                        <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.4s">
+                        <div class="col-d-3 col-6 wow fadeInUp">
                             <a href="desStyle.do" class="d-block border-radius-15 hvr-float hvr-sh2">
                                 <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
                                     <div class="icon margin-bottom-15px">
@@ -64,7 +64,7 @@ max-width: 100px;
                                 </div>
                             </a>
                         </div>
-                        <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.2s">
                             <a href="desCourse.do?id=${my.id }" class="d-block border-radius-15 hvr-float hvr-sh2">
                                 <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
                                     <div class="icon margin-bottom-15px opacity-7">
@@ -74,7 +74,7 @@ max-width: 100px;
                                 </div>
                             </a>
                         </div>
-                         <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
+                         <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.2s">
                             <a href="desWorkOpen.do?id=${my.id }" class="d-block border-radius-15 hvr-float hvr-sh2">
                                 <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
                                     <div class="icon margin-bottom-15px opacity-7">
@@ -84,7 +84,7 @@ max-width: 100px;
                                 </div>
                             </a>
                         </div>
-                        <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="col-d-3 col-6 wow fadeInUp" data-wow-delay="0.4s">
                             <a href="reviewList.do?desId=${my.id }" class="d-block border-radius-15 hvr-float hvr-sh2">
                                 <div class="background-main-color text-white border-radius-15 padding-20px text-center opacity-hover-7">
                                     <div class="icon margin-bottom-15px opacity-7">

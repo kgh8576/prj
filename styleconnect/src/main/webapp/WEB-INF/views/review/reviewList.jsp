@@ -38,7 +38,7 @@ elip{
 	text-overflow: ellipsis;
 	word-wrap: break-word;
 	display: -webkit-box;
-	-webkit-line-clamp: 3; /* ellipsis line */
+	-webkit-line-clamp: 4; /* ellipsis line */
 	-webkit-box-orient: vertical;
 }
 
@@ -75,7 +75,7 @@ elip{
 <div class="row">
 	<div class="col-md-3"></div>
 	<div class="col-md-6">
-	<br><br><br>
+	<br><br><br><br><br>
 	
 	<div id="page-title" class="padding-tb-30px gradient-white">
         <div class="container">

@@ -30,7 +30,7 @@ align-content: center;
 }
 span:hover{
 	color:white;
-   background-color: grey;
+   background-color: #8279d8;;
 }
 #styimg{
  border: 1px solid #eaeaea;
