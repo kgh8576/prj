@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <body>
-<br><br><br>
+<br><br><br><br><br>
 	
 <!-- 검색창 -->
 <form id="frm" action="searchList.do" method="post">
@@ -60,7 +60,7 @@
 									</div>
 								</a>
 							</div>
-							<div class="col-6 wow fadeInUp" data-wow-delay="0.4s">
+							<div class="col-6 wow fadeInUp" data-wow-delay="0.2s">
 								<a href="makeupList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
 								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
@@ -70,7 +70,7 @@
 									</div>
 								</a>
 							</div>
-							<div class="col-6 wow fadeInUp" data-wow-delay="0.6s">
+							<div class="col-6 wow fadeInUp" data-wow-delay="0.4s">
 								<a href="dessearchList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
 								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
 										<div class="icon margin-bottom-15px opacity-7">

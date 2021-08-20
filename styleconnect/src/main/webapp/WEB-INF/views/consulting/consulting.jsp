@@ -26,9 +26,13 @@ justify-content: space-between;
 padding:10px;
 }
 
-.active{
+div.active{
 background-color: #584ccb;
 color:white;
+}
+
+li.active{
+
 }
 
 .unactive{
@@ -50,8 +54,8 @@ text-align:right;
 padding:10px;
 }
 
-#entire-container-for-width{
-width:70%;
+#container-for-width{
+width:60%;
 }
 
 #consulting-history-box{
@@ -82,13 +86,30 @@ function goChatting(conNo) {
 </script>			
 
 
-	<br><br><br><br>
+	<br><br><br><br><br>
+
+
+
 
 <div align="center">
-	<div id="entire-container-for-width">
+	<div id="container-for-width">
+	
+	<div align="left">
+		<div id="page-title" class="padding-tb-30px gradient-white">
+	        <div class="container">
+	            <ol class="breadcrumb opacity-5">
+	                <li><a href="main.do">Home<svg class="svg-inline--fa fa-angle-right fa-w-8" data-fa-pseudo-element=":after" aria-hidden="true" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <i class="fas" data-fa-pseudo-element=":after"></i> --></a></li>
+	                <li class="active"><a href="#">상담하기</a></li>
+	            </ol>
+	            <h1 class="font-weight-300">상담하기</h1>
+	        </div>
+	    </div>
+	</div>
 
 	<c:if test="${fn:length(conHistoryList)==0}">
-		<p>참여할 수 있는 상담이 없습니다.</p>
+		<div style="background-color:#e2e2e2; margin-top:15%; width:50%; padding:30px;">
+			<h3>참여할 수 있는 상담이 없습니다.</h3>
+		</div>
 	</c:if>
 	
 	<c:if test="${fn:length(conHistoryList)!=0}">	

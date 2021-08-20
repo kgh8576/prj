@@ -150,7 +150,6 @@ img{
 }
 .mtitle {
 	font-size: 30px;
-	text-decoration: underline;
 	margin-left: 50px;
 	margin-top: 50px;
 }
@@ -182,7 +181,7 @@ function updateMajor(){
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
 			id="mainNav">
 			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav">
+				<ul	class="navbar-nav navbar-sidenav background-main-color admin-nav" id="admin-nav" style="margin-top:150px;">
 					<li class="nav-item"><span class="nav-title-text">디자이너	기본정보</span></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
 						<a href="desInfo.do" class="nav-link" href="dashboard-home.html">
@@ -235,7 +234,9 @@ function updateMajor(){
     <!-- 네비 끝// -->
 <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
-    		<h1 class="mtitle">&nbsp&nbsp&nbsp #keyword setting</h1>
+        <div id="container-for-width" align="center">
+        <div id="container-for-width" style="width:80%;" align="left">
+    		<h1 class="mtitle" style="border-bottom: 1px solid black">&nbsp;&nbsp;&nbsp; keyword setting</h1>
             <div class="row margin-tb-90px margin-lr-0px sm-mrl-0px">    
      <div id="page-title" class="padding-30px background-white full-width">
                     <div class="container">
@@ -287,6 +288,8 @@ function updateMajor(){
 			<div align="center">
 				<button onclick="updateMajor()" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block">수정하기</button>
 			</div>
+	</div>
+	</div>
 	</div>
 </div>
 			

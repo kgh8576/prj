@@ -25,7 +25,9 @@
 	width: 150px;
     text-align: center;
     height: 50px;
-    background-color: #d8d8d8;
+    background-color: #584ccb;
+    color:white;
+    font-weight:bold;
     padding-top: 10px;
     margin: 0px;
     font-size: 18px;
