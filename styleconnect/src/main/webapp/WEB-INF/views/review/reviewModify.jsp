@@ -65,11 +65,37 @@
 		}
 		
 	});
+	function getTextLength(str){ // 한글은 2바이트 계산해주는 함수
+		var len = 0;
+		for (var i = 0; i < str.length; i++){
+			if (escape(str.charAt(i)).length == 6){
+				len++;
+				
+			}
+			len++;
+		}
+		return len;
+	}
+	
 	function modify(conNo){
 		var contents = CKEDITOR.instances.contents.getData();
-		var rate = document.querySelector('input[name="rate"]:checked').value;
+		if (getTextLength(contents) <= 200){ // 200바이트 이하이면
+			alert('최소 200바이트 ( 한글 100자 ) 이상 작성해주세요');
+			return false;
+		}
 		
+		var rate = document.querySelector('input[name="rate"]:checked').value;
 		var title = $('#title').val();
+		
+		if (contents == ''){
+			alert('내용을 입력하세요');
+			return false;
+		}
+		if (title == ''){
+			alert('제목을 입력하세요');
+			return false;
+		}
+		
 		$.ajax({
 			url:'reviewUpdate.do',
 			type:'post',
@@ -104,7 +130,8 @@
 	            <h3> ${reviewInfo.name } 디자이너의 [ ${reviewInfo.title } ] 서비스는 어떠셨나요? </h3>
 	            <div class="alert alert-info alert-dismissible fade show" role="alert">
   					<h5>등록하시는 리뷰와 사진은 현행 법률에 부합하여야 하며 본 사의 이용 규칙에 따라야 합니다. <br>
-  					 부적절한 게시물은 법률과 규칙에 따라 사전통보 없이 삭제될 수 있으며 서비스 이용이 제한될 수 있습니다.</h5>
+  					 부적절한 게시물은 법률과 규칙에 따라 사전통보 없이 삭제될 수 있으며 서비스 이용이 제한될 수 있습니다.<br>
+  					 답글은 최소 200바이트 (한글 100자 이상) 작성해주세요.</h5>
   					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
     					<span aria-hidden="true">&times;</span>
   					</button>

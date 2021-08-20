@@ -40,7 +40,7 @@
 	<br>
 	<br>
 	<br>
-	
+	<button type="button" onclick="location.href='desListSelect.do?id=${date}'"></button>
 	<select onchange="testChange(this)">
             <option value="">직업선택</option>
             <option value="학생">학생</option>

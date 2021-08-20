@@ -42,9 +42,33 @@
 		document.getElementById("hiddenReplyDiv").style.display = 'block';
 		document.getElementById("replyFrmBtn").style.display = 'none';
 	}
+	
+	// 한글은 2바이트 계산해주는 함수
+	function getTextLength(str){ 
+		var len = 0;
+		for (var i = 0; i < str.length; i++){
+			if (escape(str.charAt(i)).length == 6){
+				len++;
+				
+			}
+			len++;
+		}
+		return len;
+	}
+	
 	//디자이너 답글 작성
 	function replyInsert(conNo, desId){
 		var contents = CKEDITOR.instances.replyContents.getData();
+		if (contents == ''){
+			alert('내용을 입력하세요');
+			return false;
+		}
+		if (getTextLength(contents) <= 200){ // 100바이트 이하이면
+			alert('최소 100바이트 ( 한글 100자 ) 이상 작성해주세요');
+			return false;
+		}
+		
+		
 		$.ajax({
 			url:'replyInsert.do',
 			type:'post',
@@ -54,7 +78,7 @@
 				},
 			success:function(){
 				alert('정상적으로 작성했습니다. 돌아갑니다');
-				$('#redirectFrm').submit();
+				location.reload();
 			},
 			error:function(err){
 				console.log(err);
@@ -69,7 +93,17 @@
 		document.getElementById("updateBtn").style.display = 'block'; // 실제로 ajax 호출하여 수정하는 버튼
 	}
 	function replyModify(conNo){
+		
 		var contents = CKEDITOR.instances.replyModifyContents.getData();
+		if (contents == ''){
+			alert('내용을 입력하세요');
+			return false;
+		}
+		if (getTextLength(contents) <= 200){ // 100바이트 이하이면
+			alert('최소 100바이트 ( 한글 100자 ) 이상 작성해주세요');
+			return false;
+		}
+		
 		$.ajax({
 			url:'replyUpdate.do',
 			type:'post',
@@ -79,7 +113,7 @@
 				},
 			success:function(){
 				alert('정상적으로 수정했습니다. 돌아갑니다');
-				$('#redirectFrm').submit();
+				location.reload();
 			},
 			error:function(err){
 				console.log(err);
@@ -137,12 +171,11 @@
 		</div>
 
 		<!-- 답변 영역 -->
-		<div class="margin-bottom-20px box-shadow">
+		<div class="margin-bottom-20px padding-20px box-shadow">
 			<c:if test="${did eq reviewInfo.desId && empty replyInfo }">
-				<p id="replyFrmBtn">고객에게 피드백을 남길 수 있습니다.
+				<p id="replyFrmBtn">고객에게 피드백을 남길 수 있습니다. &nbsp;&nbsp;&nbsp;
 					<button class="btn btn-info" onclick="showReplyFrm()">답변 등록하기</button>
 				</p>
-				<form method="post">
 					<div id="hiddenReplyDiv" style="display: none;">
 						<div class="margin-bottom-20px padding-bottom-40px box-shadow">
 					        <div class="padding-20px background-white">
@@ -161,7 +194,6 @@
 					        </c:if>
 			   			</div>
 					</div>
-				</form>
 			</c:if>
 			<c:if test="${not empty replyInfo }">
 				<div class="margin-bottom-20px padding-bottom-40px box-shadow">
@@ -193,10 +225,6 @@
 			        </c:if>
 	   			</div>
 			</c:if>
-			<form action="reviewInfo.do" method="POST" id="redirectFrm">
-				<input type="hidden" name="conNo" value="${reviewInfo.conNo }">
-			</form>
-			
 		</div>
 		
 		<div align="center">

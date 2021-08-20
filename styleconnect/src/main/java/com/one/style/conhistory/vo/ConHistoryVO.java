@@ -29,6 +29,7 @@ public class ConHistoryVO {
 	private String id; //디자이너 아이디
 	private int reviewexist; //리뷰 유무
 	private int canreview; //리뷰3일이내
+	private int canmodify;//리뷰수정가능한가? 가능 1 or 0
 	
 	private String codecontent; //예약상황
 	private String major; //디자이너 전문분야

@@ -38,7 +38,7 @@ elip{
 	text-overflow: ellipsis;
 	word-wrap: break-word;
 	display: -webkit-box;
-	-webkit-line-clamp: 3; /* ellipsis line */
+	-webkit-line-clamp: 4; /* ellipsis line */
 	-webkit-box-orient: vertical;
 }
 

@@ -102,13 +102,13 @@ from(
        c.title,c.detail,
        d.name AS desName,d.career,d.major,d.id,
        r.reviewexist,
-       nvl2(cr.con_no,1,0) as canreview
+       nvl2(cr.con_no,1,0) as canreview, canmodify
        FROM CONSULTING_HISTORY a,
                 COMMCODEDETAIL b,
                 DES_COURSE c,
                 DESIGNER d, 
                 (
-                select c.con_no , c.mem_id, nvl2(r.title,1,0) as reviewexist 
+                select c.con_no , c.mem_id, nvl2(r.title,1,0) as reviewexist, nvl(decode(r.state, 'Y', 1, 'N', 0), 0) as canmodify 
                 from consulting_history c
                 join commcodedetail cc
                 on c.state = cc.code
