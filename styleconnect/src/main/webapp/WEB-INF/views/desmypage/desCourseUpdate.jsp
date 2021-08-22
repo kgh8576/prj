@@ -22,12 +22,12 @@ $(document).ready(function(){
 		console.log(" 키업확인");
 		
 		 var content = $(this).val();
-		$('#counter').html("("+content.length+" / 최대 300자)");   //글자수 실시간 카운팅
+		$('#counter').html("("+content.length+" / 최대 200자)");   //글자수 실시간 카운팅
 		
-		if(content.length > 300){
-			alert("최대 300자까지 입력 가능합니다.");
-		$(this).val(content.substring(0, 300));
-        $('#counter').html("(300/ 최대 300자)");
+		if(content.length > 200){
+			alert("최대 200자까지 입력 가능합니다.");
+		$(this).val(content.substring(0, 200));
+        $('#counter').html("(200/ 최대 200자)");
 		}
 	});
 });
@@ -114,7 +114,7 @@ $(document).ready(function(){
                                     <input type="text" class="form-control form-control-sm" id="title" name="title" value="${course.title }">
                                 </div>
                                  <div class="form-group margin-bottom-20px">
-                                    <label><i class="far fa-list-alt margin-right-10px"></i> 상담상세정보 </label> <span style="color:#aaa;" id="counter">(0 / 최대 300자)</span>
+                                    <label><i class="far fa-list-alt margin-right-10px"></i> 상담상세정보 </label> <span style="color:#aaa;" id="counter">(0 / 최대 200자)</span>
                                      <textarea class="form-control" id="detail" name="detail" rows="6">${course.detail }</textarea>
                                 </div>
                                 <div class="row">

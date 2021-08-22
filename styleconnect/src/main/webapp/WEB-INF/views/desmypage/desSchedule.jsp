@@ -32,6 +32,19 @@
 	margin-left: 50px;
 	margin-top: 50px;
 }
+.state{position: absolute;
+left: 0;
+bottom: 0;
+	
+}
+.margin-left-35px {
+    margin-left: 35px;
+    height: 100%;
+    position: relative;
+}
+#close:hover{
+color:red;
+}
 </style>
 <script>
 function denyfun(conNo){
@@ -150,10 +163,12 @@ function selectList(){
                                      <div class="d-block padding-tb-5px">예약상태  :  <a  class="text-main-color">${vo.codecontent}</a></div>
                                     <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a><br/> ${vo.memComment }</p>
                                     <!-- 예약중상태 -->
+                                    <div class="state">
                                     <c:if test="${vo.state eq 'ccode001'}">
                                     	<a href="desApprove.do?conNo=${vo.conNo }" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> 예약승인</a>
-                                   		<a onclick="denyfun('${vo.conNo}')" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> 예약거부</a>
+                                   		<a href="#" onclick="denyfun('${vo.conNo}')" id="close" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> 예약거부</a>
                                 	</c:if>
+                                	</div>
                                 	<!-- 예약확정상태 -->
                                 	<c:if test="${vo.state eq 'ccode002'}">
                                     	<div id="statestyl">${vo.codecontent }</div>상태입니다.

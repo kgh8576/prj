@@ -208,12 +208,12 @@ $(document).ready(function(){
 		console.log(" 키업확인");
 		
 		 var content = $(this).val();
-		$('#counter').html("("+content.length+" / 최대 100자)");   //글자수 실시간 카운팅
+		$('#counter').html("("+content.length+" / 최대 150자)");   //글자수 실시간 카운팅
 		
-		if(content.length > 100){
-			alert("최대 100자까지 입력 가능합니다.");
-		$(this).val(content.substring(0, 100));
-        $('#counter').html("(100/ 최대 100자)");
+		if(content.length > 150){
+			alert("최대 150자까지 입력 가능합니다.");
+		$(this).val(content.substring(0, 150));
+        $('#counter').html("(150/ 최대 150자)");
 		}
 	});
 });
@@ -293,8 +293,8 @@ function cercheck(){
 		</nav>
     <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
-          <h1 class="mtitle"> &nbsp&nbsp&nbsp My Profile</h1>
-            <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+          <h1 class="mtitle"> &nbsp;&nbsp;&nbsp; My Profile</h1>
+            <div class="row margin-tb-30px margin-lr-10px sm-mrl-0px">
                 <!-- Page Title -->
                 <!-- // Page Title -->
 <!-- 개인정보 수정 -->
