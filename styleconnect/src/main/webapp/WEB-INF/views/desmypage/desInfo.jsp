@@ -294,11 +294,11 @@ function cercheck(){
     <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
           <h1 class="mtitle"> &nbsp;&nbsp;&nbsp; My Profile</h1>
-            <div class="row margin-tb-30px margin-lr-10px sm-mrl-0px">
+            <div class="row margin-tb-10px margin-lr-60px sm-mrl-0px">
                 <!-- Page Title -->
                 <!-- // Page Title -->
 <!-- 개인정보 수정 -->
-                <div class="row margin-tb-45px full-width">
+                <div class="row margin-tb-25px full-width">
                     <div class="col-md-4">
                         <div class="padding-15px background-white">
                         <!-- 프로필 이미지 -->

@@ -14,6 +14,7 @@
 	margin: 100px;
 }
 #cbtn{
+cursor:pointer;
 	    margin-left: 35%;
 	    margin-top: 40px;
 }

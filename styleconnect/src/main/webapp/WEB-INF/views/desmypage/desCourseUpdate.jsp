@@ -33,7 +33,12 @@ $(document).ready(function(){
 });
 </script>
 <style type="text/css">
-.btn{cursor:pointer;}
+.btn{cursor:pointer;
+    height: 100%;
+}
+.full-width {
+    width: 70%;
+}
 </style>
 <meta charset="UTF-8">
 <title>디자이너마이페이지/상담수정</title>
@@ -88,23 +93,10 @@ $(document).ready(function(){
     </nav>
         <div class="content-wrapper">
             <div class="container-fluid overflow-hidden">
-                <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
-                    <!-- Page Title -->
-                    <div id="page-title" class="padding-30px background-white full-width">
-                        <div class="container">
-                            <ol class="breadcrumb opacity-5">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Dashboard</a></li>
-                                <li class="active">Add Listing</li>
-                            </ol>
-                            <h1 class="font-weight-300">상담수정</h1>
-                        </div>
-                    </div>
-                    <!-- // Page Title -->
-
-                    <div class="margin-tb-45px full-width">
-                        <div class="padding-30px background-white border-radius-20 box-shadow">
-                            <h3><i class="far fa-list-alt margin-right-10px text-main-color"></i>${course.courNo } 상담관련 정보 입력란 </h3>
+                <div class="row margin-tb-20px margin-lr-10px sm-mrl-0px">
+                    <div class="margin-tb-15px full-width">
+                        <div class="padding-20px background-white border-radius-20 box-shadow">
+                            <h3><i class="far fa-list-alt margin-right-10px text-main-color"></i>${course.courNo } 상담관련 정보 수정 </h3>
                             <hr>
                             <form method="post" action="desCourseUp.do?courno=${course.courNo }" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="${course.id }" >

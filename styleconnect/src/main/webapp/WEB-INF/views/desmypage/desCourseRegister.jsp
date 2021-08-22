@@ -56,7 +56,12 @@ $(document).ready(function(){
 
 </script>
 <style type="text/css">
-.btn{cursor:pointer;}
+.btn{cursor:pointer;
+    height: 100%;
+}
+.full-width {
+    width: 70%;
+}
 </style>
 </head>
 <body>
@@ -110,13 +115,6 @@ $(document).ready(function(){
         <div class="content-wrapper">
             <div class="container-fluid overflow-hidden">
                 <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
-                    <!-- Page Title -->
-                    <div id="page-title" class="padding-30px background-white full-width">
-                        <div class="container">
-                            <h1 class="font-weight-300">상담생성</h1>
-                        </div>
-                    </div>
-                    <!-- // Page Title -->
                     <div class="margin-tb-45px full-width">
                         <div class="padding-30px background-white border-radius-20 box-shadow">
                             <h3><i class="far fa-list-alt margin-right-10px text-main-color"></i> 상담관련 정보 입력란</h3>
@@ -129,7 +127,7 @@ $(document).ready(function(){
                                 </div>
                                  <div class="form-group margin-bottom-20px">
                                     <label><i class="far fa-list-alt margin-right-10px"></i> 상담상세정보 </label> <span style="color:#aaa;" id="counter">(0 / 최대 200자)</span>
-                                     <textarea class="form-control" placeholder="상담주제에대한 설명을 입력하세요(300자 이내) " id="detail" name="detail" rows="6"></textarea>
+                                     <textarea class="form-control" placeholder="상담주제에대한 설명을 입력하세요(200자 이내) " id="detail" name="detail" rows="6"></textarea>
                                      
                                 </div>
                                 <div class="row">
@@ -144,7 +142,7 @@ $(document).ready(function(){
                                      <input type="number" class="form-control form-control-sm" placeholder="숫자만 입력하세요" id="price" name="price">
                                   </div>
                                 </div>
-                    <button onclick="formCheck()" type="button" class="btn btn-lg border-2  btn-primary btn-block border-radius-15 padding-15px box-shadow">상담등록</button>>
+                    <button onclick="formCheck()" type="button" class="btn btn-lg border-2  btn-primary btn-block border-radius-15 padding-15px box-shadow">상담등록</button>
                           </form>
                         </div>
                     </div>
