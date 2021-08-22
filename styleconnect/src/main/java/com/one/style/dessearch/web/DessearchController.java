@@ -31,6 +31,8 @@ public class DessearchController {
 		model.addAttribute("designer",vo);
 		model.addAttribute("course",dao.courseList(vo));
 		model.addAttribute("img2", dao.dessearchDesSty(vo));
+		
+		
 		return ("dessearch/desCourseList");
 	}
 	//디자이너상세페이지
@@ -41,6 +43,8 @@ public class DessearchController {
 		model.addAttribute("review",dao.dessearchSelectReview(vo));
 		model.addAttribute("img",dao.dessearchDesThum(vo));
 		model.addAttribute("img2", dao.dessearchDesSty(vo));
+		model.addAttribute("pro",dao.desProfileImg(vo));
+		
 	return("dessearch/desListSelect");
 	}
 	

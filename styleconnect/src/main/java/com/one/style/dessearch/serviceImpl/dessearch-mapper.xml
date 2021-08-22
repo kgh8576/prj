@@ -144,9 +144,9 @@
 	and state='Y'
 	</select>
 	
-	<!-- 디자이너 프로필 사진 -->
+	<!-- 디자이너 사진 파일 -->
 	<select id="desProImg" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
-	select d.id,nvl2(f.file_state,f.file_state,0)as file_state, nvl2(f.file_uuid,f.file_uuid,'0.png')as file_uuid
+	select d.id,nvl2(f.file_state,f.file_state,0)as file_state, nvl2(f.file_uuid,f.file_uuid,'0.png')fileUuid
 	from designer d 
   	left join files f
 	on d.id = f.des_id 
@@ -206,5 +206,14 @@
 		FROM FILES 
 		WHERE  FILE_STATE= 'sty'
 		AND des_ID= #{id}
+	</select>
+	<!-- 디자이너 사진 파일 -->
+	<select id="desProfileImg" parameterType="com.one.style.dessearch.vo.DessearchVO" resultType="com.one.style.dessearch.vo.DessearchVO">
+	select d.id,nvl2(f.file_state,f.file_state,0)as file_state, nvl2(f.file_uuid,f.file_uuid,'0.png')fileUuid
+	from designer d 
+  	left join files f
+	on d.id = f.des_id 
+	where d.id = #{id}
+	and file_state='pro'
 	</select>
 </mapper>

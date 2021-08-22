@@ -31,7 +31,28 @@
     width: 300px;
     margin: auto;
 }
+.blog-entry{
+width: 730px;
+height: 270px;
+padding: 15px;
+box-sizing: border-box;
+border: 1px solid #fff;
+box-shadow: 0px 6px 15px 0px rgb(0 0 0 / 10%);
+transition: 0.6s;
+position: relative;
+}
+.blog-entry:hover{
+transform: translateY(-5px);}
+.img-in{padding-top: 1%;}
 
+.meta .a{
+width: 350px;
+height: 5px;
+}
+#reserve {
+position: absolute;
+right: 15px;
+bottom: 15px;}
 </style>
 </head>
 <body>
@@ -65,19 +86,19 @@
                             <div class="img-in col-lg-5"><a href="#">
                             <img src="resources/img/${vo.fileUuid }" alt=""></a></div>
                             <div class="col-lg-7">
-                                <div class="padding-25px">
+                                <div class="padding-15px">
                                     <a class="d-block h4  text-capitalize margin-bottom-8px" href="reservation.do?courNo=${vo.courNo }">${vo.title} </a>
                                     <div class="meta">
                                         <span class="margin-right-20px text-extra-small"> ${vo.name }디자이너</span>
                         			<br/> ${vo.price }원
                         			 <hr>
-                                        <span> ${vo.detail }  </span>
-                                        <div align="right">
-                                        <a class="text-main-color" href="reservation.do?courNo=${vo.courNo }" >>예약하기</a>
-                                    	</div>
+                                        <span class="a"> ${vo.detail }  </span>
                                     </div>
                                 </div>
                             </div>
+                                        <div id="reserve" align="right">
+                                        <a class="text-main-color" href="reservation.do?courNo=${vo.courNo }" >>예약하기</a>
+                                    	</div>
                         </div>
                         <div class="clearfix"></div>
                     </div>

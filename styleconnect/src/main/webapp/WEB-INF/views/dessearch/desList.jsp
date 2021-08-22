@@ -59,6 +59,7 @@ span:hover{
 						<!-- Designer -->
 								<c:forEach items="${designer}" var="vo">
 								<input type="hidden" id="id" name="id" value="${vo.id }">
+								<input type="hidden" id="career" name="career" value="${vo.career }">
 							<div class="col-lg-4 col-md-6 hvr-bob margin-bottom-45px">
 								<div class="background-white box-shadow">
 								 <!-- 디자이너 프로필 이미지 -->

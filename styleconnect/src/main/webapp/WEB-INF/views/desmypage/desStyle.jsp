@@ -49,8 +49,10 @@
 	box-sizing: border-box;
 	border: 1px solid #ddd;
 	float: left;
-	margin: 5px;
+	margin: 7px;
 	position: relative;
+	margin-top: 13px;
+	transition: 0.6s;
 }
 
 .f .figure {
@@ -90,11 +92,22 @@
 }
 #content{
 	width: 800px;
-	height: 500px;
+	height: 480px;
 	box-sizing: border-box;
-	border: 3px solid #aaa;
-	border-radius: 5px;
+	padding: 15px;
+box-sizing: border-box;
+border: 1px solid #fff;
+box-shadow: 0px 6px 15px 0px rgb(0 0 0 / 10%);
+transition: 0.6s;
 }
+.f:hover{
+transform: translateY(-5px);
+}
+img {
+    width: 100%;
+    height: 170px;
+}
+button {cursor:pointer;}
 </style>
 </head>
 <body>
@@ -171,7 +184,7 @@
 									</c:if>
 									<!-- 사진있을때 -->
 									<c:if test="${not empty sty }">
-										<div class="pictures magnific-gallery clearfix" id="content">
+										<div class="pictures magnific-gallery clearfix" id="content" align="center">
 											<c:forEach items="${sty }" var="vo">
 												<div class="f">
 													<figure>

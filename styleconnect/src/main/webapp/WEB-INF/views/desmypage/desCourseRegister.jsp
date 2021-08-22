@@ -55,6 +55,9 @@ $(document).ready(function(){
 });
 
 </script>
+<style type="text/css">
+.btn{cursor:pointer;}
+</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top" id="mainNav">

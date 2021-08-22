@@ -32,6 +32,9 @@ $(document).ready(function(){
 	});
 });
 </script>
+<style type="text/css">
+.btn{cursor:pointer;}
+</style>
 <meta charset="UTF-8">
 <title>디자이너마이페이지/상담수정</title>
 </head>
