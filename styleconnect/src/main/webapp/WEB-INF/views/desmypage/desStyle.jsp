@@ -73,7 +73,10 @@
 	background-color: #333;
 	color: #fff;
 }
-
+.f #btnmargidn:hover{
+ background-color: #db4141;
+ border: 1px solid #db4141;
+}
 .mtitle {
     font-size: 30px;
     text-decoration: underline;
