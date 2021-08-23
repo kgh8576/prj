@@ -70,11 +70,11 @@ font-size : 15px;
 }
 
 #container-for-width{
-width:70%;
+width:80%;
 }
 
 #consulting-history-box{
-width:80%;
+width:70%;
 }
 
 

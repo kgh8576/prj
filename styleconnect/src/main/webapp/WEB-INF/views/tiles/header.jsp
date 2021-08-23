@@ -9,7 +9,7 @@
 
 <style type="text/css">
 #menu-main {
-	padding-right: 200px;
+	padding-right: 150px;
 	padding-top: 30px;
 }
 
@@ -37,11 +37,11 @@ header ul.nav-menu>li>a {
 
 #logo {
 	font-size: 20px;
-	margin-top: 70px;
+	margin-top: 60px;
 }
 
 .fixed-header{
-height: 150px;
+height: 120px;
 }
 </style>
 
@@ -109,13 +109,13 @@ height: 150px;
 	<header>
 		<div id="fixed-header-dark" class="header-output fixed-header">
 			<div class="container header-in">
-				<div class="row">
+				<div class="row" style="margin-top:0px;">
 					<div class="col-xl-2 col-lg-2">
 						<a id="logo" href="main.do" class="d-inline-block margin-tb-15px">
-							<strong>STYLE CONNECT</strong>
+							<img src="resources/assets/img/designTest/logo1.png">
 						</a>
 					</div>
-					<div class="col-lg-7 col-md-12 position-inherit">
+					<div class="col-lg-6 col-md-12 position-inherit">
 						<ul id="menu-main"
 							class="nav-menu float-lg-right link-padding-tb-20px">
 							<c:if test="${(id != null && id !='')||(did != null && did !='')}">
