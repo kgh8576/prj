@@ -66,8 +66,8 @@ function getTextLength(str){ // 한글은 2바이트 계산해주는 함수
 
 function insert(conNo){
 		var contents = CKEDITOR.instances.contents.getData();
-		if (getTextLength(contents) <= 200){ // 200바이트 이하이면
-			alert('최소 200바이트 ( 한글 100자 ) 이상 작성해주세요');
+		if (getTextLength(contents) <= 20){ // 20바이트 이하이면
+			alert('최소 20바이트 ( 한글 10자 ) 이상 작성해주세요');
 			return false;
 		}
 		
@@ -129,7 +129,7 @@ function insert(conNo){
   					<h5>리뷰 작성 시 500포인트가 적립됩니다 <br>
   					등록하시는 리뷰와 사진은 현행 법률에 부합하여야 하며 본 사의 이용 규칙에 따라야 합니다. <br>
   					 부적절한 게시물은 법률과 규칙에 따라 사전통보 없이 삭제될 수 있으며 서비스 이용이 제한될 수 있습니다. <br>
-  					 최소 한글 100자 이상으로 작성해주세요.</h5>
+  					 최소 한글 10자 이상으로 작성해주세요.</h5>
   					 
   					 
   					<button type="button" class="close" data-dismiss="alert" aria-label="Close">

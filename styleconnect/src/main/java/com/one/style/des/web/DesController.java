@@ -157,23 +157,28 @@ public class DesController {
 	@ResponseBody
 	public String SendSMS(HttpServletRequest req) throws IOException {
 		HttpSession session = req.getSession();
+		//세션에서 ID값 받아옴
 		String targetNum = req.getParameter("hp");
 		Random rand = new Random();
+		//랜덤변수생성
 		String textCode = "";
 		for (int i = 0; i < 4; i++) {
 			String ran = Integer.toString(rand.nextInt(10));
 			textCode += ran;
 		}
+		//숫자를 1개씩 생성해서 스트링타입으로 더해줌
+		//ex) 1, 3, 4, 2
+		//ex)  1342
 
 		String api_key = "NCSVASOPKECZYZIF";
 		String api_secret = "SPLU6MAYGHQOZRJPOCQ1FJ62XALYQMLJ";
 		Message coolsms = new Message(api_key, api_secret);
-
+		//coolsms api
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", targetNum);
 		params.put("from", "01055313076");
 		params.put("type", "SMS");
-		params.put("text", "고?" + textCode + " ");
+		params.put("text", "<스타일커넥트> 인증번호는 " + textCode + " 입니다. ");
 		params.put("petMart", "petMart v1.0"); // application name and version
 
 		System.out.println(params.get("text"));
@@ -187,8 +192,8 @@ public class DesController {
 		}
 
 		session.setAttribute("textCode", textCode);
-		// 문자 전송시 세션시간확인
 		session.setAttribute("sessiontime", System.currentTimeMillis());
+		// 문자 전송시 세션시간확인
 
 		return null;
 	}
@@ -200,18 +205,24 @@ public class DesController {
 	public Boolean checkSMS(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String insertCode = request.getParameter("insertCode");
+		//인증번호입력값
 		String Code = (String) session.getAttribute("textCode");
+		//인증번호세션값
 		Long sessiontime = (Long) session.getAttribute("sessiontime");
 		Long realtime = System.currentTimeMillis();
 		// 문자전송후 시간과 현재시간계산 3분 세션타임.
 		Long difftime = (realtime - sessiontime) / 1000 / 60;
 
 		boolean YorN = false;
+		//현재시간 - 문자전송시간이 3분 보다 크다면
 		if (difftime > 3) {
 			YorN = false;
 			session.removeAttribute("textCode");
+			//세션에서 인증번호삭제
 		} else if (insertCode.equals(Code)) {
+			//인증번호입력값과 , 인증번호세션값이 같을때
 			YorN = true;
+			//트루리턴
 		} else {
 			YorN = false;
 		}

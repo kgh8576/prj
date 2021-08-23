@@ -63,8 +63,8 @@
 			alert('내용을 입력하세요');
 			return false;
 		}
-		if (getTextLength(contents) <= 200){ // 100바이트 이하이면
-			alert('최소 100바이트 ( 한글 100자 ) 이상 작성해주세요');
+		if (getTextLength(contents) <= 20){ // 20바이트 이하이면
+			alert('최소 20바이트 ( 한글 10자 ) 이상 작성해주세요');
 			return false;
 		}
 		
@@ -99,8 +99,8 @@
 			alert('내용을 입력하세요');
 			return false;
 		}
-		if (getTextLength(contents) <= 200){ // 100바이트 이하이면
-			alert('최소 100바이트 ( 한글 100자 ) 이상 작성해주세요');
+		if (getTextLength(contents) <= 20){ // 20바이트 이하이면
+			alert('최소 20바이트 ( 한글 10자 ) 이상 작성해주세요');
 			return false;
 		}
 		
