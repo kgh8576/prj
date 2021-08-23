@@ -106,7 +106,7 @@ transition: 0.6s;
 .f:hover{
 transform: translateY(-5px);
 }
-img {
+.lazy {
     width: 100%;
     height: 170px;
 }
