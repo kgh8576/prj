@@ -32,6 +32,23 @@
 	margin-left: 50px;
 	margin-top: 50px;
 }
+.state{position: absolute;
+left: 0;
+bottom: 0;
+	
+}
+.margin-left-35px {
+    margin-left: 35px;
+    height: 100%;
+    position: relative;
+}
+#close:hover{
+color:red;
+}
+.text-blue-2{
+color: navy;
+font-weight: bold;
+}
 </style>
 <script>
 function denyfun(conNo){
@@ -143,17 +160,23 @@ function selectList(){
                             <div class="padding-30px2 full-width">
                                 <div class="margin-left-35px">
                                 	<a class="d-block text-dark text-medium margin-bottom-5px" >No. ${vo.conNo }  </a>
-                                    <a class="d-block text-dark text-medium margin-bottom-5px" >상담명: ${vo.title }  </a>
+                                    <a class="d-block text-dark text-medium margin-bottom-5px" ><상담명> ${vo.title }  </a>
                                     <div class="d-block padding-tb-5px">예약날짜 :  <a  class="text-main-color">${vo.day } </a></div>
                                     <div class="d-block padding-tb-5px">예약시간 :  <a  class="text-main-color">${vo.time }</a></div>
                                     <div class="d-block padding-tb-5px">예약자  :  <a  class="text-main-color">${vo.memName}</a></div>
                                      <div class="d-block padding-tb-5px">예약상태  :  <a  class="text-main-color">${vo.codecontent}</a></div>
-                                    <p class="margin-top-15px text-grey-2"><a><예약자 코멘트></a><br/> ${vo.memComment }</p>
+                                    <p class="margin-top-15px text-blue-2"><a><예약자 코멘트></a><br/> ${vo.memComment }</p>
+                                    <br/>
+                                    <c:if test="${not empty vo.desComment }">
+                                    <p class="margin-top-15px text-black-2"><a><나의 코멘트></a><br/> ${vo.desComment }</p>
+                                    </c:if>
                                     <!-- 예약중상태 -->
+                                    <div class="state">
                                     <c:if test="${vo.state eq 'ccode001'}">
                                     	<a href="desApprove.do?conNo=${vo.conNo }" class="d-inline-block text-grey-2 text-up-small"><i class="far fa-file-alt"></i> 예약승인</a>
-                                   		<a onclick="denyfun('${vo.conNo}')" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> 예약거부</a>
+                                   		<a href="#" onclick="denyfun('${vo.conNo}')" id="close" class="d-inline-block margin-lr-20px text-grey-2 text-up-small"><i class="far fa-window-close"></i> 예약거부</a>
                                 	</c:if>
+                                	</div>
                                 	<!-- 예약확정상태 -->
                                 	<c:if test="${vo.state eq 'ccode002'}">
                                     	<div id="statestyl">${vo.codecontent }</div>상태입니다.

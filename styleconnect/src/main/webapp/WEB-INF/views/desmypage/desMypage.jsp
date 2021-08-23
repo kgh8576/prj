@@ -19,7 +19,6 @@ max-width: 100px;
 <body>
 <div class="row justify-content-center">
 	              <div class="col-lg-7">					
-					<br/><br/><br/><br/><br/>
 					<div align="center" style="margin:100px;">
 						<h1>${my.name }님의 마이페이지</h1>
 					</div>

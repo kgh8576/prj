@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>디자이너마이페이지 - 내정보 관리</title>
 </head>
+<jsp:scriptlet>
+    pageContext.setAttribute("cr", "\r");
+    pageContext.setAttribute("lf", "\n");
+    pageContext.setAttribute("crlf", "\r\n");
+</jsp:scriptlet>
 <style>
 #frm{
 		width: 640px;
@@ -28,12 +34,18 @@
 .select input[type=checkbox]+label {
 	background-color: #fff;
 	color: #333;
+	transition:0.6s;
 }
 
 .select input[type=checkbox]:checked+label {
 	background-color: #333;
 	color: #fff;
+	transition:0.6s;
 }
+.select input[type=checkbox]+label:hover{
+transform: translateY(-5px);}
+.select input[type=checkbox]:checked+label:hover{
+transform: translateY(-5px);}
 
 .log-in-form .form-output label {
 	font-size: 14px;
@@ -148,16 +160,17 @@ textarea {
 	margin-top: 50px;
 }
 .select{
-	width: 500px;
+	width: 100%;
 	height:100px;
 	box-sizing: border-box;
 	border: 2px solid #ddd;
 	margin-top: 10px;
 }
 .foucsmajor{
-	margin-top: 30px;
+	margin-top: 40px;
 	
 }
+.btn{cursor:pointer;}
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -195,12 +208,12 @@ $(document).ready(function(){
 		console.log(" 키업확인");
 		
 		 var content = $(this).val();
-		$('#counter').html("("+content.length+" / 최대 100자)");   //글자수 실시간 카운팅
+		$('#counter').html("("+content.length+" / 최대 150자)");   //글자수 실시간 카운팅
 		
-		if(content.length > 100){
-			alert("최대 100자까지 입력 가능합니다.");
-		$(this).val(content.substring(0, 100));
-        $('#counter').html("(100/ 최대 100자)");
+		if(content.length > 150){
+			alert("최대 150자까지 입력 가능합니다.");
+		$(this).val(content.substring(0, 150));
+        $('#counter').html("(150/ 최대 150자)");
 		}
 	});
 });
@@ -280,12 +293,12 @@ function cercheck(){
 		</nav>
     <div class="content-wrapper">
         <div class="container-fluid overflow-hidden">
-          <h1 class="mtitle"> &nbsp&nbsp&nbsp My Profile</h1>
-            <div class="row margin-tb-90px margin-lr-10px sm-mrl-0px">
+          <h1 class="mtitle"> &nbsp;&nbsp;&nbsp; My Profile</h1>
+            <div class="row margin-tb-10px margin-lr-60px sm-mrl-0px">
                 <!-- Page Title -->
                 <!-- // Page Title -->
 <!-- 개인정보 수정 -->
-                <div class="row margin-tb-45px full-width">
+                <div class="row margin-tb-25px full-width">
                     <div class="col-md-4">
                         <div class="padding-15px background-white">
                         <!-- 프로필 이미지 -->
@@ -380,10 +393,10 @@ function cercheck(){
                           <div class="col-md-6 margin-bottom-20px">
                               <label><i class="far fa-list-alt margin-right-10px"></i>경력사항  </label><span style="color:#aaa;" id="counter">(0 / 최대 150자)</span><br/>
 								<c:if test="${empty des.career }">
-								<textarea maxlength="100" onchange="careerchange()" style="width:400px" class="career" name="career" placeholder="경력 사항을 적어주세요. &#13;&#10; ex) 청담동 OO헤어샵 2년 근무 &#13;&#10; - 디자이너 콘테스트 1등"></textarea>
+								<textarea maxlength="100" onchange="careerchange()" style="width:400px" class="career" name="career" placeholder="경력 사항을 적어주세요. &#13;&#10; ex) 청담동 OO헤어샵 2년 근무 &#13;&#10; - 디자이너 콘테스트 1등" cols="20" wrap="hard"></textarea>
 								</c:if>
 								<c:if test="${not empty des.career }">
-								<textarea maxlength="100" onchange="careerchange()" style="width:400px" class="career" name="career" >${des.career }</textarea>
+								<textarea maxlength="100" onchange="careerchange()" style="width:400px" class="career" name="career" cols="20" wrap="hard" >${des.career }</textarea>
 								<br />
 								</c:if>
                           </div>

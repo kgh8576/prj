@@ -86,4 +86,10 @@ public class DessearchServiceImpl implements DessearchService {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("dessearchDesSty",vo);
 	}
+
+	@Override
+	public DessearchVO desProfileImg(DessearchVO vo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("desProfileImg",vo);
+	}
 }

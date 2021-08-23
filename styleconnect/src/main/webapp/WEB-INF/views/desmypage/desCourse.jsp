@@ -14,18 +14,30 @@
 	margin: 100px;
 }
 #cbtn{
-	    margin-left: 70%;
+cursor:pointer;
+	    margin-left: 35%;
+	    margin-top: 40px;
 }
 #courseline{
-border: 1px solid #333;
-
+padding: 15px;
+box-sizing: border-box;
+border: 1px solid #fff;
+box-shadow: 0px 6px 15px 0px rgb(0 0 0 / 10%);
+transition: 0.6s;
 }
+#courseline:hover{
+transform: translateY(-5px);}
 .mtitle {
 	font-size: 30px;
 	text-decoration: underline;
 	margin-left: 50px;
 	margin-top: 50px;
 }
+.col-lg-7{position: relative;}
+.meta a{
+position: absolute;
+right: 0;
+bottom: 0;}
 </style>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark z-index-9  fixed-top"
@@ -82,7 +94,7 @@ border: 1px solid #333;
 			</div>
 		</nav>
 <div class="content-wrapper">
-  <div class="container-fluid overflow-hidden">
+  <div class="container-fluid overflow-hidden margin-bottom-50px">
 	<h1 class="mtitle"> &nbsp;&nbsp;&nbsp; Consulting List</h1>
 		</div>
     <div class="margin-tb-30px">
@@ -104,23 +116,22 @@ border: 1px solid #333;
 					<h2>상담생성불가</h2><br/><h5>최대5개 생성가능</h5><hr/>
 					</div>
 				</c:if>
-				<c:if test="${fn:length(course) < 5}">
-					<button id='cbtn'  onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/><br/><br/><br/><br/><br/>
-				</c:if>
 				<c:forEach items="${course}" var="vo">
-                    <div class="blog-entry background-white border-1 border-grey-1 margin-bottom-35px">
-                        <div class="row no-gutters" id="courseline">
+                    <div class="blog-entry background-white margin-bottom-35px">
+                        <div class="row no-gutters" id="courseline" >
                             <div class="img-in col-lg-5">
                             <a href="#"><img src="resources/img/${vo.fileUuid }" alt=""></a>
                             </div>
                             <div class="col-lg-7">
-                                <div class="padding-25px">
+                                <div class="padding-10px padding-bottom-0px">
                                     <a class="d-block h4  text-capitalize margin-bottom-8px" href="#">${vo.title} </a>
                                     <div class="meta">
-                        			상담번호:${vo.courNo }
+                                    <div align="right">
+                                    ${vo.price }원
+                                    </div>                        			
                         			 <hr>
                                         <span> ${vo.detail } </span>
-                                        <div align="right">
+                                        <div align="right" class="margin-top-20px">
                                         <a href="desCourseUpdate.do?courNo=${vo.courNo }" >>수정하기</a>
                                         <input type="hidden" id="courNo" name="courNo" value="${vo.courNo }">
                                     	</div>
@@ -131,10 +142,12 @@ border: 1px solid #333;
                         <div class="clearfix"></div>
                     </div>
 				</c:forEach>
+				
+				<c:if test="${fn:length(course) < 5}">
+					<button id='cbtn'  onclick="location.href='desCourseRegister.do'" class="btn btn-md padding-lr-25px  text-white background-main-color btn-inline-block"> 상담 추가생성하기 </button><br/><br/><br/><br/><br/><br/>
+				</c:if>
 			</c:if>
          <!-- 상담목록 끝 //-->
-                </div>
-                <div class="col-lg-4">
                 </div>
             </div>
         </div>
