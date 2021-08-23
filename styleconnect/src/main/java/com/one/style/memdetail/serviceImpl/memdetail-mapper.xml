@@ -17,7 +17,7 @@
 	  select e.*, nvl(file_uuid, '0.png') as file_uuid from
       (SELECT
 
-		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
+		to_char(a.day,'YY-MM-DD') as day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
 		a.time,a.state,a.price,
 		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
 		a.con_no,
@@ -54,7 +54,7 @@
 		   select e.*, nvl(file_uuid, '0.png') as file_uuid from   
   (SELECT
 
-		a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
+		to_char(a.day,'YY-MM-DD') as day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
 		a.time,a.state,a.price,
 		a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,
 		a.con_no,
@@ -96,7 +96,7 @@
    select e.*, nvl(file_uuid, '0.png') as file_uuid
 from(
        SELECT
-       a.day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
+       to_char(a.day,'YY-MM-DD') as day, to_char(day,'YY/MM/DD')||' '||time as lastst_date,
        a.time,a.state,a.price,a.reservate_date,a.cour_no,a.mem_attend,a.des_attend,a.con_no,
        b.code,b.CODECONTENT,
        c.title,c.detail,
@@ -143,7 +143,7 @@ from(
 	<select id="conccode005" parameterType="com.one.style.conhistory.vo.ConHistoryVO" resultType="com.one.style.conhistory.vo.ConHistoryVO">
 	    		 <![CDATA[
 	    	SELECT 
-a.day, to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,
+to_char(a.day,'YY-MM-DD') as day, to_char(day,'YYYY/MM/DD')||' '||time as lastst_date,
 a.time,
 a.state,
 a.price,
