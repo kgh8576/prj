@@ -5,6 +5,13 @@
 	
 </script>
 <!-- Booking item -->
+
+<br>
+<br>
+<br>
+<br>
+<br> 
+
 <div class="col-lg-12">
 	<H3 style="text-align: center;">상담이 끝난 목록입니다.</H3>
 	<p style="text-align: center; margin-bottom: 50px">파란글씨를 누르면 디자이너의

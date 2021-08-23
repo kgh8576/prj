@@ -45,6 +45,12 @@
 
 </script>
 <!-- Booking item -->
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <div class="col-lg-12">
 	<H3 style="text-align: center;">현재 예약중인 내역입니다.</H3>
 	<p style="text-align: center; margin-bottom: 50px">파란글씨를 누르면 디자이너의 상세 페이지로 이동할수있어요!</p>
