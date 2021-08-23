@@ -47,11 +47,10 @@ font-weight:bold;
 
 #consulting-history-box-middle{
 text-align:left;
-padding:40px 40px 0px 40px;
+padding:30px 30px 0px 30px;
 font-size : 20px;
 }
 #consulting-history-box-middle-title{
-color:#584ccb;
 font-weight:bold;
 font-size : 20px;
 margin-bottom: 10px;
@@ -65,7 +64,7 @@ margin-bottom: 30px;
 
 #consulting-history-box-low{
 text-align:right;
-padding:0px 30px 30px 30px;
+padding:0px 20px 20px 20px;
 font-size : 15px;
 }
 

@@ -127,10 +127,6 @@ body {margin: 10px;}
   border-color: #2e6da4;
 }
 
-img{
-	width: 100px;
-	height: 100px;
-}
 .content{
 	width: 500px;
 	height: 300px;
