@@ -78,7 +78,7 @@
 		select *
 		from CONSULTING_HISTORY
 		where mem_id = #{memId}
-		and day = #{day}
+		and day = to_date(#{day},'YY/MM/DD')
 		and time = #{time}
 	</select>
 
