@@ -12,10 +12,19 @@
     width: 200px;
     height: 200px;
 }
+.background-white{
+			height: 100%;
+}
+
+span:hover{
+	color:white;
+   background-color: #8279d8;;
+}
 </style>
 </head>
 <body>
 <body>
+<br/><br/>
 	<div id="page-title" class="padding-tb-30px gradient-white">
 		<div class="container">
 			<h1 class="font-weight-300"> ${searchkeyword } 검색결과</h1>
@@ -77,7 +86,7 @@
 										<c:if test="${vo.rate != 0}">
 										<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
-										</c:forEach>  평점 ${vo.rate }
+										</c:forEach> 
 										</c:if>
 										<c:if test="${vo.rate == 0}">
 											등록된 후기가 없습니다. 

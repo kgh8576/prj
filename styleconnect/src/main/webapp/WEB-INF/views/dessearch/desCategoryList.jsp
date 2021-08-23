@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<html>
 <body>
-<br><br><br><br><br>
-	
+<br><br>
 <!-- 검색창 -->
 <form id="frm" action="searchList.do" method="post">
-	<div class="margin-bottom-30px">
-    	<div class="padding-30px background-white border-radius-10">
+	<div class="margin-bottom-20px">
+    	<div class="padding-10px background-white border-radius-10">
         	<h4><i class="fas fa-search margin-right-10px text-main-color"></i> Search</h4>
 			<hr>
 			<div class="input-group mb-3">
@@ -22,7 +22,7 @@
 </form>
 <!-- 검색창 끝 -->
 <!-- 디자이너 카테고리 박스 -->
-<div class="margin-tb-100px">
+<div class="margin-tb-10px">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
@@ -32,7 +32,7 @@
 						<!-- 박스 -->
 							<div class="col-6 margin-bottom-30px wow fadeInUp">
 								<a href="cutList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
-								<div class = "background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
+								<div class = "background-main-color text-white border-radius-15 padding-25px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
 										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/hair-cut.png" alt="">
 									</div>
@@ -42,7 +42,7 @@
 							</div>
 							<div class="col-6 margin-bottom-30px wow fadeInUp">
 								<a href="permList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
-								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
+								<div class="background-main-color text-white border-radius-15 padding-25px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
 										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/hair-perm.png" alt="">
 									</div>
@@ -52,7 +52,7 @@
 							</div>
 							<div class="col-6 margin-bottom-30px wow fadeInUp" data-wow-delay="0.2s">
 								<a href="dyeList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
-								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
+								<div class="background-main-color text-white border-radius-15 padding-25px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
 										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/hair-dye.png" alt="">
 									</div>
@@ -62,7 +62,7 @@
 							</div>
 							<div class="col-6 margin-bottom-30px wow fadeInUp" data-wow-delay="0.2s">
 								<a href="makeupList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
-								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
+								<div class="background-main-color text-white border-radius-15 padding-25px text-center opacity-hover-7">
 									<div class="icon margin-bottom-15px opacity-7">
 										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/makeup.png" alt="">
 									</div>
@@ -72,7 +72,7 @@
 							</div>
 							<div class="col-6 margin-bottom-30px wow fadeInUp" data-wow-delay="0.4s">
 								<a href="dessearchList.do" class="d-block border-radius-15 hvr-float hvr-sh2">
-								<div class="background-main-color text-white border-radius-15 padding-30px text-center opacity-hover-7">
+								<div class="background-main-color text-white border-radius-15 padding-25px text-center opacity-hover-7">
 										<div class="icon margin-bottom-15px opacity-7">
 										<img width="100px" height="100px" src="${pageContext.request.contextPath}/resources/assets/img/icon/allList.png" alt="">
 									</div>

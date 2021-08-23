@@ -35,7 +35,7 @@ public class WorkOpenController {
 	public String uploadView(Model model) {
 		fileservice.dateTest();
 		fileservice.dateTest2();
-		model.addAttribute("date", workOpenDao.dateTest()); 
+		model.addAttribute("date", "rnrwlsdes"); 
 		FilesVO vo = new FilesVO();
 		vo.setDes_id("des05");
 		return "test/FileTest";

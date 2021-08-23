@@ -25,7 +25,10 @@
 .select input[type=checkbox]+label {
 	background-color: #fff;
 	color: #333;
+	transition: 0.6s;
 }
+.select input[type=checkbox]+label:hover{
+transform: translateY(-5px);}
 
 .select input[type=checkbox]:checked+label {
 	background-color: #333;
@@ -124,29 +127,22 @@ body {margin: 10px;}
   border-color: #2e6da4;
 }
 
-img{
-	width: 100px;
-	height: 100px;
-}
 .content{
 	width: 500px;
 	height: 300px;
 	box-sizing: border-box;
-	border: 2px solid #ddd;
+	border: 1px solid #fff;
+	box-shadow: 0px 6px 15px 0px rgb(0 0 0 / 10%);
+	padding-top: 60px;
 }
-.content p:first-child{
+.title p:first-child{
 	width: 380px;
 	height: 20px;
 	background-color: #fff;
 	display: block;
 	font-size: 20px;
-	margin-top: -10px;
-	z-index: 99;
+	text-align: center;
 	
-}
-.content p:last-child{
-	margin-top: -30px;
-	margin-bottom: 100px;
 }
 .mtitle {
 	font-size: 30px;
@@ -154,6 +150,7 @@ img{
 	margin-left: 50px;
 	margin-top: 50px;
 }
+.btn{cursor:pointer;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -245,14 +242,16 @@ function updateMajor(){
                 </div>
 				<form name="frm" id="frm" action="majorUpdate.do" method="post">
 				<input type="hidden" name="id" id="id" value="${des.id }"> 
+						<div class="title" align="center">
+						<p>특별히 잘하는 스타일링이 있나요? </p>
+						<p>3개만 선택해주세요!</p>
+						</div>
 					<div align="center" class="content">
 							<c:set var="majors" value="${fn:split(des.major,',')}"></c:set>
 							<c:set var="selectmajor" value="${des.major }"></c:set>
 							<c:forEach var="major" items="${majors}" >
 							</c:forEach> 
 							<div class="form-group label-floating">
-						<p>특별히 잘하는 스타일링이 있나요? </p>
-						<p>3개만 선택해주세요!</p>
 						 <div class="select" style="text-align: center;">
 							<input type="checkbox" style="display:none;" name="major" id="major1" value="탈색"  <c:if test="${fn:contains(selectmajor,'탈색')}">checked</c:if>/><label for="major1">탈색</label>
 							<input type="checkbox" style="display:none;" name="major" id="major2" value="댄디컷"  <c:if test="${fn:contains(selectmajor,'댄디컷')}">checked</c:if>/><label for="major2">댄디컷</label> 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +17,8 @@
 }
 #dname{
 	color: black;
+	float: left;
+	margin-left: -10px;
 }
 #side{
 align-content: center;
@@ -28,10 +31,14 @@ align-content: center;
 #tag{
  margin:  50px;
 }
-span:hover{
-	color:white;
-   background-color: #8279d8;;
+.tag a{
+height:100%;}
+
+.tag a:hover{
+   text-color:white;
+   background-color: #8279d8;
 }
+.tag span:hover{color:white;}
 #styimg{
  border: 1px solid #eaeaea;
  max-width: 119px;
@@ -114,6 +121,39 @@ color: black;
     flex: 0 0 50%;
     max-width: 140px;
 }
+.col-44{letter-spacing: 1.5px;}
+.text-grey-4{display:bolck;}
+
+#pro{
+	width: 240px;
+	height: 240px;
+	margin-left: 70px;
+}
+.rating ul li {
+    background-color: #FFF;
+    padding: 0px;
+    
+    }
+.rating p{
+    color: black;
+    width: 100%;
+    margin: 5% 30%;
+}
+
+#staralign {
+    background-color: #FFF;
+    padding: 0px;
+    text-align: left;
+    margin: 5% 35% 0 30%;
+    width: 200px;
+}
+#pro2{
+width: 80px;
+height: 80px;
+border-radius: 50%;
+float: left;
+margin: 10px 0 0 10px;
+}
 
 </style>
 </head>
@@ -152,8 +192,9 @@ color: black;
                         <div class="padding-30px background-white">
                             <h3><i class="far fa-user margin-right-10px text-main-color"></i> 경력 </h3>
                             <hr>
-                            <p class="text-grey-4">${designer.career }</p>
-                        </div>
+                            <p class="text-grey-4">${fn:replace(designer.career, replaceChar,"<br/>")}</p>
+							<input type="hidden" name="career" id="career" value="${designer.career }">
+						</div>
                     </div>
                     <!-- 전문분야-->
                     <div class="margin-bottom-30px box-shadow">
@@ -162,7 +203,7 @@ color: black;
                           <!-- Post tags -->
                         <hr>
                         <div class="post-tags">
-                            <div>
+                            <div class="tag">
 								<c:set var="majors" value="${fn:split(designer.major,',')}"></c:set>
 								<c:forEach var="major" items="${majors}">
 									<a href="searchList.do?search=${major }"> <span class="text-grey-4"># ${major} </span> </a>
@@ -214,7 +255,7 @@ color: black;
                                         <a class="d-inline-block text-dark text-medium margin-right-20px" href="#"> 작성자 : ${vo.MName} </a>
                                        <%--  <span class="text-extra-small">상담명 :  <a href="#" class="text-main-color">${review1.title }</a></span> --%>
                                         <!-- 별점 -->
-                                         <div class="rating clearfix">
+                                         <div class="rating clearfix" >
                                         	<ul class="float-left">
                                         	<c:forEach begin="1" end="${vo.rate }">
 												<li class="active"></li>
@@ -239,12 +280,31 @@ color: black;
                 <!-- 사이드바 div -->
                 <div class="col-lg-4" id="fixed">
                     <div id="side" class="background-second-color border-radius-10nav margin-bottom-45px text-white box-shadow">
-                        <h3 id="dname" class="padding-lr-30px padding-top-20px"><i class="far fa-user margin-right-10px"></i> ${designer.name}디자이너</h3>
+                        <c:if test="${not empty pro.fileUuid}">
+                        <img id="pro2"class="border-radius-10" src="resources/img/${pro.fileUuid }" alt="">
+                        </c:if>
+                        <c:if test="${empty pro.fileUuid }">
+                        <img id="pro2"class="border-radius-10" src="resources/img/0.png" alt="">
+                        </c:if>
+                        <h3 id="dname" class="padding-lr-30px padding-top-20px">  ${designer.name}디자이너</h3>
+                       <br/><br/>
+                        <div class="rating clearfix" >
+							<ul id="staralign" >
+								<c:if test="${designer.rate != 0 }">
+								<c:forEach begin="1" end="${designer.rate }">
+									<li class="active"></li>
+								</c:forEach>  
+								</c:if>
+							</ul>
+								<c:if test="${designer.rate == 0}">
+									<p>등록된 후기가 없습니다.</p> 
+								</c:if> 
+						</div>
                         <hr>
                         <div class="padding-bottom-80px">
                             <!-- 상담목록가기 버튼 -->
                          <div class="col-44" id="reserbt">
-                             <a  href="courseList.do?id=${designer.id }" ><i class="far fa-bookmark"></i>&nbsp 예 약 하 러 가 기 </a>
+                             <a  href="courseList.do?id=${designer.id }" ><i class="far fa-bookmark"></i>&nbsp 예약하러 가기 </a>
                           </div>
                        </div>
                        </div>
